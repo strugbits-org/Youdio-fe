@@ -9,6 +9,7 @@ import UserProfile from '../screens/user/UserProfile';
 import LiveClasses from '../screens/user/LiveClasses';
 import VideoClasses from '../screens/user/VideoClasses';
 import Header from '../components/Header';
+import Login from "../screens/user/Login";
 
 
 export default function Router() {
@@ -47,6 +48,7 @@ export default function Router() {
                 <Route path="/live-classes" element={<LiveClasses />} />
                 <Route path="/video-classes" element={<VideoClasses />} />
                 <Route path="/user-profile" element={<UserProfile />} />
+                <Route path="/login" element={<Login />} />
 
                 {/* <Route path="/" element={protectedAuthRoute(<Login />)} />
                 <Route path="/login" element={protectedAuthRoute(<Login />)} />

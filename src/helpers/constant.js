@@ -7,3 +7,14 @@ export const fonts = {
     comfortaaBold: "ComfortaaBold",
     interBold: "InterBold",
 }
+
+export const path = {
+    home: "/",
+    liveClasses: "live-classes",
+    videos: "video-classes",
+    membership: "",
+    instructors: "",
+    signIn: "login",
+    register: "",
+    forgotPassword: ""
+}

@@ -8,9 +8,9 @@ async function translator(text, lang) {
     return text
 }
 
-export const contentTranslator = async ({staticContent, contentToTranslate, setContent, language}) => {
+export const contentTranslator = async ({staticContent, setContent, language}) => {
     if (language === 'JA') {
-        const transalteContent = { ...contentToTranslate }
+        const transalteContent = { ...staticContent }
         const keys = Object.keys(transalteContent)
 
         for (let i = 0; i < keys.length; i++) {

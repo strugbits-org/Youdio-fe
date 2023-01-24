@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { fonts } from "../helpers/forms/constant";
+import { fonts } from "../helpers/constant";
 
 
 const { poppinsRegular } = fonts

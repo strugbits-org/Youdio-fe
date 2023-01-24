@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const PrimaryButton = styled.button`
+export const PrimaryButton = styled.button`
     border:none;
     outline:none;
     width: 100%;
@@ -19,8 +19,20 @@ const PrimaryButton = styled.button`
     }
 `
 
+export const IconButton = styled.button`
+    background-image: url();
+    background-repeat: no-repeat;
+    background-position:center;
+    outline:none;
+    border:none;
+    background: var(--textHeadingWhite);
 
+    &[disabled]{
+        background:black;
+    }
+    
+    &:hover{
+        background:var(--backgroundGreen);
+    }
+`
 
-export {
-    PrimaryButton
-}

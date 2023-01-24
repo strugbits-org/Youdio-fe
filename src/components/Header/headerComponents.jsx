@@ -7,12 +7,14 @@ const Section = styled.section`
     padding-inline: 6vw;
 `
 
-const Content = styled.div`
+const Nav = styled.nav`
     width:100%;
     display:grid;
     grid-template-columns: 1fr auto 1fr ;
     place-items:center;
-    border:1px solid red;
+    place-content: center;
+    /* align-items:center; */
+    /* border:1px solid red; */
     gap:10px;
 
     .logo img{
@@ -21,17 +23,16 @@ const Content = styled.div`
     `
 
 const UL = styled.ul`
-    width:auto;
     display:flex;
     align-items:center;
     justify-content:space-around;
     gap:30px;
-    border:1px solid red;
+    /* border:1px solid red; */
 
 `
 
 export {
     Section,
-    Content,
+    Nav,
     UL
 }

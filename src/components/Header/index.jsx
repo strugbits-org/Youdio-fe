@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
-import { Content, Section, UL } from './headerComponents'
+import { Nav, Section, UL } from './headerComponents'
 import youdio from '../../assets/logo/youdio.svg'
 import worldMap from '../../assets/icons/language_world.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLang } from '../../store/slices/language'
 import { staticContent } from './constant'
-import {contentTranslator} from "../../helpers/translator"
+import { path } from '../../helpers/constant'
+import { contentTranslator } from "../../helpers/translator"
 
 function Header() {
   const [content, setContent] = useState(staticContent)
@@ -15,7 +17,7 @@ function Header() {
   const language = useSelector(state => state.language.lang)
 
   useEffect(() => {
-    contentTranslator({staticContent, contentToTranslate: content, setContent, language})
+    contentTranslator({ staticContent, setContent, language })
     console.log("Main chala when state change");
 
   }, [language]);
@@ -28,19 +30,19 @@ function Header() {
 
   return (
     <Section>
-      <Content>
-        <div className='leftMenu'>
+      <Nav>
           <UL>
-            <li >{content.liveClasses}</li>
-            <li >{content.videos}</li>
-            <li >{content.membership}</li>
-            <li >{content.instructors}</li>
+            <li ><NavLink to={path.liveClasses}>{content.liveClasses}</NavLink></li>
+            <li ><NavLink to={path.videos}>{content.videos}</NavLink></li>
+            <li ><NavLink to={path.membership}>{content.membership}</NavLink></li>
+            <li ><NavLink to={path.instructors}>{content.instructors}</NavLink></li>
+
           </UL>
-        </div>
         <div className='logo'>
-          <img src={youdio} alt="youdio" width="" height="" />
+          <NavLink to={path.home}>
+            <img src={youdio} alt="youdio" width="" height="" />
+          </NavLink>
         </div>
-        <div className='rightMenu'>
           <UL>
             <li>
               <select onChange={handleLanguage} value={language}>
@@ -49,11 +51,10 @@ function Header() {
               </select>
               <img src={worldMap} alt='world_map' width='15' height='auto' />
             </li>
-            <li>{content.signIn}</li>
-            <li>{content.register}</li>
+            <li><NavLink to={path.signIn}>{content.signIn}</NavLink></li>
+            <li><NavLink to={path.register}>{content.register}</NavLink></li>
           </UL>
-        </div>
-      </Content>
+      </Nav>
     </Section>
   )
 }

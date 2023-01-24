@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Formik, Form } from 'formik'
 import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import { FieldPassword, FieldInput } from '../../../components/FormikInputs'
 import { loginFormValidate } from '../../../helpers/forms/validateForms/index'
 import { loginContent } from './content'
@@ -9,6 +10,7 @@ import { contentTranslator } from '../../../helpers/translator'
 import { PrimaryButton } from '../../../components/Button'
 import { Label } from '../../../components/Inputs'
 import { H1, P2 } from '../../../components/Typography'
+import { path } from '../../../helpers/constant'
 
 
 
@@ -42,8 +44,7 @@ function Login() {
 
   }, [language])
 
-  return (
-    <Contaienr>
+  return <Contaienr>
       <div className='form'>
 
         <Formik
@@ -64,13 +65,18 @@ function Login() {
                 <H1>{content.signIn}</H1>
                 <P2>{content.signInLine}</P2>
                 <FormRow>
-                  <FieldInput label={content.email} id="loginEmail" autofill name="email" type="email" placeholder={content.emailPlaceHolder} style={{ fontSize: '16px' }} />
+                  <FieldInput
+                    label={content.email}
+                    id="loginEmail" autofill name="email" type="email"
+                    placeholder={content.emailPlaceHolder}
+                    style={{ fontSize: '16px' }}
+                  />
                 </FormRow>
                 <FormRow>
-                  <FieldPassword label={content.password} id="loginPassword" name="password" placeholder="******" style={{ fontSize: '16px' }}/>
+                  <FieldPassword label={content.password} id="loginPassword" name="password" placeholder="******" style={{ fontSize: '16px' }} />
                 </FormRow>
                 <FormRow>
-                  <input 
+                  <input
                     type="checkbox"
                     id='rememberCheckbox'
                     name='rememberMe'
@@ -79,10 +85,10 @@ function Login() {
                 </FormRow>
                 <FormRow>
                   <PrimaryButton type='submit'>{content.btnLogin}</PrimaryButton>
-                  <p>{content.forgot}</p>
+                  <p><NavLink to={path.forgotPassword}>{content.forgot}</NavLink></p>
                 </FormRow>
                 <FormRow>
-                  <p>{content.dontHave}<span>{content.signUp}</span></p>
+                  <p>{content.dontHave} <NavLink to={path.register}>{content.signUp}</NavLink></p>
                 </FormRow>
               </Form>
             </div>
@@ -91,7 +97,6 @@ function Login() {
 
       </div>
     </Contaienr>
-  )
 }
 
 export default Login

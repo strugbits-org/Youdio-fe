@@ -1,7 +1,7 @@
 import React from 'react'
 import { H1, H3, H4, P1 } from '../../../components/Typography'
 import { Section } from '../../../components/Banners'
-import { ContentBox, MonthBox, WeekBox, DayBox, FilterBox } from './liveClassesComponents'
+import { ContentBox, MonthBox, WeekBox, DayBox, SelectionBox, SelectionButton, FilterBox, FilterButton } from './liveClassesComponents'
 import { IconButton, PrimaryWhiteButton } from '../../../components/Button'
 import { InputIcon } from '../../../components/Inputs'
 import searchIcon from '../../../assets/icons/search.svg'
@@ -16,7 +16,7 @@ function LiveClasses() {
         </P1>
       </ContentBox>
     </Section>
-    <Section backgroundColor="white">
+    <Section backgroundColor="white" paddingBlock="5vw 3vw">
       <MonthBox className='month'>
         <IconButton position="left">
           <svg width="62" height="23" viewBox="0 0 62 23" fill="#000"
@@ -34,7 +34,7 @@ function LiveClasses() {
       </MonthBox>
     </Section>
 
-    <Section backgroundColor="var(--backgroundLightGrey)">
+    <Section backgroundColor="var(--backgroundLightGrey)" paddingBlock="2vw 1vw">
       <WeekBox>
         <ul>
           <li>
@@ -79,66 +79,49 @@ function LiveClasses() {
       </WeekBox>
     </Section>
 
-    <Section backgroundColor="#fff">
+    <Section backgroundColor="#fff" paddingBlock="3vw">
       <DayBox>
         <div></div>
         <div>
           <H4>12/7  (Wed)</H4>
         </div>
-        <div>
+        <div className='searchBox'>
           <InputIcon isIcon={searchIcon} placeholder='Search' />
         </div>
       </DayBox>
+      <SelectionBox>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"}/>
+
+      </SelectionBox>
+      <div className='seperatorLine '></div>
       <FilterBox>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
-        <IconButton position="right">
-          {"YOGA >"}
-        </IconButton>
+        <div>
+          <FilterButton name={"DURATION"}/> 
+        </div>
+        <div>
+          <FilterButton name={"INSTRUCTORS"}/>
+        </div>
+        <div>
+          <FilterButton name={"STYLES"}/>
+        </div>
+        <div>
+          <FilterButton name={"DIFFICULTY"}/>
+        </div>
+        <div>
+          <FilterButton name={"INTENSITY"}/>
+        </div>
+
       </FilterBox>
+
     </Section>
   </React.Fragment>
 }

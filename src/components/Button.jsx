@@ -10,7 +10,7 @@ export const PrimaryButton = styled.button`
     background:var(--backgroundGreen);
     cursor:pointer;
     transition: var(--transition03s);
-    font-size:20px;
+    font-size:18px;
      
     
     &:hover{
@@ -28,7 +28,7 @@ export const PrimaryWhiteButton = styled.button`
     background: var(--backgroundLightGrey);
     cursor:pointer;
     transition: var(--transition03s);
-    font-size:20px;
+    font-size:18px;
     
     &:hover{
         transition: var(--transition03s); 
@@ -49,20 +49,47 @@ export const IconButton = styled.button`
     background: transparent;
     cursor:pointer;
     /* transition:var(--transition03s); */
-    font-size:18px;
+    font-size:16px;
     padding:5px;
-
+    
     &:disabled{
         svg path{
             fill:#b6b6b6;
         }
-        transform:scale(100%);
+        cursor:initial; 
+        /* transform:scale(100%); */
     }
 
     &:hover{
-        transform:scale(102%);
+        /* transform:scale(102%); */
         /* transition:var(--transition03s); */
     }
-`
+    `
+export const WhiteIconButton = styled(IconButton)`
+    border:1px solid var(--textHeadingBlack);
+    border-radius:100px;
+    min-width: clamp(150px, 10vw, 200px);
+    min-height: 45px;
+    gap: 20px;
+    transition:var(--transition03s);
+    background: ${({selected}) => selected ? `var(--textHeadingBlack)` : 'transparent' };
+    color: ${({selected}) => selected ? `var(--textHeadingWhite)` : `var(--textHeadingBlack)` };
+    
 
+    svg path{
+        transition:var(--transition03s);
+        stroke: ${({selected}) => selected ? `var(--textHeadingWhite)` : `var(--textHeadingBlack)` };
+    }
+
+    &:hover{
+        background: var(--textHeadingBlack);
+        color: var(--textHeadingWhite);
+        transition:var(--transition03s);
+        svg path{
+            stroke: var(--textHeadingWhite);
+            transition:var(--transition03s);
+        }
+    }
+    
+`
 

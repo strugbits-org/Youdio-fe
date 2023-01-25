@@ -29,7 +29,7 @@ export const Input = styled.input`
 export const InputIcon = styled.input`
     width: 100%;
     max-width:384px;
-    height:55px;
+    height:45px;
     background:url(${({ isIcon }) => isIcon ? isIcon : ""});
     background-repeat:no-repeat;
     background-size:16px;

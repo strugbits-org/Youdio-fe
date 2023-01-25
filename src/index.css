@@ -42,6 +42,11 @@ a{
   /* grid-template-columns: ; */
 }
 
+.seperatorLine{
+  border: 1px solid black;
+  margin-block:47px;
+}
+
 @font-face {
   font-family: PoppinsRegular;
   src: url(./assets/fonts/Poppins-Regular.ttf);

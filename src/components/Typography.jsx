@@ -29,7 +29,7 @@ const H5 = styled.h5`
 `;
 
 const H6 = styled.h6`
-    font-family: ${poppinsSemiBold};
+    font-family: ${({fontFamily}) => fontFamily ? fontFamily : poppinsSemiBold};
     font-size: ${({ fontSize }) => fontSize ? fontSize : "18px"};
     `;
 
@@ -42,7 +42,7 @@ const P2 = styled.p`
     font-size: ${({ fontSize }) => fontSize ? fontSize : "18px"};
 `
 const P3 = styled.p`
-    font-family: ${poppinsRegular};
+    font-family: ${({fontFamily}) => fontFamily ? fontFamily : poppinsRegular};
     font-size: ${({ fontSize }) => fontSize ? fontSize : "14px"};
 `
 

@@ -1,13 +1,18 @@
 import React from 'react'
-import { H1, H3, H4, P1 } from '../../../components/Typography'
+import { H1, H3, H4, H6, P1 } from '../../../components/Typography'
 import { Section } from '../../../components/Banners'
-import { ContentBox, MonthBox, WeekBox, DayBox, SelectionBox, SelectionButton, FilterBox, FilterButton } from './liveClassesComponents'
+import { ContentBox, MonthBox, WeekBox, DayBox, SelectionBox, SelectionButton, FilterBox, FilterButton, CardsBox, H6M } from './liveClassesComponents'
 import { IconButton, PrimaryWhiteButton } from '../../../components/Button'
 import { InputIcon } from '../../../components/Inputs'
 import searchIcon from '../../../assets/icons/search.svg'
+import LiveClassCard from '../../../components/Cards/Cards'
+import { DateTag } from '../../../components/Cards/cardsComponent'
+import { fonts } from '../../../helpers/constant'
+import Filters from '../../../components/Filters'
 
 function LiveClasses() {
   return <React.Fragment>
+    {/* Hero Section */}
     <Section paddingBlock="140px" >
       <ContentBox>
         <H1>Find Perfect Live Class</H1>
@@ -16,6 +21,8 @@ function LiveClasses() {
         </P1>
       </ContentBox>
     </Section>
+
+    {/* Month Section */}
     <Section backgroundColor="white" paddingBlock="5vw 3vw">
       <MonthBox className='month'>
         <IconButton position="left">
@@ -34,6 +41,7 @@ function LiveClasses() {
       </MonthBox>
     </Section>
 
+    {/* Week Section */}
     <Section backgroundColor="var(--backgroundLightGrey)" paddingBlock="2vw 1vw">
       <WeekBox>
         <ul>
@@ -79,6 +87,7 @@ function LiveClasses() {
       </WeekBox>
     </Section>
 
+    {/* Filter, Tags and Search Section */}
     <Section backgroundColor="#fff" paddingBlock="3vw">
       <DayBox>
         <div></div>
@@ -90,39 +99,55 @@ function LiveClasses() {
         </div>
       </DayBox>
       <SelectionBox>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
-        <SelectionButton name={"YOGA"}/>
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
+        <SelectionButton name={"YOGA"} />
 
       </SelectionBox>
       <div className='seperatorLine '></div>
-      <FilterBox>
-        <div>
-          <FilterButton name={"DURATION"}/> 
-        </div>
-        <div>
-          <FilterButton name={"INSTRUCTORS"}/>
-        </div>
-        <div>
-          <FilterButton name={"STYLES"}/>
-        </div>
-        <div>
-          <FilterButton name={"DIFFICULTY"}/>
-        </div>
-        <div>
-          <FilterButton name={"INTENSITY"}/>
-        </div>
-
-      </FilterBox>
+      <Filters />
 
     </Section>
+
+    {/* Cards Section */}
+    <Section backgroundColor="white">
+      <CardsBox>
+        <LiveClassCard />
+        <LiveClassCard />
+        <LiveClassCard />
+        <LiveClassCard />
+        <LiveClassCard />
+        <LiveClassCard />
+        <DateTag>
+          <H4>30</H4>
+          <hr/>
+          <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
+
+        </DateTag>
+      </CardsBox>
+      <div className='seperatorLine '></div>
+      <CardsBox>
+        <LiveClassCard />
+        <LiveClassCard />
+        <LiveClassCard />
+        <LiveClassCard />
+        <LiveClassCard />
+        <LiveClassCard />
+        <DateTag>
+          <H4>30</H4>
+          <hr/>
+          <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
+        </DateTag>
+      </CardsBox>
+    </Section>
+    
   </React.Fragment>
 }
 

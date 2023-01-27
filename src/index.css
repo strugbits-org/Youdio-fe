@@ -6,11 +6,8 @@
   --backgroundGreenHover: #41d6c2; 
   --backgroundBrown: #D6CCC3;         
   --backgroundLightGrey: #F9F9F9;    
-  --backgroundGrey: rgba(0,0,0,.25);
+  --backgroundGrey: #b6b6b6;
   --transition03s: .3s all ease-in-out;    
-  
-  
-  
 }
 
 body {
@@ -43,7 +40,7 @@ a{
 }
 
 .seperatorLine{
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.07);
   margin-block:47px;
 }
 

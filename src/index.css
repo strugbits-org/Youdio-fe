@@ -1,12 +1,12 @@
 :root{
   --textHeadingWhite: #ffffff;
   --textHeadingBlack: #1f1f1f;
-  --textParaBlack: #4e4e4e; 
+  --textParaBlack: #000000; 
   --backgroundGreen: #3AC4B2; 
   --backgroundGreenHover: #41d6c2; 
   --backgroundBrown: #D6CCC3;         
-  --backgroundLightGrey: #F9F9F9;    
-  --backgroundGrey: #b6b6b6;
+  --backgroundLightGrey: #f2f2f2;    
+  --backgroundGrey: #5b5b5b;
   --transition03s: .3s all ease-in-out;    
 }
 

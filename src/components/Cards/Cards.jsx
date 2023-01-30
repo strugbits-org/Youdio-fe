@@ -2,7 +2,7 @@ import React from 'react'
 import cardImage from '../../assets/sample/cardImg.jpg'
 import profileImage from '../../assets/sample/profileImg.jpg'
 import timeClock from '../../assets/icons/time.svg'
-import { H5, P2, P3, H6 } from '../Typography'
+import { H3, P2, P3, H4 } from '../Typography'
 import { Card, CardMedia, Tag, CardContent } from './cardsComponent'
 
 function LiveClassCard() {
@@ -10,22 +10,22 @@ function LiveClassCard() {
         <CardMedia>
             <img src={cardImage} alt={""} width="100%" height="auto" />
             <Tag>
-                <H6>YOGA</H6>
+                <H4>YOGA</H4>
             </Tag>
         </CardMedia>
         <CardContent>
             <div className='timeRow'>
-                <H6>06:30-07:30</H6>
+                <H4>06:30-07:30</H4>
                 <div>
                     <img src={timeClock} alt="" width="15px" height="auto" />
                     <P3>5 min</P3>
                 </div>
             </div>
-            <H5>upper body power&Core body</H5>
+            <H3>upper body power&Core body</H3>
             <div className='profileRow'>
                 <div className='profileBox'>
                     <img src={profileImage} alt="" width="30px" height={""} />
-                    <H6>Elizebeth Lisa</H6>
+                    <H4>Elizebeth Lisa</H4>
                 </div>
                 <div className='intensityBox'>
                     <svg width="15" height="14" viewBox="0 0 15 14" fill="none"

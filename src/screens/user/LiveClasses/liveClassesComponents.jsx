@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IconButton, WhiteIconButton } from "../../../components/Button";
 import { useState } from "react";
-import { H6 } from "../../../components/Typography";
+import { H4 } from "../../../components/Typography";
 import { fonts } from "../../../helpers/constant";
 
 export const ContentBox = styled.div`
@@ -75,10 +75,6 @@ export const SelectionButton = ({name}) => {
     </WhiteIconButton>
 }
 
-
-
-
-
 export const CardsBox = styled.div`
     display:grid;
     grid-template-columns:1fr 1fr 1fr 1fr;
@@ -86,7 +82,7 @@ export const CardsBox = styled.div`
     position:relative;
 `
 
-export const H6M = styled(H6)`
+export const H6M = styled(H4)`
     font-family:${fonts.poppinsMedium};
     font-weight:500;
 

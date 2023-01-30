@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Duration, FilterBox, FilterButton, FilterOptions, RangeSlider, SliderBox } from './filtersComponents'
+import Duration from './Duration'
+import { P3 } from '../Typography'
+import { FilterBox, FilterButton, FilterOptions } from './filtersComponents'
+import Instructors from './Instructors'
 
 export default function Filters() {
 
@@ -13,7 +16,7 @@ export default function Filters() {
         setFilter(filter)
         console.log(selectedFilter);
     }
-    return <FilterBox>
+    return <FilterBox open={selectedFilter}>
         <div>
             <FilterButton name={"DURATION"} clickEvent={() => filterHandler('duration')} />
         </div>
@@ -32,7 +35,12 @@ export default function Filters() {
 
         {
             selectedFilter !== null && <FilterOptions>
-                <Duration />
+                <P3 className='videoCount'>SHOWING 316 VIDEOS</P3>
+                {selectedFilter === "duration" && <Duration />}
+                {selectedFilter === "instructor" && <Instructors />}
+                {selectedFilter === "styles" && <Duration />}
+                {selectedFilter === "difficulty" && <Duration />}
+                {selectedFilter === "intensity" && <Duration />}
 
             </FilterOptions>
         }

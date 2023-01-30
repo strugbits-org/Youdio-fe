@@ -1,68 +1,26 @@
 import React from 'react'
-import { Slider, Box } from '@mui/material';
 import styled from "styled-components";
 import { IconButton } from "../Button";
-import { P3 } from '../Typography';
-import { fonts } from '../../helpers/constant';
 
-function valuetext(value) {
-    return `${value}min`;
-}
-
-function RangeSlider() {
-    const [value, setValue] = React.useState([0, 90]);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    return (
-        <Box sx={{ width: 400 }}>
-            <Slider
-                max="90"
-                value={value}
-                onChange={handleChange}
-                valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
-            />
-        </Box>
-
-    );
-}
-
-const SliderBox = styled.div`
-    .sliderContent{
-        width:120%;
-        display:flex;
-        justify-content:space-between;
-        margin-inline:-8% -12%;
-
-        .points{
-            color:var(--backgroundGrey);
-        }
-    }
-`
-export const Duration = () => {
-    return <SliderBox>
-        <RangeSlider />
-        <div className='sliderContent'>
-            <P3 className='points' fontFamily={fonts.poppinsMedium}>0 MINS</P3>
-            <P3 fontFamily={fonts.poppinsSemiBold} >All Duration</P3>
-            <P3 className='points' fontFamily={fonts.poppinsMedium}>90+ MINS</P3>
-        </div>
-
-    </SliderBox>
-}
-
-
-export const FilterButton = ({ name, clickEvent }) => {
+export const FilterButton = ({ name, clickEvent, open }) => {
     // const [selected, setSelected] = useState(false)
     return <IconButton onClick={clickEvent}>
         <span>{name}</span>
-        <svg width="16" height="10" viewBox="0 0 16 10" fill="none"
+        <svg width="12" height="7" viewBox="0 0 16 10" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M1 1.18945L7.66667 8.18945L15 1.18945" stroke="#1F1F1F" strokeWidth="1.2" />
         </svg>
+        {/* {
+            open !== null
+                ? <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.7034 5.84375L6.08275 1L1 5.84375" stroke="black" stroke-width="0.96875" />
+                </svg>
+                : 
+        } */}
+
+
+
     </IconButton>
 }
 
@@ -72,6 +30,9 @@ export const FilterBox = styled.div`
     align-items:center;
     flex-wrap:wrap;
     gap: 1vw;
+    background:${({open}) => open !== null ? 'var(--backgroundLightGrey)'  : '#fff' };
+    padding: ${({open}) => open !== null ? '15px'  : '0px' };
+
 `
 
 export const FilterOptions = styled.div`
@@ -83,10 +44,12 @@ export const FilterOptions = styled.div`
     place-content:center;
     background: var(--backgroundLightGrey);
     transition:var(--transition03s);
-    
+    position:relative;
+
+    .videoCount{
+        position:absolute;
+        top:10px;      
+        left:10px;
+        color:#D6CCC3;        
+    }
 `
-
-
-
-
-

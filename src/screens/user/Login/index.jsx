@@ -14,7 +14,7 @@ import { path } from '../../../helpers/constant'
 
 
 
-const Contaienr = styled.div`
+const Container = styled.div`
     background:#fff;
     height:100vh;
     display:grid;
@@ -44,7 +44,7 @@ function Login() {
 
   }, [language])
 
-  return <Contaienr>
+  return <Container>
       <div className='form'>
 
         <Formik
@@ -96,7 +96,7 @@ function Login() {
         </Formik>
 
       </div>
-    </Contaienr>
+    </Container>
 }
 
 export default Login

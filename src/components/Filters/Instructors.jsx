@@ -13,7 +13,8 @@ export default function Instructors() {
             display:flex;
             align-items:center;
             gap:5px;
-            cursor:pointer; 
+            cursor:pointer;
+            margin-bottom:2.5vw; 
         }  
         .instructorList{
             ul{
@@ -27,6 +28,7 @@ export default function Instructors() {
             }
     }
     `
+
     return <InstructorsBox>
         <div className='allInstructors' onClick={() => setAll(!isAll)}>
             {isAll && <svg width="17" height="13" viewBox="0 0 17 13" fill="none"
@@ -40,10 +42,19 @@ export default function Instructors() {
                 <li>
                     <H4 fontSize="16px">ELIZEBTH LISA</H4>
                 </li>
-                <li>ELIZEBTH LISA</li>
-                <li>ELIZEBTH LISA</li>
-                <li>ELIZEBTH LISA</li>
-                <li>ELIZEBTH LISA</li>
+                <li>
+                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
+                </li>
+                <li>
+                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
+                </li>
+                <li>
+                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
+                </li>
+                <li>
+                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
+                </li>
+                
                 
             </ul>
         </div>

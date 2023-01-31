@@ -4,7 +4,10 @@ import { IconButton } from "../Button";
 
 export const FilterButton = ({ name, clickEvent, open }) => {
     // const [selected, setSelected] = useState(false)
-    return <IconButton onClick={clickEvent}>
+    const IconButtonM = styled(IconButton)`
+        padding:5px 5px 5px 0px;
+    `
+    return <IconButtonM onClick={clickEvent}>
         <span>{name}</span>
         <svg width="12" height="7" viewBox="0 0 16 10" fill="none"
             xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +24,7 @@ export const FilterButton = ({ name, clickEvent, open }) => {
 
 
 
-    </IconButton>
+    </IconButtonM>
 }
 
 export const FilterBox = styled.div`
@@ -39,17 +42,17 @@ export const FilterOptions = styled.div`
     width:100%;
     min-height:0px;
     display:grid;
-    padding-inline:20px;
+    /* padding-inline:20px; */
     padding-block:30px;
-    place-content:center;
+    /* place-content:center;  */
     background: var(--backgroundLightGrey);
     transition:var(--transition03s);
     position:relative;
 
     .videoCount{
         position:absolute;
-        top:10px;      
-        left:10px;
+        top:0px;      
+        left:0px;
         color:#D6CCC3;        
     }
 `

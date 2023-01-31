@@ -27,7 +27,7 @@ function RangeSlider() {
 }
 export default function Duration() {
     const SliderBox = styled.div`
-        /* margin-inline:auto; */
+        margin-inline:auto;
         .sliderContent{
             width:120%;
             display:flex;

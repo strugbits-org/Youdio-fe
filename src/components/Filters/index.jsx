@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Duration from './Duration'
+import Difficulty from './Difficulty'
+import Intensity from './Intensity'
+import Styles from './Styles'
 import { P3 } from '../Typography'
+import translator from '../../helpers/translator'
 import { FilterBox, FilterButton, FilterOptions } from './filtersComponents'
 import Instructors from './Instructors'
 
@@ -13,7 +17,7 @@ export default function Filters() {
     }, [selectedFilter])
 
     const filterHandler = (filter) => {
-        setFilter(filter)
+        setFilter(filter)  
         console.log(selectedFilter);
     }
     return <FilterBox open={selectedFilter}>
@@ -38,9 +42,9 @@ export default function Filters() {
                 <P3 className='videoCount'>SHOWING 316 VIDEOS</P3>
                 {selectedFilter === "duration" && <Duration />}
                 {selectedFilter === "instructor" && <Instructors />}
-                {selectedFilter === "styles" && <Duration />}
-                {selectedFilter === "difficulty" && <Duration />}
-                {selectedFilter === "intensity" && <Duration />}
+                {selectedFilter === "styles" && <Styles />}
+                {selectedFilter === "difficulty" && <Difficulty />}
+                {selectedFilter === "intensity" && <Intensity />}
 
             </FilterOptions>
         }

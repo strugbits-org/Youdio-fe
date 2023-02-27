@@ -1,6 +1,3 @@
-
-
-
 export const staticContent = {
     liveClasses: "LIVE CLASSES",
     videos: "VIDEOS",

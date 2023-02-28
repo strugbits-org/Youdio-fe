@@ -22,6 +22,12 @@ export const WeekBox = styled.div`
         
         li{
             flex:1;
+            .selectedDate{
+                transition: var(--transition03s); 
+                color: var(--textHeadingWhite);
+                background:var(--backgroundGreen);
+                border:1px solid transparent;
+            }
         }
     }
     

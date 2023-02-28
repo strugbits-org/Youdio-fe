@@ -1,3 +1,5 @@
+import moment from "moment/moment"
+
 export const liveClassStaticContent = {
     heroSectionh1: "Find Perfect Live Class",
     heroSectionp1: "Start your Yoga, Meditation and Fitness routines by availing our live or recorded VIDEOS",
@@ -53,3 +55,26 @@ export const dates = [
     },
 ]
 
+export const monthNames = moment.months().map((val, ind) => { 
+    return ({id:ind, name:val})
+})
+
+// const weeks = moment.date;
+// console.log(weeks);
+
+
+export const getDaysArray = function (year, month) {
+    var monthIndex = month; // 0..11 instead of 1..12
+    var names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var date = new Date(year, monthIndex, 1);
+    var result = [];
+    while (date.getMonth() == monthIndex) {
+        // result.push(date.getDate() + '-' + names[date.getDay()]);
+        result.push({
+            id: date.getDate(),
+            dateString: `${date.getMonth() + 1}/${date.getDate()} (${names[date.getDay()]})`
+        });
+        date.setDate(date.getDate() + 1);
+    }
+    return result;
+}

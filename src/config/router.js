@@ -8,8 +8,9 @@ import Home from '../screens/user/Home';
 import UserProfile from '../screens/user/UserProfile';
 import LiveClasses from '../screens/user/LiveClasses';
 import VideoClasses from '../screens/user/VideoClasses';
-import Header from '../components/Header';
 import Login from "../screens/user/Login";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 
 export default function Router() {
@@ -59,6 +60,7 @@ export default function Router() {
                 <Route path="/productDetails/:adId" element={protectedRoute(<ProductDetails />)} /> */}
 
             </Routes>
+            <Footer />
 
         </BrowserRouter>
     </div>

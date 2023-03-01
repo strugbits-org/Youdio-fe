@@ -1,7 +1,9 @@
 import leftArrow from "./left_arrow.svg"
+import roundQuestionMark from "./mdi_question-mark-circle-outline.svg"
 
 const icons = {
-    leftArrow
+    leftArrow,
+    roundQuestionMark
 }
 
 export default icons

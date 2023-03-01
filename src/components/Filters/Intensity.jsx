@@ -52,7 +52,7 @@ export default function Intensity() {
                 intensities.length > 0 && intensities.map(({ id, name }) => {
                     return <li key={id} onClick={() => setIntensitiy(name)}>
                         <P2 className={name === intensitiy ? 'active' : ''}>{name}</P2>
-                        <img src={icons.leftArrow} alt={"Question Mark"} width="" height=""/>
+                        <img src={icons.roundQuestionMark} alt={"Question Mark"} tooltip={name} width="" height=""/>
                     </li>
                 })
             }

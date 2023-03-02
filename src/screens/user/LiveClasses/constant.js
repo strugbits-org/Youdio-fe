@@ -59,10 +59,6 @@ export const monthNames = moment.months().map((val, ind) => {
     return ({id:ind, name:val})
 })
 
-// const weeks = moment.date;
-// console.log(weeks);
-
-
 export const getDaysArray = function (year, month) {
     var monthIndex = month; // 0..11 instead of 1..12
     var names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

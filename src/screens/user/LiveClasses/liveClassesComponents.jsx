@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import { IconButton, WhiteIconButton } from "../../../components/Button";
+import {WhiteIconButton } from "../../../components/Button";
 import { useState } from "react";
 import { H4 } from "../../../components/Typography";
 import { fonts } from "../../../helpers/constant";
+import { layout } from "../../../helpers/constant";
+import icons from "../../../assets/icons";
+const { mobile, mobileMedium, tablet, laptop, desktop } = layout
 
 export const ContentBox = styled.div`
     max-width:632px;
@@ -11,6 +14,10 @@ export const ContentBox = styled.div`
 export const MonthBox = styled.div`
     display:flex;
     justify-content:space-between;
+
+    button img{
+        width:clamp(40px, 3.1vw, 62px);
+    }
 `
 
 export const WeekBox = styled.div`
@@ -34,10 +41,12 @@ export const WeekBox = styled.div`
     .buttons{
         display:flex;
         justify-content:space-between;
+
+        img{
+            width:16px;
+        }
             
     }
-
-
 `
 
 export const DayBox = styled.div`
@@ -51,10 +60,27 @@ export const DayBox = styled.div`
         flex:1;
         text-align:center;
     }
-    .searchBox{
-        text-align:right;
-
+     
+    @media only screen and (min-width: ${mobile}) {
+        flex-direction:column;    
+        .searchBox{
+            input{
+                min-height:30px;
+                margin-block:10px;
+            }
+        }
     }
+    @media only screen and (min-width: ${tablet}) {
+        flex-direction:row;    
+        .searchBox{
+            text-align:right;
+            input{
+                min-height:45px;
+                margin-block:0px;
+            }
+        }
+    }
+   
 `
 
 export const SelectionBox = styled.div`
@@ -62,7 +88,7 @@ export const SelectionBox = styled.div`
     justify-content:left;
     align-items:center;
     flex-wrap:wrap;
-    gap: 1vw;
+    gap: 1.3vw;
         
     div{
         flex:1;
@@ -74,18 +100,28 @@ export const SelectionButton = ({name}) => {
     
     return <WhiteIconButton selected={selected} onClick={() => setSelected(!selected)}>
         <span>{name}</span>
-        <svg width="16" height="10" viewBox="0 0 16 10" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1.18945L7.66667 8.18945L15 1.18945" stroke="#1F1F1F" strokeWidth="1.2" />
-        </svg>
+        <img src={icons.arrowDown} alt="" width={"14"} height={""}/>
     </WhiteIconButton>
 }
 
 export const CardsBox = styled.div`
     display:grid;
-    grid-template-columns:1fr 1fr 1fr 1fr;
     gap:6vw 1.8vw;
     position:relative;
+    @media only screen and (min-width: ${mobile}) {
+        grid-template-columns:1fr;
+    }
+    @media only screen and (min-width: ${mobileMedium}) {
+        grid-template-columns:1fr 1fr;
+    }
+    @media only screen and (min-width: ${tablet}) {
+        grid-template-columns:1fr 1fr 1fr;
+    }
+    @media only screen and (min-width: ${laptop}) {
+        grid-template-columns:1fr 1fr 1fr 1fr;
+    }
+    @media only screen and (min-width: ${desktop}) {
+    }
 `
 
 export const H6M = styled(H4)`

@@ -18,3 +18,11 @@ export const path = {
     register: "",
     forgotPassword: ""
 }
+
+export const layout = {
+    mobile: '280px',
+    mobileMedium:'420px',
+    tablet: '768px',
+    laptop: '1001px',
+    desktop: '1368px',
+}

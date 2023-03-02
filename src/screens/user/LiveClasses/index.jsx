@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { liveClassStaticContent, dates } from './constant'
 import { contentTranslator } from '../../../helpers/translator'
@@ -10,16 +10,21 @@ import { InputIcon } from '../../../components/Inputs'
 import searchIcon from '../../../assets/icons/search.svg'
 import LiveClassCard from '../../../components/Cards/Cards'
 import { DateTag } from '../../../components/Cards/cardsComponent'
-import { fonts } from '../../../helpers/constant'
+import { fonts, layout } from '../../../helpers/constant'
 import { monthNames, getDaysArray } from './constant'
 import Filters from '../../../components/Filters'
 import moment, { weekdays } from 'moment'
 import { useRef } from 'react'
+import icons from '../../../assets/icons'
 
 
 
 function LiveClasses() {
   const date = new Date()
+  const daysInWeek = useMemo(() => { 
+    const windowWidth = window.innerWidth
+    return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
+  })
   const initialYear = date.getFullYear()
   const initialMonth = date.getMonth()
 
@@ -28,15 +33,15 @@ function LiveClasses() {
   const [month, setMonth] = useState(initialMonth);
   const [weekDays, setWeekDays] = useState(getDaysArray(initialYear, initialMonth))
   const [weekStart, setWeekStart] = useState(0)
-  const [weekEnd, setWeekEnd] = useState(7)
   const [isDateSelected, setDateSelected] = useState()
+  const [weekEnd, setWeekEnd] = useState(daysInWeek)
   const weekDaysRef = useRef()
 
   const previousMonth = () => { 
     month !== 0 && setMonth(month - 1)
     setWeekDays(getDaysArray(initialYear, month-1))
     setWeekStart(0)
-    setWeekEnd(7)
+    setWeekEnd(daysInWeek)
     setDateSelected("")
     
   }
@@ -45,7 +50,7 @@ function LiveClasses() {
     month !== monthNames.length - 1 && setMonth(month + 1)
     setWeekDays(getDaysArray(initialYear, month + 1))
     setWeekStart(0)
-    setWeekEnd(7)
+    setWeekEnd(daysInWeek)
     setDateSelected("")
 
   }
@@ -75,15 +80,16 @@ function LiveClasses() {
 
   useEffect(() => {
     contentTranslator({ staticContent: liveClassStaticContent, contentToTranslate: content, setContent, language })
-    !isDateSelected && setDateSelected(weekDays.slice(weekStart, weekEnd)[3].dateString);
+    !isDateSelected && setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
+  
   }, [language, month, weekStart, weekEnd])
 
   return <React.Fragment>
     {/* Hero Section */}
-    <Section paddingBlock="140px" >
+    <Section paddingBlock="7.5vw" >
       <ContentBox>
         <H1>{content.heroSectionh1}</H1>
-        <P1 style={{ fontSize: '24px' }}>{ content.heroSectionp1 }</P1>
+        <P1>{ content.heroSectionp1 }</P1>
       </ContentBox>
     </Section>
 
@@ -93,11 +99,9 @@ function LiveClasses() {
         <IconButton
           position="left"
           onClick={() => previousMonth()}
-          disabled={month === 0 ? true : false}>
-          <svg width="62" height="23" viewBox="0 0 62 23" fill="#000"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.43934 10.4393C-0.146447 11.0251 -0.146447 11.9749 0.43934 12.5607L9.98528 22.1066C10.5711 22.6924 11.5208 22.6924 12.1066 22.1066C12.6924 21.5208 12.6924 20.5711 12.1066 19.9853L3.62132 11.5L12.1066 3.01472C12.6924 2.42893 12.6924 1.47918 12.1066 0.893398C11.5208 0.307612 10.5711 0.307612 9.98528 0.893398L0.43934 10.4393ZM61.5 10H1.5V13H61.5V10Z" fill="#1F1F1F" />
-          </svg>
+          disabled={month === 0 ? true : false}
+        >
+          <img src={icons.leftLongArrow} alt="Left Long Arrow" width={""} height={""} />
         </IconButton>
         
         <H3>{monthNames[month].name}</H3>
@@ -107,10 +111,7 @@ function LiveClasses() {
           onClick={() => nextMonth()}
           disabled={month === monthNames.length - 1 ? true : false}
         >
-          <svg width="62" height="24" viewBox="0 0 62 24" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M61.0607 10.9393C61.6464 11.5251 61.6464 12.4749 61.0607 13.0607L51.5147 22.6066C50.9289 23.1924 49.9792 23.1924 49.3934 22.6066C48.8076 22.0208 48.8076 21.0711 49.3934 20.4853L57.8787 12L49.3934 3.51472C48.8076 2.92893 48.8076 1.97918 49.3934 1.3934C49.9792 0.807612 50.9289 0.807612 51.5147 1.3934L61.0607 10.9393ZM0 10.5H60V13.5H0V10.5Z" fill="#1F1F1F" />
-          </svg>
+          <img src={icons.rightLongArrow} alt="Right Long Arrow" width={""} height={""} />
         </IconButton>
       </MonthBox>
     </Section>
@@ -138,10 +139,7 @@ function LiveClasses() {
             onClick={() => previousWeek()}
             disabled={weekStart === 0 ? true : false}
           >
-            <svg width="15" height="10" viewBox="0 0 15 10" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M0.575736 4.57574C0.341421 4.81005 0.341421 5.18995 0.575736 5.42426L4.39411 9.24264C4.62843 9.47696 5.00833 9.47696 5.24264 9.24264C5.47696 9.00833 5.47696 8.62843 5.24264 8.39411L1.84853 5L5.24264 1.60589C5.47696 1.37157 5.47696 0.991674 5.24264 0.757359C5.00833 0.523045 4.62843 0.523045 4.39411 0.757359L0.575736 4.57574ZM15 4.4H1V5.6H15V4.4Z" fill="#1F1F1F" />
-            </svg>
+            <img src={icons.leftArrow} alt="Left Arrow" width={""} height={""} />
             <span>{content.weekSectionPrev}</span>
 
           </IconButton>
@@ -150,10 +148,8 @@ function LiveClasses() {
             disabled={weekEnd === weekDays.length ? true : false}
           >
             <span>{content.weekSectionNext}</span>
-            <svg width="15" height="10" viewBox="0 0 15 10" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.4243 4.57574C14.6586 4.81005 14.6586 5.18995 14.4243 5.42426L10.6059 9.24264C10.3716 9.47696 9.99167 9.47696 9.75736 9.24264C9.52304 9.00833 9.52304 8.62843 9.75736 8.39411L13.1515 5L9.75736 1.60589C9.52304 1.37157 9.52304 0.991674 9.75736 0.757359C9.99167 0.523045 10.3716 0.523045 10.6059 0.757359L14.4243 4.57574ZM0 4.4H14V5.6H0V4.4Z" fill="#1F1F1F" />
-            </svg>
+            <img src={icons.rightArrow} alt="Right Arrow" width={""} height={""} />
+            
           </IconButton>
         </div>
       </WeekBox>
@@ -162,7 +158,7 @@ function LiveClasses() {
     {/* Filter, Tags and Search Section */}
     <Section backgroundColor="#fff" paddingBlock="3vw">
       <DayBox>
-        <div></div>
+        <div className='blank'></div>
         <div>
           <H4>{isDateSelected}</H4>
         </div>

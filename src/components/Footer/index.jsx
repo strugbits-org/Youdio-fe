@@ -3,8 +3,12 @@ import { NavLink } from 'react-router-dom'
 import { H4, P2, P3 } from '../Typography'
 // import { NavLink } from 'react-router-dom'
 
-import { FooterContent, UpperBox, Section, UL, BottomBox, HorizontalLine } from './footerComponents'
+import { FooterContent, UpperBox, BottomBox, HorizontalLine } from './footerComponents'
 import footerLogo from "../../assets/logo/footer_logo.svg"
+import { Section } from '../Banners'
+import { Input } from '../Inputs'
+import { IconButton } from '../Button'
+import icons from '../../assets/icons'
 // import youdio from '../../assets/logo/youdio.svg'
 // import worldMap from '../../assets/icons/language_world.svg'
 // import { useDispatch, useSelector } from 'react-redux'
@@ -32,14 +36,14 @@ function Header() {
     //   }
 
     return (
-        <Section>
+        <Section backgroundColor="var(--textHeadingBlack)">
             <FooterContent>
                 <UpperBox>
-                    <div>
+                    <div className='logoBox'>
                         <img src={footerLogo} alt="" width={""} height={""} />
                         <P2>Imagining professional yoga lessons without the hassle of travelling has now become easier.</P2>
                     </div>
-                    <div>
+                    <div className='quickLinks'>
                         <H4>QUICK LINKS</H4>
                         <ul>
                             <li><NavLink to={"/"}>Home</NavLink></li>
@@ -49,17 +53,20 @@ function Header() {
                             <li><NavLink to={"/"}>Instructor</NavLink></li>
                         </ul>
                     </div>
-                    <div>
+                    <div className='quickLinks'>
                         <H4>QUICK LINKS</H4>
                         <ul>
                             <li><NavLink to={"/"}>Blog</NavLink></li>
                             <li><NavLink to={"/"}>Contact Us</NavLink></li>
                         </ul>
                     </div>
-                    <div>
+                    <div className='subscribeBox'>
                         <H4>Subscribe to our newsletter</H4>
-                        <input type="email" name='email' id='email' />
-                        <button>Subscribe</button>
+                        <Input type="email" name='email' id='email' placeholder="Email Address" />
+                        <IconButton>
+                            <span>Subsuscribe</span>
+                            <img src={icons.rightArrowShort} alt="" />
+                        </IconButton>
                     </div>
                 </UpperBox>
                 <BottomBox>

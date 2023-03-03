@@ -4,15 +4,17 @@ const Section = styled.section`
     background: #ffffff;
     min-height: 97px;
     box-shadow: 0px 10px 10px rgba(0,0,0,0.08);
-    padding-inline: 6vw;
+    padding-inline: 122px;
 `
 
 const Nav = styled.nav`
     width:100%;
-    display:grid;
-    grid-template-columns: 1fr auto 1fr ;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    /* grid-template-columns: 1fr auto 1fr ;
     place-items:center;
-    place-content: center;
+    place-content: center; */
     /* align-items:center; */
     /* border:1px solid red; */
     gap:10px;
@@ -23,9 +25,10 @@ const Nav = styled.nav`
     `
 
 const UL = styled.ul`
+    flex:1;
     display:flex;
     align-items:center;
-    justify-content:space-around;
+    justify-content:center;
     gap:30px;
     /* border:1px solid red; */
 

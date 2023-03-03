@@ -87,6 +87,7 @@ export const IconButton = styled.button`
         /* transition:var(--transition03s); */
     }
     `
+
 export const WhiteIconButton = styled(IconButton)`
     border:1px solid var(--textHeadingBlack);
     border-radius:100px;

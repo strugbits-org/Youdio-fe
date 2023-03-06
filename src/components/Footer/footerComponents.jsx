@@ -95,7 +95,15 @@ const UpperBox = styled.div`
     }
     @media only screen and (min-width: ${laptop}) {
         grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
-        
+        div:nth-of-type(2){
+            order:2
+        }
+        div:nth-of-type(3){
+            order:3
+        }
+        div:nth-of-type(4){
+            order:4
+        }
     }
 
 `

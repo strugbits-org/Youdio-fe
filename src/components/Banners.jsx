@@ -8,6 +8,7 @@ export const Section = styled.section`
             backgroundColor ? backgroundColor :
                 `radial-gradient(circle, rgba(240,162,204,1) 0%, rgba(255,231,218,1) 70%)`
     }};
+    
     padding-block: ${({ paddingBlock }) => paddingBlock ? paddingBlock : '20px'};
     
     @media only screen and (min-width: ${mobile}) {

@@ -180,7 +180,7 @@ function LiveClasses() {
 
       </SelectionBox>
       <div className='seperatorLine '></div>
-      <Filters />
+      {window.innerWidth > 768 && <Filters />}
 
     </Section>
 
@@ -193,12 +193,13 @@ function LiveClasses() {
         <LiveClassCard />
         <LiveClassCard />
         <LiveClassCard />
-        <DateTag>
-          <H4>30</H4>
-          <hr/>
-          <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
-
-        </DateTag>
+        {
+          window.innerWidth > 1001 && <DateTag>
+            <H4>30</H4>
+            <hr />
+            <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
+          </DateTag>
+        }
       </CardsBox>
       <div className='seperatorLine '></div>
       <CardsBox>
@@ -208,11 +209,13 @@ function LiveClasses() {
         <LiveClassCard />
         <LiveClassCard />
         <LiveClassCard />
-        <DateTag>
-          <H4>30</H4>
-          <hr/>
-          <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
-        </DateTag>
+        {
+          window.innerWidth > 1001 && <DateTag>
+            <H4>30</H4>
+            <hr />
+            <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
+          </DateTag>
+        }
       </CardsBox>
     </Section>
     

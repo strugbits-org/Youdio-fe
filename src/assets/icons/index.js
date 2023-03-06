@@ -6,6 +6,7 @@ import rightLongArrow from "./right_long_arrow.svg"
 import arrowDown from "./arrow_down.svg"
 import arrowUp from "./arrow_up.svg"
 import rightArrowShort from "./right_arrow_short.svg"
+import menu from "./menu.svg"
 
 const icons = {
     leftArrow,
@@ -15,7 +16,8 @@ const icons = {
     rightLongArrow,
     arrowDown,
     arrowUp,
-    rightArrowShort
+    rightArrowShort,
+    menu
 
 }
 

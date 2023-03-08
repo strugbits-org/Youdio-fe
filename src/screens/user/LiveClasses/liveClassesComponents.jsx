@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { H4 } from "../../../components/Typography";
 import { fonts } from "../../../helpers/constant";
 import { layout } from "../../../helpers/constant";

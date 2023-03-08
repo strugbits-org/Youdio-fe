@@ -6,7 +6,6 @@ import { fonts } from '../../helpers/constant'
 export default function Instructors() {
 
     const [isAll, setAll] = useState(false)
-    const [filters, setFilters] = useState([])
 
     const InstructorsBox = styled.div`
         & :is(.allInstructors){

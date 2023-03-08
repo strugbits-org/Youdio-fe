@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { fonts } from "../../helpers/constant";
 import { layout } from "../../helpers/constant";
 
-const { mobile, tablet, laptop, desktop } = layout
+const { mobile, tablet, laptop } = layout
 
 const Section = styled.section`
     background: var(--textHeadingBlack);

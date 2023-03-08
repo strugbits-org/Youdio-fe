@@ -42,7 +42,7 @@ function Login() {
   useEffect(() => {
     contentTranslator({ staticContent: loginContent, contentToTranslate: content, setContent, language })
 
-  }, [language])
+  }, [language, content])
 
   return <Container>
       <div className='form'>

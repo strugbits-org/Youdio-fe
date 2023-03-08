@@ -4,7 +4,6 @@ import Difficulty from './Difficulty'
 import Intensity from './Intensity'
 import Styles from './Styles'
 import { P3 } from '../Typography'
-import translator from '../../helpers/translator'
 import { FilterBox, FilterButton, FilterOptions, SelectionBox, SelectionButton } from './filtersComponents'
 import Instructors from './Instructors'
 

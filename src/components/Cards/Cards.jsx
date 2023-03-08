@@ -2,7 +2,7 @@ import React from 'react'
 import cardImage from '../../assets/sample/cardImg.jpg'
 import profileImage from '../../assets/sample/profileImg.jpg'
 import timeClock from '../../assets/icons/time.svg'
-import { H3, P2, P3, H4 } from '../Typography'
+import { H3, P3, H4 } from '../Typography'
 import { Card, CardMedia, Tag, CardContent } from './cardsComponent'
 
 function LiveClassCard() {

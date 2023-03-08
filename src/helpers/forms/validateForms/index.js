@@ -1,4 +1,4 @@
-import { email, password, textField, phone, country, bool, tradeInvite } from "../fieldsValidattion";
+import { email, password } from "../fieldsValidattion";
 import * as Yup from "yup";
 
 // Login form Validation

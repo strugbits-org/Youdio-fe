@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { layout } from "../helpers/constant";
 
-const { mobile, tablet, laptop, desktop } = layout
+const { mobile, tablet, laptop } = layout
 
 export const PrimaryButton = styled.button`
     border:none;

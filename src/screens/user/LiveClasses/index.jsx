@@ -1,19 +1,19 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { liveClassStaticContent, dates } from './constant'
+import { liveClassStaticContent} from './constant'
 import { contentTranslator } from '../../../helpers/translator'
-import { H1, H3, H4, H6, P1 } from '../../../components/Typography'
+import { H1, H3, H4, P1 } from '../../../components/Typography'
 import { Section } from '../../../components/Banners'
-import { ContentBox, MonthBox, WeekBox, DayBox, SelectionBox, SelectionButton, FilterBox, FilterButton, CardsBox, H6M } from './liveClassesComponents'
+import { ContentBox, MonthBox, WeekBox, DayBox, CardsBox, H6M } from './liveClassesComponents'
 import { IconButton, PrimaryWhiteButton } from '../../../components/Button'
 import { InputIcon } from '../../../components/Inputs'
 import searchIcon from '../../../assets/icons/search.svg'
 import LiveClassCard from '../../../components/Cards/Cards'
 import { DateTag } from '../../../components/Cards/cardsComponent'
-import { fonts, layout } from '../../../helpers/constant'
+import { fonts } from '../../../helpers/constant'
 import { monthNames, getDaysArray } from './constant'
 import Filters from '../../../components/Filters'
-import moment, { weekdays } from 'moment'
+import { weekdays } from 'moment'
 import { useRef } from 'react'
 import icons from '../../../assets/icons'
 
@@ -21,10 +21,12 @@ import icons from '../../../assets/icons'
 
 function LiveClasses() {
   const date = new Date()
-  const daysInWeek = useMemo(() => {
+
+  const daysInWeek = () => {
     const windowWidth = window.innerWidth
     return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
-  })
+  }
+
   const initialYear = date.getFullYear()
   const initialMonth = date.getMonth()
 
@@ -34,14 +36,14 @@ function LiveClasses() {
   const [weekDays, setWeekDays] = useState(getDaysArray(initialYear, initialMonth))
   const [weekStart, setWeekStart] = useState(0)
   const [isDateSelected, setDateSelected] = useState()
-  const [weekEnd, setWeekEnd] = useState(daysInWeek)
+  const [weekEnd, setWeekEnd] = useState(daysInWeek())
   const weekDaysRef = useRef()
 
   const previousMonth = () => {
     month !== 0 && setMonth(month - 1)
     setWeekDays(getDaysArray(initialYear, month - 1))
     setWeekStart(0)
-    setWeekEnd(daysInWeek)
+    setWeekEnd(daysInWeek())
     setDateSelected("")
 
   }
@@ -50,7 +52,7 @@ function LiveClasses() {
     month !== monthNames.length - 1 && setMonth(month + 1)
     setWeekDays(getDaysArray(initialYear, month + 1))
     setWeekStart(0)
-    setWeekEnd(daysInWeek)
+    setWeekEnd(daysInWeek())
     setDateSelected("")
 
   }
@@ -82,7 +84,7 @@ function LiveClasses() {
     contentTranslator({ staticContent: liveClassStaticContent, contentToTranslate: content, setContent, language })
     !isDateSelected && setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
 
-  }, [language, month, weekStart, weekEnd])
+  }, [content, weekDays, language, month, weekStart, weekEnd, isDateSelected])
 
   return <React.Fragment>
     {/* Hero Section */}

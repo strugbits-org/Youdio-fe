@@ -64,7 +64,7 @@ export const getDaysArray = function (year, month) {
     var names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     var date = new Date(year, monthIndex, 1);
     var result = [];
-    while (date.getMonth() == monthIndex) {
+    while (date.getMonth() === monthIndex) {
         // result.push(date.getDate() + '-' + names[date.getDay()]);
         result.push({
             id: date.getDate(),

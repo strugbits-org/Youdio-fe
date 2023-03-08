@@ -21,7 +21,7 @@ import icons from '../../../assets/icons'
 
 function LiveClasses() {
   const date = new Date()
-  const daysInWeek = useMemo(() => { 
+  const daysInWeek = useMemo(() => {
     const windowWidth = window.innerWidth
     return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
   })
@@ -37,16 +37,16 @@ function LiveClasses() {
   const [weekEnd, setWeekEnd] = useState(daysInWeek)
   const weekDaysRef = useRef()
 
-  const previousMonth = () => { 
+  const previousMonth = () => {
     month !== 0 && setMonth(month - 1)
-    setWeekDays(getDaysArray(initialYear, month-1))
+    setWeekDays(getDaysArray(initialYear, month - 1))
     setWeekStart(0)
     setWeekEnd(daysInWeek)
     setDateSelected("")
-    
+
   }
-  
-  const nextMonth = () => { 
+
+  const nextMonth = () => {
     month !== monthNames.length - 1 && setMonth(month + 1)
     setWeekDays(getDaysArray(initialYear, month + 1))
     setWeekStart(0)
@@ -54,19 +54,19 @@ function LiveClasses() {
     setDateSelected("")
 
   }
-  
-  const previousWeek = () => { 
+
+  const previousWeek = () => {
     if (weekStart > 0) {
       setWeekStart(weekStart - 1)
       setWeekEnd(weekEnd - 1)
-    } else { 
+    } else {
       setWeekStart(weekStart)
       setWeekEnd(weekEnd)
     }
     setDateSelected("")
   }
 
-  const nextWeek = () => { 
+  const nextWeek = () => {
     if (weekEnd < weekDays.length) {
       setWeekStart(weekStart + 1)
       setWeekEnd(weekEnd + 1)
@@ -81,7 +81,7 @@ function LiveClasses() {
   useEffect(() => {
     contentTranslator({ staticContent: liveClassStaticContent, contentToTranslate: content, setContent, language })
     !isDateSelected && setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
-  
+
   }, [language, month, weekStart, weekEnd])
 
   return <React.Fragment>
@@ -89,7 +89,7 @@ function LiveClasses() {
     <Section paddingBlock="7.5vw" >
       <ContentBox>
         <H1>{content.heroSectionh1}</H1>
-        <P1>{ content.heroSectionp1 }</P1>
+        <P1>{content.heroSectionp1}</P1>
       </ContentBox>
     </Section>
 
@@ -103,9 +103,9 @@ function LiveClasses() {
         >
           <img src={icons.leftLongArrow} alt="Left Long Arrow" width={""} height={""} />
         </IconButton>
-        
+
         <H3>{monthNames[month].name}</H3>
-        
+
         <IconButton
           position="right"
           onClick={() => nextMonth()}
@@ -121,7 +121,7 @@ function LiveClasses() {
       <WeekBox>
         <ul ref={weekDaysRef}>
           {
-            weekdays.length > 0 && weekDays.slice(weekStart, weekEnd).map(({dateString}, ind) => { 
+            weekdays.length > 0 && weekDays.slice(weekStart, weekEnd).map(({ dateString }, ind) => {
               return <li key={ind}>
                 <PrimaryWhiteButton
                   className={(!isDateSelected && ind === 3) ? "selectedDate"
@@ -149,7 +149,7 @@ function LiveClasses() {
           >
             <span>{content.weekSectionNext}</span>
             <img src={icons.rightArrow} alt="Right Arrow" width={""} height={""} />
-            
+
           </IconButton>
         </div>
       </WeekBox>
@@ -163,24 +163,12 @@ function LiveClasses() {
           <H4>{isDateSelected}</H4>
         </div>
         <div className='searchBox'>
-          <InputIcon isIcon={searchIcon} placeholder={content.searchPlaceholder } />
+          <InputIcon isIcon={searchIcon} placeholder={content.searchPlaceholder} />
         </div>
       </DayBox>
-      <SelectionBox>
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-        <SelectionButton name={"YOGA"} />
-
-      </SelectionBox>
-      <div className='seperatorLine '></div>
-      {window.innerWidth > 768 && <Filters />}
+      
+      <Filters />
+      {/* {window.innerWidth > 768 && <Filters />} */}
 
     </Section>
 
@@ -193,15 +181,13 @@ function LiveClasses() {
         <LiveClassCard />
         <LiveClassCard />
         <LiveClassCard />
-        {
-          window.innerWidth > 1001 && <DateTag>
-            <H4>30</H4>
-            <hr />
-            <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
-          </DateTag>
-        }
+        <DateTag>
+          <H4>31</H4>
+          <hr />
+          <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
+        </DateTag>
       </CardsBox>
-      <div className='seperatorLine '></div>
+      <div className='seperatorLine'></div>
       <CardsBox>
         <LiveClassCard />
         <LiveClassCard />
@@ -209,16 +195,14 @@ function LiveClasses() {
         <LiveClassCard />
         <LiveClassCard />
         <LiveClassCard />
-        {
-          window.innerWidth > 1001 && <DateTag>
-            <H4>30</H4>
-            <hr />
-            <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
-          </DateTag>
-        }
+        <DateTag>
+          <H4>30</H4>
+          <hr />
+          <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
+        </DateTag>
       </CardsBox>
     </Section>
-    
+
   </React.Fragment>
 }
 

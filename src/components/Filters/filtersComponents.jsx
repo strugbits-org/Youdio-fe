@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from "styled-components";
 import { IconButton } from "../Button";
+import { WhiteIconButton } from "../../components/Button";
+import icons from "../../assets/icons";
+import { layout } from "../../helpers/constant";
 
-export const FilterButton = ({ name, clickEvent, open }) => {
+const { mobile, laptop } = layout
+
+
+export const FilterButton = ({ name, clickEvent, selected }) => {
     // const [selected, setSelected] = useState(false)
     const IconButtonM = styled(IconButton)`
         padding:5px 5px 5px 0px;
     `
-    return <IconButtonM onClick={clickEvent}>
+    return <IconButtonM onClick={() => {
+        // setSelected(!selected)
+        clickEvent()
+    }}>
         <span>{name}</span>
-        <svg width="12" height="7" viewBox="0 0 16 10" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1.18945L7.66667 8.18945L15 1.18945" stroke="#1F1F1F" strokeWidth="1.2" />
-        </svg>
+        <img src={selected?.toUpperCase() === name ? icons.arrowUp : icons.arrowDown} alt="" width={"12px"} />
         {/* {
             open !== null
                 ? <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
@@ -27,6 +33,33 @@ export const FilterButton = ({ name, clickEvent, open }) => {
     </IconButtonM>
 }
 
+export const SelectionButton = ({ name }) => {
+    const [selected, setSelected] = useState(false)
+
+    return <WhiteIconButton selected={selected} onClick={() => setSelected(!selected)}>
+        <span>{name}</span>
+        <img src={icons.arrowDown} alt="" width={"14"} height={""} />
+    </WhiteIconButton>
+}
+
+export const SelectionBox = styled.div`
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    flex-wrap:wrap;
+    gap: 1.3vw;
+        
+    div{
+        flex:1;
+    }
+    @media only screen and (min-width: ${mobile}) {
+        display:none;
+    }
+    @media only screen and (min-width: ${laptop}) {
+        display:flex;
+    }
+`
+
 export const FilterBox = styled.div`
     display:flex;
     justify-content:space-between;
@@ -34,8 +67,18 @@ export const FilterBox = styled.div`
     flex-wrap:wrap;
     gap: 1vw;
     background:${({open}) => open !== null ? 'var(--backgroundLightGrey)'  : '#fff' };
-    padding: ${({open}) => open !== null ? '15px'  : '0px' };
+    padding: ${({ open }) => open !== null ? '15px' : '0px' };
+    margin-bottom:40px;
+    /* height:auto;
+    transition: 1s all ease-in-out; */
 
+    @media only screen and (min-width: ${mobile}) {
+        display:none;
+    }
+    @media only screen and (min-width: ${laptop}) {
+        display:flex;
+    }
+    
 `
 
 export const FilterOptions = styled.div`
@@ -55,4 +98,6 @@ export const FilterOptions = styled.div`
         left:0px;
         color:#D6CCC3;        
     }
+
+    
 `

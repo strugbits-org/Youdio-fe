@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import {WhiteIconButton } from "../../../components/Button";
 import { useState } from "react";
 import { H4 } from "../../../components/Typography";
 import { fonts } from "../../../helpers/constant";
 import { layout } from "../../../helpers/constant";
-import icons from "../../../assets/icons";
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout
 
 export const ContentBox = styled.div`
@@ -54,7 +52,6 @@ export const DayBox = styled.div`
     justify-content:center;
     align-items:center;
     gap: 1vw;
-    margin-bottom:60px;
         
     div{
         flex:1;
@@ -83,42 +80,25 @@ export const DayBox = styled.div`
    
 `
 
-export const SelectionBox = styled.div`
-    display:flex;
-    justify-content:left;
-    align-items:center;
-    flex-wrap:wrap;
-    gap: 1.3vw;
-        
-    div{
-        flex:1;
-    }
-`
-
-export const SelectionButton = ({name}) => {
-    const [selected, setSelected] = useState(false)
-    
-    return <WhiteIconButton selected={selected} onClick={() => setSelected(!selected)}>
-        <span>{name}</span>
-        <img src={icons.arrowDown} alt="" width={"14"} height={""}/>
-    </WhiteIconButton>
-}
-
 export const CardsBox = styled.div`
     display:grid;
     gap:6vw 1.8vw;
     position:relative;
+
     @media only screen and (min-width: ${mobile}) {
         grid-template-columns:1fr;
+        margin-block:70px;
     }
     @media only screen and (min-width: ${mobileMedium}) {
         grid-template-columns:1fr 1fr;
     }
     @media only screen and (min-width: ${tablet}) {
         grid-template-columns:1fr 1fr 1fr;
+        margin-block:90px;
     }
     @media only screen and (min-width: ${laptop}) {
         grid-template-columns:1fr 1fr 1fr 1fr;
+        margin-block:initial;
     }
     @media only screen and (min-width: ${desktop}) {
     }

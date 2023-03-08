@@ -5,8 +5,31 @@ import Intensity from './Intensity'
 import Styles from './Styles'
 import { P3 } from '../Typography'
 import translator from '../../helpers/translator'
-import { FilterBox, FilterButton, FilterOptions } from './filtersComponents'
+import { FilterBox, FilterButton, FilterOptions, SelectionBox, SelectionButton } from './filtersComponents'
 import Instructors from './Instructors'
+
+const filter = [
+    {
+        label:"DURATION",
+        value: "duration",
+    },
+    {
+        label: "INSTRUCTORS",
+        value: "instructors",
+    },
+    {
+        label: "STYLES",
+        value: "styles",
+    },
+    {
+        label: "DIFFICULTY",
+        value: "difficulty",
+    },
+    {
+        label: "INTENSITY",
+        value: "intensity",
+    }
+]
 
 export default function Filters() {
 
@@ -17,38 +40,41 @@ export default function Filters() {
     }, [selectedFilter])
 
     const filterHandler = (filter) => {
-        setFilter(filter)  
-        console.log(selectedFilter);
+        filter === selectedFilter ? setFilter(null) : setFilter(filter)
     }
-    return <FilterBox open={selectedFilter}>
-        <div>
-            <FilterButton name={"DURATION"} clickEvent={() => filterHandler('duration')} />
-        </div>
-        <div>
-            <FilterButton name={"INSTRUCTORS"} clickEvent={() => filterHandler('instructor')} />
-        </div>
-        <div>
-            <FilterButton name={"STYLES"} clickEvent={() => filterHandler('styles')} />
-        </div>
-        <div>
-            <FilterButton name={"DIFFICULTY"} clickEvent={() => filterHandler('difficulty')} />
-        </div>
-        <div>
-            <FilterButton name={"INTENSITY"} clickEvent={() => filterHandler('intensity')} />
-        </div>
+ 
+    return <React.Fragment>
+        <FilterBox open={selectedFilter}>
+            <div className='seperatorLine'></div>
 
-        {
-            selectedFilter !== null && <FilterOptions>
-                <P3 className='videoCount'>SHOWING 316 VIDEOS</P3>
-                {selectedFilter === "duration" && <Duration />}
-                {selectedFilter === "instructor" && <Instructors />}
-                {selectedFilter === "styles" && <Styles />}
-                {selectedFilter === "difficulty" && <Difficulty />}
-                {selectedFilter === "intensity" && <Intensity />}
+            {
+                filter.map(({ label, value }) => { 
+                    return <div>
+                        <FilterButton name={label} selected={selectedFilter} clickEvent={() => filterHandler(value)} />
+                    </div>
+                } )
+            }
+            
 
-            </FilterOptions>
-        }
+            {
+                selectedFilter !== null && <FilterOptions>
+                    <P3 className='videoCount'>SHOWING 316 VIDEOS</P3>
+                    {selectedFilter === "duration" && <Duration />}
+                    {selectedFilter === "instructors" && <Instructors />}
+                    {selectedFilter === "styles" && <Styles />}
+                    {selectedFilter === "difficulty" && <Difficulty />}
+                    {selectedFilter === "intensity" && <Intensity />}
 
-    </FilterBox>
+                </FilterOptions>
+            }
 
+        </FilterBox>
+        <SelectionBox>
+            <SelectionButton name={"YOGA"} />
+            <SelectionButton name={"YOGA"} />
+            <SelectionButton name={"YOGA"} />
+            <SelectionButton name={"YOGA"} />
+            <SelectionButton name={"YOGA"} />
+        </SelectionBox>
+    </React.Fragment>
 }

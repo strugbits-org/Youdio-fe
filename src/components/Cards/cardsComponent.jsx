@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { layout } from "../../helpers/constant";
+
+const { mobile, tablet, laptop, desktop } = layout
 
 export const Card = styled.div`
     /* flex:1; */
@@ -8,6 +11,21 @@ export const Card = styled.div`
 export const CardMedia = styled.div`
     position:relative;
     margin-bottom:19px;
+    @media only screen and (min-width: ${mobile}) {
+        img{
+            max-height: 300px;
+            object-fit:cover;
+            object-position:center;
+        }
+    }
+    @media only screen and (min-width: ${tablet}) {
+        img{
+            max-height: initial;
+            object-fit:initial;
+            object-position:initial;
+        }
+    }
+    
 `
 
 export const Tag = styled.span`
@@ -64,17 +82,12 @@ export const CardContent = styled.div`
 `
 
 export const DateTag = styled.div`
-min-width:78px;
     background:var(--backgroundGreen);
-    border-radius:10px;
-    padding: .5vw .9vw;
     color:white;
     display:grid;
     gap:5px;
-    min-height:78px;
     text-align:center;
     position:absolute;
-    transform:translate(-100px, 0px );
     
     hr{
         width:100%;
@@ -82,4 +95,46 @@ min-width:78px;
         border:none;
         background-color:var(--textHeadingWhite);
     }
+
+    @media only screen and (min-width: ${mobile}) {
+        min-width:20px;
+        border-radius:0px 6px 6px 0px;
+        padding: 1.5vw 3vw;
+        grid-template-columns:1fr 10px 1fr;
+        min-height:20px;
+        transform:translate(-4vw, -125% );
+
+        h4, h6{
+            font-size:105%;
+        }
+        hr{
+            width:2px;
+            height:100%;
+            margin-inline:auto;
+        }
+    }
+    @media only screen and (min-width: ${tablet}) {
+        grid-template-columns:1fr 10px 1fr;
+        transform:translate(-7vw, -125% );
+        h4, h6{
+            font-size:115%;
+        }
+    }
+    @media only screen and (min-width: ${laptop}) {
+        min-width:78px;
+        border-radius:10px;
+        padding: .5vw .9vw;
+        grid-template-columns:initial;
+        min-height:78px;
+        transform:translate(-100px, 0px );
+        h4, h6{
+            font-size:initial;
+        }
+        hr{
+            width:100%;
+            height:2px;
+            margin-inline:initial;
+        }
+    }
 `
+    

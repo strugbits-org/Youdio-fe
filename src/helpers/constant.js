@@ -9,9 +9,9 @@ export const fonts = {
 }
 
 export const path = {
-    home: "/",
-    liveClasses: "live-classes",
-    videos: "video-classes",
+    home: "",
+    liveClasses: "",
+    videos: "",
     membership: "",
     instructors: "",
     signIn: "login",

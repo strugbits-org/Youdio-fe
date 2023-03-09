@@ -4,10 +4,10 @@ import {
     Routes, Route
 } from "react-router-dom";
 
-import Home from '../screens/user/Home';
-import UserProfile from '../screens/user/UserProfile';
+// import Home from '../screens/user/Home';
+// import UserProfile from '../screens/user/UserProfile';
 import LiveClasses from '../screens/user/LiveClasses';
-import VideoClasses from '../screens/user/VideoClasses';
+// import VideoClasses from '../screens/user/VideoClasses';
 import Login from "../screens/user/Login";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -45,11 +45,12 @@ export default function Router() {
             {/* {user ? <DashboardHeader /> : <Header />} */}
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/live-classes" element={<LiveClasses />} />
-                <Route path="/video-classes" element={<VideoClasses />} />
-                <Route path="/user-profile" element={<UserProfile />} />
-                <Route path="/login" element={<Login />} />
+                {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/" element={<LiveClasses />} />
+                {/* <Route path="/live-classes" element={<LiveClasses />} /> */}
+                {/* <Route path="/video-classes" element={<VideoClasses />} />
+                <Route path="/user-profile" element={<UserProfile />} />*/
+                <Route path="/login" element={<Login />} /> }
 
                 {/* <Route path="/" element={protectedAuthRoute(<Login />)} />
                 <Route path="/login" element={protectedAuthRoute(<Login />)} />

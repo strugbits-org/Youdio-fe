@@ -4,7 +4,6 @@ import { IconButton } from "../Button";
 import { WhiteIconButton } from "../../components/Button";
 import icons from "../../assets/icons";
 import { layout } from "../../helpers/constant";
-import { H4 } from "../Typography";
 
 const { mobile, laptop } = layout
 

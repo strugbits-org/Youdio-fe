@@ -2,10 +2,54 @@ import { useState } from "react";
 import styled from "styled-components";
 import { H4, P3 } from '../Typography'
 import { fonts } from '../../helpers/constant'
+import { Instructor } from "./filtersComponents";
+const instructors = [
+    {   
+        id:0,
+        name: "Elizabeth"
+    },
+    {
+        id: 1,
+        name: "Jordan"
+    },
+    {
+        id: 2,
+        name: "Leo Hudson"
+    },
+    {
+        id: 3,
+        name: "Richael"
+    },
+    {
+        id: 4,
+        name: "Dylan Jasper"
+    },
+    {
+        id: 5,
+        name: "Jeniffer"
+    },
+    {
+        id: 6,
+        name: "Sophie Smith"
+    },
+    {
+        id: 7,
+        name: "Hazel"
+    },
+    {
+        id: 8,
+        name: "Marie"
+    },
+    {
+        id: 9,
+        name: "Jacob"
+    }
+]
 
 export default function Instructors() {
 
     const [isAll, setAll] = useState(false)
+    const [instructorsList, setInstructorsList] = useState([])
 
     const InstructorsBox = styled.div`
         & :is(.allInstructors){
@@ -28,33 +72,35 @@ export default function Instructors() {
     }
     `
 
+    const setSelected = (name) => {
+        !instructorsList.includes(name)
+            ? setInstructorsList([...instructorsList, name])
+            : setInstructorsList(instructorsList.filter(val => val !== name && val))
+    }
+
     return <InstructorsBox>
-        <div className='allInstructors' onClick={() => setAll(!isAll)}>
-            {isAll && <svg width="17" height="13" viewBox="0 0 17 13" fill="none"
+        <div className='allInstructors' onClick={() => { 
+            setAll(!isAll);
+            setInstructorsList([])
+        }}>
+            {isAll && <svg width="15" height="11" viewBox="0 0 17 13" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 6.2L5 11L16 1" stroke="black" stroke-width="1.5" />
+                <path d="M1 6.2L5 11L16 1" stroke="black" strokeWidth="1.5" />
             </svg>}
-            <P3 fontSize="16px" fontFamily={fonts.poppinsMedium}>All Instructors</P3>
+            <P3 fontFamily={fonts.poppinsMedium}>All Instructors</P3>
         </div>
         <div className="instructorList">
             <ul>
-                <li>
-                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
-                </li>
-                <li>
-                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
-                </li>
-                <li>
-                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
-                </li>
-                <li>
-                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
-                </li>
-                <li>
-                    <H4 fontSize="16px">ELIZEBTH LISA</H4>
-                </li>
-                
-                
+                {
+                    instructors && instructors.map((val, ind) => { 
+                        return <Instructor selected={isAll ? isAll : instructorsList.includes(val.name)} key={`instructor-${ind}`} onClick={() => setSelected(val.name)}>
+                            <H4>{val.name}</H4>
+                        </Instructor>
+                        
+                        
+                        
+                    })
+                }
             </ul>
         </div>
         

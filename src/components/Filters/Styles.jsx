@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { H6, P3 } from '../Typography'
 
@@ -11,12 +12,13 @@ const StylesBox = styled.div`
         color:var(--backgroundBrown);
         h6{
             margin-bottom:24px;
+            cursor:pointer;
         }
         li{
             cursor:pointer;
-            .active{
-                color: var(--textHeadingBlack);
-            }
+        }
+        .active{
+            color: var(--textHeadingBlack);
         }
     }
 `
@@ -51,23 +53,37 @@ export default function Styles() {
          
     ]
 
+    const [allStyles, setAllStyles] = useState([])
+    const [styleList, setStyleList] = useState([])
+
+    const setAll = (name) => {
+        !allStyles.includes(name)
+            ? setAllStyles([...allStyles, name])
+            : setAllStyles(allStyles.filter(val => val !== name && val))
+    }
+
+    const setSpecific = (name) => {
+        !styleList.includes(name)
+            ? setStyleList([...styleList, name])
+            : setStyleList(styleList.filter(val => val !== name && val))
+    }
 
     return <StylesBox>
         <ul className="styles">
             {
                 styles.length > 0 && styles.map(({ id, title, list }) => {
-                    return <div key={id}>
-                        <H6>{title}</H6>
+                    return <li key={id} >
+                        <H6 className={allStyles.includes(title) ? "active" : ''} onClick={() => setAll(title)}>{title}</H6>
                         <ul>
                             {
                                 list.length > 0 && list.map((val, ind) => {
-                                    return <li key={ind}>
+                                    return <li key={ind} className={allStyles.includes(title) ? "active" : styleList.includes(val) ? "active" : ""  } onClick={() => setSpecific(val)} >
                                         <P3>{val}</P3>
                                     </li>
                                 })
                             }
                         </ul>
-                    </div>
+                    </li>
                 })
             }
         </ul>

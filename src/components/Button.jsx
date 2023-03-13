@@ -99,6 +99,7 @@ export const WhiteIconButton = styled(IconButton)`
     
     img{
         transition:var(--transition03s);
+        filter:${({ selected }) => selected ? 'invert()' : 'initial'};
     }
 
     &:hover{

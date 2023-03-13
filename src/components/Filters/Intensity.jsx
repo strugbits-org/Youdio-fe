@@ -24,7 +24,7 @@ const IntensityBox = styled.div`
 
 export default function Intensity() {
 
-    const [intensitiy, setIntensitiy] = useState("")
+    const [intensitiy, setIntensitiy] = useState([])
 
     const intensities = [
         {
@@ -45,13 +45,19 @@ export default function Intensity() {
         },
     ]
 
+    const setSelected = (name) => {
+        !intensitiy.includes(name)
+            ? setIntensitiy([...intensitiy, name])
+            : setIntensitiy(intensitiy.filter(val => val !== name && val))
+    }
+
 
     return <IntensityBox>
         <ul className="intensities">
             {
                 intensities.length > 0 && intensities.map(({ id, name }) => {
-                    return <li key={id} onClick={() => setIntensitiy(name)}>
-                        <P2 className={name === intensitiy ? 'active' : ''}>{name}</P2>
+                    return <li key={id} onClick={() => setSelected(name)}>
+                        <P2 className={intensitiy.includes(name)  ? 'active' : ''}>{name}</P2>
                         <img src={icons.roundQuestionMark} alt={"Question Mark"} tooltip={name} width="" height=""/>
                     </li>
                 })

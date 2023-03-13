@@ -8,6 +8,39 @@ function valuetext(value) {
     return `${value}min`;
 }
 
+const DurationSlider = styled(Slider)({
+    color: 'var(--textHeadingBlack)',
+
+    '& .MuiSlider-track': {
+        border: 'none',
+        color: 'var(--textHeadingBlack)',
+    },
+    '& .MuiSlider-rail': {
+        border: 'none',
+        color: 'var(--textHeadingBlack)',
+    },
+    '& .MuiSlider-thumb': {
+        height: 22,
+        width: 22,
+        backgroundColor: '#fff',
+        border: '7px solid black',
+        '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+            boxShadow: 'inherit',
+        },
+        '&:before': {
+            display: 'none',
+        },
+    },
+    '& .MuiSlider-valueLabel': {
+        background: 'var(--textHeadingBlack)',
+        color: '#fff',
+        '&:before': {
+            
+        }
+
+    }
+});
+
 function RangeSlider() {
     const [value, setValue] = useState([0, 90]);
 
@@ -16,7 +49,7 @@ function RangeSlider() {
     };
 
     return <Box sx={{ width: 400 }}>
-        <Slider
+        <DurationSlider
             max={90}
             value={value}
             onChange={handleChange}
@@ -25,6 +58,7 @@ function RangeSlider() {
         />
     </Box>
 }
+
 export default function Duration() {
     const SliderBox = styled.div`
         margin-inline:auto;
@@ -37,6 +71,7 @@ export default function Duration() {
             .points{
                 color:var(--backgroundGrey);
             }
+           
         }
     `
     return <SliderBox>

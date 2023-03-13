@@ -4,9 +4,16 @@ import { IconButton } from "../Button";
 import { WhiteIconButton } from "../../components/Button";
 import icons from "../../assets/icons";
 import { layout } from "../../helpers/constant";
+import { H4 } from "../Typography";
 
 const { mobile, laptop } = layout
 
+export const Instructor = styled.li`
+    h4{
+        font-weight:${({selected}) => selected ? 700 : 400 };
+    }
+    cursor:pointer;
+`
 
 export const FilterButton = ({ name, clickEvent, selected }) => {
     // const [selected, setSelected] = useState(false)
@@ -44,7 +51,7 @@ export const SelectionButton = ({ name }) => {
 
 export const SelectionBox = styled.div`
     display:flex;
-    justify-content:left;
+    justify-content:center;
     align-items:center;
     flex-wrap:wrap;
     gap: 1.3vw;

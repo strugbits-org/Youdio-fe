@@ -45,7 +45,7 @@ function Header() {
           <li><NavLink to={path.instructors}>{content.instructors}</NavLink></li>
         </UL>
  
-        <div className='logo' onClick={menu && reset}>
+        <div className='logo' onClick={menu ? reset : undefined}>
           <NavLink to={path.home}>
             <img src={youdio} alt="youdio" width="" height="" />
           </NavLink>

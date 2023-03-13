@@ -54,7 +54,6 @@ export default function Filters() {
                 } )
             }
             
-
             {
                 selectedFilter !== null && <FilterOptions>
                     <P3 className='videoCount'>SHOWING 316 VIDEOS</P3>
@@ -69,11 +68,11 @@ export default function Filters() {
 
         </FilterBox>
         <SelectionBox>
-            <SelectionButton name={"YOGA"} />
-            <SelectionButton name={"YOGA"} />
-            <SelectionButton name={"YOGA"} />
-            <SelectionButton name={"YOGA"} />
-            <SelectionButton name={"YOGA"} />
+            <SelectionButton key={ 0 } name={"YOGA"} />
+            <SelectionButton key={ 1 } name={"YOGA"} />
+            <SelectionButton key={ 2 } name={"YOGA"} />
+            <SelectionButton key={ 3 } name={"YOGA"} />
+            <SelectionButton key={ 4 } name={"YOGA"} />
         </SelectionBox>
     </React.Fragment>
 }

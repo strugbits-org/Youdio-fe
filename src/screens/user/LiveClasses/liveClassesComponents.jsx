@@ -97,7 +97,7 @@ export const CardsBox = styled.div`
     }
     @media only screen and (min-width: ${laptop}) {
         grid-template-columns:1fr 1fr 1fr 1fr;
-        margin-block:initial;
+        margin-block:60px;
     }
     @media only screen and (min-width: ${desktop}) {
     }

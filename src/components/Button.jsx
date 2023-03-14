@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { layout } from "../helpers/constant";
 
+
+
 const { mobile, tablet, laptop } = layout
 
 export const PrimaryButton = styled.button`
@@ -121,6 +123,7 @@ export const WhiteIconButton = styled(IconButton)`
             width:12px;
         }
     }
+
     @media only screen and (min-width: ${tablet}) {
         min-width: 80px;
         min-height: 30px;
@@ -129,8 +132,8 @@ export const WhiteIconButton = styled(IconButton)`
         img{
             width:15px;
         }
-        
     }
+
     @media only screen and (min-width: ${laptop}) {
         min-width: clamp(150px, 10vw, 200px);
         min-height: 45px;

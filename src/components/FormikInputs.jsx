@@ -26,7 +26,7 @@ const IptWithIcon = styled.div`
     }
 
 `
-const FieldInput = ({ label, ...props }) => {
+export const FieldInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
 
     return (
@@ -45,7 +45,7 @@ const FieldInput = ({ label, ...props }) => {
     )
 }
 
-const FieldPassword = ({ src, label, ...props }) => {
+export const FieldPassword = ({ src, label, ...props }) => {
     const [field, meta] = useField(props);
     const [visible, setVisible] = useState(false)
 
@@ -73,7 +73,7 @@ const FieldPassword = ({ src, label, ...props }) => {
     )
 }
 
-const TextFieldInput = ({ ...props }) => {
+export const TextFieldInput = ({ ...props }) => {
 
     return (
         <Ipt>
@@ -83,5 +83,3 @@ const TextFieldInput = ({ ...props }) => {
         </Ipt>
     )
 }
-
-export { FieldInput, TextFieldInput, FieldPassword }

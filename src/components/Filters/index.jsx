@@ -30,7 +30,7 @@ const filter = [
     }
 ]
 
-export default function Filters() {
+export function Filters() {
 
     const [selectedFilter, setFilter] = useState(null)
 
@@ -44,7 +44,6 @@ export default function Filters() {
  
     return <React.Fragment>
         <FilterBox open={selectedFilter}>
-            <div className='seperatorLine'></div>
 
             {
                 filter.map(({ label, value }) => { 

@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { liveClassStaticContent} from './constant'
-import { contentTranslator } from '../../../helpers/translator'
-import { H1, H3, H4, P1 } from '../../../components/Typography'
-import { Section } from '../../../components/Banners'
+import { contentTranslator } from 'src/helpers/translator'
+import { H1, H3, H4, P1 } from 'src/components'
+import { Section } from 'src/components'
 import { ContentBox, MonthBox, WeekBox, DayBox, CardsBox, H6M } from './liveClassesComponents'
-import { IconButton, PrimaryWhiteButton } from '../../../components/Button'
-import { InputIcon } from '../../../components/Inputs'
-import searchIcon from '../../../assets/icons/search.svg'
-import LiveClassCard from '../../../components/Cards/Cards'
-import { DateTag } from '../../../components/Cards/cardsComponent'
-import { fonts } from '../../../helpers/constant'
+import { IconButton, PrimaryWhiteButton } from 'src/components'
+import { InputIcon } from 'src/components'
+import searchIcon from 'src/assets/icons/search.svg'
+import LiveClassCard from 'src/components/Cards/LiveClassCard'
+import { DateTag } from 'src/components/Cards/cardsComponent'
+import { fonts } from 'src/helpers/constant'
 import { monthNames, getDaysArray } from './constant'
-import Filters from '../../../components/Filters'
+import { Filters } from 'src/components'
 import { weekdays } from 'moment'
 import { useRef } from 'react'
-import icons from '../../../assets/icons'
+import { icons } from 'src/helpers'
+
 
 
 
@@ -169,6 +170,8 @@ function LiveClasses() {
         </div>
       </DayBox>
       
+      <div className='seperatorLine'></div>
+ 
       <Filters />
       {/* {window.innerWidth > 768 && <Filters />} */}
 

@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Slider, Box } from '@mui/material';
 import styled from "styled-components";
-import { P3 } from '../Typography'
-import { fonts } from '../../helpers/constant'
+import { Slider, Box } from '@mui/material';
+
+import { P3 } from 'src/components'
+import { fonts } from 'src/helpers'
 
 function valuetext(value) {
     return `${value}min`;

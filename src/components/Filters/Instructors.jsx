@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { H4, P3 } from '../Typography'
-import { fonts } from '../../helpers/constant'
+
+import { H4, P3 } from 'src/components'
+import { fonts } from 'src/helpers'
 import { Instructor } from "./filtersComponents";
+
 const instructors = [
     {   
         id:0,
@@ -47,7 +49,6 @@ const instructors = [
 ]
 
 export default function Instructors() {
-
     const [isAll, setAll] = useState(false)
     const [instructorsList, setInstructorsList] = useState([])
 
@@ -71,7 +72,6 @@ export default function Instructors() {
             }
     }
     `
-
     const setSelected = (name) => {
         !instructorsList.includes(name)
             ? setInstructorsList([...instructorsList, name])
@@ -96,9 +96,6 @@ export default function Instructors() {
                         return <Instructor selected={isAll ? isAll : instructorsList.includes(val.name)} key={`instructor-${ind}`} onClick={() => setSelected(val.name)}>
                             <H4>{val.name}</H4>
                         </Instructor>
-                        
-                        
-                        
                     })
                 }
             </ul>

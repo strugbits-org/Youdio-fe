@@ -6,11 +6,11 @@ import {
 
 // import Home from '../screens/user/Home';
 // import UserProfile from '../screens/user/UserProfile';
-import LiveClasses from '../screens/user/LiveClasses';
+import LiveClasses from 'src/screens/user/LiveClasses';
 // import VideoClasses from '../screens/user/VideoClasses';
-import Login from "../screens/user/Login";
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Login from "src/screens/user/Login";
+import Header from 'src/components/Header';
+import Footer from 'src/components/Footer';
 
 
 export default function Router() {

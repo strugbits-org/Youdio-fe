@@ -1,10 +1,9 @@
-import { ErrorMessage, useField } from 'formik';
-import { Input, Error, Label } from './Inputs';
-import styled from 'styled-components';
-import closeEye from "../assets/icons/close_eye.svg"
-import openEye from "../assets/icons/open_eye.svg"
 import { useState } from 'react';
+import { ErrorMessage, useField } from 'formik';
+import styled from 'styled-components';
 
+import { Input, Error, Label } from 'src/components';
+import { icons } from 'src/helpers';
 
 const Ipt = styled.div`
     width: 100%;
@@ -24,8 +23,8 @@ const IptWithIcon = styled.div`
         right: 16px;
         cursor:pointer;
     }
-
 `
+
 export const FieldInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
 
@@ -64,7 +63,7 @@ export const FieldPassword = ({ src, label, ...props }) => {
                 />
                 <img
                     className='eye'
-                    src={visible ? openEye : closeEye}
+                    src={visible ? icons.openEye : icons.closeEye}
                     alt='close_eye' width="" height=""
                     onClick={() => setVisible(!visible)} />
             </IptWithIcon>

@@ -1,14 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { H4, P2, P3 } from '../Typography'
 // import { NavLink } from 'react-router-dom'
 
+import { H4, P2, P3 } from 'src/components'
 import { FooterContent, UpperBox, BottomBox, HorizontalLine } from './footerComponents'
-import footerLogo from "../../assets/logo/footer_logo.svg"
-import { Section } from '../Banners'
-import { Input } from '../Inputs'
-import { IconButton } from '../Button'
-import icons from '../../assets/icons'
+import { icons } from "src/helpers"
+import { Section, Input, IconButton } from 'src/components'
+
 // import youdio from '../../assets/logo/youdio.svg'
 // import worldMap from '../../assets/icons/language_world.svg'
 // import { useDispatch, useSelector } from 'react-redux'
@@ -40,7 +38,7 @@ function Header() {
             <FooterContent>
                 <UpperBox>
                     <div className='logoBox'>
-                        <img src={footerLogo} alt="" width={""} height={""} />
+                        <img src={icons.footerLogo} alt="" width={""} height={""} />
                         <P2>Imagining professional yoga lessons without the hassle of travelling has now become easier.</P2>
                     </div>
                     <div className='quickLinks'>

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { P2 } from '../Typography'
-import icons from "../../assets/icons";
+
+import { P2 } from 'src/components';
+import { icons } from "src/helpers";
 
 const IntensityBox = styled.div`
     padding: 22px;
@@ -50,7 +51,6 @@ export default function Intensity() {
             ? setIntensitiy([...intensitiy, name])
             : setIntensitiy(intensitiy.filter(val => val !== name && val))
     }
-
 
     return <IntensityBox>
         <ul className="intensities">

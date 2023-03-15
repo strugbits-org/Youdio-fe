@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Formik, Form } from 'formik'
 import { useSelector } from 'react-redux'
+import { Formik, Form } from 'formik'
 import { NavLink } from 'react-router-dom'
-import { FieldPassword, FieldInput } from '../../../components/FormikInputs'
-import { loginFormValidate } from '../../../helpers/forms/validateForms/index'
+
+import { FieldPassword, FieldInput, PrimaryButton, Label, H1, P2 } from 'src/components'
+import { loginFormValidate } from 'src/helpers/forms/validateForms'
 import { loginContent } from './content'
-import { contentTranslator } from '../../../helpers/translator'
-import { PrimaryButton } from '../../../components/Button'
-import { Label } from '../../../components/Inputs'
-import { H1, P2 } from '../../../components/Typography'
-import { path } from '../../../helpers/constant'
-
-
+import { contentTranslator } from 'src/helpers/translator'
+import { path } from 'src/helpers'
 
 const Container = styled.div`
     background:#fff;
@@ -26,18 +22,13 @@ const Container = styled.div`
       }
     }
 `
-
 const FormRow = styled.div`
   margin-bottom: 35px;
-  
 `
-
-
 
 function Login() {
   const language = useSelector(state => state.language.lang)
   const [content, setContent] = useState(loginContent)
-
 
   useEffect(() => {
     contentTranslator({ staticContent: loginContent, contentToTranslate: content, setContent, language })

@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { Nav, Section, UL, SideMenu, MobileUL } from './headerComponents'
-import youdio from '../../assets/logo/youdio.svg'
-import worldMap from '../../assets/icons/language_world.svg'
-import { useDispatch, useSelector } from 'react-redux'
-import { setLang } from '../../store/slices/language'
 import { staticContent } from './constant'
-import { path } from '../../helpers/constant'
-import { contentTranslator } from "../../helpers/translator"
-import icons from '../../assets/icons'
-import { IconButton } from '../Button'
+import { Nav, Section, UL, SideMenu, MobileUL } from './headerComponents'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLang } from 'src/store/slices/language'
+import { path } from 'src/helpers'
+import { contentTranslator } from "src/helpers/translator"
+import { icons } from 'src/helpers'
+import { IconButton } from 'src/components'
 
 function Header() {
   const [content, setContent] = useState(staticContent)
@@ -47,7 +45,7 @@ function Header() {
  
         <div className='logo' onClick={menu ? reset : undefined}>
           <NavLink to={path.home}>
-            <img src={youdio} alt="youdio" width="" height="" />
+            <img src={icons.youdio} alt="youdio" width="" height="" />
           </NavLink>
         </div>
 
@@ -61,7 +59,7 @@ function Header() {
               <option id="EN">EN</option>
               <option id="JA">JA</option>
             </select>
-            <img src={worldMap} alt='world_map' width='15' height='auto' />
+            <img src={icons.worldMap} alt='world_map' width='15' height='auto' />
           </li>
           <li><NavLink to={path.signIn}>{content.signIn}</NavLink></li>
           <li ><NavLink to={path.register}>{content.register}</NavLink></li>
@@ -75,7 +73,7 @@ function Header() {
               <option id="EN">EN</option>
               <option id="JA">JA</option>
             </select>
-            <img src={worldMap} alt='world_map' width='15' height='auto' />
+            <img src={icons.worldMap} alt='world_map' width='15' height='auto' />
           </li>
           <li onClick={reset}><NavLink to={path.signIn}>{content.signIn}</NavLink></li>
           <li onClick={reset}><NavLink to={path.register}>{content.register}</NavLink></li>

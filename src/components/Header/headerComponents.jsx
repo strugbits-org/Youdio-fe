@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { layout } from "../../helpers/constant";
+import { layout } from "src/helpers";
 
 const { mobile, tablet, laptop, desktop } = layout
 
@@ -195,7 +195,6 @@ const MobileUL = styled.ul`
         }
     }
 `
-
 export {
     Section,
     Nav,
@@ -203,4 +202,3 @@ export {
     SideMenu,
     MobileUL
 }
-

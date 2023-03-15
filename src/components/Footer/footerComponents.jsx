@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { fonts } from "../../helpers/constant";
-import { layout } from "../../helpers/constant";
+
+import { layout, fonts } from "src/helpers";
 
 const { mobile, tablet, laptop } = layout
 
@@ -130,8 +130,6 @@ const HorizontalLine = styled.div`
  min-height: 2px;
  background: white;
 `
-
-
 
 export {
     Section,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section } from '../../../components/Banners'
+import { Section } from 'src/components'
 // import { useSelector, useDispatch } from 'react-redux'
 // import { decrement, increment, incrementByAmount } from '../../../store/slices/counterSlice'
 

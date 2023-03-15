@@ -1,35 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { liveClassStaticContent} from './constant'
-import { contentTranslator } from 'src/helpers/translator'
-import { H1, H3, H4, P1 } from 'src/components'
-import { Section } from 'src/components'
-import { ContentBox, MonthBox, WeekBox, DayBox, CardsBox, H6M } from './liveClassesComponents'
-import { IconButton, PrimaryWhiteButton } from 'src/components'
-import { InputIcon } from 'src/components'
-import searchIcon from 'src/assets/icons/search.svg'
-import LiveClassCard from 'src/components/Cards/LiveClassCard'
-import { DateTag } from 'src/components/Cards/cardsComponent'
-import { fonts } from 'src/helpers/constant'
-import { monthNames, getDaysArray } from './constant'
-import { Filters } from 'src/components'
 import { weekdays } from 'moment'
-import { useRef } from 'react'
-import { icons } from 'src/helpers'
 
-
+import { liveClassStaticContent} from './constant'
+import { ContentBox, MonthBox, WeekBox, DayBox, CardsBox, H6M } from './liveClassesComponents'
+import { contentTranslator } from 'src/helpers/translator'
+import { fonts, icons } from 'src/helpers'
+import { H1, H3, H4, P1, Section, InputIcon, Filters } from 'src/components'
+import { IconButton, PrimaryWhiteButton } from 'src/components'
+import { LiveClassCard, DateTag } from 'src/components/Cards/'
+import { monthNames, getDaysArray } from './constant'
 
 
 function LiveClasses() {
   const date = new Date()
+  const initialYear = date.getFullYear()
+  const initialMonth = date.getMonth()
 
   const daysInWeek = () => {
     const windowWidth = window.innerWidth
     return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
   }
-
-  const initialYear = date.getFullYear()
-  const initialMonth = date.getMonth()
 
   const language = useSelector(state => state.language.lang)
   const [content, setContent] = useState(liveClassStaticContent)
@@ -79,7 +70,6 @@ function LiveClasses() {
     }
     setDateSelected("")
   }
-
 
   useEffect(() => {
     contentTranslator({ staticContent: liveClassStaticContent, contentToTranslate: content, setContent, language })
@@ -166,26 +156,20 @@ function LiveClasses() {
           <H4>{isDateSelected}</H4>
         </div>
         <div className='searchBox'>
-          <InputIcon isIcon={searchIcon} placeholder={content.searchPlaceholder} />
+          <InputIcon isIcon={icons.searchIcon} placeholder={content.searchPlaceholder} />
         </div>
       </DayBox>
       
       <div className='seperatorLine'></div>
  
       <Filters />
-      {/* {window.innerWidth > 768 && <Filters />} */}
 
     </Section>
 
     {/* Cards Section */}
     <Section backgroundColor="white">
       <CardsBox>
-        <LiveClassCard />
-        <LiveClassCard />
-        <LiveClassCard />
-        <LiveClassCard />
-        <LiveClassCard />
-        <LiveClassCard />
+        {[...Array(6).keys()].map(() => <LiveClassCard />)}
         <DateTag>
           <H4>31</H4>
           <hr />
@@ -194,12 +178,7 @@ function LiveClasses() {
       </CardsBox>
       <div className='seperatorLine'></div>
       <CardsBox>
-        <LiveClassCard />
-        <LiveClassCard />
-        <LiveClassCard />
-        <LiveClassCard />
-        <LiveClassCard />
-        <LiveClassCard />
+        {[...Array(6).keys()].map(() => <LiveClassCard />)}
         <DateTag>
           <H4>30</H4>
           <hr />
@@ -207,7 +186,6 @@ function LiveClasses() {
         </DateTag>
       </CardsBox>
     </Section>
-
   </React.Fragment>
 }
 

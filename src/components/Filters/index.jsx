@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Duration from './Duration'
 import Difficulty from './Difficulty'
 import Intensity from './Intensity'
-import Styles from './Styles'
-import { P3 } from '../Typography'
-import { FilterBox, FilterButton, FilterOptions, SelectionBox, SelectionButton } from './filtersComponents'
 import Instructors from './Instructors'
+import Styles from './Styles'
+import { FilterBox, FilterButton, FilterOptions, SelectionBox, SelectionButton } from './filtersComponents'
+import { P3 } from 'src/components'
 
 const filter = [
     {
@@ -61,6 +61,14 @@ export function Filters() {
                     {selectedFilter === "styles" && <Styles />}
                     {selectedFilter === "difficulty" && <Difficulty />}
                     {selectedFilter === "intensity" && <Intensity />}
+                    <div className='sortOption'>
+                        <P3 >SORT BY:</P3>
+                        <select>
+                            <option selected value="newest">NEWEST</option>
+                            <option value="oldest">OLDEST</option>
+                        </select>
+
+                    </div>
 
                 </FilterOptions>
             }

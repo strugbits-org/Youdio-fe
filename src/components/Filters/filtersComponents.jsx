@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
-import { IconButton } from "../Button";
-import { WhiteIconButton } from "../../components/Button";
-import icons from "../../assets/icons";
-import { layout } from "../../helpers/constant";
+
+import { IconButton, WhiteIconButton } from "src/components";
+import { icons, layout } from "src/helpers";
 
 const { mobile, laptop } = layout
 
@@ -25,16 +24,6 @@ export const FilterButton = ({ name, clickEvent, selected }) => {
     }}>
         <span>{name}</span>
         <img src={selected?.toUpperCase() === name ? icons.arrowUp : icons.arrowDown} alt="" width={"12px"} />
-        {/* {
-            open !== null
-                ? <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.7034 5.84375L6.08275 1L1 5.84375" stroke="black" stroke-width="0.96875" />
-                </svg>
-                : 
-        } */}
-
-
 
     </IconButtonM>
 }
@@ -103,6 +92,21 @@ export const FilterOptions = styled.div`
         top:0px;      
         left:0px;
         color:#D6CCC3;        
+    }
+
+    .sortOption{
+        position:absolute;
+        top:0px;      
+        right:0px;
+        color:#D6CCC3;
+        display:flex;
+        select{
+            background:transparent;
+            border:none;
+            outline:none;
+            color:#D6CCC3;
+            padding-inline: 4px;
+        }        
     }
 
     

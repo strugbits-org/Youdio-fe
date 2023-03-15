@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { H6, P3 } from '../Typography'
+import { H6, P3 } from 'src/components'
 
 const StylesBox = styled.div`
     padding: 22px;

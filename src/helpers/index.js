@@ -1,4 +1,4 @@
-import icons from "../assets/icons";
+import icons from "src/assets/icons";
 import { fonts, path, layout } from "./constant";
 
 

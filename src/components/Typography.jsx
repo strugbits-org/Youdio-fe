@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { fonts } from "../helpers/constant";
+
+import { fonts } from "src/helpers";
 
 const { poppinsSemiBold, poppinsRegular } = fonts
 

@@ -1,7 +1,6 @@
 import styled from "styled-components"
-import { layout } from "../helpers/constant";
 
-
+import { layout } from "src/helpers";
 
 const { mobile, tablet, laptop } = layout
 
@@ -142,4 +141,3 @@ export const WhiteIconButton = styled(IconButton)`
     }
     
 `
-

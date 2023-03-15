@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section } from '../../../components/Banners'
+import { Section } from 'src/components'
 
 function VideoClasses() {
   return (

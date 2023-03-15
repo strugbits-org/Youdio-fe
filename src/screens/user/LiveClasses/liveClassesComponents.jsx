@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { H4 } from "../../../components/Typography";
-import { fonts } from "../../../helpers/constant";
-import { layout } from "../../../helpers/constant";
+
+import { H4 } from "src/components";
+import { fonts, layout } from "src/helpers";
+
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout
 
 export const ContentBox = styled.div`

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { P1 } from '../Typography'
+
+import { P1 } from 'src/components'
 
 const DifficultyBox = styled.div`
     padding: 22px;

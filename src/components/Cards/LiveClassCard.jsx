@@ -1,14 +1,13 @@
 import React from 'react'
-import cardImage from '../../assets/sample/cardImg.jpg'
-import profileImage from '../../assets/sample/profileImg.jpg'
-import timeClock from '../../assets/icons/time.svg'
-import { H3, P3, H4 } from '../Typography'
+
+import { H3, P3, H4 } from 'src/components'
 import { Card, CardMedia, Tag, CardContent } from './cardsComponent'
+import { icons } from "src/helpers"
 
 function LiveClassCard() {
     return <Card>
         <CardMedia>
-            <img src={cardImage} alt={""} width="100%" height="auto" />
+            <img src={icons.cardImage} alt={""} width="100%" height="auto" />
             <Tag>
                 <H4>YOGA</H4>
             </Tag>
@@ -17,14 +16,14 @@ function LiveClassCard() {
             <div className='timeRow'>
                 <H4>06:30-07:30</H4>
                 <div>
-                    <img src={timeClock} alt="" width="15px" height="auto" />
+                    <img src={icons.timeClock} alt="" width="15px" height="auto" />
                     <P3>5 min</P3>
                 </div>
             </div>
             <H3>upper body power&Core body</H3>
             <div className='profileRow'>
                 <div className='profileBox'>
-                    <img src={profileImage} alt="" width="30px" height={""} />
+                    <img src={icons.profileImage} alt="" width="30px" height={""} />
                     <H4>Elizebeth Lisa</H4>
                 </div>
                 <div className='intensityBox'>
@@ -40,8 +39,6 @@ function LiveClassCard() {
                 </div>
             </div>
         </CardContent>
-
-
     </Card>
 
 }

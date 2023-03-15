@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { layout } from "../helpers/constant";
+
+import { layout } from "src/helpers";
 
 const { mobile, tablet, laptop, desktop } = layout
 export const Section = styled.section`
@@ -23,6 +24,3 @@ export const Section = styled.section`
     @media only screen and (min-width: ${desktop}) {
     }
 `
-
-
-

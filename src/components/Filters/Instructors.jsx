@@ -48,30 +48,30 @@ const instructors = [
     }
 ]
 
+const InstructorsBox = styled.div`
+    & :is(.allInstructors){
+        display:flex;
+        align-items:center;
+        gap:5px;
+        cursor:pointer;
+        margin-bottom:2.5vw; 
+    }  
+    .instructorList{
+        ul{
+            width:100%;
+            display:flex;
+            align-items:center;
+            justify-content:left;
+            flex-wrap:wrap;
+            list-style-type:none;
+            gap:10px 6vw;
+        }
+    }
+`
 export default function Instructors() {
     const [isAll, setAll] = useState(false)
     const [instructorsList, setInstructorsList] = useState([])
-
-    const InstructorsBox = styled.div`
-        & :is(.allInstructors){
-            display:flex;
-            align-items:center;
-            gap:5px;
-            cursor:pointer;
-            margin-bottom:2.5vw; 
-        }  
-        .instructorList{
-            ul{
-                width:100%;
-                display:flex;
-                align-items:center;
-                justify-content:left;
-                flex-wrap:wrap;
-                list-style-type:none;
-                gap:10px 6vw;
-            }
-    }
-    `
+    
     const setSelected = (name) => {
         !instructorsList.includes(name)
             ? setInstructorsList([...instructorsList, name])

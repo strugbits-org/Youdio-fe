@@ -134,10 +134,13 @@ export const WhiteIconButton = styled(IconButton)`
     }
 
     @media only screen and (min-width: ${laptop}) {
-        min-width: clamp(150px, 10vw, 200px);
-        min-height: 45px;
-        font-size: clamp(15px, 0.9vw, 18px);
+        min-width: clamp(100px, 10vw, 200px);
+        min-height: 35px;
+        font-size: clamp(13px, 0.9vw, 18px);
         padding: 0px;
+        img{
+            width: clamp(12px, 0.9vw, 16px);
+        }
     }
     
 `

@@ -33,6 +33,7 @@ const filter = [
 export function Filters() {
 
     const [selectedFilter, setFilter] = useState(null)
+    const [sort, setSort] = useState("newest")
 
     useEffect(() => {
 
@@ -43,11 +44,11 @@ export function Filters() {
     }
  
     return <React.Fragment>
-        <FilterBox open={selectedFilter}>
+        <FilterBox>
 
             {
-                filter.map(({ label, value }) => { 
-                    return <div>
+                filter.map(({ label, value }, ind) => { 
+                    return <div key={`filter-button-${ind}`}>
                         <FilterButton name={label} selected={selectedFilter} clickEvent={() => filterHandler(value)} />
                     </div>
                 } )
@@ -56,15 +57,17 @@ export function Filters() {
             {
                 selectedFilter !== null && <FilterOptions>
                     <P3 className='videoCount'>SHOWING 316 VIDEOS</P3>
-                    {selectedFilter === "duration" && <Duration />}
-                    {selectedFilter === "instructors" && <Instructors />}
-                    {selectedFilter === "styles" && <Styles />}
-                    {selectedFilter === "difficulty" && <Difficulty />}
-                    {selectedFilter === "intensity" && <Intensity />}
+                    <div className='filters'>
+                        {selectedFilter === "duration" && <Duration />}
+                        {selectedFilter === "instructors" && <Instructors />}
+                        {selectedFilter === "styles" && <Styles />}
+                        {selectedFilter === "difficulty" && <Difficulty />}
+                        {selectedFilter === "intensity" && <Intensity />}
+                    </div>
                     <div className='sortOption'>
                         <P3 >SORT BY:</P3>
-                        <select>
-                            <option selected value="newest">NEWEST</option>
+                        <select value={sort} onChange={e => setSort(e.target.value)}>
+                            <option value="newest">NEWEST</option>
                             <option value="oldest">OLDEST</option>
                         </select>
 
@@ -75,11 +78,7 @@ export function Filters() {
 
         </FilterBox>
         <SelectionBox>
-            <SelectionButton key={ 0 } name={"YOGA"} />
-            <SelectionButton key={ 1 } name={"YOGA"} />
-            <SelectionButton key={ 2 } name={"YOGA"} />
-            <SelectionButton key={ 3 } name={"YOGA"} />
-            <SelectionButton key={ 4 } name={"YOGA"} />
+            {[...Array(6).keys()].map((key) => <SelectionButton key={`selected-${key}`} name={"YOGA"} />)}
         </SelectionBox>
     </React.Fragment>
 }

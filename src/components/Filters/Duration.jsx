@@ -60,21 +60,23 @@ function RangeSlider() {
     </Box>
 }
 
-export default function Duration() {
-    const SliderBox = styled.div`
-        margin-inline:auto;
-        .sliderContent{
-            width:120%;
-            display:flex;
-            justify-content:space-between;
-            margin-inline:-8% -12%;
+const SliderBox = styled.div`
+    margin-inline:auto;
+    .sliderContent{
+        width:120%;
+        display:flex;
+        justify-content:space-between;
+        margin-inline:-8% -12%;
 
-            .points{
-                color:var(--backgroundGrey);
-            }
-           
+        .points{
+            color:var(--backgroundGrey);
         }
-    `
+           
+    }
+`
+
+export default function Duration() {
+    
     return <SliderBox>
         <RangeSlider />
         <div className='sliderContent'>

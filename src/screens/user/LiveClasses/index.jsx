@@ -119,6 +119,7 @@ function LiveClasses() {
                 <PrimaryWhiteButton
                   className={(!isDateSelected && ind === 3) ? "selectedDate"
                     : isDateSelected === dateString ? "selectedDate" : ""}
+                  key={`weekday-${ind}`}
                   onClick={e => setDateSelected(e.currentTarget.innerText)}
                 >
                   {dateString}
@@ -169,7 +170,7 @@ function LiveClasses() {
     {/* Cards Section */}
     <Section backgroundColor="white">
       <CardsBox>
-        {[...Array(6).keys()].map(() => <LiveClassCard />)}
+        {[...Array(6).keys()].map((val) => <LiveClassCard key={`card-${val}`} />)}
         <DateTag>
           <H4>31</H4>
           <hr />
@@ -178,7 +179,7 @@ function LiveClasses() {
       </CardsBox>
       <div className='seperatorLine'></div>
       <CardsBox>
-        {[...Array(6).keys()].map(() => <LiveClassCard />)}
+        {[...Array(6).keys()].map((val) => <LiveClassCard key={`card-${val}`} />)}
         <DateTag>
           <H4>30</H4>
           <hr />

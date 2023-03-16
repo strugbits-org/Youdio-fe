@@ -1,13 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { H6, P3 } from 'src/components'
+import { layout } from 'src/helpers'
+
+const { tablet, laptop } = layout
 
 const StylesBox = styled.div`
     padding: 22px;
     .styles{
         display:flex;
         justify-content:center;
-        /* align-items:center; */
         gap:5vw;
         color:var(--backgroundBrown);
         h6{
@@ -19,6 +21,19 @@ const StylesBox = styled.div`
         }
         .active{
             color: var(--textHeadingBlack);
+        }
+    }
+
+    @media only screen and (min-width: ${tablet}) {
+        .styles{
+            justify-content:left;
+            flex-wrap:wrap;
+        }
+    }
+    @media only screen and (min-width: ${laptop}) {
+        .styles{
+            justify-content:center;
+            flex-wrap: initial;
         }
     }
 `
@@ -77,7 +92,7 @@ export default function Styles() {
                         <ul>
                             {
                                 list.length > 0 && list.map((val, ind) => {
-                                    return <li key={ind} className={allStyles.includes(title) ? "active" : styleList.includes(val) ? "active" : ""  } onClick={() => setSpecific(val)} >
+                                    return <li key={`sub-design-${ind}`} className={allStyles.includes(title) ? "active" : styleList.includes(val) ? "active" : ""  } onClick={() => setSpecific(val)} >
                                         <P3>{val}</P3>
                                     </li>
                                 })

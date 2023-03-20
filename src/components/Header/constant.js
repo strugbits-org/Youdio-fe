@@ -2,7 +2,7 @@ export const staticContent = {
     liveClasses: "LIVE CLASSES",
     videos: "VIDEOS",
     membership: "MEMBERSHIP",
-    instructors: "INSTRUCTORS",
+    instructor: "INSTRUCTORS",
     signIn: "SIGN IN",
     register: "REGISTER",
 }

@@ -11,7 +11,7 @@ import LiveClasses from 'src/screens/user/LiveClasses';
 import Login from "src/screens/user/Login";
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
-
+import Instructor from 'src/screens/user/Instructor'
 
 export default function Router() {
 
@@ -50,7 +50,7 @@ export default function Router() {
                 {/* <Route path="/live-classes" element={<LiveClasses />} /> */}
                 {/* <Route path="/video-classes" element={<VideoClasses />} />
                 <Route path="/user-profile" element={<UserProfile />} />*/
-                <Route path="/login" element={<Login />} /> }
+                    <Route path="/login" element={<Login />} />}
 
                 {/* <Route path="/" element={protectedAuthRoute(<Login />)} />
                 <Route path="/login" element={protectedAuthRoute(<Login />)} />
@@ -59,7 +59,7 @@ export default function Router() {
                 <Route path="/dashboard" element={protectedRoute(<Dashboard />)} />
                 <Route path="/createAd" element={protectedRoute(<CreateAd />)} />
                 <Route path="/productDetails/:adId" element={protectedRoute(<ProductDetails />)} /> */}
-
+                {<Route path="/instructor" element={<Instructor />} />}
             </Routes>
             <Footer />
 

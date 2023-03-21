@@ -18,6 +18,8 @@ import openEye from "./open_eye.svg"
 // Assets/Sample
 import cardImage from "src/assets/sample/cardImg.jpg"
 import profileImage from "src/assets/sample/profileImg.jpg"
+import cardInstruct from "src/assets/sample/cardInstruct.jpg"
+import cardInstruct2 from "src/assets/sample/cardInstruct2.jpg"
 
 // Assets/Logo
 import footerLogo from "src/assets/logo/footer_logo.svg"
@@ -37,12 +39,14 @@ const icons = {
     searchIcon,
     cardImage,
     profileImage,
+    cardInstruct,
+    cardInstruct2,
     timeClock,
     footerLogo,
     youdio,
     worldMap,
     closeEye,
-    openEye
+    openEye,
 
 }
 

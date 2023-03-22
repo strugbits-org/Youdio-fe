@@ -2,7 +2,13 @@ import React from "react";
 import { icons } from "src/helpers";
 import { H3, P3 } from "src/components";
 import { CardContent, Card } from "./cardsComponent";
-
+// const arr = [
+//   {
+//     id:0,
+//     name:xyz,
+//     img: ,
+//   }
+// ]
 function InstructorCard() {
   return (
     <Card>

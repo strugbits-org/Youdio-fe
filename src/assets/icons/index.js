@@ -13,13 +13,14 @@ import timeClock from "./time.svg"
 import worldMap from "./language_world.svg"
 import closeEye from "./close_eye.svg"
 import openEye from "./open_eye.svg"
-
+import singleInstructorImg from "./singleInstructorImg.svg"
 
 // Assets/Sample
 import cardImage from "src/assets/sample/cardImg.jpg"
 import profileImage from "src/assets/sample/profileImg.jpg"
 import cardInstruct from "src/assets/sample/cardInstruct.jpg"
 import cardInstruct2 from "src/assets/sample/cardInstruct2.jpg"
+import singBgInstructor from "src/assets/sample/singBgInstructor.jpg";
 
 // Assets/Logo
 import footerLogo from "src/assets/logo/footer_logo.svg"
@@ -41,12 +42,14 @@ const icons = {
     profileImage,
     cardInstruct,
     cardInstruct2,
+    singBgInstructor,
     timeClock,
     footerLogo,
     youdio,
     worldMap,
     closeEye,
     openEye,
+    singleInstructorImg
 
 }
 

@@ -12,6 +12,7 @@ import Login from "src/screens/user/Login";
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import Instructor from 'src/screens/user/Instructor'
+import SingleInstructor from "src/screens/user/SingleInstructor";
 
 export default function Router() {
 
@@ -60,6 +61,7 @@ export default function Router() {
                 <Route path="/createAd" element={protectedRoute(<CreateAd />)} />
                 <Route path="/productDetails/:adId" element={protectedRoute(<ProductDetails />)} /> */}
                 {<Route path="/instructor" element={<Instructor />} />}
+                {<Route path="/singleinstructor" element={<SingleInstructor />} />}
             </Routes>
             <Footer />
 

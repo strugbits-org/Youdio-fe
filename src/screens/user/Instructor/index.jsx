@@ -4,10 +4,15 @@ import { ContentBox, DayBox, CardsBox } from "./instructorClassComponent";
 import { H1, P1, Section, InputIcon } from "src/components";
 import { icons } from "src/helpers";
 import { InstructorCard } from "src/components/Cards/";
+import { useNavigate } from "react-router-dom";
 
 function Instructor() {
   const [Content, setContent] = useState(instructorClassStaticContent);
-
+  const navigate = useNavigate();
+  const goToSingleInst = () => {
+    // navigate("/singleInstructor");
+    console.log("clicked");
+  };
   return (
     <>
       {/* instructorBanner */}
@@ -37,7 +42,10 @@ function Instructor() {
       <Section backgroundColor="#fff" paddingBlock="0vw">
         <CardsBox>
           {[...Array(24).keys()].map((val) => (
-            <InstructorCard key={`card-${val}`} />
+            <InstructorCard
+              key={`card-${val}`}
+              // onClick={ goToSingleInst}
+            />
           ))}
         </CardsBox>
       </Section>

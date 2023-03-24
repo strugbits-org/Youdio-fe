@@ -5,7 +5,7 @@ import { layout } from "src/helpers";
 const { mobile, tablet, laptop, desktop } = layout
 export const Section = styled.section`
     background: ${({ backgroundImage, backgroundColor }) => {
-        return backgroundImage ? backgroundImage :
+        return backgroundImage ? `url(${backgroundImage})` :
             backgroundColor ? backgroundColor :
                 `radial-gradient(circle, rgba(240,162,204,1) 0%, rgba(255,231,218,1) 70%)`
     }};

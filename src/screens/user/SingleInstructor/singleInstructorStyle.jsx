@@ -1,31 +1,43 @@
 import styled from "styled-components";
 // import { H2, P1 } from "src/components";
 import { layout } from "src/helpers";
+import { Section } from "src/components";
+import { IconButton, PrimaryButton, PrimaryWhiteButton } from "src/components";
+
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 
-export const ImgCard = styled.div`
-  /* height: 40vh; */
-  /* width: 100%; */
+export const Sec = styled(Section)`
+  h1 {
+    color: #fff;
+  }
+  p {
+    color: #fff;
+  }
   background-size: cover;
-  background-repeat: no-repeat;
+  background-position: center;
+`;
 
-  .section {
-    padding-block: ${({ paddingBlock }) =>
-      paddingBlock ? paddingBlock : "20px"};
-
-    @media only screen and (min-width: ${mobile}) {
-      padding-inline: 3vw;
+export const TextSec = styled(Section)`
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+  }
+  p {
+    padding-inline: 15.2vw;
+    text-align: left;
+    margin-bottom: 1.5em;
+  }
+  /* issue =>  when media query is set it apply on desktop also */
+  @media only screen and (min-width: ${mobile}) {
+    p {
+      padding-inline: 1vw;
+      text-align: justify;
     }
-    @media only screen and (min-width: ${tablet}) {
-      padding-inline: 6vw;
-      padding-block: 200px;
-    }
-    @media only screen and (min-width: ${laptop}) {
-      padding-inline: 122px;
-      padding-block: 250px;
-    }
-    @media only screen and (min-width: ${desktop}) {
-      padding-block: 300px;
+  }
+  @media only screen and (min-width: ${mobileMedium}) {
+    p {
+      padding-inline: 1vw;
+      text-align: justify;
     }
   }
 `;
@@ -33,56 +45,105 @@ export const ImgCard = styled.div`
 export const SingleImage = styled.div`
   display: flex;
   justify-content: center;
-
+  transform: translateY(-30%);
   img {
-    width: 25%;
-    transform: translateY(10%);
+    /* max-width: 290px; */
+    /* max-width: 200px; */
   }
-  transform: translateY(0);
-  @media only screen and (max-width: ${mobile}) {
+
+  @media only screen and (min-width: ${mobile}) {
     img {
-      width: 25%;
+      max-width: 150px;
     }
   }
   @media only screen and (min-width: ${mobileMedium}) {
     img {
-      transform: translateY(60%);
-    }
-  }
-  @media only screen and (min-width: ${tablet}) {
-    img {
-      width: 20%;
-      transform: translateY(10%);
-    }
-  }
-  @media only screen and (min-width: ${laptop}) {
-    img {
-      width: 20%;
-      transform: translateY(180%);
-    }
-  }
-  @media only screen and (min-width: ${desktop}) {
-    img {
-      width: 20%;
-      transform: translateY(50%);
+      /* width: 200px; */
     }
   }
 `;
 
-export const InstructorText = styled.div`
-  background-color: #fff;
-  /* min-width: 1127px; */
-  .h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+export const CardsBox = styled.div`
+  display: grid;
+  gap: 5vw 1.8vw;
+  position: relative;
+
+  @media only screen and (min-width: ${mobile}) {
+    grid-template-columns: 1fr;
+    margin-block: 70px;
   }
-  .p1 {
-    max-width: 1100px;
-    margin-inline: 20%;
+  @media only screen and (min-width: ${mobileMedium}) {
+    grid-template-columns: 1fr 1fr;
   }
-  .p2 {
-    max-width: 1100px;
-    margin-inline: 20%;
+  @media only screen and (min-width: ${tablet}) {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-block: 90px;
   }
+  @media only screen and (min-width: ${laptop}) {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-block: 60px;
+  }
+  @media only screen and (min-width: ${desktop}) {
+  }
+`;
+export const TwoCardsBox = styled.div`
+  display: grid;
+  gap: 6vw 1.8vw;
+  position: relative;
+
+  @media only screen and (min-width: ${mobile}) {
+    grid-template-columns: 1fr;
+    margin-block: 70px;
+  }
+  @media only screen and (min-width: ${mobileMedium}) {
+    grid-template-columns: 1fr;
+  }
+  @media only screen and (min-width: ${tablet}) {
+    grid-template-columns: 1fr 1fr;
+    margin-block: 90px;
+  }
+  @media only screen and (min-width: ${laptop}) {
+    grid-template-columns: 1fr 1fr;
+    margin-block: 60px;
+  }
+  @media only screen and (min-width: ${desktop}) {
+  }
+`;
+
+export const ReviewCards = styled.div`
+  padding-inline: 12vw;
+  display: grid;
+  gap: 6vw 5.8vw;
+  position: relative;
+
+  @media only screen and (min-width: ${mobile}) {
+    grid-template-columns: 1fr;
+    margin-block: 70px;
+  }
+  @media only screen and (min-width: ${mobileMedium}) {
+    grid-template-columns: 1fr;
+  }
+  @media only screen and (min-width: ${tablet}) {
+    grid-template-columns: 1fr 1fr;
+    margin-block: 90px;
+  }
+  @media only screen and (min-width: ${laptop}) {
+    grid-template-columns: 1fr 1fr;
+    margin-block: 60px;
+  }
+  @media only screen and (min-width: ${desktop}) {
+  }
+`;
+
+export const CenterButton = styled(PrimaryWhiteButton)`
+  margin: 0 auto;
+  /* margin-left: 43%; */
+  margin-bottom: 13.2vh;
+  min-width: 180px;
+`;
+
+export const StyledDiv = styled.div`
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  margin-block: 47px;
+  margin-inline: 5%;
 `;

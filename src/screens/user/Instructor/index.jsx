@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import { instructorClassStaticContent } from "./constant";
+import { NavLink } from "react-router-dom";
+import { ArrInstructor, instructorClassStaticContent } from "./constant";
 import { ContentBox, DayBox, CardsBox } from "./instructorClassComponent";
 import { H1, P1, Section, InputIcon } from "src/components";
 import { icons } from "src/helpers";
 import { InstructorCard } from "src/components/Cards/";
-import { useNavigate } from "react-router-dom";
 
 function Instructor() {
   const [Content, setContent] = useState(instructorClassStaticContent);
-  const navigate = useNavigate();
-  const goToSingleInst = () => {
-    // navigate("/singleInstructor");
-    console.log("clicked");
-  };
+
   return (
     <>
       {/* instructorBanner */}
@@ -41,12 +37,18 @@ function Instructor() {
       {/* Cards Section */}
       <Section backgroundColor="#fff" paddingBlock="0vw">
         <CardsBox>
-          {[...Array(24).keys()].map((val) => (
-            <InstructorCard
-              key={`card-${val}`}
-              // onClick={ goToSingleInst}
-            />
-          ))}
+          {/* {[...Array(24).keys()].map((val) => (
+            <InstructorCard key={`card-${val}`} click={goToSingleInst} />
+          ))} */}
+
+          {ArrInstructor.map((instructor) => {
+            const { id } = instructor;
+            return (
+              <NavLink to={`/singleinstructor/${id}`} key={id}>
+                <InstructorCard {...instructor} />
+              </NavLink>
+            );
+          })}
         </CardsBox>
       </Section>
     </>

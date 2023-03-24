@@ -61,7 +61,7 @@ export default function Router() {
                 <Route path="/createAd" element={protectedRoute(<CreateAd />)} />
                 <Route path="/productDetails/:adId" element={protectedRoute(<ProductDetails />)} /> */}
                 {<Route path="/instructor" element={<Instructor />} />}
-                {<Route path="/singleinstructor" element={<SingleInstructor />} />}
+                {<Route path="/singleinstructor/:id" element={<SingleInstructor />} />}
             </Routes>
             <Footer />
 

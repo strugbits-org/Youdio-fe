@@ -20,6 +20,8 @@ const UpperBox = styled.div`
     min-height: 400px;
     gap: 2.5vw;
 
+
+    
     .logoBox{
         img{
             width:clamp(130px, 11vw, 228px);

@@ -3,17 +3,20 @@ import { Wrapper } from "src/screens/user/Dashboard/style/Wrapper";
 import { HorizontalLine2 } from "../MyProfileScreen/ProfileComponent";
 import { Heading, Heading2, Heading3 } from "src/screens/user/Dashboard/style/Heading";
 import { Container } from "src/screens/user/Dashboard/style/Container";
-import { P2, H5, H3, P3 } from "src/components";
+import { P2,H3, P3 } from "src/components";
 import {
   Description,
   Box,
 } from "src/screens/user/Dashboard/Screen/MembershipScreen/MembershipScreenComponent";
+import Sidebar from "../../Components/Sidebar/Sidebar";
 
 const Membership = () => {
   return (
     <Wrapper>
       <Heading>Membership</Heading>
       <HorizontalLine2 />
+      <div style={{display:"flex",flexDirection:"row"}}>
+<Sidebar/>
       <Container>
         <Heading2>Your Plan</Heading2>
         <P2 style={{ color: "#999999", paddingBottom: "50px" }}>
@@ -25,8 +28,8 @@ const Membership = () => {
         <HorizontalLine2 />
         <Description>
           <div className="sub_heading"
-   
           >
+   
             <div style={{minWidth:"210px"}}>
               <Heading3> Monthly</Heading3>
               <H3>
@@ -48,7 +51,7 @@ const Membership = () => {
         <Description>
           <div className="sub-heading"
             
-          >
+            >
             <div>
               <Heading3> Annually</Heading3>
               <H3>
@@ -76,6 +79,7 @@ const Membership = () => {
           </P3>
         </Box>
       </Container>
+            </div>
     </Wrapper>
   );
 };

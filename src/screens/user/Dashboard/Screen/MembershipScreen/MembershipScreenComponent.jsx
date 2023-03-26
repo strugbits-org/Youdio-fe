@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { layout } from "src/helpers";
 import { Input } from "src/components";
 
-const { mobile, tablet, laptop, desktop } = layout;
 
 
 export const Description = styled.div`
@@ -10,7 +8,7 @@ export const Description = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* gap: 9rem; */
+  gap: 2rem;
   flex-wrap: wrap;
 
   img {
@@ -25,22 +23,7 @@ export const Description = styled.div`
 
   }
 
-  @media only screen and (max-width: ${mobile}) {
-    gap: 2rem;
-
-  }
-  @media only screen and (max-width: ${tablet}) {
-    gap: 2rem;
-  }
-  @media only screen and (min-width: ${laptop}) {
-    gap: 2rem;
-
-
-  }
-  @media only screen and (min-width: ${desktop}) {
-    gap: 2rem;
-
-  }
+  
 `;
 
 export const Input2 = styled(Input)`

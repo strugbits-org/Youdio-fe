@@ -12,7 +12,7 @@ export const path = {
     home: "",
     liveClasses: "",
     videos: "",
-    membership: "",
+    membership: "membership",
     instructors: "",
     signIn: "login",
     register: "",

@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "src/screens/user/Dashboard/style/Container";
 import { Heading, Heading2 } from "src/screens/user/Dashboard/style/Heading";
 import { Wrapper } from "src/screens/user/Dashboard/style/Wrapper";
 import Women from "src/assets/sample/women.png";
@@ -14,23 +13,22 @@ import {
   Box4,
   ProfileInput,
   ProfileLabel,
+  ProfileContainer,
 } from "./ProfileComponent";
 
-import Sidebar from "src/screens/user/Dashboard/Components/Sidebar/Sidebar"
+import Sidebar from "src/screens/user/Dashboard/Components/Sidebar/Sidebar";
 
 const MyProfile = () => {
   return (
-    <Wrapper>
+    <Wrapper  >
       <Heading>Profile</Heading>
       <HorizontalLine2 />
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <Sidebar/>
-        <Container>
+        <Sidebar />
+        <ProfileContainer  >
           <Box4>
             <div className="image-container">
-            <img className="profile-img" src={Women} alt="profile-pic" />
-            {/* <img className="profile-icon" src={Camera}  alt="camera-icon" style={{width:"28px",height:"28px"}} /> */}
-
+              <img className="profile-img" src={Women} alt="profile-pic" style={{width:"100%",maxWidth:"350px",minWidth:"150px"}} />
             </div>
 
             <div>
@@ -69,7 +67,7 @@ const MyProfile = () => {
               <SaveButton>SAVE</SaveButton>
             </div>
           </Box3>
-        </Container>
+        </ProfileContainer>
       </div>
     </Wrapper>
   );

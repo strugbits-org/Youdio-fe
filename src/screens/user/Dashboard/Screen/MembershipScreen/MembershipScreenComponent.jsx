@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { Input } from "src/components";
-
-
 
 export const Description = styled.div`
   padding-block: 50px;
@@ -26,11 +23,7 @@ export const Description = styled.div`
   
 `;
 
-export const Input2 = styled(Input)`
-    max-width:438px;
 
-
-`
 export const Box = styled.div`
 
   padding-block: 50px;

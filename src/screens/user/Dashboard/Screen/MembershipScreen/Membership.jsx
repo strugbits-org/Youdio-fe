@@ -30,16 +30,16 @@ const Membership = () => {
           <div className="sub_heading"
           >
    
-            <div style={{minWidth:"210px"}}>
+            <div style={{minWidth:"189px"}}>
               <Heading3> Monthly</Heading3>
-              <H3>
+              <H3 >
                 20$/
                 <span style={{ fontSize: "14px" }}>month</span>
               </H3>
             </div>
           </div>
 
-          <P2 style={{ minwidth: "300px", maxWidth: "650px" }}>
+          <P2 style={{ minwidth: "100px", maxWidth: "650px" }}>
             Lorem ipsum dc in tellus id eu. Porttitor egestas viverra ultricies
             tincidunt nulla in nisl eget. Magna integer platea dolor risus
             porttitor blandit rhoncus tortor iaculis. Ultricies r id risus lacus
@@ -61,7 +61,7 @@ const Membership = () => {
             </div>
           </div>
 
-          <P2 style={{ minwidth: "300px", maxWidth: "650px" }}>
+          <P2 style={{ minwidth: "100px", maxWidth: "650px" }}>
             Lorem ipsum dc in tellus id eu. Porttitor egestas viverra ultricies
             tincidunt nulla in nisl eget. Magna integer platea dolor risus
             porttitor blandit rhoncus tortor iaculis. Ultricies r id risus lacus

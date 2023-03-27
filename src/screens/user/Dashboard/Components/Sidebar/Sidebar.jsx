@@ -5,7 +5,6 @@ import { SidebarBtn } from './SidebarComponent';
 
 function Sidebar() {
   return (
-    <>
         <div style={{ paddingTop:"40px",display:"flex",flexDirection:"column",gap:"1rem",}}>
             {SidebarData.map((item, index) => {
               return (
@@ -18,7 +17,6 @@ function Sidebar() {
             })}
          
             </div>
-    </>
   );
 }
 

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import {
   SingleImage,
   CardsBox,
@@ -7,18 +6,16 @@ import {
   TextSec,
   TwoCardsBox,
   ReviewCards,
-  CenterButton,
   StyledDiv,
 } from "./singleInstructorStyle";
 import { icons } from "src/helpers";
-import { H1, P1, H2, Section, H4 } from "src/components";
-import { SingleinstClassStaticContent } from "./constant";
+import { H1, P1, H2, Section } from "src/components";
+import { SingleinstClassStaticContent, ArrReview } from "./constant";
 import {
   SingleInstructorCard,
   TwoCardInstructor,
 } from "src/components/Cards/SingleInstructorCard";
 import { ReviewCard } from "src/components/Cards";
-import { IconButton, PrimaryButton, PrimaryWhiteButton } from "src/components";
 
 function SingleInstructor() {
   // single id data fetch function
@@ -98,9 +95,10 @@ function SingleInstructor() {
           {SingleinstClassStaticContent.ReviewH2}
         </H2>
         <ReviewCards>
-          {[...Array(6).keys()].map((val) => (
-            <ReviewCard key={`card-${val}`} />
-          ))}
+          {ArrReview.map((review) => {
+            const { id } = review;
+            return <ReviewCard key={id} {...review} />;
+          })}
         </ReviewCards>
       </Section>
 

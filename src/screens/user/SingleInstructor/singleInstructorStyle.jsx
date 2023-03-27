@@ -2,7 +2,7 @@ import styled from "styled-components";
 // import { H2, P1 } from "src/components";
 import { layout } from "src/helpers";
 import { Section } from "src/components";
-import { IconButton, PrimaryButton, PrimaryWhiteButton } from "src/components";
+import { PrimaryWhiteButton } from "src/components";
 
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 
@@ -67,6 +67,7 @@ export const CardsBox = styled.div`
   display: grid;
   gap: 5vw 1.8vw;
   position: relative;
+  
 
   @media only screen and (min-width: ${mobile}) {
     grid-template-columns: 1fr;
@@ -111,19 +112,21 @@ export const TwoCardsBox = styled.div`
 `;
 
 export const ReviewCards = styled.div`
-  padding-inline: 12vw;
+  padding-inline: 6.5vw;
   display: grid;
-  gap: 6vw 5.8vw;
+  gap: 8vw 5.8vw;
   position: relative;
 
   @media only screen and (min-width: ${mobile}) {
     grid-template-columns: 1fr;
     margin-block: 70px;
   }
-  @media only screen and (min-width: ${mobileMedium}) {
+  @media only screen and (max-width: ${mobileMedium}) {
+    gap: 13vw 5.8vw;
     grid-template-columns: 1fr;
   }
   @media only screen and (min-width: ${tablet}) {
+    
     grid-template-columns: 1fr 1fr;
     margin-block: 90px;
   }

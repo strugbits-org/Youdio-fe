@@ -16,6 +16,7 @@ import openEye from "./open_eye.svg"
 import singleInstructorImg from "./singleInstructorImg.svg"
 import reviewImg from "./reviewImg.svg"
 import customerReview from "./customerReview.svg"
+import reviewImg2 from "./reviewImg2.jpg"
 
 // Assets/Sample
 import cardImage from "src/assets/sample/cardImg.jpg"
@@ -27,6 +28,8 @@ import cardInstructor from "src/assets/sample/cardInstructor.jpg";
 import InstructorElizebeth from "src/assets/sample/InstructorElizebeth.jpg"
 import cardInstruct3 from "src/assets/sample/cardInstruct3.jpg"
 import cardInstruct4 from "src/assets/sample/cardInstruct4.jpg"
+
+
 // Assets/Logo
 import footerLogo from "src/assets/logo/footer_logo.svg"
 import youdio from "src/assets/logo/youdio.svg"
@@ -60,7 +63,8 @@ const icons = {
     openEye,
     singleInstructorImg,
     reviewImg,
-    customerReview
+    customerReview,
+    reviewImg2,
 }
 
 export default icons

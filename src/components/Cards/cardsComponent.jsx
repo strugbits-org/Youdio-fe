@@ -9,22 +9,30 @@ export const Card = styled.div`
   flex-basis: clamp(280px, 20vw, 392px);
 `;
 export const BoxCard = styled.div`
+  flex-basis: clamp(280px, 20vw, 392px);
   background-color: #f9f9f9;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: var(--transition03s);
+  border: 1px solid transparent;
+  border-radius: 5px;
   .imgReview {
-    max-width: 45px; /* adjust to desired max width */
+    max-width: 55px; /* adjust to desired max width */
     max-height: 60px;
     line-height: 30px;
     /* color: #ffff; */
     background-color: #3ac4b2;
     padding: 0.6em;
+    text-align: center;
     border-radius: 4px;
     transform: translate(1em, -1.5em);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
   }
 
   &:hover {
     background-color: #3ac4b2;
     color: #fff;
+
     .reviewP2 {
       p {
         color: #fff;
@@ -36,17 +44,20 @@ export const BoxCard = styled.div`
       }
     }
     .imgReview {
-      background-color: #fff;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      /* background-color: #fff; */
      
+
       img {
-       
-       color: #3ac4b2;
-       background-color: #3ac4b2;
-        border: none;
+        /* filter: hue-rotate(30deg); */
+        /* color: #3ac4b2;
+        border: none; */
+      
       }
     }
   }
+`;
+export const Spacediv = styled.div`
+  margin-bottom: 1em;
 `;
 export const CardMedia = styled.div`
   position: relative;
@@ -132,9 +143,7 @@ export const CardContent = styled.div`
   h3 {
     margin-bottom: 1em;
   }
-  .space {
-    margin-bottom: 1.5em;
-  }
+
   .reviewSec {
     display: flex;
     justify-content: space-between;

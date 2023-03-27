@@ -1,5 +1,5 @@
 import React from "react";
-import { H3, P3, H2, P1 } from "src/components";
+import { H3, P3 } from "src/components";
 import { Card, CardMedia, CardContent } from "./cardsComponent";
 import { icons } from "src/helpers";
 

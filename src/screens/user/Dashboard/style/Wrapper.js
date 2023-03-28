@@ -5,7 +5,10 @@ const { mobile, tablet, laptop, desktop } = layout
 
 export const Wrapper = styled.section`
     padding-block: 1vw;
-
+.whole_box{
+display: flex;
+flex-direction: row;
+}
 
  @media only screen and (min-width: ${mobile}) {
         padding-inline: 3vw;

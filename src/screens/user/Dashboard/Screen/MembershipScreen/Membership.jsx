@@ -16,7 +16,7 @@ const Membership = () => {
     <Wrapper>
       <Heading>{content.membership}</Heading>
       <HorizontalLine2 />
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className="whole_box">
         <Sidebar />
         <Container>
           <Heading2>{content.yourPlan}</Heading2>
@@ -26,16 +26,16 @@ const Membership = () => {
           <HorizontalLine2 />
           <Description>
             <div className="sub_heading">
-              <div style={{ minWidth: "180px" }}>
+              <div  className="small-box">
                 <Heading3> {content.monthly}</Heading3>
                 <H3>
                   {content.price}
-                  <span >{content.month}</span>
+                  <span>{content.month}</span>
                 </H3>
               </div>
             </div>
 
-            <P2 style={{ minwidth: "100px", maxWidth: "650px" }}>
+            <P2 className="lorem_text">
               {content.lorem}
             </P2>
           </Description>
@@ -47,14 +47,12 @@ const Membership = () => {
                 <Heading3> {content.annually}</Heading3>
                 <H3>
                   {content.price}
-                  <span >
-                    {content.montBilledAnnually}
-                  </span>
+                  <span>{content.montBilledAnnually}</span>
                 </H3>
               </div>
             </div>
 
-            <P2 style={{ minwidth: "100px", maxWidth: "650px" }}>
+            <P2 className="lorem_text">
               {content.lorem}
             </P2>
           </Description>

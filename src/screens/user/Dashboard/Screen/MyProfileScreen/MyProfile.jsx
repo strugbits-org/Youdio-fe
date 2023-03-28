@@ -24,7 +24,8 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {profileScreenStaticContent as content} from "./Constant"
+import { profileScreenStaticContent as content } from "./Constant";
+
 const MyProfile = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -38,7 +39,7 @@ const MyProfile = () => {
     <Wrapper>
       <Heading>{content.profileH1}</Heading>
       <HorizontalLine2 />
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className="whole_box">
         <Sidebar />
         <ProfileContainer>
           <Box4>
@@ -52,7 +53,7 @@ const MyProfile = () => {
             </div>
             <div>
               <Heading2>{content.profileH2}</Heading2>
-              <H5 style={{ color: "#999999" }}>{content.H5}</H5>
+              <H5 style={{ color: "#999999" }}>{content.profileH5}</H5>
             </div>
           </Box4>
           <HorizontalLine2 />
@@ -76,13 +77,20 @@ const MyProfile = () => {
           <HorizontalLine2 />
           <Box2>
             <ProfileLabel>{content.password}</ProfileLabel>
-            <FormControl sx={{width:"100%", minWidth: "10ch",maxWidth:"63ch",}}>
-              <OutlinedInput sx={{height:"5ch",border:"1px solid ##5b5b5b",borderRadius:"0px"}}
+            <FormControl
+              sx={{ width: "100%", minWidth: "10ch", maxWidth: "63ch" }}
+            >
+              <OutlinedInput
+                sx={{
+                  height: "5ch",
+                  border: "1px solid ##5b5b5b",
+                  borderRadius: "0px",
+                }}
                 id="outlined-basic"
                 variant="outlined"
                 type={showPassword ? "text" : "password"}
                 endAdornment={
-                  <InputAdornment position="end"  >
+                  <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}

@@ -12,27 +12,27 @@ export const Description = styled.div`
     width: 20px;
     height: 20px;
   }
-  .sub_heading{
+  .sub_heading {
     display: flex;
     flex-direction: row;
-    gap:1rem;
-    align-items:center;
-
+    gap: 1rem;
+    align-items: center;
   }
-span{
-  font-size:14px;
-}
-  
+  span {
+    font-size: 14px;
+  }
+  .small-box {
+    min-width: 180px;
+  }
+  .lorem_text {
+    min-width: 100px;
+    max-width: 650px;
+  }
 `;
 
-
 export const Box = styled.div`
-
   padding-block: 50px;
-  display:flex;
+  display: flex;
   flex-direction: rows;
-  gap :1rem
-
-  
-
-`
+  gap: 1rem;
+`;

@@ -7,13 +7,13 @@ export const Container = styled.section`
     padding-block: ${({ paddingBlock }) => paddingBlock ? paddingBlock : '40px'};
 
 @media only screen and (min-width: ${mobile}) {
-        padding-inline: 3vw;
+        padding-left: 3vw;
     }
     @media only screen and (min-width: ${tablet}) {
-        padding-inline: 6vw;
+        padding-left: 6vw;
     }
     @media only screen and (min-width: ${laptop}) {
-        padding-inline: 122px;
+        padding-left: 122px;
     }
     @media only screen and (min-width: ${desktop}) {
     }

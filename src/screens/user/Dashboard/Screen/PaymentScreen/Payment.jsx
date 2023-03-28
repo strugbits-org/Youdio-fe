@@ -22,7 +22,7 @@ const Payment = () => {
     <Wrapper>
       <Heading>{constant.paymentH1}</Heading>
       <HorizontalLine2 />
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className="whole_box">
         <Sidebar />
         <Container2>
           <Main>

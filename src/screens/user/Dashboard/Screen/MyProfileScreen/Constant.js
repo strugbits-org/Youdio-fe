@@ -1,8 +1,8 @@
 
 export const profileScreenStaticContent = {
 
-    paymentH1:"Payment",
-    paymentH2:"Enter Payment Details",
+    profileH1:"Profile",
+    profileH2:"Profile",
     profileH5:"Your Nickname here",
     name:"Full Name",
     namePlaceHolder:"Alexa Morgan",

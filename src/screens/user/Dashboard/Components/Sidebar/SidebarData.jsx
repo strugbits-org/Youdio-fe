@@ -20,13 +20,13 @@ export const SidebarData =[
     },
     {
         title:"History",
-        path:"/myprofile",
+        path:"/history",
         cName:"Nav-text"
 
     },
     {
         title:"Live Booking",
-        path:"/myprofile",
+        path:"/liveBooking",
         cName:"Nav-text"
 
     },

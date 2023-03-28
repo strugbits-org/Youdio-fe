@@ -20,6 +20,8 @@ import Payment from "src/screens/user/Dashboard/Screen/PaymentScreen/Payment";
 
 import Instructor from 'src/screens/user/Instructor'
 import SingleInstructor from "src/screens/user/SingleInstructor";
+import History from "src/screens/user/Dashboard/Screen/HistoryScreen/History";
+import LiveBooking from "src/screens/user/Dashboard/Screen/LiveBookingScreen/LiveBooking";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
@@ -79,6 +81,9 @@ export default function Router() {
                 <Route path="/myprofile" element={<MyProfile/>}/>
                 <Route path="/membership2" element={<MembershipScreen2/>}/>
                 <Route path="/payment" element={<Payment/>}/>
+                <Route path="/history" element={<History/>}/>
+                <Route path="/liveBooking" element={<LiveBooking/>}/>
+
             </Routes>
             <Footer />
 

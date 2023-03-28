@@ -6,7 +6,9 @@ export const liveClassStaticContent = {
     monthSectionMonth: "December",
     weekSectionPrev: "previous",
     weekSectionNext: "next",
-    searchPlaceholder: "Search"
+    searchPlaceholder: "Search",
+    instructorSectionh1: "Our Instructor",
+    instructorSectionp1: "Start your Yoga, Meditation and Fitness routines by availing our live or recorded VIDEOS"
 
 }
 
@@ -55,8 +57,8 @@ export const dates = [
     },
 ]
 
-export const monthNames = moment.months().map((val, ind) => { 
-    return ({id:ind, name:val})
+export const monthNames = moment.months().map((val, ind) => {
+    return ({ id: ind, name: val })
 })
 
 export const getDaysArray = function (year, month) {

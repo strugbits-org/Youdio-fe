@@ -1,9 +1,10 @@
 import React from "react";
-import { P3 } from "src/components";
+import { H4, Label, P3 } from "src/components";
 import { Heading, Heading2 } from "src/screens/user/Dashboard/style/Heading";
 import { Wrapper } from "src/screens/user/Dashboard/style/Wrapper";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import { HorizontalLine2 } from "../MyProfileScreen/ProfileComponent";
+import { icons } from "src/helpers";
 import {
   Main,
   Input3,
@@ -24,7 +25,7 @@ const Payment = () => {
           <Main>
             <Heading2>Enter Payment Details</Heading2>
             <PaymentInput
-              placeholder="AlexaMorgan@gmail.com"
+              placeholder="Email                                                                               AlexaMorgan@gmail.com"
               style={{ backgroundColor: "#F7F7F7" }}
             />
             <PaymentLabel>Card Information</PaymentLabel>
@@ -50,9 +51,32 @@ const Payment = () => {
               </P3>
             </div>
             <PaymentBtn>START TRIAL</PaymentBtn>
+            <div style={{ display: "flex", gap: "1rem" }}>
+            <input
+                    type="checkbox"
+                    id='rememberCheckbox'
+                    name='rememberMe'
+                  />
+                  <Label htmlFor='rememberCheckbox'>Remember Me</Label>
+            </div>
           </Main>
           <Main>
-            <Heading2>youdio</Heading2>
+            <div className="payment-left-top-div">
+              <img
+                src={icons.youdio}
+                alt="youdio"
+                width="130px"
+                height="90px"
+              />
+              <div>
+                
+              <H4>Monthly</H4>
+              <H4>20$/
+                <span style={{fontSize:"12px"}}>month</span>
+              </H4>
+              </div>
+            </div>
+
             <P3>
               Lorem ipsum dlit. Atque, reiciendis veniam! Voluptatum explicabo
               tempore, ipsam architecto eos pariatur impedit expedita quas

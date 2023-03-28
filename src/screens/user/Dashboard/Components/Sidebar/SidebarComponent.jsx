@@ -2,7 +2,7 @@ import { PrimaryButton } from "src/components";
 import styled from "styled-components";
 
 export const SidebarBtn =styled(PrimaryButton)`
-
+  padding: 10px;
 max-width: 137px;
 min-width:90px;
 color: #3C3F46;

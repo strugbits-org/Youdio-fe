@@ -8,6 +8,14 @@ export const Main = styled.div`
   max-width: 541px;
   min-width: 100px;
   gap: 1rem;
+
+  .payment-left-top-div{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+  }
   
 `;
 export const PaymentInput = styled(Input)`

@@ -17,18 +17,38 @@ import {
 } from "./ProfileComponent";
 
 import Sidebar from "src/screens/user/Dashboard/Components/Sidebar/Sidebar";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const MyProfile = () => {
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <Wrapper  >
+    <Wrapper>
       <Heading>Profile</Heading>
       <HorizontalLine2 />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <Sidebar />
-        <ProfileContainer  >
+        <ProfileContainer>
           <Box4>
             <div className="image-container">
-              <img className="profile-img" src={Women} alt="profile-pic" style={{width:"100%",maxWidth:"350px",minWidth:"150px"}} />
+              <img
+                className="profile-img"
+                src={Women}
+                alt="profile-pic"
+                style={{ width: "100%", maxWidth: "350px", minWidth: "150px" }}
+              />
             </div>
 
             <div>
@@ -58,7 +78,25 @@ const MyProfile = () => {
 
           <Box2>
             <ProfileLabel>Password</ProfileLabel>
-            <ProfileInput placeholder="*************" />
+            <FormControl sx={{ minWidth: "10ch",width:"63ch"}}>
+              <OutlinedInput
+                id="outlined-basic"
+                variant="outlined"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
           </Box2>
 
           <Box3>

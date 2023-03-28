@@ -7,7 +7,7 @@ import { icons } from "src/helpers";
 import { InstructorCard } from "src/components/Cards/";
 
 function Instructor() {
-  const [Content, setContent] = useState(instructorClassStaticContent);
+  const [Content] = useState(instructorClassStaticContent);
 
   return (
     <>

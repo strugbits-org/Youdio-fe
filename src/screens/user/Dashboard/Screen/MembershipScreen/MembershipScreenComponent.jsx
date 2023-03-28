@@ -19,7 +19,9 @@ export const Description = styled.div`
     align-items:center;
 
   }
-
+span{
+  font-size:14px;
+}
   
 `;
 

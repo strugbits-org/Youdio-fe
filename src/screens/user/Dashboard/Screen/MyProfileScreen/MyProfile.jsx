@@ -24,7 +24,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
+import {profileScreenStaticContent as content} from "./Constant"
 const MyProfile = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -36,7 +36,7 @@ const MyProfile = () => {
 
   return (
     <Wrapper>
-      <Heading>Profile</Heading>
+      <Heading>{content.profileH1}</Heading>
       <HorizontalLine2 />
       <div style={{ display: "flex", flexDirection: "row" }}>
         <Sidebar />
@@ -50,41 +50,39 @@ const MyProfile = () => {
                 style={{ width: "100%", maxWidth: "350px", minWidth: "150px" }}
               />
             </div>
-
             <div>
-              <Heading2>Profile</Heading2>
-              <H5 style={{ color: "#999999" }}>Your Nickname here</H5>
+              <Heading2>{content.profileH2}</Heading2>
+              <H5 style={{ color: "#999999" }}>{content.H5}</H5>
             </div>
           </Box4>
           <HorizontalLine2 />
 
           <Box2>
-            <ProfileLabel>Full Name</ProfileLabel>
+            <ProfileLabel>{content.name}</ProfileLabel>
             <ProfileInput placeholder="Alexa Morgan" />
           </Box2>
           <HorizontalLine2 />
 
           <Box2>
-            <ProfileLabel>Nick Name</ProfileLabel>
+            <ProfileLabel>{content.nickName}</ProfileLabel>
             <ProfileInput placeholder="Alexa" />
           </Box2>
           <HorizontalLine2 />
 
           <Box2>
-            <ProfileLabel>Email</ProfileLabel>
+            <ProfileLabel>{content.email}</ProfileLabel>
             <ProfileInput placeholder="AlexaMorgan@gmail.com" />
           </Box2>
           <HorizontalLine2 />
-
           <Box2>
-            <ProfileLabel>Password</ProfileLabel>
-            <FormControl sx={{ minWidth: "10ch",width:"63ch"}}>
-              <OutlinedInput
+            <ProfileLabel>{content.password}</ProfileLabel>
+            <FormControl sx={{width:"100%", minWidth: "10ch",maxWidth:"63ch",}}>
+              <OutlinedInput sx={{height:"5ch",border:"1px solid ##5b5b5b",borderRadius:"0px"}}
                 id="outlined-basic"
                 variant="outlined"
                 type={showPassword ? "text" : "password"}
                 endAdornment={
-                  <InputAdornment position="end">
+                  <InputAdornment position="end"  >
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
@@ -98,11 +96,10 @@ const MyProfile = () => {
               />
             </FormControl>
           </Box2>
-
           <Box3>
             <div className="btn_gap">
-              <CancelButton>CANCEL</CancelButton>
-              <SaveButton>SAVE</SaveButton>
+              <CancelButton>{content.cancelBtn}</CancelButton>
+              <SaveButton>{content.saveBTn}</SaveButton>
             </div>
           </Box3>
         </ProfileContainer>

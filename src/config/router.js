@@ -71,6 +71,7 @@ export default function Router() {
                 <Route path="/dashboard" element={protectedRoute(<Dashboard />)} />
                 <Route path="/createAd" element={protectedRoute(<CreateAd />)} />
 <<<<<<< HEAD
+<<<<<<< HEAD
             <Route path="/productDetails/:adId" element={protectedRoute(<ProductDetails />)} /> */}
 
 =======
@@ -83,6 +84,12 @@ export default function Router() {
                 <Route path="/payment" element={<Payment/>}/>
                 <Route path="/history" element={<History/>}/>
                 <Route path="/liveBooking" element={<LiveBooking/>}/>
+{/* ======= */}
+                {/* <Route path="/productDetails/:adId" element={protectedRoute(<ProductDetails />)} />  */}
+
+                <Route path="/instructor" element={<Instructor />} />
+                <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
+{/* >>>>>>> f37cb20333f41f17feee88b2d4d9507e39ef717e */}
 
             </Routes>
             <Footer />

@@ -1,25 +1,19 @@
 import React from "react";
-import { icons } from "src/helpers";
 import { H3, P3 } from "src/components";
-import { CardContent, Card } from "./cardsComponent";
-// const arr = [
-//   {
-//     id:0,
-//     name:xyz,
-//     img: ,
-//   }
-// ]
-function InstructorCard() {
+import { CardContent, Card, CardMedia } from "./cardsComponent";
+
+function InstructorCard({ id, img, name, trainer }) {
   return (
     <Card>
-      {/* <ImgCard> */}
-      <img src={icons.cardInstruct2} alt={""} width="100%" height="auto" />
-      {/* </ImgCard> */}
+      <CardMedia>
+        <img src={img} alt={""} width="100%" height="auto" />
+      </CardMedia>
+
       <CardContent>
         <div className="timeRow">
-          <H3>Max Arthur</H3>
+          <H3>{name}</H3>
         </div>
-        <P3>yoga Trainer</P3>
+        <P3 className="trainerP3">{trainer}</P3>
       </CardContent>
     </Card>
   );

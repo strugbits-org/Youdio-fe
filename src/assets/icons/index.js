@@ -14,6 +14,9 @@ import worldMap from "./language_world.svg"
 import closeEye from "./close_eye.svg"
 import openEye from "./open_eye.svg"
 import singleInstructorImg from "./singleInstructorImg.svg"
+import reviewImg from "./reviewImg.svg"
+import customerReview from "./customerReview.svg"
+import reviewImg2 from "./reviewImg2.jpg"
 
 // Assets/Sample
 import cardImage from "src/assets/sample/cardImg.jpg"
@@ -21,6 +24,11 @@ import profileImage from "src/assets/sample/profileImg.jpg"
 import cardInstruct from "src/assets/sample/cardInstruct.jpg"
 import cardInstruct2 from "src/assets/sample/cardInstruct2.jpg"
 import singBgInstructor from "src/assets/sample/singBgInstructor.jpg";
+import cardInstructor from "src/assets/sample/cardInstructor.jpg";
+import InstructorElizebeth from "src/assets/sample/InstructorElizebeth.jpg"
+import cardInstruct3 from "src/assets/sample/cardInstruct3.jpg"
+import cardInstruct4 from "src/assets/sample/cardInstruct4.jpg"
+
 
 // Assets/Logo
 import footerLogo from "src/assets/logo/footer_logo.svg"
@@ -43,14 +51,20 @@ const icons = {
     cardInstruct,
     cardInstruct2,
     singBgInstructor,
+    cardInstructor,
+    InstructorElizebeth,
+    cardInstruct3,
+    cardInstruct4,
     timeClock,
     footerLogo,
     youdio,
     worldMap,
     closeEye,
     openEye,
-    singleInstructorImg
-
+    singleInstructorImg,
+    reviewImg,
+    customerReview,
+    reviewImg2,
 }
 
 export default icons

@@ -51,7 +51,7 @@ export default function Router() {
                 {/* <Route path="/live-classes" element={<LiveClasses />} /> */}
                 {/* <Route path="/video-classes" element={<VideoClasses />} />
                 <Route path="/user-profile" element={<UserProfile />} />*/
-                    <Route path="/login" element={<Login />} />}
+                <Route path="/login" element={<Login />} />}
 
                 {/* <Route path="/" element={protectedAuthRoute(<Login />)} />
                 <Route path="/login" element={protectedAuthRoute(<Login />)} />
@@ -60,8 +60,10 @@ export default function Router() {
                 <Route path="/dashboard" element={protectedRoute(<Dashboard />)} />
                 <Route path="/createAd" element={protectedRoute(<CreateAd />)} />
                 <Route path="/productDetails/:adId" element={protectedRoute(<ProductDetails />)} /> */}
-                {<Route path="/instructor" element={<Instructor />} />}
-                {<Route path="/singleinstructor/:id" element={<SingleInstructor />} />}
+
+                <Route path="/instructor" element={<Instructor />} />
+                <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
+
             </Routes>
             <Footer />
 

@@ -5,7 +5,7 @@ import { SidebarBtn } from './SidebarComponent';
 
 function Sidebar() {
   return (
-        <div style={{ paddingTop:"40px",display:"flex",flexDirection:"column",gap:"1rem",}}>
+        <div style={{ paddingTop:"30px",display:"flex",flexDirection:"column",gap:"1rem",}}>
             {SidebarData.map((item, index) => {
               return (
                 <SidebarBtn style={{listStyleType:"none"}} key={index} className={item.cName}>

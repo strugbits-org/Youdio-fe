@@ -4,7 +4,7 @@ import { Card, CardMedia, CardContent } from "./cardsComponent";
 import { icons } from "src/helpers";
 export function HistoryCard({ img }) {
   return (
-    <Card style={{ display: "flex", gap: "2rem" }}>
+    <Card style={{ display: "flex", gap:"2rem" }}>
       <CardMedia>
         <img src={img} alt={""} width="334px" height="203.1px" />
       </CardMedia>
@@ -63,7 +63,7 @@ export function HistoryCard({ img }) {
         </div>
 
         <div className="p1">
-          <P3>
+          <P3  style={{width:"482px"}}>
             Lorem ipsum dolor sit amet consectetur. Eget vulputate sed posuere
             sit. Integer in ac sem adipiscing nulla arcu Enim placerat nunc
             tincidunt gravida vitae tincidunt

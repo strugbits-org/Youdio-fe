@@ -15,9 +15,9 @@ const History = () => {
       <HorizontalLine2 />
       <div className="whole_box">
         <Sidebar />
-        <Container>
+        <Container style={{width:"100%"}}>
           <Heading2>{content.historyH2}</Heading2>
-          <HistoryList>
+          <HistoryList >
             {
               ArrHistory.map((value)=>{
                 return <HistoryCard {...value}/>

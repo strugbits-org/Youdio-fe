@@ -7,6 +7,8 @@ import {
   TwoCardsBox,
   ReviewCards,
   StyledDiv,
+  Box,
+  CenterButton,
 } from "./singleInstructorStyle";
 import { icons } from "src/helpers";
 import { H1, P1, H2, Section } from "src/components";
@@ -102,9 +104,9 @@ function SingleInstructor() {
         </ReviewCards>
       </Section>
 
-      {/* Button issue => not come in center take full width  */}
-
-      {/* <CenterButton>{SingleinstClassStaticContent.ButtonH4}</CenterButton> */}
+      <Box>
+        <CenterButton>{SingleinstClassStaticContent.ButtonH4}</CenterButton>
+      </Box>
     </React.Fragment>
   );
 }

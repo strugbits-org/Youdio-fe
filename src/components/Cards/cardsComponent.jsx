@@ -174,6 +174,7 @@ export const CardContent = styled.div`
     }
   }
 `;
+
 export const ContentInside = styled.div`
   padding-inline: 1em;
   padding-block: 1em;

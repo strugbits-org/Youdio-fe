@@ -1,6 +1,6 @@
 import { Input, PrimaryButton ,Label} from "src/components";
 import styled from "styled-components";
-import { Container } from "../../style/Container";
+import { Container } from "../../Components/Container";
 
 export const Main = styled.div`
   display: flex;

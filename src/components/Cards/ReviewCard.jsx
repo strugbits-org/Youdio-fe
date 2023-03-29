@@ -4,7 +4,7 @@ import { CardContent, ContentInside, BoxCard } from "./cardsComponent";
 import { icons } from "src/helpers";
 import { P2, P3, H5 } from "src/components";
 function ReviewCard({ id, date, text, custName, custRole, custImg }) {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(3);
 
   return (
     <BoxCard>
@@ -18,6 +18,7 @@ function ReviewCard({ id, date, text, custName, custRole, custImg }) {
               className="star"
               name="simple-controlled"
               value={value}
+              readOnly={true}
               onChange={(event, newValue) => {
                 setValue(newValue);
               }}
@@ -30,7 +31,7 @@ function ReviewCard({ id, date, text, custName, custRole, custImg }) {
           </div>
 
           <div className="reviewProfile">
-            <img src={custImg} alt="" width="30px" height={""} />
+            <img src={custImg} alt="" />
             <H5>{custName}</H5>
           </div>
           <P3 className="chef">{custRole}</P3>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ArrInstructor, instructorClassStaticContent } from "./constant";
-import { ContentBox, DayBox, CardsBox } from "./instructorClassComponent";
+import { ContentBox, SearchBox, CardsBox } from "./instructorClassComponent";
 import { H1, P1, Section, InputIcon } from "src/components";
 import { icons } from "src/helpers";
 import { InstructorCard } from "src/components/Cards/";
@@ -22,25 +22,17 @@ function Instructor() {
 
       {/*  Search Section */}
       <Section backgroundColor="#fff" paddingBlock="6vw">
-        <DayBox>
-          <div className="blank"></div>
-
-          <div className="searchBox">
-            <InputIcon
-              isIcon={icons.searchIcon}
-              placeholder={Content.searchPlaceholder}
-            />
-          </div>
-        </DayBox>
+        <SearchBox>
+          <InputIcon
+            isIcon={icons.searchIcon}
+            placeholder={Content.searchPlaceholder}
+          />
+        </SearchBox>
       </Section>
 
       {/* Cards Section */}
-      <Section backgroundColor="#fff" paddingBlock="0vw">
+      <Section backgroundColor="#fff" paddingBlock="0px">
         <CardsBox>
-          {/* {[...Array(24).keys()].map((val) => (
-            <InstructorCard key={`card-${val}`} click={goToSingleInst} />
-          ))} */}
-
           {ArrInstructor.map((instructor) => {
             const { id } = instructor;
             return (

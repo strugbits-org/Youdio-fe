@@ -25,7 +25,6 @@ export const BoxCard = styled.div`
     text-align: center;
     border-radius: 4px;
     transform: translate(1em, -1.5em);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     opacity: 0.9;
   }
 
@@ -44,14 +43,16 @@ export const BoxCard = styled.div`
       }
     }
     .imgReview {
-      /* background-color: #fff; */
-     
+      background-color: whitesmoke;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 
       img {
-        /* filter: hue-rotate(30deg); */
-        /* color: #3ac4b2;
-        border: none; */
       
+        /* filter: hue-rotate(30deg); */
+        /* filter : contrast(110%);
+        filter: grayscale(110%); */
+        color: #3ac4b2;
+        
       }
     }
   }
@@ -154,12 +155,16 @@ export const CardContent = styled.div`
   }
   .reviewProfile {
     display: flex;
-    gap: 10px;
-    align-items: center;
+    gap: 8px;
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
   }
   .chef {
-    padding-left: 3.5em;
-    transform: translateY(-0.8em);
+    padding-left: 4em;
+    transform: translateY(-1.3em);
   }
   .reviewP2 {
     align-items: center;

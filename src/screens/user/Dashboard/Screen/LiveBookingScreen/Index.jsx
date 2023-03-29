@@ -1,8 +1,8 @@
 import React from 'react'
-import Sidebar from '../../Components/Sidebar/Sidebar'
-import { Container } from '../../style/Container'
-import { Heading,Heading2 } from '../../style/Heading'
-import { Wrapper } from '../../style/Wrapper'
+import Sidebar from '../../Components/Sidebar/Index'
+import { Container } from '../../Components/Container'
+import { Heading,Heading2 } from '../../Components/Heading'
+import { Wrapper } from '../../Components/Wrapper'
 import { HorizontalLine2 } from '../MyProfileScreen/ProfileComponent'
 import { bookingScreenStaticContent as content } from "./Constant";
 

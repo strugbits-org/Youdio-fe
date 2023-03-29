@@ -1,15 +1,15 @@
 import React from "react";
-import { Wrapper } from "src/screens/user/Dashboard/style/Wrapper";
+import { Wrapper } from "src/screens/user/Dashboard/Components/Wrapper";
 import { HorizontalLine2 } from "../MyProfileScreen/ProfileComponent";
 import {
   Heading,
   Heading2,
   Heading3,
-} from "src/screens/user/Dashboard/style/Heading";
-import { Container } from "src/screens/user/Dashboard/style/Container";
+} from "src/screens/user/Dashboard/Components/Heading";
+import { Container } from "src/screens/user/Dashboard/Components/Container";
 import { P2, H3, P3 } from "src/components";
 import { Description, Box } from "./MembershipScreenComponent";
-import Sidebar from "../../Components/Sidebar/Sidebar";
+import Sidebar from "../../Components/Sidebar/Index";
 import { membershipScreenStaticContent as content } from "./Constant";
 const Membership = () => {
   return (

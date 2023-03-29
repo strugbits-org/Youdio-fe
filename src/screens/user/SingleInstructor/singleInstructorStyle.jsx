@@ -23,21 +23,27 @@ export const TextSec = styled(Section)`
     margin-bottom: 1.5em;
   }
   p {
-    padding-inline: 15.2vw;
-    text-align: left;
+    padding-inline: clamp(20px, 11.27vw, 180px);
+    /* margin: 0 auto; */
     margin-bottom: 1.5em;
+    text-align: left;
   }
-  /* issue =>  when media query is set it apply on desktop also */
-  @media only screen and (min-width: ${mobile}) {
+  @media only screen and (max-width: ${tablet}) {
     p {
-      padding-inline: 1vw;
-      text-align: justify;
+      padding-inline: 0;
+      width: 100%;
     }
   }
-  @media only screen and (min-width: ${mobileMedium}) {
+  @media only screen and (max-width: ${mobileMedium}) {
     p {
-      padding-inline: 1vw;
-      text-align: justify;
+      padding-inline: 0;
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: ${mobile}) {
+    p {
+      padding-inline: 0;
+      width: 100%;
     }
   }
 `;
@@ -67,7 +73,6 @@ export const CardsBox = styled.div`
   display: grid;
   gap: 5vw 1.8vw;
   position: relative;
-  
 
   @media only screen and (min-width: ${mobile}) {
     grid-template-columns: 1fr;
@@ -126,7 +131,6 @@ export const ReviewCards = styled.div`
     grid-template-columns: 1fr;
   }
   @media only screen and (min-width: ${tablet}) {
-    
     grid-template-columns: 1fr 1fr;
     margin-block: 90px;
   }
@@ -139,14 +143,25 @@ export const ReviewCards = styled.div`
 `;
 
 export const CenterButton = styled(PrimaryWhiteButton)`
-  margin: 0 auto;
+  /* margin: 0 auto; */
   /* margin-left: 43%; */
-  margin-bottom: 13.2vh;
-  min-width: 180px;
+  /* margin-bottom: 13.2vh;
+  min-width: 180px; */
+
+  max-width: 200px;
+  min-width: 100px;
+  background-color: #ffff;
 `;
 
 export const StyledDiv = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.07);
-  margin-block: 47px;
+  /* margin-block: 8px; */
+  min-height: 2px;
   margin-inline: 5%;
+`;
+
+export const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
 `;

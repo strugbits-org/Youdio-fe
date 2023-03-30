@@ -23,10 +23,21 @@ export const TextSec = styled(Section)`
     margin-bottom: 1.5em;
   }
   p {
-    padding-inline: clamp(20px, 11.27vw, 180px);
-    /* margin: 0 auto; */
+    
+    /* width: clamp(100%, 50%, 11.27%); */
+    /* padding-inline: clamp(10px,50%,320px); */
+    /* width: max-content(1127px); */
+    padding-inline: clamp(10%, 17vw, 95%);
     margin-bottom: 1.5em;
-    text-align: left;
+    text-align: center;
+    /* font-size: min(90%,30px); */
+    font-size: clamp(13px, 1.1vw, 22px);
+  }
+  @media only screen and (max-width: ${laptop}) {
+    p {
+      padding-inline: 10%;
+      width: 100%;
+    }
   }
   @media only screen and (max-width: ${tablet}) {
     p {
@@ -51,21 +62,9 @@ export const TextSec = styled(Section)`
 export const SingleImage = styled.div`
   display: flex;
   justify-content: center;
-  transform: translateY(-30%);
+  transform: translateY(-35%);
   img {
-    /* max-width: 290px; */
-    /* max-width: 200px; */
-  }
-
-  @media only screen and (min-width: ${mobile}) {
-    img {
-      max-width: 150px;
-    }
-  }
-  @media only screen and (min-width: ${mobileMedium}) {
-    img {
-      /* width: 200px; */
-    }
+    width: min(35%, 290px);
   }
 `;
 
@@ -117,9 +116,9 @@ export const TwoCardsBox = styled.div`
 `;
 
 export const ReviewCards = styled.div`
-  padding-inline: 6.5vw;
+  padding-inline: 11.5vw;
   display: grid;
-  gap: 8vw 5.8vw;
+  gap: 7vw 5.8vw;
   position: relative;
 
   @media only screen and (min-width: ${mobile}) {
@@ -127,7 +126,7 @@ export const ReviewCards = styled.div`
     margin-block: 70px;
   }
   @media only screen and (max-width: ${mobileMedium}) {
-    gap: 13vw 5.8vw;
+    gap: 11vw 5.8vw;
     grid-template-columns: 1fr;
   }
   @media only screen and (min-width: ${tablet}) {

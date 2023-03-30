@@ -17,6 +17,8 @@ import singleInstructorImg from "./singleInstructorImg.svg"
 import reviewImg from "./reviewImg.svg"
 import customerReview from "./customerReview.svg"
 import reviewImg2 from "./reviewImg2.jpg"
+import calendarImg from "./calendarImg.svg"
+import zoomImg from "./zoomImg.svg"
 
 // Assets/Sample
 import cardImage from "src/assets/sample/cardImg.jpg"
@@ -28,6 +30,7 @@ import cardInstructor from "src/assets/sample/cardInstructor.jpg";
 import InstructorElizebeth from "src/assets/sample/InstructorElizebeth.jpg"
 import cardInstruct3 from "src/assets/sample/cardInstruct3.jpg"
 import cardInstruct4 from "src/assets/sample/cardInstruct4.jpg"
+import liveVideoImg from "src/assets/sample/liveVideoImg.jpg"
 
 
 // Assets/Logo
@@ -55,6 +58,7 @@ const icons = {
     InstructorElizebeth,
     cardInstruct3,
     cardInstruct4,
+    liveVideoImg,
     timeClock,
     footerLogo,
     youdio,
@@ -65,6 +69,8 @@ const icons = {
     reviewImg,
     customerReview,
     reviewImg2,
+    calendarImg,
+    zoomImg,
 }
 
 export default icons

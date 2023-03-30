@@ -22,6 +22,7 @@ import Instructor from 'src/screens/user/Instructor'
 import SingleInstructor from "src/screens/user/SingleInstructor";
 import History from "src/screens/user/Dashboard/Screen/HistoryScreen/History";
 import LiveBooking from "src/screens/user/Dashboard/Screen/LiveBookingScreen/LiveBooking";
+import LiveVideo from "src/screens/user/LiveVideo";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
@@ -84,6 +85,8 @@ export default function Router() {
                 <Route path="/history" element={<History/>}/>
                 <Route path="/liveBooking" element={<LiveBooking/>}/>
 
+                {/* LIVE_VIDEO_PAGE */}
+                <Route path="/livevideo" element={<LiveVideo/>}/>
             </Routes>
             <Footer />
 
@@ -92,4 +95,4 @@ export default function Router() {
 }
 
 //Types of Routing
-//1. 
+//1.

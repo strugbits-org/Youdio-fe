@@ -13,9 +13,9 @@ function SingleInstructorCard() {
       <CardContent>
         <div className="timeRow">
           <H3>LOREUM ISPUM DUMMY</H3>
-          <div>
+          <div className="x">
             <img src={icons.timeClock} alt="" width="15px" height="auto" />
-            <P3>5 min 47 sec</P3>
+            <P3>5 min 47sec</P3>
           </div>
         </div>
 

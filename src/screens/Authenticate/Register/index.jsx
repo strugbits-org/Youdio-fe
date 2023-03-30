@@ -8,7 +8,6 @@ import {
   FieldPassword,
   FieldInput,
   PrimaryButton,
-  Label,
   H1,
   P2,
 } from "src/components";

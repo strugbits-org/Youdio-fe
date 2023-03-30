@@ -1,12 +1,12 @@
 import React from "react";
 import { P2, H3, P3 } from "src/components";
-import { Container } from "src/screens/user/Dashboard/style/Container";
+import { Container } from "src/screens/user/Dashboard/Components/Container";
 import {
   Heading,
   Heading2,
   Heading3,
-} from "src/screens/user/Dashboard/style/Heading";
-import { Wrapper } from "src/screens/user/Dashboard/style/Wrapper";
+} from "src/screens/user/Dashboard/Components/Heading";
+import { Wrapper } from "src/screens/user/Dashboard/Components/Wrapper";
 import {
   Description,
   Input2,

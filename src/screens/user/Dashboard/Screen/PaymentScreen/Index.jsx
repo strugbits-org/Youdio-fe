@@ -1,8 +1,8 @@
 import React from "react";
 import { H4, Label, P3 } from "src/components";
-import { Heading, Heading2 } from "src/screens/user/Dashboard/style/Heading";
-import { Wrapper } from "src/screens/user/Dashboard/style/Wrapper";
-import Sidebar from "../../Components/Sidebar/Sidebar";
+import { Heading, Heading2 } from "src/screens/user/Dashboard/Components/Heading";
+import { Wrapper } from "src/screens/user/Dashboard/Components/Wrapper";
+import Sidebar from "../../Components/Sidebar/Index";
 import { HorizontalLine2 } from "../MyProfileScreen/ProfileComponent";
 import { icons } from "src/helpers";
 

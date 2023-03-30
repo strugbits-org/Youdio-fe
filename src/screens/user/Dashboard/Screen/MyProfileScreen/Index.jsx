@@ -1,6 +1,6 @@
 import React from "react";
-import { Heading, Heading2 } from "src/screens/user/Dashboard/style/Heading";
-import { Wrapper } from "src/screens/user/Dashboard/style/Wrapper";
+import { Heading, Heading2 } from "src/screens/user/Dashboard/Components/Heading";
+import { Wrapper } from "src/screens/user/Dashboard/Components/Wrapper";
 import Women from "src/assets/sample/women.png";
 
 import { H5 } from "src/components";
@@ -16,7 +16,7 @@ import {
   ProfileContainer,
 } from "./ProfileComponent";
 
-import Sidebar from "src/screens/user/Dashboard/Components/Sidebar/Sidebar";
+import Sidebar from "src/screens/user/Dashboard/Components/Sidebar/Index";
 import {
   FormControl,
   IconButton,

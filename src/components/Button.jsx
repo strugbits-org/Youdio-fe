@@ -34,7 +34,7 @@ export const PrimaryWhiteButton = styled.button`
     cursor:pointer;
     transition: var(--transition03s);
     
-    &:hover{
+    &:hover {
         transition: var(--transition03s); 
         color: var(--textHeadingWhite);
         background:var(--backgroundGreen);

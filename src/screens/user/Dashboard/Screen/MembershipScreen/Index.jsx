@@ -1,4 +1,3 @@
-import React from "react";
 import { Wrapper } from "src/screens/user/Dashboard/Components/Wrapper";
 import { HorizontalLine2 } from "../MyProfileScreen/ProfileComponent";
 import {
@@ -11,7 +10,16 @@ import { P2, H3, P3 } from "src/components";
 import { Description, Box } from "./MembershipScreenComponent";
 import Sidebar from "../../Components/Sidebar/Index";
 import { membershipScreenStaticContent as content } from "./Constant";
+import React, { useState, useRef } from 'react';
 const Membership = () => {
+  const [selectedOption, setSelectedOption] = useState('');
+  const radioRef = useRef(null);
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  }
+  const handleParagraphClick = () => {
+    radioRef.current.click();
+  }
   return (
     <Wrapper>
       <Heading>{content.membership}</Heading>
@@ -26,7 +34,7 @@ const Membership = () => {
           <HorizontalLine2 />
           <Description>
             <div className="sub_heading">
-              <div  className="small-box">
+              <div className="small-box">
                 <Heading3> {content.monthly}</Heading3>
                 <H3>
                   {content.price}
@@ -35,9 +43,7 @@ const Membership = () => {
               </div>
             </div>
 
-            <P2 className="lorem_text">
-              {content.lorem}
-            </P2>
+            <P2 className="lorem_text">{content.lorem}</P2>
           </Description>
           <HorizontalLine2 />
 
@@ -52,14 +58,14 @@ const Membership = () => {
               </div>
             </div>
 
-            <P2 className="lorem_text">
-              {content.lorem}
-            </P2>
+            <P2 className="lorem_text">{content.lorem}</P2>
           </Description>
           <HorizontalLine2 />
           <Box>
-            <input type="radio" />
-            <P3>{content.lorem}</P3>
+            <input type="radio" name="option" value="option1" checked={selectedOption === "option1"} onChange={handleOptionChange} ref={radioRef}/>
+            <P3 onClick={handleParagraphClick} style={{ cursor: "pointer" }}>
+              {content.lorem}
+            </P3>
           </Box>
         </Container>
       </div>

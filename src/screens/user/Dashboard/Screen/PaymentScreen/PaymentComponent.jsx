@@ -9,6 +9,14 @@ export const Main = styled.div`
   min-width: 100px;
   gap: 1rem;
 
+  form{
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+
+  }
+
   .payment-left-top-div{
     display:flex;
     justify-content: space-between;

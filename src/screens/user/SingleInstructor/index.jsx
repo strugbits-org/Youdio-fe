@@ -6,7 +6,6 @@ import {
   TextSec,
   TwoCardsBox,
   ReviewCards,
-  StyledDiv,
   Box,
   CenterButton,
 } from "./singleInstructorStyle";
@@ -57,9 +56,10 @@ function SingleInstructor() {
         <P1 className="p2">
           {SingleinstClassStaticContent.singleInstructorPara2}
         </P1>
+        <div className="seperatorLine"></div>
       </TextSec>
 
-      <StyledDiv />
+      {/* <StyledDiv /> */}
 
       {/* Single-Instructor Cards Section */}
       <Section backgroundColor="#fff">
@@ -71,10 +71,11 @@ function SingleInstructor() {
             <SingleInstructorCard key={`card-${val}`} />
           ))}
         </CardsBox>
+        <div className="seperatorLine"></div>
       </Section>
 
       {/* Horizontal Line */}
-      <StyledDiv />
+      {/* <StyledDiv /> */}
 
       {/* Two Card Section */}
       <Section backgroundColor="#fff">
@@ -86,10 +87,11 @@ function SingleInstructor() {
             <TwoCardInstructor key={`card-${val}`} />
           ))}
         </TwoCardsBox>
+        <div className="seperatorLine"></div>
       </Section>
 
       {/* Horizontal Line */}
-      <StyledDiv />
+      {/* <StyledDiv /> */}
 
       {/* Review-Card */}
       <Section backgroundColor="#fff">

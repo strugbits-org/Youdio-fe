@@ -15,6 +15,7 @@ export const SearchBox = styled.div`
   @media only screen and (min-width: ${mobile}) {
     input {
       min-height: 30px;
+      
     }
   }
   @media only screen and (min-width: ${tablet}) {

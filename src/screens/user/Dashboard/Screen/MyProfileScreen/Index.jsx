@@ -2,7 +2,6 @@ import React from "react";
 import { Heading, Heading2 } from "src/screens/user/Dashboard/Components/Heading";
 import { Wrapper } from "src/screens/user/Dashboard/Components/Wrapper";
 import Women from "src/assets/sample/women.png";
-
 import { H5 } from "src/components";
 import {
   Box2,
@@ -37,8 +36,11 @@ const MyProfile = () => {
 
   return (
     <Wrapper>
+       <div className="membership_top_div">
+
       <Heading>{content.profileH1}</Heading>
       <HorizontalLine2 />
+      </div>
       <div className="whole_box">
         <Sidebar />
         <ProfileContainer>

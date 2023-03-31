@@ -9,6 +9,16 @@ export const Wrapper = styled.section`
 display: flex;
 flex-direction: row;
 }
+.membership_top_div{
+    @media only screen and (max-width: ${mobile}) {
+      display:none
+    }
+    @media only screen and (max-width: ${tablet}) {
+       display:none
+
+    }
+
+}
 
  @media only screen and (min-width: ${mobile}) {
         padding-inline: 3vw;

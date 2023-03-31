@@ -4,6 +4,9 @@ import { Box } from "src/screens/user/Dashboard/Screen/MembershipScreen/Membersh
 import Camera from "src/assets/icons/camera.png";
 import styled from "styled-components";
 import { Container } from "../../Components/Container";
+import { layout } from "src/helpers";
+
+const { mobile, tablet, desktop } = layout
 
 export const ProfileInput = styled(Input)`
   max-width: 541px;
@@ -20,8 +23,22 @@ export const ProfileLabel = styled(Label)`
 export const Box2 = styled(Box)`
   display: flex;
   flex-direction: row;
+  gap:18rem;
   flex-wrap: wrap;
-  justify-content: space-between;
+  @media only screen and (min-width: ${mobile}) {
+    gap:2rem;
+
+  }
+  @media only screen and (min-width: ${tablet}) {
+    gap:2rem;
+    
+  }
+ 
+  @media only screen and (min-width: ${desktop}) {
+  gap:18rem;
+   
+    
+  }
 `;
 export const Box3 = styled.div`
   .btn_gap {
@@ -51,6 +68,8 @@ export const Box4 = styled(Box)`
     cursor: pointer;
     background-image: url(${Camera});
   }
+
+  
   .image-container::after {
     background-size: cover;
   }

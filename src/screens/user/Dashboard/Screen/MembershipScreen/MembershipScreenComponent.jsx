@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const Description = styled.div`
   padding-block: 50px;
   display: flex;
@@ -36,3 +35,4 @@ export const Box = styled.div`
   flex-direction: rows;
   gap: 1rem;
 `;
+

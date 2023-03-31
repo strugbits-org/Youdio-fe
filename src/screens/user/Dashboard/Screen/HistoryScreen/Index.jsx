@@ -11,8 +11,11 @@ import { HistoryList } from "./HistoryComponent";
 const History = () => {
   return (
     <Wrapper>
+       <div className="membership_top_div">
       <Heading>{content.historyH1}</Heading>
       <HorizontalLine2 />
+      </div>
+
       <div className="whole_box">
         <Sidebar />
         <Container style={{width:"100%"}}>

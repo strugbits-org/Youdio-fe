@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { H2, H4, P1, P2, P3, Section } from "src/components";
 import {
   LiveCard,
@@ -17,12 +18,24 @@ function LiveVideo() {
       <Section backgroundColor="white">
         <LiveCard>
           <CardMedia>
-            <img src={icons.liveVideoImg} alt="" />
+            {/* <NavLink>
+              <img
+                src={icons.zoomImg}
+                alt=""
+                width="65"
+                height="65"
+                className="zoom"
+              />
+            </NavLink> */}
+            <div className="imgContainer">
+              <img src={icons.liveVideoImg} alt="" className="img" />
+            </div>
           </CardMedia>
           <Container>
             <Content>
               <H2 className="h2">{liveVideoContent.liveVideoH2}</H2>
               <P1 className="p1">{liveVideoContent.liveVideoH3}</P1>
+
               <div className="totaltxt">
                 <H4 className="h4">TOTAL RUN TIME</H4>
                 <H4 className="h4">Date</H4>
@@ -30,7 +43,7 @@ function LiveVideo() {
               </div>
 
               <div className="totalImg">
-                <div>
+                <div className="div1">
                   <img
                     src={icons.timeClock}
                     alt=""
@@ -40,7 +53,7 @@ function LiveVideo() {
                   <P3>5 min</P3>
                 </div>
 
-                <div>
+                <div className="div1">
                   <img
                     src={icons.calendarImg}
                     alt=""
@@ -49,10 +62,11 @@ function LiveVideo() {
                   />
                   <P3>5/Jan/2022</P3>
                 </div>
-                <div>
+
+                <div className="div1">
                   <svg
                     width="15"
-                    height="14"
+                    // height="14"
                     viewBox="0 0 15 14"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"

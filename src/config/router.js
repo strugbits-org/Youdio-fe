@@ -23,6 +23,7 @@ import Membership from "src/screens/user/Dashboard/Screen/MembershipScreen/Index
 import MyProfile from "src/screens/user/Dashboard/Screen/MyProfileScreen/Index";
 import Payment from "src/screens/user/Dashboard/Screen/PaymentScreen/Index";
 import LiveBooking from "src/screens/user/Dashboard/Screen/LiveBookingScreen/Index";
+import LiveVideo from "src/screens/user/LiveVideo";
 
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
@@ -92,8 +93,8 @@ export default function Router() {
                 <Route path="/history" element={<History/>}/>
                 <Route path="/liveBooking" element={<LiveBooking/>}/> */}
 
-                    {/* LIVE_VIDEO_PAGE */}
-                    {/* <Route path="/livevideo" element={<LiveVideo/>}/> */}
+                    {/* LIVE_VIDEO_PAGE */} */
+                    <Route path="/livevideo" element={<LiveVideo />} />
                 </Routes>
                 <Footer />
 

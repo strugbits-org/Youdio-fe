@@ -73,6 +73,7 @@ export const CardMedia = styled.div`
       max-height: initial;
       object-fit: initial;
       object-position: initial;
+      
     }
   }
 `;

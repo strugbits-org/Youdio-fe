@@ -23,7 +23,6 @@ export const TextSec = styled(Section)`
     margin-bottom: 1.5em;
   }
   p {
-    
     /* width: clamp(100%, 50%, 11.27%); */
     /* padding-inline: clamp(10px,50%,320px); */
     /* width: max-content(1127px); */

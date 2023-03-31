@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { H2, H4, P1, P2, P3, Section } from "src/components";
 import {
   LiveCard,

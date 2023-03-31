@@ -27,7 +27,7 @@ export const SidebarData = [
 
     },
     {
-        title: "Live Booking",
+        title: "Booking",
         path: "/liveBooking",
         cName: "Nav-text"
 

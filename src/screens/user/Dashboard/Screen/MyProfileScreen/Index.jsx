@@ -37,7 +37,6 @@ const MyProfile = () => {
   return (
     <Wrapper>
        <div className="membership_top_div">
-
       <Heading>{content.profileH1}</Heading>
       <HorizontalLine2 />
       </div>

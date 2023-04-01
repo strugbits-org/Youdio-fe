@@ -2,35 +2,53 @@ import { PrimaryButton } from "src/components";
 import styled from "styled-components";
 import { layout } from "src/helpers";
 
-const { mobile, tablet } = layout
-
+const { mobile, tablet ,laptop,desktop} = layout;
 
 export const WholeSidebar = styled.section`
+
+
 .body_container {
+  
   flex: 1;
+
 }
 .sidebar_container {
-  height: 100vh;
-  position: sticky;
+  height: 100%;
+  position: fixed;
   top: 0;
   left:0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  @media only screen and (min-width: ${laptop}) {
+display:none
+
+    }
+    @media only screen and (min-width: ${desktop}) {
+display:none
+    }
+    @media only screen and (min-width: ${mobile}) {
+margin-top:3rem;
+
+    }
+    @media only screen and (min-width: ${tablet}) {
+      margin-top:2rem;
+
+    }
+
 }
 .sidebar{
   display: flex;
   width: 14rem;
-  height: 80%;
+  height: 100%;
   justify-content: start;
   align-items: start;
   flex-direction: column;
   padding: 15px;
-  margin: 10px;
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px 0 rgba(100, 165, 125, 0.37);
+  background: whitesmoke;
+  /* box-shadow: 0 8px 32px 0 rgba(100, 165, 125, 0.37); */
   backdrop-filter: blur(5.5px);
-  border-radius:10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 .lines_icon{

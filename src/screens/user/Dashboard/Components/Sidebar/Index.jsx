@@ -1,10 +1,9 @@
-
-import {  NavLink } from 'react-router-dom';
-import { SidebarData } from './Constant';
-import { SidebarBtn, SideBarWrapper, WholeSidebar } from './SidebarComponent';
+import { NavLink } from "react-router-dom";
+import { SidebarData } from "./Constant";
+import { SidebarBtn, SideBarWrapper, WholeSidebar } from "./SidebarComponent";
 // import { Heading3 } from '../Heading';
 // import {FaBars} from "react-icons/fa"
-import Item from '../Item/Item';
+import Item from "../Item/Item";
 import { motion } from "framer-motion";
 import {
   AssignmentTurnedInRounded,
@@ -12,9 +11,8 @@ import {
   BarChartRounded,
   DashboardRounded,
 } from "@mui/icons-material";
-import { useState } from 'react';
-import { TocRounded } from '@mui/icons-material';
-
+import { useState } from "react";
+import { TocRounded } from "@mui/icons-material";
 
 function Sidebar() {
   // const [menu, setMenu] = useState(false);
@@ -34,7 +32,7 @@ function Sidebar() {
     },
     false: {
       transition: {
-        delay: 0.6,
+        delay: 0,
       },
     },
   };
@@ -44,7 +42,7 @@ function Sidebar() {
     false: {
       width: "4rem",
       transition: {
-        delay: 0.4,
+        delay: 0,
       },
     },
   };
@@ -61,30 +59,26 @@ function Sidebar() {
   //   },
   // };
   return (
+    <WholeSidebar>
+      <SideBarWrapper>
+        {SidebarData.map((item, index) => {
+          return (
+            <NavLink to={item.path}>
+              <SidebarBtn key={index} className={item.cName}>
+                <span>{item.title}</span>
+              </SidebarBtn>
+            </NavLink>
+          );
+        })}
+      </SideBarWrapper>
 
-<WholeSidebar>
-  
-        <SideBarWrapper >
-            {SidebarData.map((item, index) => {
-              return (
-                <NavLink to={item.path}>
-                <SidebarBtn   
-                key={index} className={item.cName}>
-                    <span>{item.title}</span>
-                </SidebarBtn>
-                </NavLink>
-
-);
-})}
-          
-            </SideBarWrapper>
-          
-            <motion.div
+      <motion.div
         data-Open={open}
         variants={sideContainerVariants}
         initial={`${open}`}
         animate={`${open}`}
         className="sidebar_container"
+        style={{position:"absolute",zIndex:"1"}}
       >
         {/* sidebar div */}
         <motion.div
@@ -103,7 +97,7 @@ function Sidebar() {
               WebkitBackdropFilter: "blur(3.5px)",
               border: "1px solid rgba( 255, 255, 255, 0.18 )",
               transition: {
-                delay: 0.2,
+                delay: 0,
                 duration: 0.4,
               },
             }}
@@ -142,21 +136,16 @@ function Sidebar() {
               </motion.h3>
               <Item icon={<DashboardRounded />} name="My Profile" />
               <Item icon={<BarChartRounded />} name="Membership" />
-            <Item icon={<AttachMoneyRounded />} name="Payment" />
-            <Item icon={<AssignmentTurnedInRounded />} name="History" />
-            <Item icon={<AssignmentTurnedInRounded />} name="Live Booking" />
-
-
+              <Item icon={<AttachMoneyRounded />} name="Payment" />
+              <Item icon={<AssignmentTurnedInRounded />} name="History" />
+              <Item icon={<AssignmentTurnedInRounded />} name="Live Booking" />
             </div>
           </div>
-         
         </motion.div>
       </motion.div>
 
-     
-      
-          {/* ///////////////// this is a comment code of Sidebar donot uncomment this I will remove this later //////////////// */}
-             {/* <div className="sidebar_container"
+      {/* ///////////////// this is a comment code of Sidebar donot uncomment this I will remove this later //////////////// */}
+      {/* <div className="sidebar_container"
              >
                  <div className="sidebar">
                   <div className='top-gray-level'>
@@ -180,9 +169,8 @@ function Sidebar() {
               </div>
 
              </div> */}
-</WholeSidebar>
+    </WholeSidebar>
   );
 }
 
 export default Sidebar;
-

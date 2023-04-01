@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { Container } from "../../Components/Container";
 import { layout } from "src/helpers";
 
-const { mobile, tablet, desktop } = layout
+const { mobile, tablet, desktop ,laptop} = layout
 
 export const ProfileInput = styled(Input)`
   max-width: 541px;
@@ -23,19 +23,22 @@ export const ProfileLabel = styled(Label)`
 export const Box2 = styled(Box)`
   display: flex;
   flex-direction: row;
-  gap:18rem;
   flex-wrap: wrap;
   @media only screen and (min-width: ${mobile}) {
-    gap:2rem;
+    gap:2vw;
 
   }
-  @media only screen and (min-width: ${tablet}) {
-    gap:2rem;
+  /* @media only screen and (min-width: ${tablet}) {
+    gap:2vw;
+    
+  } */
+  @media only screen and (min-width: ${laptop}) {
+    gap:2vw;
     
   }
  
   @media only screen and (min-width: ${desktop}) {
-  gap:18rem;
+  gap:17vw;
    
     
   }

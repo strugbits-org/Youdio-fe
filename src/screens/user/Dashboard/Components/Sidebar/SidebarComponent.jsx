@@ -20,23 +20,26 @@ export const WholeSidebar = styled.section`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+margin-top:3.9rem;
+ 
 
-  @media only screen and (min-width: ${laptop}) {
+@media only screen and (min-width: ${mobile}) {
+
+}
+@media only screen and (min-width: ${tablet}) {
 display:none
 
     }
+   
     @media only screen and (min-width: ${desktop}) {
 display:none
     }
-    @media only screen and (min-width: ${mobile}) {
-margin-top:3rem;
+    @media only screen and (min-width: ${laptop}) {
+display:none
 
     }
-    @media only screen and (min-width: ${tablet}) {
-      margin-top:2rem;
-
-    }
-
+   
+    
 }
 .sidebar{
   display: flex;
@@ -140,6 +143,11 @@ export const SideBarWrapper = styled.nav`
     }
     @media only screen and (max-width: ${tablet}) {
        display:none
+
+    }
+    @media only screen and (max-width: ${laptop}) {
+    }
+    @media only screen and (max-width: ${desktop}) {
 
     }
 

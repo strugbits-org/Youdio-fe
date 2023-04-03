@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { H2, H4, P1, P2, P3, Section } from "src/components";
 import {
   LiveCard,
@@ -10,8 +10,13 @@ import {
 } from "./liveVideoComponent";
 import { icons } from "src/helpers";
 import { liveVideoContent } from "./constant";
+import Modal from "./Modal";
 
 function LiveVideo() {
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => setShowModal(false);
+
   return (
     <>
       <Section backgroundColor="white">
@@ -112,7 +117,10 @@ function LiveVideo() {
               </div>
               <P2 className="para">{liveVideoContent.liveVideoP2}</P2>
               <Box>
-                <CenterButton>{liveVideoContent.liveVideoBtn}</CenterButton>
+                <CenterButton onClick={() => setShowModal(true)}>
+                  {liveVideoContent.liveVideoBtn}
+                </CenterButton>
+                {showModal && <Modal closeModal={closeModal} />}
               </Box>
             </Content>
           </Container>

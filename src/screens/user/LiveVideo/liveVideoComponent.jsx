@@ -51,7 +51,6 @@ export const CardMedia = styled.div`
   @media only screen and (max-width: ${desktop}) {
     .img {
       width: 100%;
-   
     }
   }
 `;
@@ -76,7 +75,6 @@ export const LiveCard = styled.div`
   }
   @media only screen and (min-width: ${desktop}) {
     grid-template-columns: 1fr 2fr;
-    
   }
 `;
 
@@ -140,6 +138,7 @@ export const CenterButton = styled(PrimaryWhiteButton)`
   background-color: #3ac4b2;
   max-width: 200px;
   min-width: 100px;
+  min-height: 35px;
   color: #fff;
   border: none;
 `;
@@ -150,5 +149,126 @@ export const Zoom = styled.div`
     border: 2px solid #a12b2b;
 
     /* transform: translate(1rem,7rem) */
+  }
+`;
+
+//Modal Styling
+
+export const ModalWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  overflow: auto;
+`;
+
+export const ModalOverlay = styled.div`
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(49, 49, 49, 0.8);
+`;
+export const ModalContent = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  background: #f1f1f1;
+  /* padding: 14px 28px; */
+
+  border-radius: 1px;
+  max-width: 900px;
+  min-width: 350px;
+  /* width: clamp(350px, 8vw, 900px); */
+
+  .close-modal {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    border-radius: 50%;
+    border: 1px solid #111;
+    background-color: #111;
+    cursor: pointer;
+    padding: 10px;
+  }
+`;
+
+export const Image = styled.div`
+  img {
+    width: 100%;
+  }
+`;
+
+export const ModalSec = styled.div`
+  background-color: #fff;
+  padding-block: 20px;
+
+  /* line-height: 1.4; */
+
+  .heading {
+    padding-bottom: 1rem;
+  }
+  .intensityBox {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 1rem;
+  }
+  .bottomGap {
+    padding-bottom: 1rem;
+  }
+  .btn {
+    margin-bottom: 1rem;
+    min-height: 35px;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    img {
+      width: clamp(100px, 8vw, 170px);
+    }
+  }
+  .btnBox {
+    position: relative;
+    .btnBook {
+      position: absolute;
+      bottom: 40px;
+      max-width: 200px;
+      min-width: 100px;
+      border: none;
+      outline: none;
+      width: 100%;
+      min-height: 35px;
+      color: var(--textHeadingWhite);
+      background: var(--backgroundGreen);
+      cursor: pointer;
+      transition: var(--transition03s);
+      font-size: 18px;
+
+      &:hover {
+        transition: var(--transition03s);
+        background: var(--backgroundGreenHover);
+      }
+    }
+  }
+
+  @media only screen and (min-width: ${mobile}) {
+    padding-inline: 3vw;
+  }
+  @media only screen and (min-width: ${tablet}) {
+    padding-inline: 6vw;
+  }
+  @media only screen and (min-width: ${laptop}) {
+    padding-inline: 50px;
+  }
+  @media only screen and (min-width: ${desktop}) {
   }
 `;

@@ -2,7 +2,7 @@ import React from "react";
 import Rating from "@mui/material/Rating";
 import { CardContent, ContentInside, BoxCard } from "./cardsComponent";
 import { icons } from "src/helpers";
-import { P2, P3, H5 } from "src/components";
+import { P2, P3, H6 } from "src/components";
 function ReviewCard({ id, date, text, custName, custRole, custImg }) {
   const [value, setValue] = React.useState(3);
 
@@ -32,7 +32,7 @@ function ReviewCard({ id, date, text, custName, custRole, custImg }) {
 
           <div className="reviewProfile">
             <img src={custImg} alt="" />
-            <H5>{custName}</H5>
+            <H6>{custName}</H6>
           </div>
           <P3 className="chef">{custRole}</P3>
         </ContentInside>

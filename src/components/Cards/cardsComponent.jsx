@@ -9,9 +9,8 @@ export const Card = styled.div`
   flex-basis: clamp(280px, 20vw, 392px);
 `;
 export const BoxCard = styled.div`
-  flex-basis: clamp(280px, 20vw, 392px);
+  /* flex-basis: clamp(280px, 20vw, 392px); */
   background-color: #f9f9f9;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   transition: var(--transition03s);
   border: 1px solid transparent;
   border-radius: 5px;
@@ -24,13 +23,14 @@ export const BoxCard = styled.div`
     padding: 0.6em;
     text-align: center;
     border-radius: 4px;
-    transform: translate(1em, -1.5em);
+    transform: translate(1.5em, -1.5em);
     opacity: 0.9;
   }
 
   &:hover {
     background-color: #3ac4b2;
     color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
     .reviewP2 {
       p {
@@ -44,15 +44,13 @@ export const BoxCard = styled.div`
     }
     .imgReview {
       background-color: whitesmoke;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+     
 
       img {
-      
         /* filter: hue-rotate(30deg); */
         /* filter : contrast(110%);
         filter: grayscale(110%); */
         color: #3ac4b2;
-        
       }
     }
   }
@@ -75,6 +73,7 @@ export const CardMedia = styled.div`
       max-height: initial;
       object-fit: initial;
       object-position: initial;
+      
     }
   }
 `;
@@ -93,13 +92,18 @@ export const CardContent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    /* background-color: red; */
+    /* margin-bottom: 10px; */
     div {
       min-width: 66px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+      /* background-color: red; */
+    }
+    .x {
+      transform: translateY(-0.5rem);
     }
   }
 
@@ -163,7 +167,7 @@ export const CardContent = styled.div`
     }
   }
   .chef {
-    padding-left: 4em;
+    padding-left: 3.9em;
     transform: translateY(-1.3em);
   }
   .reviewP2 {

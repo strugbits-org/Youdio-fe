@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { H2, H4, P1, P2, P3, Section } from "src/components";
+import { H2, H4, H3, P1, P2, P3, Section } from "src/components";
+import { NavLink } from "react-router-dom";
 import {
   LiveCard,
   CardMedia,
@@ -22,22 +23,17 @@ function LiveVideo() {
       <Section backgroundColor="white">
         <LiveCard>
           <CardMedia>
-            {/* <NavLink>
-              <img
-                src={icons.zoomImg}
-                alt=""
-                width="65"
-                height="65"
-                className="zoom"
-              />
-            </NavLink> */}
+            <NavLink className="zoom-link">
+              <img src={icons.zoomImg} alt="" className="zoom" />
+            </NavLink>
             <div className="imgContainer">
               <img src={icons.liveVideoImg} alt="" className="img" />
             </div>
           </CardMedia>
           <Container>
             <Content>
-              <H2 className="h2">{liveVideoContent.liveVideoH2}</H2>
+              {/* <H2 className="h2">{liveVideoContent.liveVideoH2}</H2> */}
+              <H3 className="h2">{liveVideoContent.liveVideoH2}</H3>
               <P1 className="p1">{liveVideoContent.liveVideoH3}</P1>
 
               <div className="totaltxt">
@@ -64,7 +60,7 @@ function LiveVideo() {
                     width="15px"
                     height="auto"
                   />
-                  <P3>5/Jan/2022</P3>
+                  <P3>{liveVideoContent.liveVideoBtn}</P3>
                 </div>
 
                 <div className="div1">

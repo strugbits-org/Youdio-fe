@@ -1,15 +1,20 @@
 import React from "react";
 import { H3,P3 } from "src/components";
-import { Card, CardMedia, CardContent } from "./cardsComponent";
+import { Card, CardContent } from "./cardsComponent";
 import { icons } from "src/helpers";
+import { layout } from "src/helpers";
+import styled from "styled-components"
+import { HorizontalLine2 } from "src/screens/user/Dashboard/Screen/MyProfileScreen/ProfileComponent";
+
+const { mobile, tablet} = layout;
 export function HistoryCard({ img }) {
   return (
-    <Card style={{ display: "flex", gap:"2rem" }}>
-      <CardMedia>
-        <img src={img} alt={""} width="334px" height="203.1px" />
-      </CardMedia>
-
-      <CardContent style={{ maxwidth: "600px", minWidth: "30%" }}>
+    <>
+    <Card style={{ display: "flex", justifyContent:"space-between",flexWrap:"wrap"}}>
+      <CardImg>
+        <img src={img} alt="workout" />
+      </CardImg>
+      <CardText >
         <div className="timeRow">
           <H3>UPPER BODY POWER</H3>
           <div>
@@ -17,7 +22,20 @@ export function HistoryCard({ img }) {
             <P3>5 min 47 sec</P3>
           </div>
         </div>
-        <div className="intensityInstructor" style={{ paddingBottom: "20px" }}>
+        <div className="intensityInstructor" >
+          <div className="f">
+
+          <div>
+            <img src={icons.shortpicWomen} alt="img" />
+          
+          </div>
+          <p4>Elizebeth Lisa
+
+</p4>
+          </div>
+
+         <div className="flex">
+
           <svg
             width="15"
             height="14"
@@ -60,16 +78,78 @@ export function HistoryCard({ img }) {
           </svg>
 
           <P3>Intensity 1</P3>
+        
+          </div>
         </div>
 
         <div className="p1">
-          <P3  style={{width:"482px"}}>
+          <P3  >
             Lorem ipsum dolor sit amet consectetur. Eget vulputate sed posuere
             sit. Integer in ac sem adipiscing nulla arcu Enim placerat nunc
             tincidunt gravida vitae tincidunt
           </P3>
         </div>
-      </CardContent>
+      </CardText>
     </Card>
+    <HorizontalLine2 style={{marginBottom:"20px"}}/>
+    </>
+
   );
 }
+export const CardImg = styled.div`
+  position: relative;
+  margin-bottom: 19px;
+
+
+  @media only screen and (min-width: ${mobile}) {
+    img {
+      max-height: 100px;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  @media only screen and (min-width: ${tablet}) {
+    img {
+      max-height: initial;
+      object-fit: initial;
+      object-position: initial;
+      
+    }
+  }
+  `
+
+export const CardText = styled(CardContent)`
+max-width:505px;
+min-width:100px;
+padding:20px 0px 20px 0px;
+gap:2rem
+.x {
+      transform: translateY(0.5rem);
+    }
+
+
+ .flex{
+  display:flex;
+  gap :5px;
+}
+.intensityInstructor{
+  padding-Bottom:20px;
+  gap:0px;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+.f{
+  display:flex;
+  justify-content:space-between;
+align-items:center;
+gap :10px;
+}
+.timeRow{
+  display:flex;
+  flex-wrap:wrap;
+  padding-bottom:20px
+  min-width:100px
+  justify-content:center;
+}
+`;
+

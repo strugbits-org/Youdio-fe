@@ -4,9 +4,9 @@ import { Box } from "src/screens/user/Dashboard/Screen/MembershipScreen/Membersh
 import Camera from "src/assets/icons/camera.png";
 import styled from "styled-components";
 import { Container } from "../../Components/Container";
-import { layout } from "src/helpers";
+// import { layout } from "src/helpers";
 
-const { mobile, tablet, desktop ,laptop} = layout
+// const { mobile, tablet, desktop ,laptop} = layout
 
 export const ProfileInput = styled(Input)`
   max-width: 541px;
@@ -18,31 +18,9 @@ export const ProfileLabel = styled(Label)`
   max-width: 541px;
   display: flex;
   align-items: center;
-`;
+  font-weight: bold;
+  `;
 
-export const Box2 = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  @media only screen and (min-width: ${mobile}) {
-    gap:2vw;
-
-  }
-  /* @media only screen and (min-width: ${tablet}) {
-    gap:2vw;
-    
-  } */
-  @media only screen and (min-width: ${laptop}) {
-    gap:2vw;
-    
-  }
- 
-  @media only screen and (min-width: ${desktop}) {
-  gap:17vw;
-   
-    
-  }
-`;
 export const Box3 = styled.div`
   .btn_gap {
     display: flex;
@@ -77,6 +55,14 @@ export const Box4 = styled(Box)`
     background-size: cover;
   }
 `;
+export const FormRow2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-block: 50px;
+justify-content:space-between`
+
+
 
 export const CancelButton = styled(PrimaryButton)`
   color: black;

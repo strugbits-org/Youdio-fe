@@ -60,12 +60,7 @@ display:none
   border-radius: 5px;
 }
 
-/* .profile{
-display: flex;
-align-items: center;
-border-radius: 50%;
-margin-bottom: 1rem;
-} */
+
 
 .profile>img{
   width: 100%;
@@ -152,9 +147,4 @@ export const SideBarWrapper = styled.nav`
     }
 
 
-    /* &:hover {
-      transition: var(--transition03s);
-      background: var(--backgroundGreenHover);
-      color: #ffffff;
-    } */
 `;

@@ -33,7 +33,11 @@ import cardInstruct3 from "src/assets/sample/cardInstruct3.jpg"
 import cardInstruct4 from "src/assets/sample/cardInstruct4.jpg"
 import liveVideoImg from "src/assets/sample/liveVideoImg.jpg"
 import profile from "src/assets/sample/profile.jpg"
-
+import workout from "src/assets/sample/workout.png"
+import workout2 from "src/assets/sample/workout2.png"
+import workout3 from "src/assets/sample/workout3.png"
+import workout4 from "src/assets/sample/workout4.png"
+import shortpicWomen from "src/assets/sample/ShortpicWomen.png"
 
 // Assets/Logo
 import footerLogo from "src/assets/logo/footer_logo.svg"
@@ -74,7 +78,12 @@ const icons = {
     calendarImg,
     zoomImg,
     profile,
-    cross
+    cross,
+    workout,
+    workout2,
+    workout3,
+    workout4,
+    shortpicWomen
 }
 
 export default icons

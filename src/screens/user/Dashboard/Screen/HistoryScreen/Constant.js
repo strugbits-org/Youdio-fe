@@ -9,75 +9,17 @@ export const historyScreenStaticContent = {
 export const ArrHistory = [
 
     {
-        "img": icons.cardInstruct,
+        "img": icons.workout,
     },
 
     {
-        "img": icons.cardInstruct2,
+        "img": icons.workout2,
     },
     {
-        "img": icons.cardInstruct3,
+        "img": icons.workout3,
     },
     {
-        "img": icons.cardInstruct4,
+        "img": icons.workout4,
     },
-    {
-        "img": icons.cardInstruct,
-    },
-    {
-        "img": icons.cardInstruct2,
-    },
-    {
-        "img": icons.cardInstruct3,
-    },
-    {
-        "img": icons.cardInstruct4,
-    },
-    {
-        "img": icons.cardInstruct,
-    },
-    {
-        "img": icons.cardInstruct2,
-    },
-    {
-        "img": icons.cardInstruct3,
-    },
-    {
-        "img": icons.cardInstruct4,
-    },
-    {
-        "img": icons.cardInstruct,
-    },
-    {
-        "img": icons.cardInstruct2,
-    },
-    {
-        "img": icons.cardInstruct3,
-    },
-    {
-        "img": icons.cardInstruct4,
-    },
-    {
-        "img": icons.cardInstruct,
-    },
-    {
-        "img": icons.cardInstruct2,
-    },
-    {
-        "img": icons.cardInstruct3,
-    },
-    {
-        "img": icons.cardInstruct4,
-    },
-    {
-        "img": icons.cardInstruct,
-    },
-    {
-        "img": icons.cardInstruct2,
-    },
-    {
-        "img": icons.cardInstruct3,
-    },
-
 
 ]

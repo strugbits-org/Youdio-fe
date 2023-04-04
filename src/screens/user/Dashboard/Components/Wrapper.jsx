@@ -5,7 +5,13 @@ const { mobile, tablet, laptop, desktop } = layout
 
 export const Wrapper = styled.section`
 
+
     padding-block: 1vw;
+    .section{
+        width:100%;
+        max-width:1175px;
+        min-width:200px;
+    }
 .whole_box{
 display: flex;
 flex-direction: row;

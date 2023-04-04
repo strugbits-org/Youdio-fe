@@ -1,7 +1,8 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 import styled from "styled-components"
-function Item({icon, name}) {
+import { NavLink } from 'react-router-dom'
+function Item({icon, name,path}) {
 
     const subheading ={
         true:{
@@ -14,6 +15,7 @@ function Item({icon, name}) {
     }
   return (
     <Wrapper>
+<NavLink to={path}>
 
     <motion.div className='item'
     whileHover = {{
@@ -37,6 +39,8 @@ function Item({icon, name}) {
             {name}
         </motion.span>
     </motion.div>
+</NavLink>
+
 </Wrapper>
   )
 }

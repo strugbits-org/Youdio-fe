@@ -47,24 +47,14 @@ function Sidebar() {
     },
   };
 
-  // const profileVariants = {
-  //   true: {
-  //     alignSelf: "center",
-  //     width: "4rem",
-  //   },
-  //   false: {
-  //     alignSelf: "flex-start",
-  //     marginTop: "2rem",
-  //     width: "4rem",
-  //   },
-  // };
+
   return (
     <WholeSidebar>
       <SideBarWrapper>
         {SidebarData.map((item, index) => {
           return (
             <NavLink to={item.path}>
-              <SidebarBtn key={index} className={item.cName}>
+              <SidebarBtn key={index} >
                 <span>{item.title}</span>
               </SidebarBtn>
             </NavLink>
@@ -106,69 +96,23 @@ function Sidebar() {
           >
             <TocRounded />
           </motion.div>
-          {/* profile */}
-          {/* <motion.div
-            layout
-            initial={`${open}`}
-            animate={`${open}`}
-            variants={profileVariants}
-            className="profile"
-            transition={{ duration: 0.4 }}
-            whileHover={{
-              backgroundColor: "rgba(255, 255, 255, 0.3)",
-              boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-              backdropFilter: "blur(5.5px)",
-              WebkitBackdropFilter: "blur(5.5px)",
-              border: "1px solid rgba( 255, 255, 255, 0.18 )",
-              cursor: "pointer",
-            }}
-          >
-           <h1>H</h1>
-          </motion.div> */}
-          {/* groups */}
           <div className="groups">
-            {/* group 1 */}
+            {/* Heading  */}
             <div className="group">
               <motion.h3
                 animate={{ opacity: open ? 1 : 0, height: open ? "auto" : 0 }}
               >
                 Dashboard
               </motion.h3>
-              <Item icon={<DashboardRounded />} name="My Profile" />
-              <Item icon={<BarChartRounded />} name="Membership" />
-              <Item icon={<AttachMoneyRounded />} name="Payment" />
-              <Item icon={<AssignmentTurnedInRounded />} name="History" />
-              <Item icon={<AssignmentTurnedInRounded />} name="Live Booking" />
+              <Item icon={<DashboardRounded />} name="My Profile" path="/myprofile" />
+              <Item icon={<BarChartRounded />} name="Membership" path="/membership" />
+              <Item icon={<AttachMoneyRounded />} name="Payment" path="/payment" />
+              <Item icon={<AssignmentTurnedInRounded />} name="History" path="/history" />
+              <Item icon={<AssignmentTurnedInRounded />} name="Live Booking" path="/livebooking" />
             </div>
           </div>
         </motion.div>
       </motion.div>
-
-      {/* ///////////////// this is a comment code of Sidebar donot uncomment this I will remove this later //////////////// */}
-      {/* <div className="sidebar_container"
-             >
-                 <div className="sidebar">
-                  <div className='top-gray-level'>
-                  <div className="top_level">
-                  <FaBars style={{color:"white",height:"1rem",}}/>
-                   <Heading3 style={{color:"white"}}>
-                   Hassan Lodhi
-                  </Heading3>
-                 
-                 </div>
-               
-                </div>
-               
-
-                <div className="groups">
-                    <div className="group">
-                      <Item/>
-                    </div>
-                  </div>
-
-              </div>
-
-             </div> */}
     </WholeSidebar>
   );
 }

@@ -20,25 +20,15 @@ export const CardMedia = styled.div`
     }
   }
   .imgContainer {
-    /* width: 100%;
-    height: 100%; */
     display: flex;
     justify-content: center;
-    /* align-items: center; */
+
     img {
       max-width: 100%;
       max-height: 100%;
     }
   }
-  .img {
-    /* width: clamp(150px, 29vw, 535px); */
-    /* width: 50% */
-    /* max-width: 150%; */
-    /* object-fit: contain; */
-    /* width: 100%; */
-    /* height: 100%; */
-    /* height: 100vh; */
-  }
+
   @media only screen and (min-width: 280px) and (max-width: 400px) {
     img {
       width: 100%;
@@ -120,7 +110,9 @@ export const LiveCard = styled.div`
   gap: 4vw 5.8vw;
   position: relative;
   padding-top: 2rem;
-
+  /* .para {
+    grid-column: 1 / -1;
+  } */
   @media only screen and (min-width: 280px) and (max-width: 400px) {
     grid-template-columns: 1fr;
   }
@@ -129,12 +121,13 @@ export const LiveCard = styled.div`
     grid-template-columns: 0.5fr 1fr;
 
     .profileBox {
-      width: 100%;
+      /* width: 100%; */
       display: flex;
       align-items: center;
     }
     .para {
-      width: 100%;
+      /* width: 100%; */
+      grid-column: 1 / -1;
     }
   }
 
@@ -235,8 +228,7 @@ export const ModalWrapper = styled.div`
   right: 0;
   bottom: 0;
   position: fixed;
-  overflow-x: hidden;
-  /* overflow: auto; */
+  overflow-y: scroll;
 `;
 
 export const ModalOverlay = styled.div`
@@ -250,7 +242,7 @@ export const ModalOverlay = styled.div`
   background: rgba(49, 49, 49, 0.8);
 `;
 export const ModalContent = styled.div`
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   position: absolute;
   top: 50%;
   left: 50%;

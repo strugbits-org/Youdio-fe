@@ -2,10 +2,8 @@ import React from "react";
 import { Heading, Heading2 } from "src/screens/user/Dashboard/Components/Heading";
 import { Wrapper } from "src/screens/user/Dashboard/Components/Wrapper";
 import Women from "src/assets/sample/women.png";
-
-import { H5 } from "src/components";
+import {H5 } from "src/components";
 import {
-  Box2,
   CancelButton,
   SaveButton,
   Box3,
@@ -14,6 +12,7 @@ import {
   ProfileInput,
   ProfileLabel,
   ProfileContainer,
+  FormRow2,
 } from "./ProfileComponent";
 
 import Sidebar from "src/screens/user/Dashboard/Components/Sidebar/Index";
@@ -36,9 +35,12 @@ const MyProfile = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper >
+      <div className="section">
+       <div className="membership_top_div">
       <Heading>{content.profileH1}</Heading>
       <HorizontalLine2 />
+      </div>
       <div className="whole_box">
         <Sidebar />
         <ProfileContainer>
@@ -57,30 +59,32 @@ const MyProfile = () => {
             </div>
           </Box4>
           <HorizontalLine2 />
+  <form>
 
-          <Box2>
+          <FormRow2>
             <ProfileLabel>{content.name}</ProfileLabel>
-            <ProfileInput placeholder="Alexa Morgan" />
-          </Box2>
+            <ProfileInput placeholder="Alexa Morgan" required />
+          </FormRow2>
           <HorizontalLine2 />
 
-          <Box2>
+          <FormRow2>
             <ProfileLabel>{content.nickName}</ProfileLabel>
-            <ProfileInput placeholder="Alexa" />
-          </Box2>
+            <ProfileInput placeholder="Alexa" required/>
+          </FormRow2>
           <HorizontalLine2 />
 
-          <Box2>
+          <FormRow2>
             <ProfileLabel>{content.email}</ProfileLabel>
-            <ProfileInput placeholder="AlexaMorgan@gmail.com" />
-          </Box2>
+            <ProfileInput placeholder="AlexaMorgan@gmail.com" required/>
+          </FormRow2>
           <HorizontalLine2 />
-          <Box2>
+          
+          <FormRow2>
             <ProfileLabel>{content.password}</ProfileLabel>
             <FormControl
               sx={{ width: "100%", minWidth: "10ch", maxWidth: "63ch" }}
-            >
-              <OutlinedInput
+            > 
+               <OutlinedInput
                 sx={{
                   height: "5ch",
                   border: "1px solid ##5b5b5b",
@@ -103,15 +107,21 @@ const MyProfile = () => {
                 }
               />
             </FormControl>
-          </Box2>
+          </FormRow2>
+
           <Box3>
             <div className="btn_gap">
               <CancelButton>{content.cancelBtn}</CancelButton>
               <SaveButton>{content.saveBTn}</SaveButton>
             </div>
           </Box3>
+          </form>
+
         </ProfileContainer>
+
       </div>
+      </div>
+
     </Wrapper>
   );
 };

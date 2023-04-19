@@ -31,8 +31,11 @@ const Payment = () => {
   }
   return (
     <Wrapper>
+       <div className="membership_top_div">
+
       <Heading>{constant.paymentH1}</Heading>
       <HorizontalLine2 />
+      </div>
       <div className="whole_box">
         <Sidebar />
         <Container2>
@@ -43,8 +46,8 @@ const Payment = () => {
                 placeholder="Email                                                                               AlexaMorgan@gmail.com"
                 required="Empty"
               />
-              <div>
                 <PaymentLabel>{constant.cardInfo}</PaymentLabel>
+              <div>
 
                 <PaymentInput
                   placeholder="1234 1233 1234 1234"

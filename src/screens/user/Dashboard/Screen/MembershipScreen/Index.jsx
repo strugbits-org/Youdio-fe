@@ -22,8 +22,11 @@ const Membership = () => {
   }
   return (
     <Wrapper>
+      <div className="membership_top_div">
+
       <Heading>{content.membership}</Heading>
       <HorizontalLine2 />
+      </div>
       <div className="whole_box">
         <Sidebar />
         <Container>

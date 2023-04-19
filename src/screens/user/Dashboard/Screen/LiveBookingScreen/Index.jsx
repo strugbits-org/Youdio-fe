@@ -9,8 +9,11 @@ import { bookingScreenStaticContent as content } from "./Constant";
 const LiveBooking = () => {
   return (
     <Wrapper>
+       <div className="membership_top_div">
+
     <Heading>{content.bookingH1}</Heading>
     <HorizontalLine2 />
+    </div>
     <div className="whole_box">
       <Sidebar />
       <Container >

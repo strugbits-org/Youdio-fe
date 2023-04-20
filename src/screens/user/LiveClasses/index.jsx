@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { weekdays } from 'moment'
 
 import { liveClassStaticContent} from './constant'
@@ -10,6 +10,7 @@ import { H1, H3, H4, P1, Section, InputIcon, Filters } from 'src/components'
 import { IconButton, PrimaryWhiteButton } from 'src/components'
 import { LiveClassCard, DateTag } from 'src/components/Cards/'
 import { monthNames, getDaysArray } from './constant'
+import { fetchAllTodos } from "src/store/slices/counterSlice";
 
 
 function LiveClasses() {
@@ -22,7 +23,10 @@ function LiveClasses() {
     return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
   }
 
+  const dispatch = useDispatch();
+  const callApi = () => dispatch(fetchAllTodos("hamza", 45, 5646464646))
   const language = useSelector(state => state.language.lang)
+  const base = useSelector((state) => state.counter);
   const [content, setContent] = useState(liveClassStaticContent)
   const [month, setMonth] = useState(initialMonth);
   const [weekDays, setWeekDays] = useState(getDaysArray(initialYear, initialMonth))
@@ -72,122 +76,165 @@ function LiveClasses() {
   }
 
   useEffect(() => {
+    callApi();
     contentTranslator({ staticContent: liveClassStaticContent, contentToTranslate: content, setContent, language })
     !isDateSelected && setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
 
   }, [content, weekDays, language, month, weekStart, weekEnd, isDateSelected])
 
-  return <React.Fragment>
-    {/* Hero Section */}
-    <Section paddingBlock="7.5vw" >
-      <ContentBox>
-        <H1>{content.heroSectionh1}</H1>
-        <P1>{content.heroSectionp1}</P1>
-      </ContentBox>
-    </Section>
+  const { todos } = base
+  return (
+    <React.Fragment>
+      {/* Hero Section */}
+      {todos.length > 0 ? (
+        <Section paddingBlock="7.5vw">
+          <ContentBox>
+            <H1>{content.heroSectionh1}</H1>
+            <P1>{content.heroSectionp1}</P1>
+          </ContentBox>
+        </Section>
+      ) : (
+        <h1>Loading</h1>
+      )}
 
-    {/* Month Section */}
-    <Section backgroundColor="white" paddingBlock="5vw 3vw">
-      <MonthBox className='month'>
-        <IconButton
-          position="left"
-          onClick={() => previousMonth()}
-          disabled={month === 0 ? true : false}
-        >
-          <img src={icons.leftLongArrow} alt="Left Long Arrow" width={""} height={""} />
-        </IconButton>
-
-        <H3>{monthNames[month].name}</H3>
-
-        <IconButton
-          position="right"
-          onClick={() => nextMonth()}
-          disabled={month === monthNames.length - 1 ? true : false}
-        >
-          <img src={icons.rightLongArrow} alt="Right Long Arrow" width={""} height={""} />
-        </IconButton>
-      </MonthBox>
-    </Section>
-
-    {/* Week Section */}
-    <Section backgroundColor="var(--backgroundLightGrey)" paddingBlock="2vw 1vw">
-      <WeekBox>
-        <ul ref={weekDaysRef}>
-          {
-            weekdays.length > 0 && weekDays.slice(weekStart, weekEnd).map(({ dateString }, ind) => {
-              return <li key={ind}>
-                <PrimaryWhiteButton
-                  className={(!isDateSelected && ind === 3) ? "selectedDate"
-                    : isDateSelected === dateString ? "selectedDate" : ""}
-                  key={`weekday-${ind}`}
-                  onClick={e => setDateSelected(e.currentTarget.innerText)}
-                >
-                  {dateString}
-                </PrimaryWhiteButton>
-              </li>
-            })
-          }
-        </ul>
-        <div className='buttons'>
+      {/* Month Section */}
+      <Section backgroundColor="white" paddingBlock="5vw 3vw">
+        <MonthBox className="month">
           <IconButton
-            onClick={() => previousWeek()}
-            disabled={weekStart === 0 ? true : false}
+            position="left"
+            onClick={() => previousMonth()}
+            disabled={month === 0 ? true : false}
           >
-            <img src={icons.leftArrow} alt="Left Arrow" width={""} height={""} />
-            <span>{content.weekSectionPrev}</span>
-
+            <img
+              src={icons.leftLongArrow}
+              alt="Left Long Arrow"
+              width={""}
+              height={""}
+            />
           </IconButton>
+
+          <H3>{monthNames[month].name}</H3>
+
           <IconButton
-            onClick={() => nextWeek()}
-            disabled={weekEnd === weekDays.length ? true : false}
+            position="right"
+            onClick={() => nextMonth()}
+            disabled={month === monthNames.length - 1 ? true : false}
           >
-            <span>{content.weekSectionNext}</span>
-            <img src={icons.rightArrow} alt="Right Arrow" width={""} height={""} />
-
+            <img
+              src={icons.rightLongArrow}
+              alt="Right Long Arrow"
+              width={""}
+              height={""}
+            />
           </IconButton>
-        </div>
-      </WeekBox>
-    </Section>
+        </MonthBox>
+      </Section>
 
-    {/* Filter, Tags and Search Section */}
-    <Section backgroundColor="#fff" paddingBlock="3vw">
-      <DayBox>
-        <div className='blank'></div>
-        <div>
-          <H4>{isDateSelected}</H4>
-        </div>
-        <div className='searchBox'>
-          <InputIcon isIcon={icons.searchIcon} placeholder={content.searchPlaceholder} />
-        </div>
-      </DayBox>
-      
-      <div className='seperatorLine'></div>
- 
-      <Filters />
+      {/* Week Section */}
+      <Section
+        backgroundColor="var(--backgroundLightGrey)"
+        paddingBlock="2vw 1vw"
+      >
+        <WeekBox>
+          <ul ref={weekDaysRef}>
+            {weekdays.length > 0 &&
+              weekDays.slice(weekStart, weekEnd).map(({ dateString }, ind) => {
+                return (
+                  <li key={ind}>
+                    <PrimaryWhiteButton
+                      className={
+                        !isDateSelected && ind === 3
+                          ? "selectedDate"
+                          : isDateSelected === dateString
+                          ? "selectedDate"
+                          : ""
+                      }
+                      key={`weekday-${ind}`}
+                      onClick={(e) =>
+                        setDateSelected(e.currentTarget.innerText)
+                      }
+                    >
+                      {dateString}
+                    </PrimaryWhiteButton>
+                  </li>
+                );
+              })}
+          </ul>
+          <div className="buttons">
+            <IconButton
+              onClick={() => previousWeek()}
+              disabled={weekStart === 0 ? true : false}
+            >
+              <img
+                src={icons.leftArrow}
+                alt="Left Arrow"
+                width={""}
+                height={""}
+              />
+              <span>{content.weekSectionPrev}</span>
+            </IconButton>
+            <IconButton
+              onClick={() => nextWeek()}
+              disabled={weekEnd === weekDays.length ? true : false}
+            >
+              <span>{content.weekSectionNext}</span>
+              <img
+                src={icons.rightArrow}
+                alt="Right Arrow"
+                width={""}
+                height={""}
+              />
+            </IconButton>
+          </div>
+        </WeekBox>
+      </Section>
 
-    </Section>
+      {/* Filter, Tags and Search Section */}
+      <Section backgroundColor="#fff" paddingBlock="3vw">
+        <DayBox>
+          <div className="blank"></div>
+          <div>
+            <H4>{isDateSelected}</H4>
+          </div>
+          <div className="searchBox">
+            <InputIcon
+              isIcon={icons.searchIcon}
+              placeholder={content.searchPlaceholder}
+            />
+          </div>
+        </DayBox>
 
-    {/* Cards Section */}
-    <Section backgroundColor="white">
-      <CardsBox>
-        {[...Array(6).keys()].map((val) => <LiveClassCard key={`card-${val}`} />)}
-        <DateTag>
-          <H4>31</H4>
-          <hr />
-          <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
-        </DateTag>
-      </CardsBox>
-      <div className='seperatorLine'></div>
-      <CardsBox>
-        {[...Array(6).keys()].map((val) => <LiveClassCard key={`card-${val}`} />)}
-        <DateTag>
-          <H4>30</H4>
-          <hr />
-          <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
-        </DateTag>
-      </CardsBox>
-    </Section>
-  </React.Fragment>
+        <div className="seperatorLine"></div>
+
+        <Filters />
+      </Section>
+
+      {/* Cards Section */}
+      <Section backgroundColor="white">
+        <CardsBox>
+          {[...Array(6).keys()].map((val) => (
+            <LiveClassCard key={`card-${val}`} />
+          ))}
+          <DateTag>
+            <H4>31</H4>
+            <hr />
+            <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
+          </DateTag>
+        </CardsBox>
+        <div className="seperatorLine"></div>
+        <CardsBox>
+          {[...Array(6).keys()].map((val) => (
+            <LiveClassCard key={`card-${val}`} />
+          ))}
+          <DateTag>
+            <H4>30</H4>
+            <hr />
+            <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
+          </DateTag>
+        </CardsBox>
+      </Section>
+    </React.Fragment>
+  );
 }
 
 export default LiveClasses

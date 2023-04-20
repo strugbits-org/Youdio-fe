@@ -1,90 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { apiClient } from "src/config/https";
 
-// const initAction = async (
-//     indentifier,
-//             cbAction,
-//             successCb,
-//             errorCb,
-//             ...params
-// ) => { 
-//     this.toggleLoader(indentifier)
-//             try {
-//                 await cbAction(...params);
-//                 successCb?.();
-//             } catch (error: any) {
-//                 errorCb?.(error)
-//             } finally {
-//                 this.toggleLoader(indentifier)
-//             }
-// }
+export const init = createAsyncThunk("fetchAllAds", async () => {
+  const res = await apiClient.get("todos");
+  console.log(res);
+  return res.data;
+});
 
 const initialState = {
-    isLoading: []
-}
+  isLoading: [],
+};
 
-const baseSlice = createSlice({
-    name: 'base',
-    initialState,
-    reducers: {
-        // initAction: (
-        //     indentifier,
-        //     cbAction,
-        //     successCb,
-        //     errorCb,
-        //     ...params
-        // ) => {
+const counterSlice = createSlice({
+  name: "baseStore",
+  initialState,
+  reducers: {
+    async initAction(indentifier, cbAction, successCb, errorCb, ...params) {},
+    toggleLoader(indentifier) {
+      const array = [initialState];
+      if (array.includes(indentifier)) {
+        const index = array.indexOf(indentifier);
+        array.splice(index, 1);
+      } else {
+        array.push(indentifier);
+      }
 
-        // },
-        // toggleLoader(indentifier) {
-        //     const array = [...this.isLoading]
-        //     if (array.includes(indentifier)) {
-        //         const index = array.indexOf(indentifier);
-        //         array.splice(index, 1);
-        //     } else {
-        //         array.push(indentifier);
-        //     }
+      this.isLoading = array;
+    },
+    loading(indentifier) {
+      return this.isLoading.includes(indentifier);
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAllTodos.fulfilled, (state, action) => {
+      console.log("Fulfilled", { state, action });
+    });
+  },
+});
 
-        //     this.isLoading = array;
-        // },
-        // loading(indentifier) {
-        //     return this.isLoading.includes(indentifier)
-        // },
-
-    }
-})
-
-// export const useBaseStore = defineStore("base", {
-//     actions: {
-//         async initAction(
-//             indentifier: String,
-//             cbAction: Function,
-//             successCb?: Function,
-//             errorCb?: (error: Error) => void | undefined,
-//             ...params: Parameters<any>
-//         ) {
-//             this.toggleLoader(indentifier)
-//             try {
-//                 await cbAction(...params);
-//                 successCb?.();
-//             } catch (error: any) {
-//                 errorCb?.(error)
-//             } finally {
-//                 this.toggleLoader(indentifier)
-//             }
-//         },
-//         toggleLoader(indentifier: String) {
-//             const array = [...this.isLoading]
-//             if (array.includes(indentifier)) {
-//                 const index = array.indexOf(indentifier);
-//                 array.splice(index, 1);
-//             } else {
-//                 array.push(indentifier);
-//             }
-
-//             this.isLoading = array;
-//         },
-//         loading(indentifier: any) {
-//             return this.isLoading.includes(indentifier)
-//         },
-//     },
-// })
+export default counterSlice.reducer;

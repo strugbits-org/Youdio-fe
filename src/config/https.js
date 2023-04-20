@@ -1,9 +1,10 @@
 import axios from "axios";
 // import { useToast } from "vue-toastification";
-import { getHeaders } from "@/helpers";
-import { logout } from "@/helpers/config";
+import { getHeaders } from "src/helpers/config";
+// import { logout } from "@/helpers/config";
 
-const base_url = ""; 
+const base_url = "https://jsonplaceholder.typicode.com/"; 
+// const base_url = "https://youdio-app.herokuapp.com"; 
 const auth_url = "";
 
 const axiosBaseClient = (type) => {
@@ -13,23 +14,23 @@ const axiosBaseClient = (type) => {
 };
 
 const axiosClient = axiosBaseClient("base");
-const axiosAuthClient = axiosBaseClient("auth");
+// const axiosAuthClient = axiosBaseClient("auth");
 
 // const toast = useToast();
 
-const api = (axios) => {
+const api = (axioss) => {
   return {
     get:(url, config = {}) => {
-      return axios.get (url, config);
+      return axioss.get (url, config);
     },
     post:( url, body, config = {} ) => {
-      return axios.post(url, body, config);
+      return axioss.post(url, body, config);
     },
     put: (url, body, config = {}) => {
-      return axios.put(url, body, config);
+      return axioss.put(url, body, config);
     },
     delete: (url, config = {}) => {
-      return axios.delete (url, config);
+      return axioss.delete (url, config);
     },
   };
 };
@@ -62,10 +63,10 @@ const errorHandler = (error) => {
       alert(message)
   }
 
-  if (status === 401) {
-    logout();
-    return false;
-  }
+  // if (status === 401) {
+  //   logout();
+  //   return false;
+  // }
 
   throw new Error(message);
 };
@@ -73,7 +74,7 @@ const errorHandler = (error) => {
 //inceptors
 axiosClient.interceptors.request.use(requestHandlers, errorHandler);
 axiosClient.interceptors.response.use(responseHandler, errorHandler);
-axiosAuthClient.interceptors.response.use(responseHandler, errorHandler);
+// axiosAuthClient.interceptors.response.use(responseHandler, errorHandler);
 
 export const apiClient = api(axiosClient);
-export const authApiClient = api(axiosAuthClient);
+// export const authApiClient = api(axiosAuthClient);

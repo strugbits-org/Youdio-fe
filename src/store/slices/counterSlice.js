@@ -1,45 +1,36 @@
 import { createAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiClient } from "src/config/https";
 
-export const fetchAllTodos = createAsyncThunk("fetchAllAds", async (name, age, number) => {
-  console.log({name, age, number});
-  const res = await apiClient.get("todos");
-  console.log(res);
-  return res.data;
+export const login = createAsyncThunk("login", async ({ data, successCb }) => {
+  const res = await apiClient.post("login", data);
+  if (res?.data) {
+    successCb()
+    return res.data;
+  }
+  return false;
 });
 
 const initialState = {
-  value: 0,
-  name: "Hamza",
-  todos: []
+  token: null,
+  user: null
 };
 
 const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
+    logout: (state) => {
+      state.token = null
+      state.user = null
+    }
   },
   extraReducers: (builder) => {
-      builder.addCase(fetchAllTodos.fulfilled, (state, action) => {
-        // console.log("Fulfilled", { state, payload: action.payload });
-        state.todos = action.payload
+      builder.addCase(login.fulfilled, (state, action) => {
+        state.token = action.payload.token;
+        state.token = action.payload.user;
       });
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { logout } = counterSlice.actions;
 export default counterSlice.reducer;

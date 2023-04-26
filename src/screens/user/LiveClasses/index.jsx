@@ -1,101 +1,102 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { weekdays } from 'moment'
+import React, { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { weekdays } from "moment";
 
-import { liveClassStaticContent} from './constant'
-import { ContentBox, MonthBox, WeekBox, DayBox, CardsBox, H6M } from './liveClassesComponents'
-import { contentTranslator } from 'src/helpers/translator'
-import { fonts, icons } from 'src/helpers'
-import { H1, H3, H4, P1, Section, InputIcon, Filters } from 'src/components'
-import { IconButton, PrimaryWhiteButton } from 'src/components'
-import { LiveClassCard, DateTag } from 'src/components/Cards/'
-import { monthNames, getDaysArray } from './constant'
-import { fetchAllTodos } from "src/store/slices/counterSlice";
-
+import { liveClassStaticContent } from "./constant";
+import {
+  ContentBox,
+  MonthBox,
+  WeekBox,
+  DayBox,
+  CardsBox,
+  H6M,
+} from "./liveClassesComponents";
+import { contentTranslator } from "src/helpers/translator";
+import { fonts, icons } from "src/helpers";
+import { H1, H3, H4, P1, Section, InputIcon, Filters } from "src/components";
+import { IconButton, PrimaryWhiteButton } from "src/components";
+import { LiveClassCard, DateTag } from "src/components/Cards/";
+import { monthNames, getDaysArray } from "./constant";
 
 function LiveClasses() {
-  const date = new Date()
-  const initialYear = date.getFullYear()
-  const initialMonth = date.getMonth()
+  const date = new Date();
+  const initialYear = date.getFullYear();
+  const initialMonth = date.getMonth();
 
   const daysInWeek = () => {
-    const windowWidth = window.innerWidth
+    const windowWidth = window.innerWidth;
     return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
-  }
+  };
 
-  const dispatch = useDispatch();
-  const callApi = () => dispatch(fetchAllTodos("hamza", 45, 5646464646))
-  const language = useSelector(state => state.language.lang)
-  const base = useSelector((state) => state.counter);
-  const [content, setContent] = useState(liveClassStaticContent)
+  const language = useSelector((state) => state.language.lang);
+  const [content, setContent] = useState(liveClassStaticContent);
   const [month, setMonth] = useState(initialMonth);
-  const [weekDays, setWeekDays] = useState(getDaysArray(initialYear, initialMonth))
-  const [weekStart, setWeekStart] = useState(0)
-  const [isDateSelected, setDateSelected] = useState()
-  const [weekEnd, setWeekEnd] = useState(daysInWeek())
-  const weekDaysRef = useRef()
+  const [weekDays, setWeekDays] = useState(
+    getDaysArray(initialYear, initialMonth)
+  );
+  const [weekStart, setWeekStart] = useState(0);
+  const [isDateSelected, setDateSelected] = useState();
+  const [weekEnd, setWeekEnd] = useState(daysInWeek());
+  const weekDaysRef = useRef();
 
   const previousMonth = () => {
-    month !== 0 && setMonth(month - 1)
-    setWeekDays(getDaysArray(initialYear, month - 1))
-    setWeekStart(0)
-    setWeekEnd(daysInWeek())
-    setDateSelected("")
-
-  }
+    month !== 0 && setMonth(month - 1);
+    setWeekDays(getDaysArray(initialYear, month - 1));
+    setWeekStart(0);
+    setWeekEnd(daysInWeek());
+    setDateSelected("");
+  };
 
   const nextMonth = () => {
-    month !== monthNames.length - 1 && setMonth(month + 1)
-    setWeekDays(getDaysArray(initialYear, month + 1))
-    setWeekStart(0)
-    setWeekEnd(daysInWeek())
-    setDateSelected("")
-
-  }
+    month !== monthNames.length - 1 && setMonth(month + 1);
+    setWeekDays(getDaysArray(initialYear, month + 1));
+    setWeekStart(0);
+    setWeekEnd(daysInWeek());
+    setDateSelected("");
+  };
 
   const previousWeek = () => {
     if (weekStart > 0) {
-      setWeekStart(weekStart - 1)
-      setWeekEnd(weekEnd - 1)
+      setWeekStart(weekStart - 1);
+      setWeekEnd(weekEnd - 1);
     } else {
-      setWeekStart(weekStart)
-      setWeekEnd(weekEnd)
+      setWeekStart(weekStart);
+      setWeekEnd(weekEnd);
     }
-    setDateSelected("")
-  }
+    setDateSelected("");
+  };
 
   const nextWeek = () => {
     if (weekEnd < weekDays.length) {
-      setWeekStart(weekStart + 1)
-      setWeekEnd(weekEnd + 1)
+      setWeekStart(weekStart + 1);
+      setWeekEnd(weekEnd + 1);
     } else {
-      setWeekStart(weekStart)
-      setWeekEnd(weekEnd)
+      setWeekStart(weekStart);
+      setWeekEnd(weekEnd);
     }
-    setDateSelected("")
-  }
+    setDateSelected("");
+  };
 
-  useEffect(() => {
-    callApi();
-    contentTranslator({ staticContent: liveClassStaticContent, contentToTranslate: content, setContent, language })
-    !isDateSelected && setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
+  useEffect(() => {    
+    contentTranslator({
+      staticContent: liveClassStaticContent,
+      contentToTranslate: content,
+      setContent,
+      language,
+    });
+    !isDateSelected &&
+      setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
+  }, [content, weekDays, language, month, weekStart, weekEnd, isDateSelected]);
 
-  }, [content, weekDays, language, month, weekStart, weekEnd, isDateSelected])
-
-  const { todos } = base
   return (
     <React.Fragment>
       {/* Hero Section */}
-      {todos.length > 0 ? (
-        <Section paddingBlock="7.5vw">
-          <ContentBox>
-            <H1>{content.heroSectionh1}</H1>
-            <P1>{content.heroSectionp1}</P1>
-          </ContentBox>
-        </Section>
-      ) : (
-        <h1>Loading</h1>
-      )}
+      <Section paddingBlock="7.5vw">
+        <ContentBox>
+          <H1>{content.heroSectionh1}</H1>
+          <P1>{content.heroSectionp1}</P1>
+        </ContentBox>
+      </Section>
 
       {/* Month Section */}
       <Section backgroundColor="white" paddingBlock="5vw 3vw">
@@ -237,4 +238,4 @@ function LiveClasses() {
   );
 }
 
-export default LiveClasses
+export default LiveClasses;

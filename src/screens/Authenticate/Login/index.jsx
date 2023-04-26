@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Formik, Form } from 'formik'
+import { useNavigate } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
 import { FieldPassword, FieldInput, PrimaryButton, Label, H1, P2 } from 'src/components'
@@ -9,6 +10,8 @@ import { loginFormValidate } from 'src/helpers/forms/validateForms'
 import { loginContent } from './content'
 import { contentTranslator } from 'src/helpers/translator'
 import { path } from 'src/helpers'
+
+import { login } from 'src/store/slices/counterSlice'
 
 const Container = styled.div`
     background:#fff;
@@ -29,6 +32,8 @@ const FormRow = styled.div`
 function Login() {
   const language = useSelector(state => state.language.lang)
   const [content, setContent] = useState(loginContent)
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   useEffect(() => {
     contentTranslator({ staticContent: loginContent, contentToTranslate: content, setContent, language })
@@ -40,14 +45,14 @@ function Login() {
 
         <Formik
           initialValues={{
-            email: '',
-            password: '',
+            email: 'hamza@gmail.com',
+            password: 'hamza@123',
           }}
           validationSchema={loginFormValidate}
-          onSubmit={values => {
-            console.log(values);
+          onSubmit={data => {
+            console.log(data);
             // setLoader(true);
-            // dispatch(PostLogin(values));
+            dispatch(login({ data, successCb: () => navigate('/') }));
           }}
         >
           {formik => (

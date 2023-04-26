@@ -109,10 +109,6 @@ export const SidebarBtn = styled(PrimaryButton)`
     }
   }
   
-
-    
-    
-  
 `;
 
 export const SideBarWrapper = styled.nav`
@@ -135,6 +131,7 @@ export const SideBarWrapper = styled.nav`
 
   @media only screen and (max-width: ${mobile}) {
       display:none
+
     }
     @media only screen and (max-width: ${tablet}) {
        display:none

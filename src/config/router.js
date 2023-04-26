@@ -1,5 +1,12 @@
 // import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Header from "src/components/Header";
 import Footer from "src/components/Footer";
@@ -24,17 +31,17 @@ import LiveVideo from "src/screens/user/LiveVideo";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
-export default function Router() {
-  // const [user, setUser] = useState()
+const ProtectedRoute = ({ children }) => {
+  const base = useSelector((state) => state.counter);
+  let location = useLocation();
 
-  // const protectedRoute = (component) => {
-  //     if (!user) {
-  //         return <Login />
-  //     }
-  //     else {
-  //         return component
-  //     }
-  // }
+  if (!base.token) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  return children;
+};
+
+export default function Router() {
 
   // // Protected Routes For check the user is logged in or not | if loggedin show redirect to member page else show login or signup page.
   // const protectedAuthRoute = (component) => {
@@ -68,13 +75,54 @@ export default function Router() {
           <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
 
           {/* User Dashboard */}
-          <Route path="/membership" element={<Membership />} />
-          <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/membership2" element={<MembershipScreen2 />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/liveBooking" element={<LiveBooking />} />
-          
+          <Route
+            path="/membership"
+            element={
+              <ProtectedRoute>
+                <Membership />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/myprofile"
+            element={
+              <ProtectedRoute>
+                <MyProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/membership2"
+            element={
+              <ProtectedRoute>
+                <MembershipScreen2 />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <ProtectedRoute>
+                <History />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/liveBooking"
+            element={
+              <ProtectedRoute>
+                <LiveBooking />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

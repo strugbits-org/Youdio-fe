@@ -7,10 +7,9 @@ export const headers = {
   "Content-Type": "application/json",
 };
 
-export const getHeaders = () => {
-  // const { token } = useUserStore();
-  // if (!_.isEmpty(token))
-  //   Object.assign(headers, { Authorization: `Bearer ${token}` });
+export const getHeaders = (token) => {
+  console.log(token);
+  // if (token) Object.assign(headers, { Cookies: `jwt=${token}` });
 
   return headers;
 };

@@ -10,17 +10,21 @@ import { contentTranslator } from "src/helpers/translator";
 import { icons } from "src/helpers";
 import { IconButton } from "src/components";
 
-function Header() {
+import { logout } from "src/store/slices/counterSlice";
+
+function Header({ isLoggedin }) {
   const [content, setContent] = useState(staticContent);
   const [menu, setMenu] = useState(false);
 
   const dispatch = useDispatch();
+  const base = useSelector((state) => state.counter);
+
   const language = useSelector((state) => state.language.lang);
 
   useEffect(() => {
     contentTranslator({ staticContent, setContent, language });
     console.log("Main chala when state change");
-  }, [language]);
+  }, [language, isLoggedin]);
 
   // Language Listener
   const handleLanguage = (e) => {
@@ -30,6 +34,10 @@ function Header() {
 
   const reset = () => {
     setMenu(false);
+  };
+
+  const btnLogout = () => {
+    dispatch(logout());
   };
 
   return (
@@ -73,12 +81,20 @@ function Header() {
               height="auto"
             />
           </li>
-          <li>
-            <NavLink to={path.signIn}>{content.signIn}</NavLink>
-          </li>
-          <li>
-            <NavLink to={path.register}>{content.register}</NavLink>
-          </li>
+          {!base.token ? (
+            <React.Fragment>
+              <li>
+                <NavLink to={path.signIn}>{content.signIn}</NavLink>
+              </li>
+              <li>
+                <NavLink to={path.register}>{content.register}</NavLink>
+              </li>
+            </React.Fragment>
+          ) : (
+            <li onClick={() => btnLogout()}>
+              <span>{content.logout}</span>
+            </li>
+          )}
         </UL>
       </Nav>
 

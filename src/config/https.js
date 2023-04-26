@@ -3,8 +3,8 @@ import axios from "axios";
 import { getHeaders } from "src/helpers/config";
 // import { logout } from "@/helpers/config";
 
-const base_url = "https://jsonplaceholder.typicode.com/"; 
-// const base_url = "https://youdio-app.herokuapp.com"; 
+// const base_url = "https://jsonplaceholder.typicode.com/"; 
+const base_url = "https://youdio-app.herokuapp.com"; 
 const auth_url = "";
 
 const axiosBaseClient = (type) => {

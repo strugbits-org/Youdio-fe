@@ -5,5 +5,6 @@ export const staticContent = {
     instructor: "INSTRUCTORS",
     signIn: "SIGN IN",
     register: "REGISTER",
+    logout: "LOGOUT"
 }
 

@@ -11,7 +11,7 @@ import { loginContent } from './content'
 import { contentTranslator } from 'src/helpers/translator'
 import { path } from 'src/helpers'
 
-import { login } from 'src/store/slices/counterSlice'
+import { login } from 'src/features/userSlice'
 
 const Container = styled.div`
     background:#fff;

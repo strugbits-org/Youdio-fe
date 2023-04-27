@@ -1,11 +1,20 @@
 import { createAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiClient } from "src/config/https";
 
-export const init = createAsyncThunk("fetchAllAds", async () => {
-  const res = await apiClient.get("todos");
-  console.log(res);
-  return res.data;
-});
+const test = () => {
+  return Promise((resolve, reject) => {
+    resolve(setTimeout(() => true, 3000))
+  })
+}
+export const init = createAsyncThunk(
+  "init",
+  async ({ indentifier, cbAction, successCb, errorCb, params }, {getState, rejectWithValue, dispatch}) => {
+    dispatch(cbAction(params))
+    const state = getState()
+    console.log(state);
+    return await test()
+  }
+);
 
 const initialState = {
   isLoading: [],
@@ -15,7 +24,6 @@ const counterSlice = createSlice({
   name: "baseStore",
   initialState,
   reducers: {
-    async initAction(indentifier, cbAction, successCb, errorCb, ...params) {},
     toggleLoader(indentifier) {
       const array = [initialState];
       if (array.includes(indentifier)) {
@@ -32,7 +40,7 @@ const counterSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllTodos.fulfilled, (state, action) => {
+    builder.addCase(init.fulfilled, (state, action) => {
       console.log("Fulfilled", { state, action });
     });
   },

@@ -41,8 +41,17 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-export default function Router() {
+const ProtectedAuthRoute = ({ children }) => {
+  const base = useSelector((state) => state.counter);
+  let location = useLocation();
 
+  if (base.token) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+  return children;
+};
+
+export default function Router() {
   // // Protected Routes For check the user is logged in or not | if loggedin show redirect to member page else show login or signup page.
   // const protectedAuthRoute = (component) => {
   //     if (user) {
@@ -65,8 +74,14 @@ export default function Router() {
 
         <Routes>
           {/* Authenticate */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={<ProtectedAuthRoute children={<Login />} />}
+          />
+          <Route
+            path="/register"
+            element={<ProtectedAuthRoute children={<Register />} />}
+          />
 
           {/* User */}
           <Route path="/" element={<LiveClasses />} />
@@ -77,51 +92,27 @@ export default function Router() {
           {/* User Dashboard */}
           <Route
             path="/membership"
-            element={
-              <ProtectedRoute>
-                <Membership />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute children={<Membership />} />}
           />
           <Route
             path="/myprofile"
-            element={
-              <ProtectedRoute>
-                <MyProfile />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute children={<MyProfile />} />}
           />
           <Route
             path="/membership2"
-            element={
-              <ProtectedRoute>
-                <MembershipScreen2 />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute children={<MembershipScreen2 />} />}
           />
           <Route
             path="/payment"
-            element={
-              <ProtectedRoute>
-                <Payment />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute children={<Payment />} />}
           />
           <Route
             path="/history"
-            element={
-              <ProtectedRoute>
-                <History />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute children={<History />} />}
           />
           <Route
             path="/liveBooking"
-            element={
-              <ProtectedRoute>
-                <LiveBooking />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute children={<LiveBooking />} />}
           />
         </Routes>
         <Footer />

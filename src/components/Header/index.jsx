@@ -4,13 +4,14 @@ import { NavLink } from "react-router-dom";
 import { staticContent } from "./constant";
 import { Nav, Section, UL, SideMenu, MobileUL } from "./headerComponents";
 import { useDispatch, useSelector } from "react-redux";
-import { setLang } from "src/store/slices/language";
+import { setLang } from "src/features/language";
 import { path } from "src/helpers";
 import { contentTranslator } from "src/helpers/translator";
 import { icons } from "src/helpers";
 import { IconButton } from "src/components";
 
-import { logout } from "src/store/slices/counterSlice";
+import { logout, setId } from "src/features/userSlice";
+// import { init } from "src/store/baseStore";
 
 function Header({ isLoggedin }) {
   const [content, setContent] = useState(staticContent);
@@ -22,6 +23,7 @@ function Header({ isLoggedin }) {
   const language = useSelector((state) => state.language.lang);
 
   useEffect(() => {
+    // dispatch(init({ cbAction: setId }));
     contentTranslator({ staticContent, setContent, language });
     console.log("Main chala when state change");
   }, [language, isLoggedin]);

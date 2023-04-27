@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { NavLink } from "react-router-dom";
+import { register } from "src/features/userSlice";
 
 import {
   FieldPassword,
@@ -37,6 +38,8 @@ function Register() {
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(regsiterContent);
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     contentTranslator({
       staticContent: regsiterContent,
@@ -51,14 +54,16 @@ function Register() {
       <div className="form">
         <Formik
           initialValues={{
+            userName: "",
             email: "",
             password: "",
+            confirmPassword: ""
           }}
           validationSchema={regsiterFormValidate}
-          onSubmit={(values) => {
-            console.log(values);
+          onSubmit={(data) => {
+            console.log(data);
             // setLoader(true);
-            // dispatch(PostLogin(values));
+            dispatch(register({ data }));
           }}
         >
           {(formik) => (
@@ -88,7 +93,6 @@ function Register() {
                     style={{ fontSize: "16px" }}
                   />
                 </FormRow>
-                
                 <FormRow>
                   <FieldPassword
                     label={content.password}

@@ -10,7 +10,7 @@ import { contentTranslator } from "src/helpers/translator";
 import { icons } from "src/helpers";
 import { IconButton } from "src/components";
 
-import { logout, setId } from "src/features/userSlice";
+import { logout } from "src/features/userSlice";
 // import { init } from "src/store/baseStore";
 
 function Header({ isLoggedin }) {
@@ -52,9 +52,9 @@ function Header({ isLoggedin }) {
           <li>
             <NavLink to={path.videos}>{content.videos}</NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to={path.membership}>{content.membership}</NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink to={path.instructor}>{content.instructor}</NavLink>
           </li>
@@ -93,9 +93,16 @@ function Header({ isLoggedin }) {
               </li>
             </React.Fragment>
           ) : (
-            <li onClick={() => btnLogout()}>
-              <span>{content.logout}</span>
-            </li>
+            <React.Fragment>
+              <li onClick={() => btnLogout()}>
+                <span>{content.logout}</span>
+              </li>
+              <li>
+                <NavLink to={path.membership}>
+                  <img src={icons.cardInstruct} alt="profile" width="40px" height="40px" />
+                </NavLink>
+              </li>
+            </React.Fragment>
           )}
         </UL>
       </Nav>

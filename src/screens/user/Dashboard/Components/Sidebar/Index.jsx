@@ -63,7 +63,7 @@ function Sidebar() {
       </SideBarWrapper>
 
       <motion.div
-        data-Open={open}
+        data-open={open}
         variants={sideContainerVariants}
         initial={`${open}`}
         animate={`${open}`}

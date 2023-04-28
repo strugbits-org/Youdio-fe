@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik, Form } from 'formik'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
-import { FieldPassword, FieldInput, PrimaryButton, Label, H1, P2 } from 'src/components'
+import { FieldPassword, FieldInput, PrimaryButton, H1, P2 } from 'src/components'
 import { loginFormValidate } from 'src/helpers/forms/validateForms'
 import { loginContent } from './content'
 import { contentTranslator } from 'src/helpers/translator'
@@ -33,7 +33,7 @@ function Login() {
   const language = useSelector(state => state.language.lang)
   const [content, setContent] = useState(loginContent)
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   useEffect(() => {
     contentTranslator({ staticContent: loginContent, contentToTranslate: content, setContent, language })
@@ -52,7 +52,7 @@ function Login() {
           onSubmit={data => {
             console.log(data);
             // setLoader(true);
-            dispatch(login({ data, successCb: () => navigate('/') }));
+            dispatch(login({ data }));
           }}
         >
           {formik => (
@@ -71,14 +71,17 @@ function Login() {
                 <FormRow>
                   <FieldPassword label={content.password} id="loginPassword" name="password" placeholder="******" style={{ fontSize: '16px' }} />
                 </FormRow>
-                <FormRow>
+                {/* <FormRow className='rememberBox'>
                   <input
                     type="checkbox"
                     id='rememberCheckbox'
                     name='rememberMe'
                   />
                   <Label htmlFor='rememberCheckbox'>{content.remember}</Label>
-                </FormRow>
+              </FormRow> */}
+              <FormRow>
+                {/* <P2>Message</P2> */}
+              </FormRow>
                 <FormRow>
                   <PrimaryButton type='submit'>{content.btnLogin}</PrimaryButton>
                   <p><NavLink to={path.forgotPassword}>{content.forgot}</NavLink></p>

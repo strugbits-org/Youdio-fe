@@ -42,7 +42,7 @@ const requestHandlers = async (request) => {
 };
 
 const responseHandler = async (response) => {
-  const { config } = response;
+  // const { config } = response;
 
 //   if (config && config.method === "put" && config.url === "auth/profile") {
 //     toast.success("Profile Updated");
@@ -56,7 +56,7 @@ const responseHandler = async (response) => {
 const errorHandler = (error) => {
   const { response } = error;
   const message = response?.data.message;
-  const status = response?.status;
+  // const status = response?.status;
 
   if (message) {
     // toast.error(message);

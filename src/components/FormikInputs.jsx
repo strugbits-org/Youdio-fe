@@ -17,6 +17,7 @@ const Ipt = styled.div`
 const IptWithIcon = styled.div`
     position:relative;
     & .eye{
+        width: 22px;
         position: absolute;
         top: 50%;
         transform:translateY(-50%);

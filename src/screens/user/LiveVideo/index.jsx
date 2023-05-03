@@ -107,21 +107,14 @@ function LiveVideo() {
                   <P3>Intensity 1</P3>
                 </div>
               </div>
-              <div className="mainDiv">
-                <div className="profileBox">
-                  <img
-                    src={icons.profileImage}
-                    alt=""
-                    width="30px"
-                    height={""}
-                  />
-                  <H4>Elizebeth Lisa</H4>
-                </div>
-                <P2 className="para">{liveVideoContent.liveVideoP2}</P2>
+              <div className="profileBox">
+                <img src={icons.profileImage} alt="" width="30px" height={""} />
+                <H4>Elizebeth Lisa</H4>
               </div>
+              <P2 className="para">{liveVideoContent.liveVideoP2}</P2>
               <Box>
                 <CenterButton onClick={() => setShowModal(true)}>
-                  <H4> {liveVideoContent.liveVideoBtn}</H4>
+                  {liveVideoContent.liveVideoBtn}
                 </CenterButton>
                 {showModal && <Modal closeModal={closeModal} />}
               </Box>

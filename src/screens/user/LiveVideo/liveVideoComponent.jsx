@@ -5,7 +5,8 @@ const { mobile, tablet, laptop, desktop } = layout;
 
 export const CardMedia = styled.div`
   position: relative;
-
+  background-color: blueviolet;
+  width: 100%;
   .zoom-link {
     position: absolute;
     top: 10%;
@@ -20,29 +21,26 @@ export const CardMedia = styled.div`
     }
   }
   .imgContainer {
-    /* width: 100%;
-    height: 100%; */
+    img {
+      width: 100%;
+      /* height: auto; */
+      /* width: clamp(280px, 70%, 1900px); */
+    }
+  }
+  /* .imgContainer {
     display: flex;
     justify-content: center;
-    /* align-items: center; */
+
     img {
       max-width: 100%;
       max-height: 100%;
     }
-  }
-  .img {
-    /* width: clamp(150px, 29vw, 535px); */
-    /* width: 50% */
-    /* max-width: 150%; */
-    /* object-fit: contain; */
-    /* width: 100%; */
-    /* height: 100%; */
-    /* height: 100vh; */
-  }
+  } */
+
   @media only screen and (min-width: 280px) and (max-width: 400px) {
-    img {
+    /* img {
       width: 100%;
-    }
+    } */
     .zoom-link {
       width: 50px;
       height: 50px;
@@ -53,9 +51,9 @@ export const CardMedia = styled.div`
   }
 
   @media only screen and (min-width: 400px) and (max-width: 768px) {
-    img {
+    /* img {
       width: 100%;
-    }
+    } */
     .zoom-link {
       width: 50px;
       height: 50px;
@@ -66,9 +64,9 @@ export const CardMedia = styled.div`
   }
 
   @media only screen and (min-width: 768px) and (max-width: ${laptop}) {
-    img {
+    /* img {
       width: 100%;
-    }
+    } */
     .zoom-link {
       width: 50px;
       height: 50px;
@@ -79,9 +77,9 @@ export const CardMedia = styled.div`
   }
 
   @media only screen and (min-width: ${laptop}) {
-    img {
+    /* img {
       width: 100%;
-    }
+    } */
     .zoom-link {
       width: 50px;
       height: 50px;
@@ -92,9 +90,9 @@ export const CardMedia = styled.div`
   }
 
   @media only screen and (min-width: ${laptop}) and (max-width: ${desktop}) {
-    img {
+    /* img {
       width: 100%;
-    }
+    } */
     .zoom-link {
       width: 50px;
       height: 50px;
@@ -120,21 +118,24 @@ export const LiveCard = styled.div`
   gap: 4vw 5.8vw;
   position: relative;
   padding-top: 2rem;
-
+  /* .para {
+    grid-column: 1 / -1;
+  } */
   @media only screen and (min-width: 280px) and (max-width: 400px) {
     grid-template-columns: 1fr;
   }
 
   @media only screen and (min-width: 400px) and (max-width: 768px) {
-    grid-template-columns: 0.5fr 1fr;
-
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: repeat(2, 1fr);
     .profileBox {
-      width: 100%;
-      display: flex;
-      align-items: center;
     }
-    .para {
+    .mainDiv {
+      position: absolute;
+      left: 0;
+      top: 100%;
       width: 100%;
+      padding-top: 2rem;
     }
   }
 
@@ -154,6 +155,8 @@ export const LiveCard = styled.div`
 export const Container = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+  background-color: whitesmoke;
 `;
 export const Content = styled.div`
   /* background-color: #423f3f; */
@@ -180,12 +183,13 @@ export const Content = styled.div`
   .totalImg {
     display: flex;
     max-width: 500px;
-    min-width: 280px;
+    background-color: #beb9b9;
     padding-bottom: 2rem;
+
     div {
       display: flex;
       flex: 1;
-      gap: 2px;
+      gap: 10px;
     }
   }
   .profileBox {
@@ -211,7 +215,7 @@ export const CenterButton = styled(PrimaryWhiteButton)`
   background-color: #3ac4b2;
   max-width: 200px;
   min-width: 100px;
-  min-height: 35px;
+  min-height: 40px;
   color: #fff;
   border: none;
 `;
@@ -235,8 +239,8 @@ export const ModalWrapper = styled.div`
   right: 0;
   bottom: 0;
   position: fixed;
-  overflow-x: hidden;
-  /* overflow: auto; */
+  overflow-y: scroll;
+  z-index: 999;
 `;
 
 export const ModalOverlay = styled.div`
@@ -250,18 +254,27 @@ export const ModalOverlay = styled.div`
   background: rgba(49, 49, 49, 0.8);
 `;
 export const ModalContent = styled.div`
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #f1f1f1;
   border-radius: 1px;
-  max-width: 900px;
+  max-width: 1000px;
   min-width: 280px;
   max-height: 70%;
   /* min-height: 10%; */
   /* width: clamp(350px, 8vw, 900px); */
+  @media only screen and (min-width: 280px) and (max-width: 400px) {
+    width: 90%;
+  }
+  @media only screen and (min-width: 400px) and (max-width: 800px) {
+    width: 80%;
+  }
+  @media only screen and (min-width: 800px) and (max-width: ${laptop}) {
+    width: 80%;
+  }
   .close-modal {
     position: absolute;
     top: -20px;

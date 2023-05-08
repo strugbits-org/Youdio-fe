@@ -9,7 +9,7 @@ const loginFormValidate = Yup.object({
 
 // Register form Validation
 const regsiterFormValidate = Yup.object({
-  userName: textField({ reqMesg: "Name is Required" }),
+  name: textField({ reqMesg: "Name is Required" }),
   email,
   password: password({ reqMesg: "Password is Required" }),
   confirmPassword: password({ reqMesg: "Password is Required" }),

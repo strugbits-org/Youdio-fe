@@ -32,7 +32,7 @@ import LiveVideo from "src/screens/user/LiveVideo";
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
 const ProtectedRoute = ({ children }) => {
-  const base = useSelector((state) => state.counter);
+  const base = useSelector((state) => state.user);
   let location = useLocation();
 
   if (!base.token) {
@@ -42,7 +42,7 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const ProtectedAuthRoute = ({ children }) => {
-  const base = useSelector((state) => state.counter);
+  const base = useSelector((state) => state.user);
   let location = useLocation();
 
   if (base.token) {

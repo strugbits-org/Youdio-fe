@@ -54,7 +54,7 @@ function Register() {
       <div className="form">
         <Formik
           initialValues={{
-            userName: "",
+            name: "",
             email: "",
             password: "",
             confirmPassword: ""
@@ -76,8 +76,8 @@ function Register() {
                 <FormRow>
                   <FieldInput
                     label={content.name}
-                    id="userName"
-                    name="userName"
+                    id="name"
+                    name="name"
                     type="text"
                     placeholder={content.namePlaceholder}
                     style={{ fontSize: "16px" }}

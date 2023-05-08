@@ -18,7 +18,7 @@ function Header({ isLoggedin }) {
   const [menu, setMenu] = useState(false);
 
   const dispatch = useDispatch();
-  const base = useSelector((state) => state.counter);
+  const base = useSelector((state) => state.user);
 
   const language = useSelector((state) => state.language.lang);
 

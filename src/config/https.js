@@ -1,6 +1,6 @@
 import axios from "axios";
-// import { useToast } from "vue-toastification";
 import { getHeaders } from "src/helpers/config";
+import "react-toastify/dist/ReactToastify.css";
 // import { logout } from "@/helpers/config";
 
 // const base_url = "https://jsonplaceholder.typicode.com/"; 
@@ -15,8 +15,6 @@ const axiosBaseClient = (type) => {
 
 const axiosClient = axiosBaseClient("base");
 // const axiosAuthClient = axiosBaseClient("auth");
-
-// const toast = useToast();
 
 const api = (axioss) => {
   return {
@@ -44,23 +42,21 @@ const requestHandlers = async (request) => {
 const responseHandler = async (response) => {
   // const { config } = response;
 
-//   if (config && config.method === "put" && config.url === "auth/profile") {
-//     toast.success("Profile Updated");
-//   } else if (config && config.method === "post" && config.url === "addresses") {
-//     toast.success("Address Created");
-//   }
+  // if (config && (config.method === "put" || config.method === "post")) {
+  // } else if (config && config.method === "post" && config.url === "addresses") {
+  //   toast.success("Address Created");
+  // }
 
   return response;
 };
 
 const errorHandler = (error) => {
   const { response } = error;
-  const message = response?.data.message;
+  const message = response?.data?.errors;
   // const status = response?.status;
 
-  if (message) {
-    // toast.error(message);
-      alert(message)
+  if (message && message.length > 0) {
+    throw new Error(message[0].msg);
   }
 
   // if (status === 401) {
@@ -68,7 +64,7 @@ const errorHandler = (error) => {
   //   return false;
   // }
 
-  throw new Error(message);
+  
 };
 
 //inceptors

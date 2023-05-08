@@ -10,11 +10,11 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import counterReducer from 'src/features/userSlice'
+import userReducer from 'src/features/userSlice'
 import languageReducer from 'src/features/language'
 
 export const rootReducer = combineReducers({
-  counter: counterReducer,
+  user: userReducer,
   language: languageReducer,
 });
 const persistConfig = {

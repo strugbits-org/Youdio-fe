@@ -16,6 +16,8 @@ import { regsiterFormValidate } from "src/helpers/forms/validateForms";
 import { regsiterContent } from "./content";
 import { contentTranslator } from "src/helpers/translator";
 import { path } from "src/helpers";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Container = styled.div`
   background: #fff;
@@ -38,7 +40,8 @@ function Register() {
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(regsiterContent);
 
-  const dispatch = useDispatch()
+  const { isLoading, errorMessage } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     contentTranslator({
@@ -49,6 +52,13 @@ function Register() {
     });
   }, [language, content]);
 
+  useEffect(() => {
+    errorMessage &&
+      toast.error(errorMessage, {
+        position: "top-right",
+      });
+  }, [errorMessage]);
+
   return (
     <Container>
       <div className="form">
@@ -57,7 +67,7 @@ function Register() {
             name: "",
             email: "",
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
           }}
           validationSchema={regsiterFormValidate}
           onSubmit={(data) => {
@@ -127,6 +137,7 @@ function Register() {
           )}
         </Formik>
       </div>
+      <ToastContainer />
     </Container>
   );
 }

@@ -20,7 +20,6 @@ import { path } from "src/helpers";
 import { login } from "src/features/userSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-toastify/dist/ReactToastify.css";
 
 
 const Container = styled.div`
@@ -57,10 +56,9 @@ function Login() {
   }, [language, content]);
 
   useEffect(() => {
-    console.log(errorMessage);
-    // errorMessage && toast.error(errorMessage, {
-    //   position: "top-right"
-    // });
+    errorMessage && toast.error(errorMessage, {
+      position: "top-right"
+    });
   }, [errorMessage]);
 
   return (
@@ -68,8 +66,8 @@ function Login() {
       <div className="form">
         <Formik
           initialValues={{
-            email: "hamza@gmail.com",
-            password: "hamza@123",
+            email: "",
+            password: "",
           }}
           validationSchema={loginFormValidate}
           onSubmit={(data) => {
@@ -115,7 +113,7 @@ function Login() {
               </FormRow> */}
                 <FormRow>{/* <P2>Message</P2> */}</FormRow>
                 <FormRow>
-                  <PrimaryButton type="submit" disabled={isLoading}>
+                  <PrimaryButton type="submit">
                     {content.btnLogin}
                   </PrimaryButton>
                   <p>
@@ -133,7 +131,7 @@ function Login() {
           )}
         </Formik>
       </div>
-      <ToastContainer />
+      {errorMessage && <ToastContainer />}
     </Container>
   );
 }

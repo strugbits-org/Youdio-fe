@@ -40,7 +40,7 @@ function Register() {
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(regsiterContent);
 
-  const { isLoading, errorMessage } = useSelector((state) => state.user);
+  const { isLoading, errorMessage, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,7 +57,10 @@ function Register() {
       toast.error(errorMessage, {
         position: "top-right",
       });
-  }, [errorMessage]);
+      user !== null && toast.success("Registered Successfully", {
+        position: "top-right",
+      }); 
+  }, [errorMessage, user]);
 
   return (
     <Container>
@@ -122,7 +125,7 @@ function Register() {
                   />
                 </FormRow>
                 <FormRow>
-                  <PrimaryButton type="submit">
+                  <PrimaryButton type="submit" disabled={isLoading}>
                     {content.btnSignup}
                   </PrimaryButton>
                 </FormRow>

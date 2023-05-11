@@ -15,14 +15,41 @@ export const PrimaryButton = styled.button`
     cursor:pointer;
     transition: var(--transition03s);
     font-size:18px;
-     
     
     &:hover{
         transition: var(--transition03s); 
         background:var(--backgroundGreenHover);
     }
 
-  
+    &:disabled{
+        background: var(--backgroundBrown);
+        cursor: default;
+        position: relative;
+        color: transparent;
+        display: grid;
+        align-items: center;
+        place-items: center;
+        &::after{
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50px;
+            border-width: 5px;
+            border: 4px solid var(--backgroundLightGrey);
+            border-bottom: 4px solid transparent;
+            animation: rotate 1s linear infinite;
+        }
+
+        @keyframes rotate {
+	        0% {
+		        transform: rotate(0deg);
+	        }
+            100% {
+		        transform: rotate(360deg);
+	        }
+        }
+    }
 `
 
 export const PrimaryWhiteButton = styled.button`
@@ -94,8 +121,8 @@ export const WhiteIconButton = styled(IconButton)`
     border-radius:100px;
     gap: 1vw;
     transition:var(--transition03s);
-    background: ${({selected}) => selected ? `var(--textHeadingBlack)` : 'transparent' };
-    color: ${({selected}) => selected ? `var(--textHeadingWhite)` : `var(--textHeadingBlack)` };
+    background: ${({ selected }) => selected ? `var(--textHeadingBlack)` : 'transparent'};
+    color: ${({ selected }) => selected ? `var(--textHeadingWhite)` : `var(--textHeadingBlack)`};
     
     
     img{

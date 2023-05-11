@@ -41,7 +41,7 @@ const FormRow = styled.div`
 
 function Login() {
   const language = useSelector((state) => state.language.lang);
-  const {isLoading, errorMessage} = useSelector((state) => state.user);
+  const {isLoading, errorMessage, user} = useSelector((state) => state.user);
   const [content, setContent] = useState(loginContent);
   const dispatch = useDispatch();
   // const navigate = useNavigate()
@@ -59,7 +59,10 @@ function Login() {
     errorMessage && toast.error(errorMessage, {
       position: "top-right"
     });
-  }, [errorMessage]);
+    user !== null && toast.success("Login Successfully", {
+      position: "top-right",
+    }); 
+  }, [errorMessage, user]);
 
   return (
     <Container>
@@ -113,7 +116,7 @@ function Login() {
               </FormRow> */}
                 <FormRow>{/* <P2>Message</P2> */}</FormRow>
                 <FormRow>
-                  <PrimaryButton type="submit">
+                  <PrimaryButton type="submit" disabled={isLoading}>
                     {content.btnLogin}
                   </PrimaryButton>
                   <p>

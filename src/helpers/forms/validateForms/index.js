@@ -15,4 +15,13 @@ const regsiterFormValidate = Yup.object({
   confirmPassword: password({ reqMesg: "Password is Required" }),
 });
 
-export { loginFormValidate, regsiterFormValidate };
+// User Form Validation
+const userFormValidate = Yup.object({
+  name: textField({ reqMesg: "Name is Required" }),
+  userEmail:email,
+  nickName: textField({ reqMesg: "Nick name is Required" }),
+  oldPassword: password({ reqMesg: "Password is Required" }),
+  newPassword: password({ reqMesg: "Password is Required" }),
+});
+
+export { loginFormValidate, regsiterFormValidate, userFormValidate };

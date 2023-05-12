@@ -5,7 +5,6 @@ export const login = createAsyncThunk(
   "login",
   async ({ data }, {rejectWithValue}) => {
     try {
-      console.log({login});
       const res = await apiClient.post("login", data);
       if (res?.data) {
         return res.data;

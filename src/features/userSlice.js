@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiClient } from "src/config/https";
+// import { getHeaders } from "src/helpers/config";
 
 export const login = createAsyncThunk(
   "login",
@@ -28,6 +29,23 @@ export const register = createAsyncThunk(
     }
   }
 );
+
+// export const getUser = createAsyncThunk(
+//   "getUser",
+//   async (_, { rejectWithValue, getState }) => {
+//     const state = getState()
+//     const headers = getHeaders(state.user.token)
+//     try {
+//       const res = await apiClient.get("user-profile", {headers});
+//       console.log(res);
+//       if (res?.data) {
+//         return res.data;
+//       }
+//     } catch (e) {
+//       return rejectWithValue(e.message);
+//     }
+//   }
+// );
 
 const initialState = {
   token: null,
@@ -90,6 +108,19 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = action.payload;
     });
+
+    // Get User
+    // Pending
+    // Fulfilled
+    // builder.addCase(getUser.fulfilled, (state, action) => {
+    //   console.log(action);
+    //   state.user = action.payload.user;
+    //   state.errorMessage = "";
+    // });
+    // Rejected
+    // builder.addCase(getUser.rejected, (state, action) => {
+    //   state.errorMessage = action.payload;
+    // });
   },
 });
 

@@ -8,8 +8,8 @@ export const headers = {
 };
 
 export const getHeaders = (token) => {
-  console.log(token);
-  // if (token) Object.assign(headers, { Cookies: `jwt=${token}` });
+  // if (token) Object.assign(headers, { authorization: token });
+  // console.log({headers});
 
   return headers;
 };

@@ -19,7 +19,7 @@ export const ProfileLabel = styled(Label)`
   display: flex;
   align-items: center;
   font-weight: bold;
-  `;
+`;
 
 export const Box3 = styled.div`
   .btn_gap {
@@ -50,7 +50,6 @@ export const Box4 = styled(Box)`
     background-image: url(${Camera});
   }
 
-  
   .image-container::after {
     background-size: cover;
   }
@@ -60,15 +59,14 @@ export const FormRow2 = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   padding-block: 50px;
-justify-content:space-between`
-
-
+  justify-content: space-between;
+`;
 
 export const CancelButton = styled(PrimaryButton)`
   color: black;
   max-width: 200px;
   min-width: 100px;
-  border: 1px solid #E6E7E9;
+  border: 1px solid #e6e7e9;
   background-color: #ffff;
   border-radius: 0px;
 `;
@@ -77,7 +75,7 @@ export const SaveButton = styled(PrimaryButton)`
   color: black;
   max-width: 200px;
   min-width: 100px;
-  border: 1px solid #FFE7DA;
+  border: 1px solid #ffe7da;
   background-color: #ffe7da;
   border-radius: 0px;
 `;

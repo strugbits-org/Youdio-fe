@@ -10,7 +10,8 @@ export const profileScreenStaticContent = {
     nickNamePlaceHolder:"Alexa",
     email:"Email",
     emailPlaceHolder:"AlexaMorgan@gmail.com",
-    password:'Password',
+    currentPassword:'Current Password',
+    newPassword:'New Password',
     cancelBtn:"CANCEL",
     saveBTn:'SAVE',
 

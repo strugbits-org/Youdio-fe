@@ -1,10 +1,11 @@
 import axios from "axios";
 import { getHeaders } from "src/helpers/config";
+import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 // import { logout } from "@/helpers/config";
 
-// const base_url = "https://jsonplaceholder.typicode.com/"; 
-const base_url = "https://youdio-app.herokuapp.com"; 
+// const base_url = "https://jsonplaceholder.typicode.com/";
+const base_url = "https://youdio-app.herokuapp.com";
 const auth_url = "";
 
 const axiosBaseClient = (type) => {
@@ -18,26 +19,27 @@ const axiosClient = axiosBaseClient("base");
 
 const api = (axioss) => {
   return {
-    get:(url, config = {}) => {
-      return axioss.get (url, config);
+    get: (url, config = {}) => {
+      return axioss.get(url, config);
     },
-    post:( url, body, config = {} ) => {
+    post: (url, body, config = {}) => {
       return axioss.post(url, body, config);
     },
     put: (url, body, config = {}) => {
       return axioss.put(url, body, config);
     },
     delete: (url, config = {}) => {
-      return axioss.delete (url, config);
+      return axioss.delete(url, config);
     },
   };
 };
-
-const requestHandlers = async (request) => {
-  request.headers = getHeaders();
+// const requestHandlers =
+async function requestHandlers(request) {
+  console.log({request});
+  // request.headers = getHeaders(token);
 
   return request;
-};
+}
 
 const responseHandler = async (response) => {
   // const { config } = response;
@@ -63,8 +65,6 @@ const errorHandler = (error) => {
   //   logout();
   //   return false;
   // }
-
-  
 };
 
 //inceptors

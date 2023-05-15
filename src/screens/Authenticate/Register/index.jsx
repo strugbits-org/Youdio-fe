@@ -122,6 +122,7 @@ function Register() {
                     name="confirmPassword"
                     placeholder="******"
                     style={{ fontSize: "16px" }}
+                    
                   />
                 </FormRow>
                 <FormRow>

@@ -53,7 +53,7 @@ function Sidebar() {
       <SideBarWrapper>
         {SidebarData.map((item, index) => {
           return (
-            <NavLink to={item.path}>
+            <NavLink key={`menu${index}`} to={item.path}>
               <SidebarBtn key={index} >
                 <span>{item.title}</span>
               </SidebarBtn>

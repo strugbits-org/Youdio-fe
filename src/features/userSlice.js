@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiClient } from "src/config/https";
-// import { getHeaders } from "src/helpers/config";
+import { getHeaders } from "src/helpers/config";
 
 export const login = createAsyncThunk(
   "login",
@@ -30,27 +30,28 @@ export const register = createAsyncThunk(
   }
 );
 
-// export const getUser = createAsyncThunk(
-//   "getUser",
-//   async (_, { rejectWithValue, getState }) => {
-//     const state = getState()
-//     const headers = getHeaders(state.user.token)
-//     try {
-//       const res = await apiClient.get("user-profile", {headers});
-//       console.log(res);
-//       if (res?.data) {
-//         return res.data;
-//       }
-//     } catch (e) {
-//       return rejectWithValue(e.message);
-//     }
-//   }
-// );
+export const getUser = createAsyncThunk(
+  "getUser",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const state = getState()
+      const headers = await getHeaders(state.user.token);
+      console.log({headers});
+      const res = await apiClient.get("user/user-profile", {headers});
+      console.log({res});
+      if (res?.data) {
+        return res.data;
+      }
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
 
 const initialState = {
   token: null,
   user: null,
-  isLoading: true,
+  isLoading: false,
   errorMessage: "",
 };
 
@@ -64,6 +65,14 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = "";
     },
+
+    setUserAuth: (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+    }
   },
   extraReducers: (builder) => {
     // Login
@@ -112,17 +121,17 @@ const userSlice = createSlice({
     // Get User
     // Pending
     // Fulfilled
-    // builder.addCase(getUser.fulfilled, (state, action) => {
-    //   console.log(action);
-    //   state.user = action.payload.user;
-    //   state.errorMessage = "";
-    // });
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      console.log(action);
+      state.user = action.payload.user;
+      state.errorMessage = "";
+    });
     // Rejected
-    // builder.addCase(getUser.rejected, (state, action) => {
-    //   state.errorMessage = action.payload;
-    // });
+    builder.addCase(getUser.rejected, (state, action) => {
+      state.errorMessage = action.payload;
+    });
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, setUser, setUserAuth } = userSlice.actions;
 export default userSlice.reducer;

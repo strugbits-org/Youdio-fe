@@ -11,18 +11,23 @@ import {
   Box4,
   ProfileContainer,
 } from "./ProfileComponent";
-import { getUser } from "src/features/userSlice";
 
 import Sidebar from "src/screens/user/Dashboard/Components/Sidebar/Index";
 import { profileScreenStaticContent as content } from "./Constant";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ProfileForm from "./ProfileForm";
+import useFetch from "src/features/hooks/useFetch";
+import { setUser } from "src/features/userSlice";
 
 
 const MyProfile = () => {
+  const { res, loading, error, fetchData } = useFetch();
 
   const { user } = useSelector((state) => state.user);
-  const dispatch = useDispatch()
+
+  useEffect(() => {
+    fetchData("user/user-profile", setUser)
+  }, [])
 
   return (
     <Wrapper>
@@ -53,7 +58,7 @@ const MyProfile = () => {
               </div>
             </Box4>
             <HorizontalLine2 />
-            <ProfileForm user={user} dispatch={dispatch} content={content} />
+            <ProfileForm user={user} content={content} />
           </ProfileContainer>
         </div>
       </div>

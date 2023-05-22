@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 // import { useNavigate } from 'react-router-dom'
 import { NavLink } from "react-router-dom";
@@ -17,9 +17,10 @@ import { loginContent } from "./content";
 import { contentTranslator } from "src/helpers/translator";
 import { path } from "src/helpers";
 
-import { login } from "src/features/userSlice";
+import { setUserAuth } from "src/features/userSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useFetch from "src/features/hooks/useFetch";
 
 
 const Container = styled.div`
@@ -40,10 +41,9 @@ const FormRow = styled.div`
 `;
 
 function Login() {
+  const { loading, error, postData } = useFetch()
   const language = useSelector((state) => state.language.lang);
-  const {isLoading, errorMessage, user} = useSelector((state) => state.user);
   const [content, setContent] = useState(loginContent);
-  const dispatch = useDispatch();
   // const navigate = useNavigate()
 
   useEffect(() => {
@@ -56,27 +56,22 @@ function Login() {
   }, [language, content]);
 
   useEffect(() => {
-    errorMessage && toast.error(errorMessage, {
+    error && toast.error(error, {
       position: "top-right"
     });
-    user !== null && toast.success("Login Successfully", {
-      position: "top-right",
-    }); 
-  }, [errorMessage, user]);
+  }, [error]);
 
   return (
     <Container>
       <div className="form">
         <Formik
           initialValues={{
-            email: "",
-            password: "",
+            email: "hamza@gmail.com",
+            password: "1234567",
           }}
           validationSchema={loginFormValidate}
           onSubmit={(data) => {
-            console.log(data);
-            // setLoader(true);
-            dispatch(login({ data }));
+            postData("login", data, setUserAuth);
           }}
         >
           {(formik) => (
@@ -116,7 +111,7 @@ function Login() {
               </FormRow> */}
                 <FormRow>{/* <P2>Message</P2> */}</FormRow>
                 <FormRow>
-                  <PrimaryButton type="submit" disabled={isLoading}>
+                  <PrimaryButton type="submit" disabled={loading}>
                     {content.btnLogin}
                   </PrimaryButton>
                   <p>
@@ -134,7 +129,7 @@ function Login() {
           )}
         </Formik>
       </div>
-      {errorMessage && <ToastContainer />}
+      {error && <ToastContainer />}
     </Container>
   );
 }

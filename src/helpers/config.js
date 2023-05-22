@@ -7,9 +7,8 @@ export const headers = {
   "Content-Type": "application/json",
 };
 
-export const getHeaders = (token) => {
-  // if (token) Object.assign(headers, { authorization: token });
-  // console.log({headers});
+export const getHeaders = async (token) => {
+  if (token) Object.assign(headers, { "authorization": token });
 
   return headers;
 };

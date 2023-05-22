@@ -11,9 +11,11 @@ import { icons } from "src/helpers";
 import { IconButton } from "src/components";
 
 import { logout } from "src/features/userSlice";
+
 // import { init } from "src/store/baseStore";
 
 function Header({ isLoggedin }) {
+  
   const [content, setContent] = useState(staticContent);
   const [menu, setMenu] = useState(false);
 

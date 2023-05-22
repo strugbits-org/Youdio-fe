@@ -1,8 +1,4 @@
 import axios from "axios";
-import { getHeaders } from "src/helpers/config";
-import { useSelector } from "react-redux";
-import "react-toastify/dist/ReactToastify.css";
-// import { logout } from "@/helpers/config";
 
 // const base_url = "https://jsonplaceholder.typicode.com/";
 const base_url = "https://youdio-app.herokuapp.com";
@@ -31,24 +27,19 @@ const api = (axioss) => {
     delete: (url, config = {}) => {
       return axioss.delete(url, config);
     },
+    patch: (url, body, config = {}) => { 
+      return axioss.patch(url, body, config)
+    }
   };
 };
-// const requestHandlers =
-async function requestHandlers(request) {
-  console.log({request});
-  // request.headers = getHeaders(token);
 
+async function requestHandlers(request) {
+  
   return request;
 }
 
 const responseHandler = async (response) => {
-  // const { config } = response;
-
-  // if (config && (config.method === "put" || config.method === "post")) {
-  // } else if (config && config.method === "post" && config.url === "addresses") {
-  //   toast.success("Address Created");
-  // }
-
+  
   return response;
 };
 

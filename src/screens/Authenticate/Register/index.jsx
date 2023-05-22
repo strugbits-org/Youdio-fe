@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import { NavLink } from "react-router-dom";
-import { register } from "src/features/userSlice";
+import { setUserAuth } from "src/features/userSlice";
 
 import {
   FieldPassword,
@@ -18,6 +18,7 @@ import { contentTranslator } from "src/helpers/translator";
 import { path } from "src/helpers";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useFetch from "src/features/hooks/useFetch";
 
 const Container = styled.div`
   background: #fff;
@@ -37,11 +38,9 @@ const FormRow = styled.div`
 `;
 
 function Register() {
+  const { loading, error, postData } = useFetch()
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(regsiterContent);
-
-  const { isLoading, errorMessage, user } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     contentTranslator({
@@ -53,14 +52,11 @@ function Register() {
   }, [language, content]);
 
   useEffect(() => {
-    errorMessage &&
-      toast.error(errorMessage, {
+    error &&
+      toast.error(error, {
         position: "top-right",
       });
-      user !== null && toast.success("Registered Successfully", {
-        position: "top-right",
-      }); 
-  }, [errorMessage, user]);
+  }, [error]);
 
   return (
     <Container>
@@ -74,9 +70,7 @@ function Register() {
           }}
           validationSchema={regsiterFormValidate}
           onSubmit={(data) => {
-            console.log(data);
-            // setLoader(true);
-            dispatch(register({ data }));
+            postData("register", data, setUserAuth);
           }}
         >
           {(formik) => (
@@ -122,11 +116,10 @@ function Register() {
                     name="confirmPassword"
                     placeholder="******"
                     style={{ fontSize: "16px" }}
-                    
                   />
                 </FormRow>
                 <FormRow>
-                  <PrimaryButton type="submit" disabled={isLoading}>
+                  <PrimaryButton type="submit" disabled={loading}>
                     {content.btnSignup}
                   </PrimaryButton>
                 </FormRow>
@@ -141,7 +134,7 @@ function Register() {
           )}
         </Formik>
       </div>
-      <ToastContainer />
+      {error && <ToastContainer />}
     </Container>
   );
 }

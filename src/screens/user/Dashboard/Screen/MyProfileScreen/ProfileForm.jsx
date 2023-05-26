@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { FieldInput, FieldPassword } from "src/components";
 import { userFormValidate } from "src/helpers/forms/validateForms";
 import {
-  CancelButton,
+  // CancelButton,
   SaveButton,
   Box3,
   HorizontalLine2,
@@ -44,6 +44,7 @@ function ProfileForm({ user, content }) {
         validationSchema={userFormValidate}
         onSubmit={(data) => {
           // dispatch(login({ data }));
+          Object.values()
           patchData("user/update-profile", data, setUser);
         }}
       >

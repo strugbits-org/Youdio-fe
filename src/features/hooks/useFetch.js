@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { apiClient } from "src/config/https";
 import { useSelector, useDispatch } from "react-redux";
 import { getHeaders } from "src/helpers/config";
@@ -51,7 +51,7 @@ const useFetch = () => {
     }
   };
 
-  // Post
+  // Patch
   const patchData = async (url, payload, cbFunction) => {
     setLoading(true);
     const headers = await getHeaders(token);

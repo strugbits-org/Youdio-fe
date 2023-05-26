@@ -7,26 +7,39 @@ export const email = Yup.string()
 .required('Email is required')
 
 // Password
-export const password = ({min, reqMesg, minMesg}) => {
+export const password = ({min, reqMesg, isRequired, minMesg}) => {
     reqMesg = reqMesg ? reqMesg : reqMesg = 'Password is Required';
     minMesg = minMesg ? minMesg : minMesg = `Password should be ${min} or more characters`;
     
     if (typeof min === 'number') {
+        if (!isRequired) return Yup.string().min(min, minMesg);
         return Yup.string()
         .required(reqMesg)
         .min(min, minMesg)
     } else {
+        if (!isRequired) return Yup.string();
         return Yup.string()
         .required(reqMesg)
     }
 }
 
+export const confirmPassword = ({ reqMesg, isRequired, pass }) => {
+  reqMesg = reqMesg ? reqMesg : (reqMesg = "Password is Required");
+
+  if (!isRequired) return Yup.string().equals(pass, "Password not matched");
+  return Yup.string().required(reqMesg).equals(pass, "Password not matched");
+};
+
 // Simple Text Field
-export const textField = ({min, reqMesg, minMesg}) => {
+export const textField = ({min, reqMesg, isRequired, minMesg}) => {
     min = typeof min === 'number' ? min : min = 3;
     reqMesg = reqMesg ? reqMesg : reqMesg = 'Required';
     minMesg = minMesg ? minMesg : minMesg = `Should be ${min} or more characters`;
     
+    if (!isRequired) {
+        return Yup.string()
+        .min(min, minMesg)
+    }
     return Yup.string()
     .required(reqMesg)
     .min(min, minMesg)

@@ -21,7 +21,7 @@ import { setUser } from "src/features/userSlice";
 
 
 const MyProfile = () => {
-  const { res, loading, error, fetchData } = useFetch();
+  const { fetchData } = useFetch();
 
   const { user } = useSelector((state) => state.user);
 

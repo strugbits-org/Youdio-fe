@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import { NavLink } from "react-router-dom";
 import { setUserAuth } from "src/features/userSlice";
@@ -56,6 +56,7 @@ function Register() {
       toast.error(error, {
         position: "top-right",
       });
+    
   }, [error]);
 
   return (
@@ -134,7 +135,7 @@ function Register() {
           )}
         </Formik>
       </div>
-      {error && <ToastContainer />}
+      <ToastContainer />
     </Container>
   );
 }

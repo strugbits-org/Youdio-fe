@@ -8,14 +8,16 @@ import {
   // CancelButton,
   SaveButton,
   Box3,
-  HorizontalLine2,
+  // HorizontalLine2,
 } from "./ProfileComponent";
 import useFetch from "src/features/hooks/useFetch";
 import { setUser } from "src/features/userSlice";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
-const FormRow = styled.div``;
+const FormRow = styled.div`
+ margin-bottom: 20px;
+`;
 
 function ProfileForm({ user, content }) {
   const { loading, error, success, patchData } = useFetch();
@@ -43,8 +45,6 @@ function ProfileForm({ user, content }) {
         }}
         validationSchema={userFormValidate}
         onSubmit={(data) => {
-          // dispatch(login({ data }));
-          Object.values()
           patchData("user/update-profile", data, setUser);
         }}
       >
@@ -59,7 +59,7 @@ function ProfileForm({ user, content }) {
                 style={{ fontSize: "16px" }}
               />
             </FormRow>
-            <HorizontalLine2 />
+            {/* <HorizontalLine2 /> */}
 
             <FormRow>
               <FieldInput
@@ -70,7 +70,7 @@ function ProfileForm({ user, content }) {
                 style={{ fontSize: "16px" }}
               />
             </FormRow>
-            <HorizontalLine2 />
+            {/* <HorizontalLine2 /> */}
 
             <FormRow>
               <FieldInput
@@ -82,7 +82,7 @@ function ProfileForm({ user, content }) {
                 style={{ fontSize: "16px" }}
               />
             </FormRow>
-            <HorizontalLine2 />
+            {/* <HorizontalLine2 /> */}
 
             <FormRow>
               <FieldPassword

@@ -110,6 +110,9 @@ const UL = styled.ul`
     justify-content:${({align}) => align ? align : 'center' };
     /* border:1px solid red; */
 
+    .txtLogout{
+        cursor: pointer;
+    }
     .langChange{
         display:flex;
         justify-content:center;

@@ -11,13 +11,12 @@ import {
   PrimaryButton,
   H1,
   P2,
+  P1,
 } from "src/components";
 import { regsiterFormValidate } from "src/helpers/forms/validateForms";
 import { regsiterContent } from "./content";
 import { contentTranslator } from "src/helpers/translator";
 import { path } from "src/helpers";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import useFetch from "src/features/hooks/useFetch";
 
 const Container = styled.div`
@@ -25,8 +24,10 @@ const Container = styled.div`
   height: 100vh;
   display: grid;
   place-content: center;
+  padding-inline: 5vw;
   .form {
-    width: 474px;
+    width: 90vw;
+    max-width: 474px;
     h1,
     p {
       text-align: center;
@@ -35,10 +36,18 @@ const Container = styled.div`
 `;
 const FormRow = styled.div`
   margin-bottom: 35px;
+
+  .txtSignIn {
+    color: var(--backgroundGreen);
+  }
+`;
+
+const CustomP2 = styled(P2)`
+  margin-bottom: 60px;
 `;
 
 function Register() {
-  const { loading, error, postData } = useFetch()
+  const { loading, postData } = useFetch()
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(regsiterContent);
 
@@ -50,14 +59,6 @@ function Register() {
       language,
     });
   }, [language, content]);
-
-  useEffect(() => {
-    error &&
-      toast.error(error, {
-        position: "top-right",
-      });
-    
-  }, [error]);
 
   return (
     <Container>
@@ -80,7 +81,7 @@ function Register() {
                 {" "}
                 {/*Formik Form Import from Formik*/}
                 <H1>{content.signUp}</H1>
-                <P2>{content.signUpLine}</P2>
+                <CustomP2>{content.signUpLine}</CustomP2>
                 <FormRow>
                   <FieldInput
                     label={content.name}
@@ -125,17 +126,17 @@ function Register() {
                   </PrimaryButton>
                 </FormRow>
                 <FormRow>
-                  <p>
+                  <P1>
                     {content.ifYouHave}{" "}
-                    <NavLink to={path.signIn}>{content.signIn}</NavLink>
-                  </p>
+                    <NavLink className="txtSignIn" to={path.signIn}>{content.signIn}</NavLink>
+                  </P1>
                 </FormRow>
               </Form>
             </div>
           )}
         </Formik>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </Container>
   );
 }

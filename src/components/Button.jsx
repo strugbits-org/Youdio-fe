@@ -26,9 +26,15 @@ export const PrimaryButton = styled.button`
         cursor: default;
         position: relative;
         color: transparent;
-        display: grid;
+        display: flex;
+        justify-content: center;
         align-items: center;
-        place-items: center;
+
+        & img{
+            display: none;
+        }
+
+        
         &::after{
             content: "";
             position: absolute;

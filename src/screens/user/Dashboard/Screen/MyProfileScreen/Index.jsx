@@ -26,8 +26,8 @@ const MyProfile = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    fetchData("user/user-profile", setUser)
-  }, [])
+    fetchData("user/user-profile", setUser);
+  }, [fetchData]);
 
   return (
     <Wrapper>

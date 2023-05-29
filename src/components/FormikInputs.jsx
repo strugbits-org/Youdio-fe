@@ -6,11 +6,10 @@ import { Input, Error, Label } from 'src/components';
 import { icons } from 'src/helpers';
 
 const Ipt = styled.div`
-    width: 100%;
+    /* width: 100%; */
     display:flex;
     flex-direction:column;
     gap:4px;
-    /* position: relative; */
     
 `
 
@@ -31,12 +30,9 @@ export const FieldInput = ({ label, ...props }) => {
 
     return (
         <Ipt>
-
-            {/* {src && <img src={src} alt="" width="15px" height="15px" />} */}
             <Label htmlFor={props.id}>{label}</Label>
             <Input
                 err={meta.touched && meta.error}
-                // isIcon={src}
                 {...field}
                 {...props}
             />

@@ -16,6 +16,7 @@ export const login = createAsyncThunk(
   }
 );
 
+
 export const register = createAsyncThunk(
   "register",
   async ({ data }, {rejectWithValue}) => {
@@ -133,5 +134,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout, setUser, setUserAuth } = userSlice.actions;
+export const { logout, setUser, setUserAuth, forgotpassword } = userSlice.actions;
 export default userSlice.reducer;

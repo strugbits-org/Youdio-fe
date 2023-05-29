@@ -96,12 +96,19 @@ function Header({ isLoggedin }) {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <li onClick={() => btnLogout()}>
-                <span>{content.logout}</span>
+              <li>
+                <span className="txtLogout" onClick={() => btnLogout()}>
+                  {content.logout}
+                </span>
               </li>
               <li>
                 <NavLink to={path.membership}>
-                  <img src={icons.cardInstruct} alt="profile" width="40px" height="40px" />
+                  <img
+                    src={icons.cardInstruct}
+                    alt="profile"
+                    width="40px"
+                    height="40px"
+                  />
                 </NavLink>
               </li>
             </React.Fragment>

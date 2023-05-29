@@ -18,7 +18,7 @@ export const path = {
 
   signIn: "/login",
   register: "/register",
-  forgotPassword: "",
+  forgotPassword: "/forgot-password",
 };
 
 export const layout = {

@@ -27,7 +27,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     fetchData("user/user-profile", setUser);
-  }, [fetchData]);
+  }, []);
 
   return (
     <Wrapper>

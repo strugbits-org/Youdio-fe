@@ -45,9 +45,11 @@ const useFetch = () => {
   };
 
   // Post
-  const postData = async (url, payload, cbFunction) => {
-      setLoading(true);
-    const headers = await getHeaders(token);
+  const postData = async (url, payload, cbFunction, resetToken) => {
+    setLoading(true);
+    const headers = resetToken
+      ? await getHeaders(resetToken)
+      : await getHeaders(token);
     try {
       const response = await apiClient.post(url, payload, { headers });
       if (response?.data) {
@@ -55,8 +57,9 @@ const useFetch = () => {
         setLoading(false);
         setSuccess(true);
         cbFunction && dispatch(cbFunction(response.data));
-        if(res.data?.message) notify("success", res.data.message);
+        if (response.data?.message) notify("success", response.data.message);
       }
+      
     } catch (e) {
       setLoading(false);
       setSuccess(false);

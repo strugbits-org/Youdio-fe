@@ -1,21 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Formik, Form } from "formik";
 
-import {
-  FieldInput,
-  H1,
-  P2,
-  PrimaryButton,
-} from "src/components";
-import {
-  forgotFormValidate,
-} from "src/helpers/forms/validateForms";
+import { FieldPassword, H1, P2, PrimaryButton } from "src/components";
+import { resetPasswordFormValidate } from "src/helpers/forms/validateForms";
 
 import "react-toastify/dist/ReactToastify.css";
 import useFetch from "src/features/hooks/useFetch";
-import { icons } from "src/helpers";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Container = styled.div`
   background: #fff;
@@ -57,58 +49,50 @@ const CustomPrimaryButton = styled(PrimaryButton)`
   gap: 8px;
 `;
 
-function ForgotPassword() {
+function ResetPassword() {
   const { loading, postData, res } = useFetch();
+  const [resetToken, setResetToken] = useState("");
+  const location = useParams();
   const navigate = useNavigate();
-
   useEffect(() => {
-    if (res && res.link) {
-      const link = res.link;
-      const token = link.slice(link.lastIndexOf("/") + 1);
-      navigate(`/reset-password/${token}`);
+    if (location?.token) {
+      setResetToken(location.token);
     }
-  }, [res, navigate]);
- 
+    if (res && res.message) navigate("/login");
+  }, [resetToken, res, location, navigate]);
+
   return (
     <Container>
       <div className="form">
         <Formik
           initialValues={{
-            email:""
+            newPassword: "",
           }}
-          validationSchema={forgotFormValidate}
+          validationSchema={resetPasswordFormValidate}
           onSubmit={(data) => {
-            postData("forgot-password", data);
+            postData("reset-password", data, undefined, resetToken);
           }}
         >
           {(formik) => (
             <div>
               <Form autoComplete="off">
                 {/*Formik Form Import from Formik*/}
-                <H1>Forgot Password</H1>
+                <H1>Reset Password</H1>
                 <CustomP2>
                   Lorem ipsum dolor sit amet tortor ut nulla amet dui.
                 </CustomP2>
                 <FormRow>
-                  <FieldInput
-                    label="Email"
-                    id="forgotEmail"
-                    autofill
-                    name="email"
-                    type="email"
-                    placeholder="Enter E-mail address"
+                  <FieldPassword
+                    label="New Password"
+                    id="newPassword"
+                    name="newPassword"
+                    placeholder="******"
                     style={{ fontSize: "16px" }}
                   />
                 </FormRow>
                 <FormRow>
                   <CustomPrimaryButton type="submit" disabled={loading}>
-                    Send
-                    <img
-                      src={icons.envelop}
-                      alt="envelop-icon"
-                      width=""
-                      height=""
-                    />
+                    Reset Password
                   </CustomPrimaryButton>
                 </FormRow>
               </Form>
@@ -120,4 +104,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default ResetPassword;

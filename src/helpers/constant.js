@@ -11,7 +11,7 @@ export const fonts = {
 export const path = {
   home: "/",
   liveClasses: "",
-  videos: "",
+  videos: "/videoclasses",
 
   membership: "/myprofile",
   instructor: "/instructor",

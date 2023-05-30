@@ -29,43 +29,35 @@ import Payment from "src/screens/user/Dashboard/Screen/PaymentScreen/Index";
 import LiveBooking from "src/screens/user/Dashboard/Screen/LiveBookingScreen/Index";
 import LiveVideo from "src/screens/user/LiveVideo";
 import ForgotPassword from "src/screens/Authenticate/ForgotPassword";
+import ResetPassword from "src/screens/Authenticate/ResetPassword";
+import VideoClasses from "src/screens/user/VideoClasses";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
-const ProtectedRoute = ({ children }) => {
-  const base = useSelector((state) => state.user);
-  let location = useLocation();
-
-  if (!base.token) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-  return children;
-};
-
-const ProtectedAuthRoute = ({ children }) => {
-  const base = useSelector((state) => state.user);
-  let location = useLocation();
-
-  if (base.token) {
-    return <Navigate to="/" state={{ from: location }} replace />;
-  }
-  return children;
-};
-
 export default function Router() {
-  // // Protected Routes For check the user is logged in or not | if loggedin show redirect to member page else show login or signup page.
-  // const protectedAuthRoute = (component) => {
-  //     if (user) {
-  //         return <Dashboard />
-  //     }
-  //     else {
-  //         return component
-  //     }
-  // }
-
   // useEffect(() => {
   //     // Calling a auth function if user logged in setUser with id or something. Else setUser to null.
   // }, [])
+
+  const ProtectedRoute = ({ children }) => {
+    const base = useSelector((state) => state.user);
+    let location = useLocation();
+
+    if (!base.token) {
+      return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+    return children;
+  };
+
+  const ProtectedAuthRoute = ({ children }) => {
+    const base = useSelector((state) => state.user);
+    let location = useLocation();
+
+    if (base.token) {
+      return <Navigate to="/" state={{ from: location }} replace />;
+    }
+    return children;
+  };
 
   return (
     <div>
@@ -86,13 +78,27 @@ export default function Router() {
 
           <Route
             path="/forgot-password"
-            element={<ProtectedAuthRoute children={<ForgotPassword />} />}
+            element={
+              <ProtectedAuthRoute
+                children={<ForgotPassword isReset={false} />}
+              />
+            }
+          />
+
+          <Route
+            path="/reset-password/:token"
+            element={
+              <ProtectedAuthRoute
+                children={<ResetPassword />}
+              />
+            }
           />
 
           {/* User */}
           <Route path="/" element={<LiveClasses />} />
           <Route path="/instructor" element={<Instructor />} />
           <Route path="/livevideo" element={<LiveVideo />} />
+          <Route path="/videoclasses" element={<VideoClasses />} />
           <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
 
           {/* User Dashboard */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Heading,
   Heading2,
@@ -25,8 +25,10 @@ const MyProfile = () => {
 
   const { user } = useSelector((state) => state.user);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchData("user/user-profile", setUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

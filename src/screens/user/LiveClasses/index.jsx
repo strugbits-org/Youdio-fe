@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { weekdays } from "moment";
+import useFetch from "src/features/hooks/useFetch";
 
 import { liveClassStaticContent } from "./constant";
 import {
@@ -20,6 +21,9 @@ import { monthNames, getDaysArray } from "./constant";
 
 function LiveClasses() {
   const date = new Date();
+
+  const { fetchData, res } = useFetch();
+
   const initialYear = date.getFullYear();
   const initialMonth = date.getMonth();
 
@@ -77,7 +81,7 @@ function LiveClasses() {
     setDateSelected("");
   };
 
-  useEffect(() => {    
+  useEffect(() => {
     contentTranslator({
       staticContent: liveClassStaticContent,
       contentToTranslate: content,
@@ -87,6 +91,14 @@ function LiveClasses() {
     !isDateSelected &&
       setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
   }, [content, weekDays, language, month, weekStart, weekEnd, isDateSelected]);
+
+ 
+  useEffect(() => {
+    fetchData("video");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {}, [res]);
 
   return (
     <React.Fragment>
@@ -213,24 +225,14 @@ function LiveClasses() {
       {/* Cards Section */}
       <Section backgroundColor="white">
         <CardsBox>
-          {[...Array(6).keys()].map((val) => (
-            <LiveClassCard key={`card-${val}`} />
-          ))}
+          {res?.videos.length > 0 &&
+            res.videos.map((val) => (
+              <LiveClassCard key={`card-${val._id}`} data={val} />
+            ))}
           <DateTag>
             <H4>31</H4>
             <hr />
             <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
-          </DateTag>
-        </CardsBox>
-        <div className="seperatorLine"></div>
-        <CardsBox>
-          {[...Array(6).keys()].map((val) => (
-            <LiveClassCard key={`card-${val}`} />
-          ))}
-          <DateTag>
-            <H4>30</H4>
-            <hr />
-            <H6M fontFamily={fonts.poppinsMedium}>Mon</H6M>
           </DateTag>
         </CardsBox>
       </Section>

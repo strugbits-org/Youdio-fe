@@ -124,13 +124,6 @@ export const CardContent = styled.div`
       align-items: center;
       gap: 13px;
     }
-    .intensityBox {
-      flex: 1;
-      align-items: center;
-      justify-content: right;
-      display: flex;
-      gap: 10px;
-    }
   }
   .trainerP3 {
     margin-top: -2em;

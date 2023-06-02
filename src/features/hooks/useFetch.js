@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { apiClient } from "src/config/https";
 import { useSelector, useDispatch } from "react-redux";
 import { getHeaders } from "src/helpers/config";
@@ -26,9 +26,8 @@ const useFetch = () => {
   }
 
   // Get
-  const fetchData = async (url, cbFunction) => {
+  const fetchData = async (url, cbFunction, setLocalState) => {
     setLoading(true);
-
     const headers = await getHeaders(token);
     try {
       const response = await apiClient.get(url, { headers });
@@ -37,6 +36,7 @@ const useFetch = () => {
         setLoading(false);
         setError("");
         cbFunction && dispatch(cbFunction(response.data));
+        setLocalState && setLocalState(response.data);
       }
     } catch (e) {
       setLoading(false);
@@ -88,11 +88,12 @@ const useFetch = () => {
     }
   };
 
-  // useEffect(() => {
-  //   // method === "get" && get();
-  //   // method === "post" && post();
-  // }, [url, payload]);
+  useEffect(() => {
+    // method === "get" && get();
+    // method === "post" && post();
+  }, []);
 
   return { res, loading, error, success, fetchData, postData, patchData };
 };
+
 export default useFetch;

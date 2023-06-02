@@ -74,6 +74,7 @@ const useFetch = () => {
     const headers = await getHeaders(token);
     try {
       const response = await apiClient.patch(url, payload, { headers });
+      console.log({response});
       if (response?.data) {
         setResponse(response.data);
         setLoading(false);

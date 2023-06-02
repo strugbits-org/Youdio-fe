@@ -35,11 +35,11 @@ const resetPasswordFormValidate = Yup.object({
 
 // User Form Validation
 const userFormValidate = Yup.object({
-  name: textField({ isRequired: false }),
+  name: textField({ reqMesg: "Full name is Required" }),
   userEmail: email,
   nickName: textField({ reqMesg: "Nick name is Required" }),
-  oldPassword: password({ isRequired: false }),
-  newPassword: password({ isRequired: false }),
+  oldPassword: Yup.string(),
+  newPassword: Yup.string().min(6, "Password should be 6 or more characters"),
 });
 
 export {

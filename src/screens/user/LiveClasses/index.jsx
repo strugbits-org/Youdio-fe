@@ -18,11 +18,12 @@ import { H1, H3, H4, P1, Section, InputIcon, Filters } from "src/components";
 import { IconButton, PrimaryWhiteButton } from "src/components";
 import { LiveClassCard, DateTag } from "src/components/Cards/";
 import { monthNames, getDaysArray } from "./constant";
+import Loader from "src/components/Loader";
 
 function LiveClasses() {
   const date = new Date();
 
-  const { fetchData, res } = useFetch();
+  const { fetchData, res, loading } = useFetch();
 
   const initialYear = date.getFullYear();
   const initialMonth = date.getMonth();
@@ -98,7 +99,7 @@ function LiveClasses() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {}, [res]);
+  useEffect(() => {}, [res, loading]);
 
   return (
     <React.Fragment>
@@ -224,8 +225,10 @@ function LiveClasses() {
 
       {/* Cards Section */}
       <Section backgroundColor="white">
+        {loading && <Loader width="35px" height="35px" />}
         <CardsBox>
-          {res?.videos.length > 0 &&
+          {!loading &&
+            res?.videos.length > 0 &&
             res.videos.map((val) => (
               <LiveClassCard key={`card-${val._id}`} data={val} />
             ))}

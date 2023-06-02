@@ -1,14 +1,10 @@
 import React, { useEffect } from "react";
 import {
   Heading,
-  Heading2,
 } from "src/screens/user/Dashboard/Components/Heading";
 import { Wrapper } from "src/screens/user/Dashboard/Components/Wrapper";
-import Women from "src/assets/sample/women.png";
-import { H5 } from "src/components";
 import {
   HorizontalLine2,
-  Box4,
   ProfileContainer,
 } from "./ProfileComponent";
 
@@ -25,7 +21,6 @@ const MyProfile = () => {
 
   const { user } = useSelector((state) => state.user);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchData("user/user-profile", setUser);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,25 +36,8 @@ const MyProfile = () => {
         <div className="whole_box">
           <Sidebar />
           <ProfileContainer>
-            <Box4>
-              <div className="image-container">
-                <img
-                  className="profile-img"
-                  src={Women}
-                  alt="profile-pic"
-                  style={{
-                    width: "100%",
-                    maxWidth: "350px",
-                    minWidth: "150px",
-                  }}
-                />
-              </div>
-              <div>
-                <Heading2>{content.profileH2}</Heading2>
-                <H5 style={{ color: "#999999" }}>{content.profileH5}</H5>
-              </div>
-            </Box4>
-            <HorizontalLine2 />
+            
+            {/* <HorizontalLine2 /> */}
             <ProfileForm user={user} content={content} />
           </ProfileContainer>
         </div>

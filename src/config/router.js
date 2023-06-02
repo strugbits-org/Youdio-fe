@@ -94,7 +94,7 @@ export default function Router() {
           <Route path="/" element={<LiveClasses />} />
           <Route path="/instructor" element={<Instructor />} />
           <Route path="/livevideo" element={<LiveVideo />} />
-          <Route path="/videoclasses" element={<LiveVideo />} />
+          <Route path="/videoclasses" element={<LiveClasses />} />
           <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
 
           {/* User Dashboard */}

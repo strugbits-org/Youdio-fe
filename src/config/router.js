@@ -30,7 +30,7 @@ import LiveBooking from "src/screens/user/Dashboard/Screen/LiveBookingScreen/Ind
 import LiveVideo from "src/screens/user/LiveVideo";
 import ForgotPassword from "src/screens/Authenticate/ForgotPassword";
 import ResetPassword from "src/screens/Authenticate/ResetPassword";
-import VideoClasses from "src/screens/user/VideoClasses";
+// import VideoClasses from "src/screens/user/VideoClasses";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 

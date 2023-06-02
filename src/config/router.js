@@ -87,18 +87,14 @@ export default function Router() {
 
           <Route
             path="/reset-password/:token"
-            element={
-              <ProtectedAuthRoute
-                children={<ResetPassword />}
-              />
-            }
+            element={<ProtectedAuthRoute children={<ResetPassword />} />}
           />
 
           {/* User */}
           <Route path="/" element={<LiveClasses />} />
           <Route path="/instructor" element={<Instructor />} />
           <Route path="/livevideo" element={<LiveVideo />} />
-          <Route path="/videoclasses" element={<VideoClasses />} />
+          <Route path="/videoclasses" element={<LiveVideo />} />
           <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
 
           {/* User Dashboard */}

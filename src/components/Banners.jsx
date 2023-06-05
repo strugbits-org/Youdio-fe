@@ -24,3 +24,10 @@ export const Section = styled.section`
     @media only screen and (min-width: ${desktop}) {
     }
 `
+export const Box = styled.div`
+    display: flex;
+    flex-direction: ${({direction}) => (direction ? direction : "initial")};
+    gap: ${({ gap }) => (gap ? gap : "initial")};
+    align-items: ${({ alignment }) => (alignment ? alignment : "center")};
+    margin-bottom: 65px;
+`;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { IconButton, WhiteIconButton } from "src/components";
@@ -119,13 +119,12 @@ export const FilterButton = ({ name, clickEvent, selected }) => {
   );
 };
 
-export const SelectionButton = ({ name }) => {
-  const [selected, setSelected] = useState(false);
-
+export const SelectionButton = ({ name, removeTag }) => {
   return (
-    <WhiteIconButton selected={selected} onClick={() => setSelected(!selected)}>
+    <WhiteIconButton onClick={() => removeTag(name)}>
       <span>{name}</span>
       <img src={icons.arrowDown} alt="" width={"14"} height={""} />
     </WhiteIconButton>
+
   );
 };

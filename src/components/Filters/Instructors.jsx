@@ -28,7 +28,7 @@ const InstructorsBox = styled.div`
     }
   }
 `;
-export default function Instructors() {
+export default function Instructors({removeTag, addTag}) {
   const { instructors } = useSelector((state) => state.filter);
   const { fetchData } = useFetch();
 
@@ -36,11 +36,13 @@ export default function Instructors() {
   const [instructorsList, setInstructorsList] = useState([]);
 
   const setSelected = (name) => {
-    !instructorsList.includes(name)
-      ? setInstructorsList([...instructorsList, name])
-      : setInstructorsList(
-          instructorsList.filter((val) => val !== name && val)
-        );
+    if (!instructorsList.includes(name)) {
+      addTag(name)
+      setInstructorsList([...instructorsList, name]);
+    } else {
+      removeTag(name)
+      setInstructorsList(instructorsList.filter((val) => val !== name && val));
+    }
   };
 
   useEffect(() => {

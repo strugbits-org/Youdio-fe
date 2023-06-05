@@ -41,10 +41,21 @@ export function Filters() {
   const [allFilters, setAllFilters] = useState([]);
   const [sort, setSort] = useState("newest");
 
-  useEffect(() => {}, [selectedFilter]);
+  useEffect(() => {}, [selectedFilter, allFilters]);
 
   const filterHandler = (filter) => {
     filter === selectedFilter ? setFilter(null) : setFilter(filter);
+  };
+
+  const removeTag = (tagName) => {
+    const filterTags = allFilters.filter((val) => val !== tagName && val);
+    setAllFilters(filterTags);
+  };
+
+  const addTag = (tagName) => {
+    const filterTags = [...allFilters];
+    filterTags.push(tagName);
+    setAllFilters(filterTags);
   };
 
   return (
@@ -67,12 +78,22 @@ export function Filters() {
             <P3 className="videoCount">SHOWING 316 VIDEOS</P3>
             <div className="filters">
               {selectedFilter === "duration" && <Duration />}
-              {selectedFilter === "instructors" && <Instructors />}
-              {selectedFilter === "styles" && (
-                <Styles setAllFilters={setAllFilters} allFilters={allFilters} />
+              {selectedFilter === "instructors" && (
+                <Instructors removeTag={removeTag} addTag={addTag} />
               )}
-              {selectedFilter === "difficulty" && <Difficulty />}
-              {selectedFilter === "intensity" && <Intensity />}
+              {selectedFilter === "styles" && (
+                <Styles
+                  removeTag={removeTag}
+                  addTag={addTag}
+                  allFilters={allFilters}
+                />
+              )}
+              {selectedFilter === "difficulty" && (
+                <Difficulty removeTag={removeTag} addTag={addTag} />
+              )}
+              {selectedFilter === "intensity" && (
+                <Intensity removeTag={removeTag} addTag={addTag} />
+              )}
             </div>
             <div className="sortOption">
               <P3>SORT BY:</P3>
@@ -87,7 +108,11 @@ export function Filters() {
       <SelectionBox>
         {allFilters.length > 0 &&
           allFilters.map((value, index) => (
-            <SelectionButton key={`selected-${value}`} name={value} />
+            <SelectionButton
+              key={`selected-${value}`}
+              name={value}
+              removeTag={removeTag}
+            />
           ))}
       </SelectionBox>
     </React.Fragment>

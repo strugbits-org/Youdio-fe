@@ -41,32 +41,37 @@ const StylesBox = styled.div`
   }
 `;
 
-export default function Styles({ setAllFilters, allFilters }) {
+export default function Styles({ addTag, removeTag }) {
   const { styles } = useSelector((state) => state.filter);
-  const { fetchData } = useFetch()
+  const { fetchData } = useFetch();
 
   const [allStyles, setAllStyles] = useState([]);
   const [styleList, setStyleList] = useState([]);
 
   const setAll = (name) => {
-    // setAllFilters([...allFilters, name]);
-
-    !allStyles.includes(name)
-      ? setAllStyles([...allStyles, name])
-      : setAllStyles(allStyles.filter((val) => val !== name && val));
+    if (!allStyles.includes(name)) {
+      setAllStyles([...allStyles, name]);
+      addTag(name);
+    } else {
+      setAllStyles(allStyles.filter((val) => val !== name && val));
+      removeTag(name);
+    }
   };
 
   const setSpecific = (name) => {
-    // setAllFilters([...allFilters, name]);
-    !styleList.includes(name)
-      ? setStyleList([...styleList, name])
-      : setStyleList(styleList.filter((val) => val !== name && val));
+    if (!styleList.includes(name)) {
+      setStyleList([...styleList, name]);
+      addTag(name);
+    } else {
+      setStyleList(styleList.filter((val) => val !== name && val));
+      removeTag(name);
+    }
   };
 
   useEffect(() => {
     fetchData("category/get-sub-category", setStyles);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <StylesBox>

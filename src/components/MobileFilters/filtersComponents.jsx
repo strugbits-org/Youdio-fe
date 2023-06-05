@@ -35,22 +35,7 @@ export const SelectionBox = styled.div`
   }
 `;
 
-export const FilterBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1vw;
-  background: whitesmoke;
-  padding: ${({ open }) => (open !== null ? "15px" : "0px")};
-  /* margin-bottom:40px; */
-  /* height:auto;
-    transition: 1s all ease-in-out; */
 
-  .filters {
-    background: var(--backgroundLightGrey);
-  }
-`;
 
 export const FilterOptions = styled.div`
   width: 100%;
@@ -129,3 +114,16 @@ export const SelectionButton = ({ name }) => {
     </WhiteIconButton>
   );
 };
+
+
+export const FilterBox = styled.div`
+  height: 100dvh;
+  background: #26262677;
+
+  /* @media only screen and (min-width: ${mobile}) {
+    display: none;
+  }
+  @media only screen and (min-width: ${tablet}) {
+    display: flex;
+  } */
+`;

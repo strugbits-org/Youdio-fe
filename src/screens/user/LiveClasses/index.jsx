@@ -19,11 +19,15 @@ import { IconButton, PrimaryWhiteButton } from "src/components";
 import { LiveClassCard, DateTag } from "src/components/Cards/";
 import { monthNames, getDaysArray } from "./constant";
 import Loader from "src/components/Loader";
+import useInnerWidth from "src/features/hooks/useInnerWidth";
+import MobileFilters from "src/components/MobileFilters";
 
 function LiveClasses() {
   const date = new Date();
 
   const { fetchData, res, loading } = useFetch();
+  const { innerWidth } = useInnerWidth();
+  const [open, setOpen] = useState(false);
 
   const initialYear = date.getFullYear();
   const initialMonth = date.getMonth();
@@ -91,9 +95,17 @@ function LiveClasses() {
     });
     !isDateSelected &&
       setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
-  }, [content, weekDays, language, month, weekStart, weekEnd, isDateSelected]);
+  }, [
+    content,
+    open,
+    weekDays,
+    language,
+    month,
+    weekStart,
+    weekEnd,
+    isDateSelected,
+  ]);
 
- 
   useEffect(() => {
     fetchData("video");
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -218,9 +230,19 @@ function LiveClasses() {
           </div>
         </DayBox>
 
-        <div className="seperatorLine"></div>
-
-        <Filters />
+        {innerWidth === "mobileFilters" ? (
+          <React.Fragment>
+            <PrimaryWhiteButton onClick={() => setOpen(true)}>
+              Filters
+            </PrimaryWhiteButton>
+            <MobileFilters open={open} setOpen={setOpen} />
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="seperatorLine"></div>
+            <Filters />
+          </React.Fragment>
+        )}
       </Section>
 
       {/* Cards Section */}

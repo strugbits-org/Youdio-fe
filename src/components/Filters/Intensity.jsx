@@ -1,8 +1,9 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 import { P2 } from "src/components";
 import { icons } from "src/helpers";
+import { useSelector } from "react-redux";
+import { filterKeys } from "src/helpers/constant";
 
 const IntensityBox = styled.div`
   padding: 22px;
@@ -24,7 +25,7 @@ const IntensityBox = styled.div`
 `;
 
 export default function Intensity({ removeTag, addTag }) {
-  const [intensitiy, setIntensitiy] = useState([]);
+  const { filters } = useSelector(state => state.filter)
 
   const intensities = [
     {
@@ -46,13 +47,17 @@ export default function Intensity({ removeTag, addTag }) {
   ];
 
   const setSelected = (name) => {
-      if (!intensitiy.includes(name)) {
-        addTag(name)
-        setIntensitiy([...intensitiy, name]);
-    } else {
-        removeTag(name)
-        setIntensitiy(intensitiy.filter((val) => val !== name && val));
-    }
+     if (!filters.intensity.includes(name)) {
+       addTag({
+         data: name,
+         key: filterKeys.intensity,
+       });
+     } else {
+       removeTag({
+         data: name,
+         key: filterKeys.intensity,
+       });
+     }
   };
 
   return (
@@ -62,7 +67,9 @@ export default function Intensity({ removeTag, addTag }) {
           intensities.map(({ id, name }) => {
             return (
               <li key={id} onClick={() => setSelected(name)}>
-                <P2 className={intensitiy.includes(name) ? "active" : ""}>
+                <P2
+                  className={filters.intensity.includes(name) ? "active" : ""}
+                >
                   {name}
                 </P2>
                 <img

@@ -12,7 +12,14 @@ import {
   SelectionButton,
 } from "./filtersComponents";
 import { P3 } from "src/components";
-
+import useFetch from "src/features/hooks/useFetch";
+import {
+  setStyles,
+  setInstructors,
+  pushToFilters,
+  removeFromFilter,
+} from "src/features/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
 const filter = [
   {
     label: "DURATION",
@@ -37,25 +44,40 @@ const filter = [
 ];
 
 export function Filters() {
-  const [selectedFilter, setFilter] = useState(null);
-  const [allFilters, setAllFilters] = useState([]);
+  const [filterTab, setFilterTab] = useState(null);
+  const filterTags = useSelector((state) => state.filter.filterTags);
   const [sort, setSort] = useState("newest");
+  const { fetchMultipleData } = useFetch();
+  const dispatch = useDispatch();
 
-  useEffect(() => {}, [selectedFilter, allFilters]);
+  useEffect(() => {}, [filterTab, filterTags]);
+
+  useEffect(() => {
+    fetchMultipleData(
+      ["category/get-sub-category", "instructor/get-instructor"],
+      [setStyles, setInstructors]
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const filterHandler = (filter) => {
-    filter === selectedFilter ? setFilter(null) : setFilter(filter);
+    filter === filterTab ? setFilterTab(null) : setFilterTab(filter);
   };
 
-  const removeTag = (tagName) => {
-    const filterTags = allFilters.filter((val) => val !== tagName && val);
-    setAllFilters(filterTags);
+  const removeTag = (tag) => {
+    if (tag?.subKey) {
+      dispatch(removeFromFilter(tag));
+    } else {
+      dispatch(removeFromFilter(tag));
+    }
   };
 
-  const addTag = (tagName) => {
-    const filterTags = [...allFilters];
-    filterTags.push(tagName);
-    setAllFilters(filterTags);
+  const addTag = (tag) => {
+    if (tag?.subKey) {
+      dispatch(pushToFilters(tag));
+    } else {
+      dispatch(pushToFilters(tag));
+    }
   };
 
   return (
@@ -66,32 +88,28 @@ export function Filters() {
             <div key={`filter-button-${ind}`}>
               <FilterButton
                 name={label}
-                selected={selectedFilter}
+                selected={filterTab}
                 clickEvent={() => filterHandler(value)}
               />
             </div>
           );
         })}
 
-        {selectedFilter !== null && (
+        {filterTab !== null && (
           <FilterOptions>
             <P3 className="videoCount">SHOWING 316 VIDEOS</P3>
             <div className="filters">
-              {selectedFilter === "duration" && <Duration />}
-              {selectedFilter === "instructors" && (
+              {filterTab === "duration" && <Duration />}
+              {filterTab === "instructors" && (
                 <Instructors removeTag={removeTag} addTag={addTag} />
               )}
-              {selectedFilter === "styles" && (
-                <Styles
-                  removeTag={removeTag}
-                  addTag={addTag}
-                  allFilters={allFilters}
-                />
+              {filterTab === "styles" && (
+                <Styles removeTag={removeTag} addTag={addTag} />
               )}
-              {selectedFilter === "difficulty" && (
+              {filterTab === "difficulty" && (
                 <Difficulty removeTag={removeTag} addTag={addTag} />
               )}
-              {selectedFilter === "intensity" && (
+              {filterTab === "intensity" && (
                 <Intensity removeTag={removeTag} addTag={addTag} />
               )}
             </div>
@@ -106,11 +124,11 @@ export function Filters() {
         )}
       </FilterBox>
       <SelectionBox>
-        {allFilters.length > 0 &&
-          allFilters.map((value, index) => (
+        {filterTags?.length > 0 &&
+          filterTags.map((value, index) => (
             <SelectionButton
-              key={`selected-${value}`}
-              name={value}
+              key={`selected-${value.data}`}
+              tag={value}
               removeTag={removeTag}
             />
           ))}

@@ -1,7 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 import { P1 } from "src/components";
+import { filterKeys } from "src/helpers/constant";
+import { useSelector } from "react-redux";
 
 const DifficultyBox = styled.div`
   padding: 22px;
@@ -20,8 +21,8 @@ const DifficultyBox = styled.div`
   }
 `;
 
-export default function Difficulty({addTag, removeTag}) {
-  const [difficult, setDifficult] = useState([]);
+export default function Difficulty({ addTag, removeTag }) {
+  const { filters } = useSelector((state) => state.filter);
 
   const difficulties = [
     {
@@ -43,12 +44,16 @@ export default function Difficulty({addTag, removeTag}) {
   ];
 
   const setSelected = (name) => {
-    if (!difficult.includes(name)) {
-        setDifficult([...difficult, name]);
-        addTag(name)
+    if (!filters.difficulty.includes(name)) {
+      addTag({
+        data: name,
+        key: filterKeys.difficulty,
+      });
     } else {
-        setDifficult(difficult.filter((val) => val !== name && val));
-        removeTag(name)
+      removeTag({
+        data: name,
+        key: filterKeys.difficulty,
+      });
     }
   };
 
@@ -59,7 +64,9 @@ export default function Difficulty({addTag, removeTag}) {
           difficulties.map(({ id, name }) => {
             return (
               <li key={id} onClick={() => setSelected(name)}>
-                <P1 className={difficult.includes(name) ? "active" : ""}>
+                <P1
+                  className={filters.difficulty.includes(name) ? "active" : ""}
+                >
                   {name}
                 </P1>
               </li>

@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { H6, P3 } from "src/components";
 import { layout } from "src/helpers";
 import { useSelector } from "react-redux";
-import useFetch from "src/features/hooks/useFetch";
-import { setStyles } from "src/features/filterSlice";
+import { filterKeys } from "src/helpers/constant";
 
 const { tablet, laptop } = layout;
 
@@ -42,36 +40,29 @@ const StylesBox = styled.div`
 `;
 
 export default function Styles({ addTag, removeTag }) {
-  const { styles } = useSelector((state) => state.filter);
-  const { fetchData } = useFetch();
+  const { styles, filters } = useSelector((state) => state.filter);
 
-  const [allStyles, setAllStyles] = useState([]);
-  const [styleList, setStyleList] = useState([]);
-
-  const setAll = (name) => {
-    if (!allStyles.includes(name)) {
-      setAllStyles([...allStyles, name]);
-      addTag(name);
+  const setSpecific = (name, subKey) => {
+    const customSubKey = camelCase(subKey);
+    if (!filters.styles[customSubKey].includes(name)) {
+      addTag({
+        data: name,
+        key: filterKeys.styles,
+        subKey: customSubKey,
+      });
     } else {
-      setAllStyles(allStyles.filter((val) => val !== name && val));
-      removeTag(name);
+      removeTag({
+        data: name,
+        key: filterKeys.instructors,
+        subKey: customSubKey,
+      });
     }
   };
 
-  const setSpecific = (name) => {
-    if (!styleList.includes(name)) {
-      setStyleList([...styleList, name]);
-      addTag(name);
-    } else {
-      setStyleList(styleList.filter((val) => val !== name && val));
-      removeTag(name);
-    }
+  const camelCase = (text) => {
+    if (text === "Set your intention") return "setYourIntention";
+    return text.toLowerCase();
   };
-
-  useEffect(() => {
-    fetchData("category/get-sub-category", setStyles);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <StylesBox>
@@ -81,8 +72,12 @@ export default function Styles({ addTag, removeTag }) {
             return (
               <li key={_id}>
                 <H6
-                  className={allStyles.includes(category) ? "active" : ""}
-                  onClick={() => setAll(category)}
+                  className={
+                    filters.styles[camelCase(category)].includes(category)
+                      ? "active"
+                      : ""
+                  }
+                  onClick={() => setSpecific(category, category)}
                 >
                   {category}
                 </H6>
@@ -93,13 +88,17 @@ export default function Styles({ addTag, removeTag }) {
                         <li
                           key={`sub-design-${ind}`}
                           className={
-                            allStyles.includes(category)
+                            filters.styles[camelCase(category)].includes(
+                              category
+                            )
                               ? "active"
-                              : styleList.includes(val)
+                              : filters.styles[camelCase(category)].includes(
+                                  val
+                                )
                               ? "active"
                               : ""
                           }
-                          onClick={() => setSpecific(val)}
+                          onClick={() => setSpecific(val, category)}
                         >
                           <P3>{val}</P3>
                         </li>

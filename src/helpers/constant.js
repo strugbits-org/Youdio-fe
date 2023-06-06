@@ -28,3 +28,16 @@ export const layout = {
     laptop: '1001px',
     desktop: '1368px',
 }
+
+export const filterKeys = {
+  duration: "duration",
+  instructors: "instructors",
+  styles: "styles",
+  fitness: "fitness",
+  mindfulness: "mindfulness",
+  skills: "skills",
+  yoga: "yoga",
+  setYourIntention: "setYourIntention",
+  difficulty: "difficulty",
+  intensity: "intensity",
+};

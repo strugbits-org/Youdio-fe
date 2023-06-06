@@ -3,13 +3,14 @@ import { apiClient } from "src/config/https";
 import { useSelector, useDispatch } from "react-redux";
 import { getHeaders } from "src/helpers/config";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const useFetch = () => {
   const { token } = useSelector((state) => state.user);
   const [res, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false);
   const dispatch = useDispatch();
 
   const notify = (type, mesg) => {
@@ -23,7 +24,7 @@ const useFetch = () => {
         position: "top-right",
       });
     }
-  }
+  };
 
   // Get
   const fetchData = async (url, cbFunction, setLocalState) => {
@@ -37,6 +38,38 @@ const useFetch = () => {
         setError("");
         cbFunction && dispatch(cbFunction(response.data));
         setLocalState && setLocalState(response.data);
+      }
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
+  };
+
+  // Get Data From Multiple endpoints
+  const fetchMultipleData = async (url, cbFunction, setLocalState) => {
+    setLoading(true);
+    const headers = await getHeaders(token);
+    try {
+      if (typeof url === "object" && url.length > 0) {
+        const response = await axios.all(
+          url.map((endpoint) => {
+            return apiClient
+              .get(endpoint, { headers })
+              .then((res) => res)
+              .catch((e) => console.error(e));
+          })
+        );
+        const isResponseValid = response.some((val) => val?.data && true);
+        if (isResponseValid) {
+          const responseData = [];
+          response.forEach((res) => res?.data && responseData.push(res.data));
+          setResponse(responseData);
+          setLoading(false);
+          setError("");
+          cbFunction &&
+            cbFunction.forEach((cb, ind) => dispatch(cb(responseData[ind], "Hamza")));
+          // setLocalState && setLocalState(response.data);
+        }
       }
     } catch (e) {
       setLoading(false);
@@ -59,7 +92,6 @@ const useFetch = () => {
         cbFunction && dispatch(cbFunction(response.data));
         if (response.data?.message) notify("success", response.data.message);
       }
-      
     } catch (e) {
       setLoading(false);
       setSuccess(false);
@@ -74,7 +106,7 @@ const useFetch = () => {
     const headers = await getHeaders(token);
     try {
       const response = await apiClient.patch(url, payload, { headers });
-      console.log({response});
+      console.log({ response });
       if (response?.data) {
         setResponse(response.data);
         setLoading(false);
@@ -84,7 +116,7 @@ const useFetch = () => {
       }
     } catch (e) {
       setLoading(false);
-        setSuccess(false);
+      setSuccess(false);
       setError(e.message);
     }
   };
@@ -94,7 +126,16 @@ const useFetch = () => {
     // method === "post" && post();
   }, []);
 
-  return { res, loading, error, success, fetchData, postData, patchData };
+  return {
+    res,
+    loading,
+    error,
+    success,
+    fetchData,
+    fetchMultipleData,
+    postData,
+    patchData,
+  };
 };
 
 export default useFetch;

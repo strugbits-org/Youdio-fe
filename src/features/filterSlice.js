@@ -3,6 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   styles: null,
   instructors: null,
+  filters: {
+    duration: {},
+    instructors: [],
+    styles: {
+      fitness: [],
+      mindfulness: [],
+      skills: [],
+      yoga: [],
+      setYourIntention: [],
+    },
+    difficulty: [],
+    intensity: [],
+  },
+  filterTags: [],
 };
 
 const filterSlice = createSlice({
@@ -13,8 +27,43 @@ const filterSlice = createSlice({
       state.styles = action.payload;
     },
     setInstructors: (state, action) => {
-        state.instructors = action.payload;
-        console.log(state.instructors);
+      state.instructors = action.payload;
+    },
+
+    // Duration
+    filterDuration: (state, action) => {
+      const { startTime, endTime } = action.payload;
+      state.filters.duration = { startTime, endTime };
+    },
+    removeDuration: (state) => {
+      state.filters.duration = {};
+    },
+
+    // For Arrays Filter
+    pushToFilters: (state, action) => {
+      const { key, subKey, data } = action.payload;
+      
+      if (subKey) {
+        state.filterTags.push({data, key, subKey});
+        state.filters[key][subKey].push(data);
+      }
+      else {
+        state.filterTags.push({data, key});
+        state.filters[key].push(data);
+      }
+    },
+    removeFromFilter: (state, action) => {
+      const { key, subKey, data } = action.payload;
+
+      state.filterTags = state.filterTags.filter((tag) => tag.data !== data && tag);
+      if (subKey) {
+        const old = state.filters[key][subKey];
+        state.filters[key][subKey] = old.filter((val) => val !== data && val);
+      }
+      else {
+        const old = state.filters[key];
+        state.filters[key] = old.filter((val) => val !== data && val);
+      }
     },
   },
 
@@ -23,5 +72,12 @@ const filterSlice = createSlice({
   // },
 });
 
-export const { setStyles, setInstructors } = filterSlice.actions;
+export const {
+  setStyles,
+  setInstructors,
+  filterDuration,
+  removeDuration,
+  pushToFilters,
+  removeFromFilter,
+} = filterSlice.actions;
 export default filterSlice.reducer;

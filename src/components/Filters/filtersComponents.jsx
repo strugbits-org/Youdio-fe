@@ -119,10 +119,10 @@ export const FilterButton = ({ name, clickEvent, selected }) => {
   );
 };
 
-export const SelectionButton = ({ name, removeTag }) => {
+export const SelectionButton = ({ tag, removeTag }) => {
   return (
-    <WhiteIconButton onClick={() => removeTag(name)}>
-      <span>{name}</span>
+    <WhiteIconButton onClick={() => removeTag(tag)}>
+      <span>{tag.data}</span>
       <img src={icons.arrowDown} alt="" width={"14"} height={""} />
     </WhiteIconButton>
 

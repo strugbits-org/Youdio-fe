@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { H4, P3 } from "src/components";
-import { fonts } from "src/helpers";
+import { H4 } from "src/components";
+// import { fonts } from "src/helpers";
 import { Instructor } from "./filtersComponents";
 import { useSelector } from "react-redux";
 import { filterKeys } from "src/helpers/constant";
@@ -30,7 +30,7 @@ const InstructorsBox = styled.div`
 export default function Instructors({ removeTag, addTag }) {
   const { instructors, filters } = useSelector((state) => state.filter);
 
-  const [isAll, setAll] = useState(false);
+  const [isAll] = useState(false);
 
   const setSelected = (name) => {
     if (!filters.instructors.includes(name)) {
@@ -48,7 +48,7 @@ export default function Instructors({ removeTag, addTag }) {
 
   return (
     <InstructorsBox>
-      <div
+      {/* <div
         className="allInstructors"
         onClick={() => {
           setAll(!isAll);
@@ -67,7 +67,7 @@ export default function Instructors({ removeTag, addTag }) {
           </svg>
         )}
         <P3 fontFamily={fonts.poppinsMedium}>All Instructors</P3>
-      </div>
+      </div> */}
       <div className="instructorList">
         <ul>
           {instructors &&

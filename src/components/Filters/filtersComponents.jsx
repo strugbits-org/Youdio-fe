@@ -23,6 +23,7 @@ export const SelectionBox = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 1.3vw;
+  margin-block-start: 16px;
 
   div {
     flex: 1;
@@ -119,12 +120,26 @@ export const FilterButton = ({ name, clickEvent, selected }) => {
   );
 };
 
+const WhiteTagIconButton = styled(WhiteIconButton)`
+  min-width: initial;
+  padding: 0px 12px;
+  img {
+    width: 10px !important;
+    filter: ${({ selected }) => (selected ? "initial" : "invert()")};
+  }
+
+  &:hover {
+    img {
+      filter: initial;
+    }
+  }
+`;
+
 export const SelectionButton = ({ tag, removeTag }) => {
   return (
-    <WhiteIconButton onClick={() => removeTag(tag)}>
+    <WhiteTagIconButton onClick={() => removeTag(tag)}>
       <span>{tag.data}</span>
-      <img src={icons.arrowDown} alt="" width={"14"} height={""} />
-    </WhiteIconButton>
-
+      <img src={icons.cross} alt="" width={""} height={""} />
+    </WhiteTagIconButton>
   );
 };

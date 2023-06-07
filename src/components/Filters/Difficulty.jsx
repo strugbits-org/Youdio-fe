@@ -27,19 +27,19 @@ export default function Difficulty({ addTag, removeTag }) {
   const difficulties = [
     {
       id: 0,
-      name: "Beginner",
+      name: "BEGINNER",
     },
     {
       id: 1,
-      name: "Moderate",
+      name: "MODERATE",
     },
     {
       id: 2,
-      name: "Intermediate",
+      name: "INTERMEDIATE",
     },
     {
       id: 3,
-      name: "Advanced",
+      name: "ADVANCED",
     },
   ];
 

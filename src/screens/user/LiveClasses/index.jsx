@@ -11,6 +11,7 @@ import {
   DayBox,
   CardsBox,
   H6M,
+  NoFoundBox,
 } from "./liveClassesComponents";
 import { contentTranslator } from "src/helpers/translator";
 import { fonts, icons } from "src/helpers";
@@ -25,7 +26,7 @@ import MobileFilters from "src/components/MobileFilters";
 function LiveClasses() {
   const date = new Date();
 
-  const { fetchData, res, loading } = useFetch();
+  const { postData, res, loading } = useFetch();
   const { innerWidth } = useInnerWidth();
   const [open, setOpen] = useState(false);
 
@@ -38,6 +39,7 @@ function LiveClasses() {
   };
 
   const language = useSelector((state) => state.language.lang);
+  const { filterTags, filters } = useSelector((state) => state.filter);
   const [content, setContent] = useState(liveClassStaticContent);
   const [month, setMonth] = useState(initialMonth);
   const [weekDays, setWeekDays] = useState(
@@ -107,11 +109,15 @@ function LiveClasses() {
   ]);
 
   useEffect(() => {
-    fetchData("video");
+    postData("video/filter", filters);
+    // filterTags.length > 0
+    //   ?
+    //   : fetchData("video");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filterTags]);
 
   useEffect(() => {}, [res, loading]);
+
 
   return (
     <React.Fragment>
@@ -248,18 +254,26 @@ function LiveClasses() {
       {/* Cards Section */}
       <Section backgroundColor="white">
         {loading && <Loader width="35px" height="35px" />}
-        <CardsBox>
-          {!loading &&
-            res?.videos.length > 0 &&
-            res.videos.map((val) => (
-              <LiveClassCard key={`card-${val._id}`} data={val} />
-            ))}
-          <DateTag>
-            <H4>31</H4>
-            <hr />
-            <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
-          </DateTag>
-        </CardsBox>
+        {/* <CardsBox> */}
+          {!loading && res?.videos.length > 0 ? (
+            <CardsBox>
+              {res.videos.map((val) => (
+                <LiveClassCard key={`card-${val._id}`} data={val} />
+              ))}
+              <DateTag>
+                <H4>31</H4>
+                <hr />
+                <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
+              </DateTag>
+            </CardsBox>
+          ) : (
+            !loading && (
+              <NoFoundBox>
+                <H3>No Data Found</H3>
+              </NoFoundBox>
+            )
+          )}
+        {/* </CardsBox> */}
       </Section>
     </React.Fragment>
   );

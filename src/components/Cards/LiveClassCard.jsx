@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { H3, P3, H4 } from "src/components";
 import { Card, CardMedia, Tag, CardContent } from "./cardsComponent";
@@ -6,6 +6,9 @@ import { icons } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
 
 function LiveClassCard({ data }) {
+  const intensityLevel = useMemo(() => {
+    return data.intensity.slice(-1)
+  }, [data])
   return (
     <Card>
       <CardMedia>
@@ -29,7 +32,7 @@ function LiveClassCard({ data }) {
             <H4>{data.instructor.name}</H4>
           </div>
           <div className="intensityBox">
-            <IntensityLevel level={data.intensity} />
+            <IntensityLevel level={intensityLevel} />
           </div>
         </div>
       </CardContent>

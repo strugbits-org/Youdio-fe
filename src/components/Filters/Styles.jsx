@@ -53,7 +53,7 @@ export default function Styles({ addTag, removeTag }) {
     } else {
       removeTag({
         data: name,
-        key: filterKeys.instructors,
+        key: filterKeys.styles,
         subKey: customSubKey,
       });
     }
@@ -73,11 +73,13 @@ export default function Styles({ addTag, removeTag }) {
               <li key={_id}>
                 <H6
                   className={
-                    filters.styles[camelCase(category)].includes(category)
-                      ? "active"
-                      : ""
+                    "active"
+                    // filters.styles[camelCase(category)].includes(category)
+                    //   ? "active"
+                    //   : ""
                   }
-                  onClick={() => setSpecific(category, category)}
+                  // onClick={() => setSpecific(category, category)}
+                  style={{cursor: 'default'}}
                 >
                   {category}
                 </H6>
@@ -88,13 +90,7 @@ export default function Styles({ addTag, removeTag }) {
                         <li
                           key={`sub-design-${ind}`}
                           className={
-                            filters.styles[camelCase(category)].includes(
-                              category
-                            )
-                              ? "active"
-                              : filters.styles[camelCase(category)].includes(
-                                  val
-                                )
+                            filters.styles[camelCase(category)].includes(val)
                               ? "active"
                               : ""
                           }

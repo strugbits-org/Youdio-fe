@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { filterKeys } from "src/helpers/constant";
 
 const initialState = {
   styles: null,
@@ -32,8 +33,20 @@ const filterSlice = createSlice({
 
     // Duration
     filterDuration: (state, action) => {
-      const { startTime, endTime } = action.payload;
+      const {
+        key,
+        duration: { startTime, endTime },
+      } = action.payload;
       state.filters.duration = { startTime, endTime };
+
+      state.filterTags = state.filterTags.filter(
+        (tag) => tag.key !== key && tag
+      );
+      const durationTag = {
+        data: `${startTime} - ${endTime}`,
+        key,
+      };
+      state.filterTags.push(durationTag);
     },
     removeDuration: (state) => {
       state.filters.duration = {};
@@ -42,27 +55,35 @@ const filterSlice = createSlice({
     // For Arrays Filter
     pushToFilters: (state, action) => {
       const { key, subKey, data } = action.payload;
-      
+
       if (subKey) {
-        state.filterTags.push({data, key, subKey});
+        state.filterTags.push({ data, key, subKey });
         state.filters[key][subKey].push(data);
-      }
-      else {
-        state.filterTags.push({data, key});
+      } else {
+        state.filterTags.push({ data, key });
         state.filters[key].push(data);
       }
     },
     removeFromFilter: (state, action) => {
       const { key, subKey, data } = action.payload;
 
-      state.filterTags = state.filterTags.filter((tag) => tag.data !== data && tag);
-      if (subKey) {
-        const old = state.filters[key][subKey];
-        state.filters[key][subKey] = old.filter((val) => val !== data && val);
-      }
-      else {
-        const old = state.filters[key];
-        state.filters[key] = old.filter((val) => val !== data && val);
+      if (key === filterKeys.duration) {
+        state.filterTags = state.filterTags.filter(
+          (tag) => tag.key !== key && tag
+        );
+
+        state.filters.duration = {}
+      } else {
+        state.filterTags = state.filterTags.filter(
+          (tag) => tag.data !== data && tag
+        );
+        if (subKey) {
+          const old = state.filters[key][subKey];
+          state.filters[key][subKey] = old.filter((val) => val !== data && val);
+        } else {
+          const old = state.filters[key];
+          state.filters[key] = old.filter((val) => val !== data && val);
+        }
       }
     },
   },

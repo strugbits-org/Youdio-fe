@@ -18,6 +18,7 @@ import {
   setInstructors,
   pushToFilters,
   removeFromFilter,
+  filterDuration,
 } from "src/features/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 const filter = [
@@ -80,6 +81,10 @@ export function Filters() {
     }
   };
 
+  const addDuration = (duration) => {
+    dispatch(filterDuration(duration));
+  };
+
   return (
     <React.Fragment>
       <FilterBox>
@@ -99,7 +104,9 @@ export function Filters() {
           <FilterOptions>
             <P3 className="videoCount">SHOWING 316 VIDEOS</P3>
             <div className="filters">
-              {filterTab === "duration" && <Duration />}
+              {filterTab === "duration" && (
+                <Duration addDuration={addDuration} />
+              )}
               {filterTab === "instructors" && (
                 <Instructors removeTag={removeTag} addTag={addTag} />
               )}

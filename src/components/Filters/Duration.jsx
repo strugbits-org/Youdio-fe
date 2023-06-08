@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Slider, Box } from "@mui/material";
 
 import { P3 } from "src/components";
 import { fonts } from "src/helpers";
+import { useSelector } from "react-redux";
+import { filterKeys } from "src/helpers/constant";
 
 function valuetext(value) {
   return `${value}min`;
@@ -39,19 +41,36 @@ const DurationSlider = styled(Slider)({
   },
 });
 
-function RangeSlider() {
+function RangeSlider({ addDuration }) {
   const [value, setValue] = useState([0, 90]);
-
+  const { filters } = useSelector((state) => state.filter);
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    const startTime = newValue[0] % 10 === 0;
+    const endTime = newValue[1] % 10 === 0;
+    if (startTime && endTime) {
+      setValue(newValue);
+      addDuration({
+        duration: {
+          startTime: newValue[0],
+          endTime: newValue[1],
+        },
+        key: filterKeys.duration,
+      }); 
+    }
   };
 
+  useEffect(() => {
+    if (Object.keys(filters.duration).length > 0) {
+      const duration = [filters.duration.startTime, filters.duration.endTime];
+      setValue(duration);
+    }
+  }, [filters.duration]);
   return (
     <Box sx={{ width: 400 }}>
       <DurationSlider
         max={90}
         value={value}
-        step={10}
+        step={1}
         onChange={handleChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
@@ -83,10 +102,10 @@ const SliderBox = styled.div`
   }
 `;
 
-export default function Duration() {
+export default function Duration({addDuration}) {
   return (
     <SliderBox>
-      <RangeSlider />
+      <RangeSlider addDuration={addDuration} />
     </SliderBox>
   );
 }

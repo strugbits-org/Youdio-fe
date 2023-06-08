@@ -122,6 +122,20 @@ export default function Router() {
             path="/liveBooking"
             element={<ProtectedRoute children={<LiveBooking />} />}
           />
+
+          {/* Admin Dashboard */}
+          <Route
+            path="/add-instructor"
+            element={<ProtectedRoute children={<Membership />} />}
+          />
+          <Route
+            path="/add-video"
+            element={<ProtectedRoute children={<Membership />} />}
+          />
+          <Route
+            path="/add-live-session"
+            element={<ProtectedRoute children={<Membership />} />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

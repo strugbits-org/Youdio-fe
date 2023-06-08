@@ -4,14 +4,27 @@ import useFetch from "src/features/hooks/useFetch";
 import { H1, H2, P1, P2, Section, Filters } from "src/components";
 import { LiveClassCard } from "src/components/Cards/";
 import { Box } from "src/components/Banners";
+import { useDispatch, useSelector } from "react-redux";
+import { clearFilters } from "src/features/filterSlice";
 
 function VideoClasses() {
-  const { fetchData, res, loading } = useFetch();
+  const { postData, res, loading } = useFetch();
+  const { filters, filterTags } = useSelector(state => state.filter);
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    fetchData("video");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+   useEffect(() => {
+     if (filterTags.length > 0) {
+       dispatch(clearFilters());
+     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
+   useEffect(() => {
+     postData("video/filter", filters);
+     // filterTags.length > 0
+     //   ?
+     //   : fetchData("video");
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [filterTags]);
 
   useEffect(() => {}, [res, loading]);
 

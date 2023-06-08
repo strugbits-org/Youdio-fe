@@ -52,6 +52,10 @@ a:link, a:visited, a:hover, a:active {
   margin-block:0px;
 }
 
+.Toastify__toast-container {
+  margin-top: 80px;
+}
+
 @font-face {
   font-family: PoppinsRegular;
   src: url(./assets/fonts/Poppins-Regular.ttf);

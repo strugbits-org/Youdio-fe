@@ -64,7 +64,8 @@ function RangeSlider({ addDuration }) {
       const duration = [filters.duration.startTime, filters.duration.endTime];
       setValue(duration);
     }
-  }, [filters.duration]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Box sx={{ width: 400 }}>
       <DurationSlider

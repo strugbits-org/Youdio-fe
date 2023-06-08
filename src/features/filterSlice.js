@@ -4,6 +4,19 @@ import { filterKeys } from "src/helpers/constant";
 const initialState = {
   styles: null,
   instructors: null,
+  resetFilters:{
+    duration: {},
+    instructors: [],
+    styles: {
+      fitness: [],
+      mindfulness: [],
+      skills: [],
+      yoga: [],
+      setYourIntention: [],
+    },
+    difficulty: [],
+    intensity: [],
+  },
   filters: {
     duration: {},
     instructors: [],
@@ -86,6 +99,11 @@ const filterSlice = createSlice({
         }
       }
     },
+
+    clearFilters: (state) => {
+      state.filters = state.resetFilters;
+      state.filterTags = []
+    }
   },
 
   // extraReducers: (builder) => {
@@ -100,5 +118,6 @@ export const {
   removeDuration,
   pushToFilters,
   removeFromFilter,
+  clearFilters,
 } = filterSlice.actions;
 export default filterSlice.reducer;

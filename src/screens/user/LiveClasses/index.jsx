@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { weekdays } from "moment";
 import useFetch from "src/features/hooks/useFetch";
 
@@ -22,6 +22,7 @@ import { monthNames, getDaysArray } from "./constant";
 import Loader from "src/components/Loader";
 import useInnerWidth from "src/features/hooks/useInnerWidth";
 import MobileFilters from "src/components/MobileFilters";
+import { clearFilters } from "src/features/filterSlice";
 
 function LiveClasses() {
   const date = new Date();
@@ -32,6 +33,8 @@ function LiveClasses() {
 
   const initialYear = date.getFullYear();
   const initialMonth = date.getMonth();
+
+  const dispatch = useDispatch()
 
   const daysInWeek = () => {
     const windowWidth = window.innerWidth;
@@ -109,6 +112,12 @@ function LiveClasses() {
   ]);
 
   useEffect(() => {
+    if (filterTags.length > 0) {
+      dispatch(clearFilters());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
     postData("video/filter", filters);
     // filterTags.length > 0
     //   ?
@@ -117,7 +126,6 @@ function LiveClasses() {
   }, [filterTags]);
 
   useEffect(() => {}, [res, loading]);
-
 
   return (
     <React.Fragment>

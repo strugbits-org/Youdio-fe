@@ -17,11 +17,13 @@ const useFetch = () => {
     if (type === "success") {
       toast.success(mesg, {
         position: "top-right",
+        className: "toastPosition",
       });
     }
     if (type === "error") {
       toast.error(mesg, {
         position: "top-right",
+        className: "toastPosition",
       });
     }
   };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { weekdays } from "moment";
 import useFetch from "src/features/hooks/useFetch";
@@ -34,7 +34,7 @@ function LiveClasses() {
   const initialYear = date.getFullYear();
   const initialMonth = date.getMonth();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const daysInWeek = () => {
     const windowWidth = window.innerWidth;
@@ -51,6 +51,8 @@ function LiveClasses() {
   const [weekStart, setWeekStart] = useState(0);
   const [isDateSelected, setDateSelected] = useState();
   const [weekEnd, setWeekEnd] = useState(daysInWeek());
+  const [sort, setSort] = useState("newest");
+
   const weekDaysRef = useRef();
 
   const previousMonth = () => {
@@ -119,13 +121,36 @@ function LiveClasses() {
   }, []);
   useEffect(() => {
     postData("video/filter", filters);
-    // filterTags.length > 0
-    //   ?
-    //   : fetchData("video");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterTags]);
 
   useEffect(() => {}, [res, loading]);
+
+  const sortedVideos = useMemo(() => {
+    if (res?.videos && res.videos.length > 0) {
+      const videos = res.videos.sort((a, b) => {
+        const titleA = a.title.toUpperCase()
+        const titleB = b.date.toUpperCase()
+
+        if(sort === 'newest'){
+          if (titleA > titleB) return -1;
+          if (titleA < titleB) return 1;
+          return 0;
+        }
+        
+        if(sort === 'oldest'){
+          if (titleB > titleA) return -1;
+          if (titleB < titleA) return 1;
+          return 0;
+        }
+        return 0
+      });
+      return videos;
+    }
+    return [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, [sort, res?.videos]);
 
   return (
     <React.Fragment>
@@ -240,6 +265,7 @@ function LiveClasses() {
             <InputIcon
               isIcon={icons.searchIcon}
               placeholder={content.searchPlaceholder}
+              style={{ visibility: "hidden" }}
             />
           </div>
         </DayBox>
@@ -254,7 +280,11 @@ function LiveClasses() {
         ) : (
           <React.Fragment>
             <div className="seperatorLine"></div>
-            <Filters />
+            <Filters
+              videoCount={res?.videos ? res.videos.length : 0}
+              videoSort={sort}
+              setVideoSort={setSort}
+            />
           </React.Fragment>
         )}
       </Section>
@@ -263,24 +293,24 @@ function LiveClasses() {
       <Section backgroundColor="white">
         {loading && <Loader width="35px" height="35px" />}
         {/* <CardsBox> */}
-          {!loading && res?.videos.length > 0 ? (
-            <CardsBox>
-              {res.videos.map((val) => (
-                <LiveClassCard key={`card-${val._id}`} data={val} />
-              ))}
-              <DateTag>
-                <H4>31</H4>
-                <hr />
-                <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
-              </DateTag>
-            </CardsBox>
-          ) : (
-            !loading && (
-              <NoFoundBox>
-                <H3>No Data Found</H3>
-              </NoFoundBox>
-            )
-          )}
+        {!loading && res?.videos.length > 0 ? (
+          <CardsBox>
+            {sortedVideos.map((val) => (
+              <LiveClassCard key={`card-${val._id}`} data={val} />
+            ))}
+            <DateTag>
+              <H4>31</H4>
+              <hr />
+              <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
+            </DateTag>
+          </CardsBox>
+        ) : (
+          !loading && (
+            <NoFoundBox>
+              <H3>No Data Found</H3>
+            </NoFoundBox>
+          )
+        )}
         {/* </CardsBox> */}
       </Section>
     </React.Fragment>

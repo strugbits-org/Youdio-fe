@@ -58,46 +58,14 @@ export const FilterOptions = styled.div`
   min-height: 0px;
   /* padding-inline:20px; */
   /* place-content:center;  */
-  padding-block: 30px;
+  /* padding-block: 30px; */
   transition: var(--transition03s);
-  position: relative;
-
-  .videoCount {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    color: #d6ccc3;
-  }
 
   .filters {
     display: grid;
     padding-block: 30px;
     padding-inline: 15px;
     background: var(--backgroundLightGrey);
-  }
-
-  .sortOption {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    color: #d6ccc3;
-    display: flex;
-    select {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #d6ccc3;
-      padding-inline: 4px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-    select option {
-      background: var(--backgroundLightGrey);
-      color: var(--textHeadingBlack);
-    }
-    select:hover {
-      color: var(--textHeadingBlack);
-    }
   }
 `;
 
@@ -143,3 +111,36 @@ export const SelectionButton = ({ tag, removeTag }) => {
     </WhiteTagIconButton>
   );
 };
+
+export const SortingOption = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-block: 24px 8px;
+
+  .videoCount {
+    color: #d6ccc3;
+  }
+
+  .sortOption {
+    color: #d6ccc3;
+    display: flex;
+    select {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #d6ccc3;
+      padding-inline: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    select option {
+      background: var(--backgroundLightGrey);
+      color: var(--textHeadingBlack);
+    }
+    select:hover {
+      color: var(--textHeadingBlack);
+    }
+  }
+`;

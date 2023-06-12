@@ -10,6 +10,7 @@ import {
   FilterOptions,
   SelectionBox,
   SelectionButton,
+  SortingOption
 } from "./filtersComponents";
 import { P3 } from "src/components";
 import useFetch from "src/features/hooks/useFetch";
@@ -44,10 +45,9 @@ const filter = [
   },
 ];
 
-export function Filters() {
+export function Filters({videoCount, videoSort, setVideoSort}) {
   const [filterTab, setFilterTab] = useState(null);
   const filterTags = useSelector((state) => state.filter.filterTags);
-  const [sort, setSort] = useState("newest");
   const { fetchMultipleData } = useFetch();
   const dispatch = useDispatch();
 
@@ -99,37 +99,36 @@ export function Filters() {
             </div>
           );
         })}
-
-        {filterTab !== null && (
-          <FilterOptions>
-            <P3 className="videoCount">SHOWING 316 VIDEOS</P3>
-            <div className="filters">
-              {filterTab === "duration" && (
-                <Duration addDuration={addDuration} />
-              )}
-              {filterTab === "instructors" && (
-                <Instructors removeTag={removeTag} addTag={addTag} />
-              )}
-              {filterTab === "styles" && (
-                <Styles removeTag={removeTag} addTag={addTag} />
-              )}
-              {filterTab === "difficulty" && (
-                <Difficulty removeTag={removeTag} addTag={addTag} />
-              )}
-              {filterTab === "intensity" && (
-                <Intensity removeTag={removeTag} addTag={addTag} />
-              )}
-            </div>
-            <div className="sortOption">
-              <P3>SORT BY:</P3>
-              <select value={sort} onChange={(e) => setSort(e.target.value)}>
-                <option value="newest">NEWEST</option>
-                <option value="oldest">OLDEST</option>
-              </select>
-            </div>
-          </FilterOptions>
-        )}
       </FilterBox>
+      <SortingOption >
+        <P3 className="videoCount">{`SHOWING ${videoCount} VIDEOS`}</P3>
+        <div className="sortOption">
+          <P3>SORT BY:</P3>
+          <select value={videoSort} onChange={(e) => setVideoSort(e.target.value)}>
+            <option value="newest">NEWEST</option>
+            <option value="oldest">OLDEST</option>
+          </select>
+        </div>
+      </SortingOption>
+      {filterTab !== null && (
+        <FilterOptions>
+          <div className="filters">
+            {filterTab === "duration" && <Duration addDuration={addDuration} />}
+            {filterTab === "instructors" && (
+              <Instructors removeTag={removeTag} addTag={addTag} />
+            )}
+            {filterTab === "styles" && (
+              <Styles removeTag={removeTag} addTag={addTag} />
+            )}
+            {filterTab === "difficulty" && (
+              <Difficulty removeTag={removeTag} addTag={addTag} />
+            )}
+            {filterTab === "intensity" && (
+              <Intensity removeTag={removeTag} addTag={addTag} />
+            )}
+          </div>
+        </FilterOptions>
+      )}
       <SelectionBox>
         {filterTags?.length > 0 &&
           filterTags.map((value, index) => (

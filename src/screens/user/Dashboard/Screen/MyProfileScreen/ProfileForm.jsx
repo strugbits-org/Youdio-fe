@@ -68,7 +68,7 @@ function ProfileForm({ user, content }) {
                 </div>
                 <div>
                   <Heading2>{content.profileH2}</Heading2>
-                  <H5 style={{ color: "#999999" }}>{content.profileH5}</H5>
+                  <H5 style={{ color: "#999999" }}>{user.nickName}</H5>
                 </div>
               </Box4>
               {/* <FieldInput

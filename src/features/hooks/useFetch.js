@@ -103,24 +103,25 @@ const useFetch = () => {
   };
 
   // Patch
-  const patchData = async (url, payload, cbFunction) => {
+  const patchData = async (url, payload, cbFunction, setValues) => {
     setLoading(true);
-    const headers = await getHeaders(token);
+    const headers = await getHeaders(token, true);
     try {
       const response = await apiClient.patch(url, payload, { headers });
-      console.log({ response });
       if (response?.data) {
         setResponse(response.data);
         setLoading(false);
         setError("");
         setSuccess(true);
         cbFunction && dispatch(cbFunction(response.data));
+        setValues && setValues()
       }
     } catch (e) {
       setLoading(false);
       setSuccess(false);
       setError(e.message);
-    }
+      console.log("Error", e);
+      }
   };
 
   useEffect(() => {

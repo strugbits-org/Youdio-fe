@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Formik, Form } from "formik";
 import styled from "styled-components";
 
 import { FieldInput, FieldPassword } from "src/components";
-import { userFormValidate } from "src/helpers/forms/validateForms";
 import {
-  SaveButton,
-  Box3,
-} from "./ProfileComponent";
+  userFormValidate,
+} from "src/helpers/forms/validateForms";
+import { SaveButton, Box3 } from "./ProfileComponent";
 import useFetch from "src/features/hooks/useFetch";
 import { setUser } from "src/features/userSlice";
 import { useEffect } from "react";
@@ -24,6 +23,7 @@ const FormRow = styled.div`
 
 function ProfileForm({ user, content }) {
   const { loading, error, success, patchData } = useFetch();
+  const formikRef = useRef();
   useEffect(() => {
     error &&
       toast.error(error, {
@@ -35,49 +35,61 @@ function ProfileForm({ user, content }) {
       });
   }, [error, success]);
 
+  const handleSubmit = (data) => {
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    patchData("user/update-profile", data, setUser, resetFormValues);
+  };
+
+  const resetFormValues = () => {
+    const formik = formikRef.current
+    formik.setFieldValue('userIamge', "")
+    formik.setFieldValue('oldPassword', "")
+    formik.setFieldValue('newPassword', "")
+  }
+
   return (
     <React.Fragment>
+      <Box4>
+        <div className="image-container">
+          <img
+            className="profile-img"
+            src={user?.userImage ? user.userImage : Women}
+            alt="profile-pic"
+          />
+          <input
+            id="userImage"
+            name="userImage"
+            type="file"
+            className="userImage"
+            accept="image/*"
+            onChange={(e) =>
+              formikRef.current.setFieldValue("userImage", e.target.files[0])
+            }
+          />
+        </div>
+        <div>
+          <Heading2>{content.profileH2}</Heading2>
+          <H5 style={{ color: "#999999" }}>{user.nickName}</H5>
+        </div>
+      </Box4>
+
       <Formik
         initialValues={{
           name: user.name,
           nickName: user.nickName,
           userEmail: user.email,
+          userImage: "",
           oldPassword: "",
           newPassword: "",
         }}
         validationSchema={userFormValidate}
-        onSubmit={(data) => {
-          patchData("user/update-profile", data, setUser);
-        }}
+        onSubmit={handleSubmit}
+        innerRef={formikRef}
       >
         {(formik) => (
           <Form>
             <FormRow>
-              <Box4>
-                <div className="image-container">
-                  <img
-                    className="profile-img"
-                    src={Women}
-                    alt="profile-pic"
-                    style={{
-                      width: "100%",
-                      maxWidth: "350px",
-                      minWidth: "150px",
-                    }}
-                  />
-                </div>
-                <div>
-                  <Heading2>{content.profileH2}</Heading2>
-                  <H5 style={{ color: "#999999" }}>{user.nickName}</H5>
-                </div>
-              </Box4>
-              {/* <FieldInput
-                id="userImage"
-                name="userImage"
-                type="file"
-                className="userImage"
-                
-              /> */}
               <FieldInput
                 label={content.name}
                 id="name"
@@ -135,7 +147,9 @@ function ProfileForm({ user, content }) {
             <Box3>
               <div className="btn_gap">
                 {/* <CancelButton>{content.cancelBtn}</CancelButton> */}
-                <SaveButton type="submit" disabled={loading}>{content.saveBTn}</SaveButton>
+                <SaveButton type="submit" disabled={loading}>
+                  {content.saveBTn}
+                </SaveButton>
               </div>
             </Box3>
           </Form>

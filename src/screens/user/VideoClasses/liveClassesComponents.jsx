@@ -109,3 +109,9 @@ export const H6M = styled(H4)`
     font-weight:500;
 
 `
+
+export const NoFoundBox = styled.div`
+  h3 {
+    text-align: center;
+  }
+`;

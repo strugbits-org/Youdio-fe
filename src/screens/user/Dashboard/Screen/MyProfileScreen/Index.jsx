@@ -36,7 +36,6 @@ const MyProfile = () => {
         <div className="whole_box">
           <Sidebar />
           <ProfileContainer>
-            
             {/* <HorizontalLine2 /> */}
             <ProfileForm user={user} content={content} />
           </ProfileContainer>

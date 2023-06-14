@@ -37,21 +37,41 @@ export const Box4 = styled(Box)`
   flex-wrap: wrap;
   .image-container {
     position: relative;
-  }
 
-  .image-container::after {
-    content: "";
-    position: absolute;
-    bottom: 10px;
-    right: 50px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background-image: url(${Camera});
+    img{
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 100%;
+    }
   }
-
-  .image-container::after {
-    background-size: cover;
+  .userImage {
+    border: none;
+    outline: none;
+    color: transparent;
+    width: 0px;
+    height: 0px;
+ 
+    &::file-selector-button {
+      color: transparent;
+      padding: 0;
+      font-size: 0px;
+      border: none;
+      border-radius: 0px;
+      outline: none;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      background-image: url(${Camera});
+      background-size: cover;
+    }
+    /* .userImage */
   }
 `;
 export const FormRow2 = styled.div`

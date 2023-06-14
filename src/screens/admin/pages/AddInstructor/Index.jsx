@@ -1,36 +1,41 @@
-import React from 'react'
-import { Formik } from 'formik'
-import { Container, FormRow, Heading, BrowseFile, ButtonOne, ButtonTwo, ImageBrowse, BrowseBtn } from './AddInstructorComp'
-import { H2 } from 'src/components'
-import { AddInstructorContent } from './content'
-import { FieldInput } from 'src/components/AdminInput/AdminInput'
-import { icons } from 'src/helpers'
+import React from "react";
+import { Formik } from "formik";
+import {
+  Container,
+  FormRow,
+  Heading,
+  BrowseFile,
+  ButtonOne,
+  ButtonTwo,
+  ImageBrowse,
+  BrowseBtn,
+} from "./AddInstructorComp";
+import { H2 } from "src/components";
+import { AddInstructorContent } from "./content";
+import { FieldInput } from "src/components/AdminInput/AdminInput";
+import { icons } from "src/helpers";
 
 const AddInstructor = () => {
-
   const initialValues = {
-    FirstName: 'Alexa',
-    lastName: 'Morgan',
-    EmailAddress: 'Alexa Morgan@,com',
-    PhoneNo: '#########',
-    JobTitle: 'Yoga Instructor',
-    PremiumInstructor: 'Alex',
+    FirstName: "Alexa",
+    lastName: "Morgan",
+    EmailAddress: "Alexa Morgan@,com",
+    PhoneNo: "#########",
+    JobTitle: "Yoga Instructor",
+    PremiumInstructor: "Alex",
   };
-  const handleSubmit = () => {
+  const handleSubmit = () => {};
 
-  }
   return (
     <React.Fragment>
-
       {/* <MainContainer> */}
-      <Container >
-
+      <Container>
         <Formik
           initialValues={initialValues}
           // validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <form >
+          <form>
             <Heading>
               <H2>{AddInstructorContent.heading}</H2>
             </Heading>
@@ -103,23 +108,26 @@ const AddInstructor = () => {
               <ButtonOne>{AddInstructorContent.btncancel}</ButtonOne>
               <ButtonTwo>{AddInstructorContent.btnSave}</ButtonTwo>
             </FormRow>
-
           </form>
         </Formik>
 
         <BrowseFile>
           <ImageBrowse>
-            <img src={icons.browseFile} alt='' typeof='file' />
-            <BrowseBtn>
-              {AddInstructorContent.btnBrowse}
-            </BrowseBtn>
+            <img src={icons.upload} alt="upload"  />
           </ImageBrowse>
-          <input type='file' placeholder='Browse file' />
+          <BrowseBtn>
+            <input
+              type="file"
+              id="myFile"
+              // value={AddInstructorContent.btnBrowse}
+              className="input"
+            />
+          </BrowseBtn>
         </BrowseFile>
       </Container>
       {/* </MainContainer> */}
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default AddInstructor
+export default AddInstructor;

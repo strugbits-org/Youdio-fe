@@ -21,6 +21,7 @@ import calendarImg from "./calendarImg.svg"
 import zoomImg from "./zoomImg.svg"
 import cross from "./cross.svg"
 import envelop from "./Envelop.svg"
+import dropDown from "./dropDown.svg"
 
 // Assets/Sample
 import cardImage from "src/assets/sample/cardImg.jpg"
@@ -40,6 +41,7 @@ import workout3 from "src/assets/sample/workout3.png"
 import workout4 from "src/assets/sample/workout4.png"
 import shortpicWomen from "src/assets/sample/ShortpicWomen.png"
 import browseFile from "src/assets/sample/browseFile.png"
+import upload from "src/assets/sample/upload.png"
 
 // Assets/Logo
 import footerLogo from "src/assets/logo/footer_logo.svg"
@@ -87,7 +89,9 @@ const icons = {
   workout4,
   shortpicWomen,
   envelop,
-  browseFile
+  browseFile,
+  upload,
+  dropDown
 };
 
 export default icons

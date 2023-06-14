@@ -10,14 +10,20 @@ import {
   WeekBox,
   DayBox,
   CardsBox,
-  H6M,
+  // H6M,
   NoFoundBox,
 } from "./liveClassesComponents";
 import { contentTranslator } from "src/helpers/translator";
-import { fonts, icons } from "src/helpers";
+import {
+  // fonts,
+  icons,
+} from "src/helpers";
 import { H1, H3, H4, P1, Section, InputIcon, Filters } from "src/components";
 import { IconButton, PrimaryWhiteButton } from "src/components";
-import { LiveClassCard, DateTag } from "src/components/Cards/";
+import {
+  LiveClassCard,
+  // DateTag
+} from "src/components/Cards/";
 import { monthNames, getDaysArray } from "./constant";
 import Loader from "src/components/Loader";
 import useInnerWidth from "src/features/hooks/useInnerWidth";
@@ -129,27 +135,26 @@ function LiveClasses() {
   const sortedVideos = useMemo(() => {
     if (res?.videos && res.videos.length > 0) {
       const videos = res.videos.sort((a, b) => {
-        const titleA = a.title.toUpperCase()
-        const titleB = b.date.toUpperCase()
+        const titleA = a.title.toUpperCase();
+        const titleB = b.date.toUpperCase();
 
-        if(sort === 'newest'){
+        if (sort === "newest") {
           if (titleA > titleB) return -1;
           if (titleA < titleB) return 1;
           return 0;
         }
-        
-        if(sort === 'oldest'){
+
+        if (sort === "oldest") {
           if (titleB > titleA) return -1;
           if (titleB < titleA) return 1;
           return 0;
         }
-        return 0
+        return 0;
       });
       return videos;
     }
     return [];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
   }, [sort, res?.videos]);
 
   return (
@@ -298,11 +303,11 @@ function LiveClasses() {
             {sortedVideos.map((val) => (
               <LiveClassCard key={`card-${val._id}`} data={val} />
             ))}
-            <DateTag>
+            {/* <DateTag>
               <H4>31</H4>
               <hr />
               <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
-            </DateTag>
+            </DateTag> */}
           </CardsBox>
         ) : (
           !loading && (

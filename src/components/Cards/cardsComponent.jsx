@@ -145,7 +145,7 @@ export const CardContent = styled.div`
   }
   h3 {
     margin-bottom: 1em;
-    text-align: left;
+    text-align: left !important;
   }
 
   .reviewSec {

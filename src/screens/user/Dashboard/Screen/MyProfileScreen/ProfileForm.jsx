@@ -13,9 +13,9 @@ import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 import { Heading2 } from "src/screens/user/Dashboard/Components/Heading";
-import Women from "src/assets/sample/women.png";
 import { H5 } from "src/components";
 import { Box4 } from "./ProfileComponent";
+import userIcon from "src/assets/icons/user.png"
 
 const FormRow = styled.div`
   margin-bottom: 20px;
@@ -54,7 +54,7 @@ function ProfileForm({ user, content }) {
         <div className="image-container">
           <img
             className="profile-img"
-            src={user?.userImage ? user.userImage : Women}
+            src={user?.userImage ? user.userImage : userIcon}
             alt="profile-pic"
           />
           <input

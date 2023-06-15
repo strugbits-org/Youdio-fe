@@ -198,10 +198,16 @@ const MobileUL = styled.ul`
         }
     }
 `
+
+const ProfileImageCircle = styled.img`
+    border-radius: 100%;
+    object-fit: cover;
+`
 export {
     Section,
     Nav,
     UL,
     SideMenu,
-    MobileUL
+    MobileUL,
+    ProfileImageCircle
 }

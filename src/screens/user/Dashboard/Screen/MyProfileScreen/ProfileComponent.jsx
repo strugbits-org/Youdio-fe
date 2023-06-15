@@ -41,7 +41,7 @@ export const Box4 = styled(Box)`
     img{
       width: 240px;
       height: 240px;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 100%;
     }
   }

@@ -2,26 +2,33 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { staticContent } from "./constant";
-import { Nav, Section, UL, SideMenu, MobileUL } from "./headerComponents";
+import {
+  Nav,
+  Section,
+  UL,
+  SideMenu,
+  MobileUL,
+  ProfileImageCircle,
+} from "./headerComponents";
 import { useDispatch, useSelector } from "react-redux";
 import { setLang } from "src/features/language";
 import { path } from "src/helpers";
 import { contentTranslator } from "src/helpers/translator";
 import { icons } from "src/helpers";
 import { IconButton } from "src/components";
+import userIcon from "src/assets/icons/user.png"
 
 import { logout } from "src/features/userSlice";
 
 // import { init } from "src/store/baseStore";
 
 function Header({ isLoggedin }) {
-  
   const [content, setContent] = useState(staticContent);
   const [menu, setMenu] = useState(false);
 
   const dispatch = useDispatch();
-  const base = useSelector((state) => state.user);
-
+  const auth = useSelector((state) => state.user);
+  console.log(auth.user);
   const language = useSelector((state) => state.language.lang);
 
   useEffect(() => {
@@ -85,7 +92,7 @@ function Header({ isLoggedin }) {
               height="auto"
             />
           </li>
-          {!base.token ? (
+          {!auth.token ? (
             <React.Fragment>
               <li>
                 <NavLink to={path.signIn}>{content.signIn}</NavLink>
@@ -103,11 +110,11 @@ function Header({ isLoggedin }) {
               </li>
               <li>
                 <NavLink to={path.membership}>
-                  <img
-                    src={icons.cardInstruct}
+                  <ProfileImageCircle
+                    src={auth?.user?.userImage ? auth.user.userImage : userIcon }
                     alt="profile"
-                    width="40px"
-                    height="40px"
+                    width="30px"
+                    height="30px"
                   />
                 </NavLink>
               </li>

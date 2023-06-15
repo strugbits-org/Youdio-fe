@@ -19,6 +19,7 @@ const CONTAINER = styled.div`
     position: absolute;
     top: 50%;
     right: 10px;
+    /* min-width: 10px; */
   }
 `;
 const TEXTAREA = styled.div`
@@ -89,6 +90,8 @@ export const TextArea = ({ label, ...props }) => {
       <Ipt>
         <Label htmlFor={props.id}>{label}</Label>
         <TEXTAREA err={meta.touched && meta.error} {...field} {...props} />
+        {/* <StyleInput err={meta.touched && meta.error} {...field} {...props} /> */}
+
         <ErrorMessage component={Error} name={field.name} className="error" />
       </Ipt>
     </>

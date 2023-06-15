@@ -9,6 +9,7 @@ import {
   ButtonTwo,
   ImageBrowse,
   BrowseBtn,
+  SIDEBAR
 } from "./AddInstructorComp";
 import { H2 } from "src/components";
 import { AddInstructorContent } from "./content";
@@ -30,6 +31,7 @@ const AddInstructor = () => {
     <React.Fragment>
       {/* <MainContainer> */}
       <Container>
+        <SIDEBAR>SideBar</SIDEBAR>
         <Formik
           initialValues={initialValues}
           // validationSchema={validationSchema}
@@ -113,7 +115,7 @@ const AddInstructor = () => {
 
         <BrowseFile>
           <ImageBrowse>
-            <img src={icons.upload} alt="upload"  />
+            <img src={icons.upload} alt="upload" />
           </ImageBrowse>
           <BrowseBtn>
             <input

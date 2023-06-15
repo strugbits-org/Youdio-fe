@@ -1,12 +1,16 @@
 import React from "react";
 import { Formik } from "formik";
 import { H2 } from "src/components";
-import { Container } from "./AddLiveSessComo";
+import { icons } from "src/helpers";
+import { Container, BrowseFile } from "./AddLiveSessComo";
 import {
   FormRow,
   Heading,
   ButtonOne,
   ButtonTwo,
+  SIDEBAR,
+  ImageBrowse,
+  BrowseBtn,
 } from "../AddInstructor/AddInstructorComp";
 import {
   FieldInput,
@@ -28,6 +32,7 @@ const AddLiveSession = () => {
   return (
     <React.Fragment>
       <Container>
+        <SIDEBAR>SideBar</SIDEBAR>
         <Formik
           initialValues={initialValues}
           // validationSchema={validationSchema}
@@ -142,7 +147,8 @@ const AddLiveSession = () => {
                 label="Decription"
                 id="Decription"
                 autofill
-                name="Decription"
+                name="Time"
+                type="Tiem"
                 placeholder="Description"
                 style={{ fontSize: "16px" }}
               />
@@ -153,6 +159,20 @@ const AddLiveSession = () => {
             </FormRow>
           </form>
         </Formik>
+
+        <BrowseFile>
+          <ImageBrowse>
+            <img src={icons.upload} alt="upload" />
+          </ImageBrowse>
+          <BrowseBtn>
+            <input
+              type="file"
+              id="myFile"
+              // value={AddInstructorContent.btnBrowse}
+              className="input"
+            />
+          </BrowseBtn>
+        </BrowseFile>
       </Container>
     </React.Fragment>
   );

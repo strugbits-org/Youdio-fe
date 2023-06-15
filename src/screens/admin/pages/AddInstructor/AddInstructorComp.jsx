@@ -2,20 +2,23 @@ import styled from "styled-components";
 import { Field, ErrorMessage } from "formik";
 import { PrimaryButton, PrimaryWhiteButton } from "src/components";
 
-export const MainContainer = styled.div``;
 export const Container = styled.div`
   display: flex;
-  /* flex-direction: row; */
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   height: 100vh;
-
+  justify-content: space-around;
+  padding-block: 4rem;
   form {
-    width: 90vw;
-    max-width: 474px;
+    /* width: 90vw;
+    max-width: 474px; */
+    flex-basis: 50%;
   }
 `;
 
+export const SIDEBAR = styled.div`
+  flex-basis: 15%;
+`;
 export const FormRow = styled.div`
   margin-bottom: 2rem;
   display: flex;
@@ -23,30 +26,28 @@ export const FormRow = styled.div`
 `;
 export const Heading = styled.div`
   margin-bottom: 4rem;
-  /* display: flex; */
-  /* padding: 2rem 0 0 36.9rem; */
 `;
 
 export const BrowseFile = styled.div`
-  /* margin: 50px; */
-  margin: 10px;
-  position: relative;
-  left: 300px;
+  flex-basis: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 export const ImageBrowse = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px dotted #000;
-  padding: 50px;
+  border: 1px dotted #797979;
+  padding: 70px;
+
   img {
     width: 100px;
-    height: auto;
   }
 `;
 export const BrowseBtn = styled(PrimaryButton)`
   /* min-width: 100px; */
-  height: 30px;
+  height: 50px;
   border: none;
   border-radius: 0px;
   /* max-width: 341px; */

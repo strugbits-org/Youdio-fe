@@ -22,6 +22,7 @@ import zoomImg from "./zoomImg.svg"
 import cross from "./cross.svg"
 import envelop from "./Envelop.svg"
 import dropDown from "./dropDown.svg"
+import videoPlay from "./videoPlay.svg"
 
 // Assets/Sample
 import cardImage from "src/assets/sample/cardImg.jpg"
@@ -91,7 +92,8 @@ const icons = {
   envelop,
   browseFile,
   upload,
-  dropDown
+  dropDown,
+  videoPlay
 };
 
 export default icons

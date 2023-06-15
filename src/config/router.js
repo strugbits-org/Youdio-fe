@@ -34,6 +34,8 @@ import VideoClasses from "src/screens/user/VideoClasses";
 import AddInstructor from "src/screens/admin/pages/AddInstructor/Index";
 import AddLiveSession from "src/screens/admin/pages/AddLiveSession/Index";
 
+import SingleVideo from "src/screens/user/SingleVideo/Index";
+
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
 export default function Router() {
@@ -98,6 +100,9 @@ export default function Router() {
           <Route path="/livevideo" element={<LiveVideo />} />
           <Route path="/videoclasses" element={<VideoClasses />} />
           <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
+
+          {/* SINGLE VIDEO */}
+          <Route path="/singlevideo" element={<SingleVideo />} />
 
           {/* User Dashboard */}
           <Route

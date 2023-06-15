@@ -94,15 +94,11 @@
 //   );
 // }
 
-import React, { useEffect } from "react";
+import React from "react";
 import Drawer from "@mui/material/Drawer";
 import { FilterBox } from "./filtersComponents";
 
 export default function MobileFilters({ open, setOpen, onClose }) {
-  useEffect(() => {
-    console.log({ open });
-  });
-
   const list = () => (
     <FilterBox
       sx={{

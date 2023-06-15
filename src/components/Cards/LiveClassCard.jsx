@@ -28,7 +28,7 @@ function LiveClassCard({ data }) {
         <H3>{data.title}</H3>
         <div className="profileRow">
           <div className="profileBox">
-            <img src={data.instructor.image} alt="" width="30px" height={""} />
+            <img src={data.instructor.image} alt="" width="30px" height="30px" />
             <H4>{data.instructor.name}</H4>
           </div>
           <div className="intensityBox">

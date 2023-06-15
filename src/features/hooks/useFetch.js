@@ -120,7 +120,6 @@ const useFetch = () => {
       setLoading(false);
       setSuccess(false);
       setError(e.message);
-      console.log("Error", e);
       }
   };
 

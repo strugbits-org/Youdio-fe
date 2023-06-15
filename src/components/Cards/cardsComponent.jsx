@@ -123,6 +123,11 @@ export const CardContent = styled.div`
       display: flex;
       align-items: center;
       gap: 13px;
+
+      img{
+        border-radius: 100%;
+        object-fit: cover;
+      }
     }
   }
   .trainerP3 {
@@ -140,6 +145,7 @@ export const CardContent = styled.div`
   }
   h3 {
     margin-bottom: 1em;
+    text-align: left;
   }
 
   .reviewSec {

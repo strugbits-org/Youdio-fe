@@ -145,8 +145,8 @@ function LiveClasses() {
         }
 
         if (sort === "oldest") {
-          if (titleB > titleA) return -1;
-          if (titleB < titleA) return 1;
+          if (titleB > titleA) return 1;
+          if (titleB < titleA) return -1;
           return 0;
         }
         return 0;

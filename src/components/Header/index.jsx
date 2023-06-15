@@ -28,13 +28,11 @@ function Header({ isLoggedin }) {
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.user);
-  console.log(auth.user);
   const language = useSelector((state) => state.language.lang);
 
   useEffect(() => {
     // dispatch(init({ cbAction: setId }));
     contentTranslator({ staticContent, setContent, language });
-    console.log("Main chala when state change");
   }, [language, isLoggedin]);
 
   // Language Listener

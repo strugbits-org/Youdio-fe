@@ -34,7 +34,6 @@ const api = (axioss) => {
 };
 
 async function requestHandlers(request) {
-  console.log({request});
   return request;
 }
 

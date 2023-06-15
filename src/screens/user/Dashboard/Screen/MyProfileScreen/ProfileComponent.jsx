@@ -39,9 +39,9 @@ export const Box4 = styled(Box)`
     position: relative;
 
     img{
-      width: 240px;
-      height: 240px;
-      object-fit: contain;
+      width: clamp(140px, 18vw, 240px);
+      height: clamp(140px, 18vw, 240px);
+      object-fit: cover;
       border-radius: 100%;
     }
   }
@@ -63,8 +63,8 @@ export const Box4 = styled(Box)`
     &::after {
       content: "";
       position: absolute;
-      bottom: 15px;
-      right: 15px;
+      bottom: 1vw;
+      right: 1vw;
       width: 50px;
       height: 50px;
       cursor: pointer;

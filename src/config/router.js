@@ -31,6 +31,10 @@ import LiveVideo from "src/screens/user/LiveVideo";
 import ForgotPassword from "src/screens/Authenticate/ForgotPassword";
 import ResetPassword from "src/screens/Authenticate/ResetPassword";
 import VideoClasses from "src/screens/user/VideoClasses";
+import AddInstructor from "src/screens/admin/pages/AddInstructor/Index";
+import AddLiveSession from "src/screens/admin/pages/AddLiveSession/Index";
+
+import SingleVideo from "src/screens/user/SingleVideo/Index";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
@@ -97,6 +101,9 @@ export default function Router() {
           <Route path="/videoclasses" element={<VideoClasses />} />
           <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
 
+          {/* SINGLE VIDEO */}
+          <Route path="/singlevideo" element={<SingleVideo />} />
+
           {/* User Dashboard */}
           <Route
             path="/membership"
@@ -126,7 +133,7 @@ export default function Router() {
           {/* Admin Dashboard */}
           <Route
             path="/add-instructor"
-            element={<ProtectedRoute children={<Membership />} />}
+            element={<ProtectedRoute children={<AddInstructor />} />}
           />
           <Route
             path="/add-video"
@@ -134,7 +141,7 @@ export default function Router() {
           />
           <Route
             path="/add-live-session"
-            element={<ProtectedRoute children={<Membership />} />}
+            element={<ProtectedRoute children={<AddLiveSession />} />}
           />
         </Routes>
         <Footer />

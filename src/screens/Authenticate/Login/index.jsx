@@ -74,7 +74,7 @@ function Login() {
       <div className="form">
         <Formik
           initialValues={{
-            email: "hamza@gmail.com",
+            email: "test@test.com",
             password: "1234567",
           }}
           validationSchema={loginFormValidate}

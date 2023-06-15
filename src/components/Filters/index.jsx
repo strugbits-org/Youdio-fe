@@ -45,7 +45,7 @@ const filter = [
   },
 ];
 
-export function Filters({videoCount, videoSort, setVideoSort}) {
+export function Filters({videoCount, videoSort, setVideoSort, videoType}) {
   const [filterTab, setFilterTab] = useState(null);
   const filterTags = useSelector((state) => state.filter.filterTags);
   const { fetchMultipleData } = useFetch();
@@ -101,7 +101,7 @@ export function Filters({videoCount, videoSort, setVideoSort}) {
         })}
       </FilterBox>
       <SortingOption >
-        <P3 className="videoCount">{`SHOWING ${videoCount} VIDEOS`}</P3>
+        <P3 className="videoCount">{`SHOWING ${videoCount} ${videoType}`}</P3>
         <div className="sortOption">
           <P3>SORT BY:</P3>
           <select value={videoSort} onChange={(e) => setVideoSort(e.target.value)}>

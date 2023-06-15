@@ -289,6 +289,7 @@ function LiveClasses() {
               videoCount={res?.videos ? res.videos.length : 0}
               videoSort={sort}
               setVideoSort={setSort}
+              videoType="CLASSES"
             />
           </React.Fragment>
         )}

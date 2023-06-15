@@ -83,6 +83,7 @@ function VideoClasses() {
           videoSort={sort}
           setVideoSort={setSort}
           videoCount={res?.videos ? res.videos.length : 0}
+          videoType="VIDEOS"
         />
       </Section>
 

@@ -11,7 +11,7 @@ import Loader from "src/components/Loader";
 function VideoClasses() {
   const { postData, res, loading } = useFetch();
   const { filters, filterTags } = useSelector((state) => state.filter);
-
+  const [isFilters, setIsFilters] = useState(true)
   const [sort, setSort] = useState("newest");
 
   const dispatch = useDispatch();
@@ -20,17 +20,14 @@ function VideoClasses() {
     if (filterTags.length > 0) {
       dispatch(clearFilters());
     }
+    setIsFilters(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    postData("video/filter", filters);
-    // filterTags.length > 0
-    //   ?
-    //   : fetchData("video");
+    !isFilters && postData("video/filter", filters);
+   
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterTags]);
-
-  useEffect(() => {}, [res, loading]);
+  }, [filterTags, isFilters]);
 
   const sortedVideos = useMemo(() => {
     if (res?.videos && res.videos.length > 0) {

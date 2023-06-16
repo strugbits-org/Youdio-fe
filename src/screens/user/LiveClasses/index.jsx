@@ -58,6 +58,7 @@ function LiveClasses() {
   const [isDateSelected, setDateSelected] = useState();
   const [weekEnd, setWeekEnd] = useState(daysInWeek());
   const [sort, setSort] = useState("newest");
+  const [isFilters, setIsFilters] = useState(true)
 
   const weekDaysRef = useRef();
 
@@ -123,14 +124,13 @@ function LiveClasses() {
     if (filterTags.length > 0) {
       dispatch(clearFilters());
     }
+    setIsFilters(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    postData("video/filter", filters);
+    !isFilters && postData("video/filter", filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterTags]);
-
-  useEffect(() => {}, [res, loading]);
+  }, [filterTags, isFilters]);
 
   const sortedVideos = useMemo(() => {
     if (res?.videos && res.videos.length > 0) {

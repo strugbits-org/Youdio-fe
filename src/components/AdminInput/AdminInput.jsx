@@ -1,8 +1,7 @@
 import { ErrorMessage, useField } from "formik";
 import styled from "styled-components";
 import { Error, Label } from "src/components/AdminInput/AdminInpComp";
-import { StyleInput } from "./AdminInpComp";
-import { icons } from "src/helpers";
+import { StyleInput, DropInput } from "./AdminInpComp";
 import { fonts } from "src/helpers";
 const { poppinsRegular } = fonts;
 
@@ -22,14 +21,15 @@ const CONTAINER = styled.div`
     /* min-width: 10px; */
   }
 `;
-const TEXTAREA = styled.div`
+const TEXTAREA = styled.textarea`
   width: 720px;
   height: 185px;
   color: #797979;
   background: #f7f7f7;
   outline: none;
   font-size: 0.8em;
-  padding-inline: 16px;
+  padding-inline:5px;
+  padding-block: 5px;
   font-family: ${poppinsRegular};
   border: ${(props) =>
     props.err ? "1px solid red" : "1px solid var(--textParaBlack25)"};
@@ -58,8 +58,9 @@ export const FieldInput = ({ label, ...props }) => {
     </Ipt>
   );
 };
-export const DropDownInput = ({ label, ...props }) => {
+export const DropDownInput = ({ label, options, ...props }) => {
   const [field, meta] = useField(props);
+  const selectedOption = field.value;
 
   return (
     <>
@@ -67,14 +68,14 @@ export const DropDownInput = ({ label, ...props }) => {
         <Label htmlFor={props.id}>{label}</Label>
 
         <CONTAINER className="input-container">
-          <StyleInput err={meta.touched && meta.error} {...field} {...props} />
-          <img
-            src={icons.dropDown}
-            alt=""
-            width="20px"
-            height="auto"
-            className="icon"
-          />
+          <DropInput err={meta.touched && meta.error} {...field} {...props} highlightOption={selectedOption}
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </DropInput>
         </CONTAINER>
         <ErrorMessage component={Error} name={field.name} className="error" />
       </Ipt>

@@ -35,6 +35,7 @@ import AddInstructor from "src/screens/admin/pages/AddInstructor/Index";
 import AddLiveSession from "src/screens/admin/pages/AddLiveSession/Index";
 
 import SingleVideo from "src/screens/user/SingleVideo/Index";
+import AddVideo from "src/screens/admin/pages/AddVideo/Index";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
@@ -137,7 +138,7 @@ export default function Router() {
           />
           <Route
             path="/add-video"
-            element={<ProtectedRoute children={<Membership />} />}
+            element={<ProtectedRoute children={<AddVideo />} />}
           />
           <Route
             path="/add-live-session"

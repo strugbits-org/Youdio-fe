@@ -28,7 +28,15 @@ const AddLiveSession = () => {
     JobTitle: "Yoga Instructor",
     PremiumInstructor: "Alex",
   };
-  const handleSubmit = () => {};
+  const handleSubmit = () => { };
+
+  const options = [
+    { value: 'Yoga', label: 'Yoga' },
+    { value: 'saab', label: 'Saab' },
+    { value: 'mercedes', label: 'Mercedes' },
+    { value: 'audi', label: 'Audi' },
+  ];
+
   return (
     <React.Fragment>
       <Container>
@@ -51,6 +59,7 @@ const AddLiveSession = () => {
                 type="Category"
                 placeholder="Yoga"
                 style={{ fontSize: "16px" }}
+                options={options}
               />
               <FieldInput
                 label="Date"
@@ -80,6 +89,7 @@ const AddLiveSession = () => {
                 type="Trainer"
                 placeholder="Elizabeth Lisa"
                 style={{ fontSize: "16px" }}
+                options={options}
               />
             </FormRow>
             <FormRow>
@@ -91,6 +101,7 @@ const AddLiveSession = () => {
                 type="Difficulty"
                 placeholder="Medium"
                 style={{ fontSize: "16px" }}
+                options={options}
               />
               <DropDownInput
                 label="Intensity"
@@ -100,6 +111,7 @@ const AddLiveSession = () => {
                 type="Intensity"
                 placeholder="Level 1"
                 style={{ fontSize: "16px" }}
+                options={options}
               />
             </FormRow>
             <FormRow>
@@ -111,6 +123,7 @@ const AddLiveSession = () => {
                 type="Filter"
                 placeholder="Core"
                 style={{ fontSize: "16px" }}
+                options={options}
               />
               <FieldInput
                 label="Total Time"
@@ -147,9 +160,9 @@ const AddLiveSession = () => {
                 label="Decription"
                 id="Decription"
                 autofill
-                name="Time"
-                type="Tiem"
-                placeholder="Description"
+                name="textarea"
+                type="textarea"
+                placeholder="l...."
                 style={{ fontSize: "16px" }}
               />
             </FormRow>

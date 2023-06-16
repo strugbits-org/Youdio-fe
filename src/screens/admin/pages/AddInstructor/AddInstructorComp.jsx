@@ -32,7 +32,8 @@ export const BrowseFile = styled.div`
   flex-basis: 10%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-block: 10rem;
+  /* justify-content: center; */
 `;
 export const ImageBrowse = styled.div`
   display: flex;

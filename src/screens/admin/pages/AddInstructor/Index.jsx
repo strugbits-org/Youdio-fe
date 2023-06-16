@@ -25,7 +25,7 @@ const AddInstructor = () => {
     JobTitle: "Yoga Instructor",
     PremiumInstructor: "Alex",
   };
-  const handleSubmit = () => {};
+  const handleSubmit = () => { };
 
   return (
     <React.Fragment>
@@ -44,20 +44,20 @@ const AddInstructor = () => {
             <FormRow>
               <FieldInput
                 label={AddInstructorContent.fullName}
-                id="loginEmail"
+                id="fullName"
                 autofill
-                name="email"
-                type="email"
+                name="fullName"
+                type="fullName"
                 placeholder={AddInstructorContent.fullNamePlace}
                 style={{ fontSize: "16px" }}
               />
 
               <FieldInput
                 label={AddInstructorContent.lastName}
-                id="loginEmail"
+                id="lastName"
                 autofill
-                name="email"
-                type="email"
+                name="lastName"
+                type="lastName"
                 placeholder={AddInstructorContent.lastNameplace}
                 style={{ fontSize: "16px" }}
               />

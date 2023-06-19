@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { fonts } from "src/helpers";
 const { poppinsRegular } = fonts;
 
@@ -27,6 +27,45 @@ export const StyleInput = styled.input`
     color: #797979;
   }
 `;
+
+export const DropInput = styled.select`
+    width: 350px;
+  height: 45px;
+  color: #797979;
+  background: #f7f7f7;
+  outline: none;
+  font-size: 0.8em;
+  padding-inline: 16px;
+  font-family: ${poppinsRegular};
+  border: ${(props) =>
+    props.err ? "1px solid red" : "1px solid var(--textParaBlack25)"};
+
+  &:hover {
+    border-color: ${(props) => (props.err ? "red" : "var(--backgroundGreen)")};
+  }
+
+  &:focus {
+    border-color: ${(props) => (props.err ? "red" : "var(--backgroundGreen)")};
+    border-width: 2px;
+  }
+
+  &::placeholder {
+    color: #797979;
+  }
+  option {
+    background: rgb(247, 247, 247);
+    color: rgb(121,121,121);
+    font-size: 0.8em;
+
+    ${(props) =>
+    props.highlightOption === 'Yoga' &&
+    css`
+        font-weight: bold;
+        color: red;
+      `}
+  }
+ 
+`
 export const Icon = styled.div`
   position: absolute;
   padding: 10px;

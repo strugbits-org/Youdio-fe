@@ -18,15 +18,22 @@ import {
   TextArea,
 } from "src/components/AdminInput/AdminInput";
 import { Addlivesession } from "./content";
+import { liveSessionvalidate } from "src/helpers/forms/AdminValidateForm";
 
 const AddLiveSession = () => {
   const initialValues = {
-    FirstName: "Alexa",
-    lastName: "Morgan",
-    EmailAddress: "Alexa Morgan@,com",
-    PhoneNo: "#########",
-    JobTitle: "Yoga Instructor",
-    PremiumInstructor: "Alex",
+    category: "",
+    date: "",
+    title: "",
+    trainer: "",
+    difficulty: "",
+    intensity: "",
+    filter: "",
+    totalTime: "",
+    zoomLink: "",
+    time: "",
+    image: "",
+    description: "",
   };
   const handleSubmit = () => { };
 
@@ -43,7 +50,7 @@ const AddLiveSession = () => {
         <SIDEBAR>SideBar</SIDEBAR>
         <Formik
           initialValues={initialValues}
-          // validationSchema={validationSchema}
+          validationSchema={liveSessionvalidate}
           onSubmit={handleSubmit}
         >
           <form>
@@ -53,19 +60,19 @@ const AddLiveSession = () => {
             <FormRow>
               <DropDownInput
                 label="Category"
-                id="Category"
+                id="category"
                 autofill
-                name="Category"
-                type="Category"
+                name="category"
+                type="text"
                 placeholder="Yoga"
                 style={{ fontSize: "16px" }}
                 options={options}
               />
               <FieldInput
                 label="Date"
-                id="Date"
+                id="date"
                 autofill
-                name="Date"
+                name="date"
                 type="Date"
                 placeholder="dd/mm/yy"
                 style={{ fontSize: "16px" }}
@@ -74,19 +81,19 @@ const AddLiveSession = () => {
             <FormRow>
               <FieldInput
                 label="Title"
-                id="Title"
+                id="title"
                 autofill
-                name="Title"
-                type="Title"
+                name="title"
+                type="text"
                 placeholder="Live Back Press"
                 style={{ fontSize: "16px" }}
               />
               <DropDownInput
                 label="Trainer"
-                id="Trainer"
+                id="trainer"
                 autofill
-                name="Trainer"
-                type="Trainer"
+                name="trainer"
+                type="trainer"
                 placeholder="Elizabeth Lisa"
                 style={{ fontSize: "16px" }}
                 options={options}

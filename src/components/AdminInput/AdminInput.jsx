@@ -53,7 +53,9 @@ export const FieldInput = ({ label, ...props }) => {
   return (
     <Ipt>
       <Label htmlFor={props.id}>{label}</Label>
-      <StyleInput err={meta.touched && meta.error} {...field} {...props} />
+      <StyleInput err={meta.touched && meta.error}
+        {...field}
+        {...props} />
       <ErrorMessage component={Error} name={field.name} className="error" />
     </Ipt>
   );

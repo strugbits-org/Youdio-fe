@@ -58,7 +58,7 @@ function LiveClasses() {
   const [isDateSelected, setDateSelected] = useState();
   const [weekEnd, setWeekEnd] = useState(daysInWeek());
   const [sort, setSort] = useState("newest");
-  const [isFilters, setIsFilters] = useState(true)
+  const [isFilters, setIsFilters] = useState(true);
 
   const weekDaysRef = useRef();
 
@@ -124,7 +124,7 @@ function LiveClasses() {
     if (filterTags.length > 0) {
       dispatch(clearFilters());
     }
-    setIsFilters(false)
+    setIsFilters(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
@@ -138,14 +138,9 @@ function LiveClasses() {
       const videos = res.videos.sort((a, b) => {
         const titleA = new Date(a.date);
         const titleB = new Date(b.date);
-        if (sort === "newest") {
-          return titleB - titleA;
-        }
 
-        if (sort === "oldest") {
-          return titleA - titleB;
-        }
-        // return 0;
+        if (sort === "newest") return titleB - titleA;
+        else return titleA - titleB;
       });
       return videos;
     }

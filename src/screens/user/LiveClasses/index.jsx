@@ -134,22 +134,18 @@ function LiveClasses() {
 
   const sortedVideos = useMemo(() => {
     if (res?.videos && res.videos.length > 0) {
+      console.log(new Date(res.videos[1].date));
       const videos = res.videos.sort((a, b) => {
-        const titleA = a.title.toUpperCase();
-        const titleB = b.date.toUpperCase();
-
+        const titleA = new Date(a.date);
+        const titleB = new Date(b.date);
         if (sort === "newest") {
-          if (titleA > titleB) return -1;
-          if (titleA < titleB) return 1;
-          return 0;
+          return titleB - titleA;
         }
 
         if (sort === "oldest") {
-          if (titleB > titleA) return 1;
-          if (titleB < titleA) return -1;
-          return 0;
+          return titleA - titleB;
         }
-        return 0;
+        // return 0;
       });
       return videos;
     }

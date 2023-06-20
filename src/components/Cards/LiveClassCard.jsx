@@ -15,6 +15,7 @@ function LiveClassCard({ data }) {
         <img src={data.thumbnail} alt={data.title} width="100%" height="auto" />
         <Tag>
           <H4>{data.category}</H4>
+          {/* <H4>{new Date(data.date).toDateString()}</H4> */}
         </Tag>
       </CardMedia>
       <CardContent>
@@ -28,7 +29,12 @@ function LiveClassCard({ data }) {
         <H3>{data.title}</H3>
         <div className="profileRow">
           <div className="profileBox">
-            <img src={data.instructor.image} alt="" width="30px" height="30px" />
+            <img
+              src={data.instructor.image}
+              alt=""
+              width="30px"
+              height="30px"
+            />
             <H4>{data.instructor.name}</H4>
           </div>
           <div className="intensityBox">

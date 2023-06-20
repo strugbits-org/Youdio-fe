@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { weekdays } from "moment";
 import useFetch from "src/features/hooks/useFetch";
 
-import { liveClassStaticContent } from "./constant";
+import { getMonth, liveClassStaticContent } from "./constant";
 import {
   ContentBox,
   MonthBox,
@@ -50,8 +50,8 @@ function LiveClasses() {
   const language = useSelector((state) => state.language.lang);
   const { filterTags, filters } = useSelector((state) => state.filter);
   const [content, setContent] = useState(liveClassStaticContent);
-  const [month, setMonth] = useState(initialMonth);
-  const [weekDays, setWeekDays] = useState(
+  const [month, setMonth] = useState(getMonth());
+  const [weekDays] = useState(
     getDaysArray(initialYear, initialMonth)
   );
   const [weekStart, setWeekStart] = useState(0);
@@ -62,21 +62,28 @@ function LiveClasses() {
 
   const weekDaysRef = useRef();
 
-  const previousMonth = () => {
-    month !== 0 && setMonth(month - 1);
-    setWeekDays(getDaysArray(initialYear, month - 1));
-    setWeekStart(0);
-    setWeekEnd(daysInWeek());
-    setDateSelected("");
+  const changeMonth = (action) => {
+    
+    const currentMonth = getMonth(action, month);
+    // console.log(currentMonth);
+    setMonth(currentMonth);
+    // month !== 0 && setMonth(month - 1);
+    // setWeekDays(getDaysArray(initialYear, month - 1));
+    // setWeekStart(0);
+    // setWeekEnd(daysInWeek());
+    // setDateSelected("");
   };
 
-  const nextMonth = () => {
-    month !== monthNames.length - 1 && setMonth(month + 1);
-    setWeekDays(getDaysArray(initialYear, month + 1));
-    setWeekStart(0);
-    setWeekEnd(daysInWeek());
-    setDateSelected("");
-  };
+  // const nextMonth = () => {
+  //   const currentMonth = getMonth('next')
+  //   setMonth(currentMonth)
+
+  //   // month !== monthNames.length - 1 && setMonth(month + 1);
+  //   // setWeekDays(getDaysArray(initialYear, month + 1));
+  //   // setWeekStart(0);
+  //   // setWeekEnd(daysInWeek());
+  //   // setDateSelected("");
+  // };
 
   const previousWeek = () => {
     if (weekStart > 0) {
@@ -162,7 +169,7 @@ function LiveClasses() {
         <MonthBox className="month">
           <IconButton
             position="left"
-            onClick={() => previousMonth()}
+            onClick={() => changeMonth('prev')}
             disabled={month === 0 ? true : false}
           >
             <img
@@ -173,11 +180,11 @@ function LiveClasses() {
             />
           </IconButton>
 
-          <H3>{monthNames[month].name}</H3>
+          <H3>{`${month.monthName} ${month.year}`}</H3>
 
           <IconButton
             position="right"
-            onClick={() => nextMonth()}
+            onClick={() => changeMonth("next")}
             disabled={month === monthNames.length - 1 ? true : false}
           >
             <img

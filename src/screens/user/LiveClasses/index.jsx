@@ -134,7 +134,6 @@ function LiveClasses() {
 
   const sortedVideos = useMemo(() => {
     if (res?.videos && res.videos.length > 0) {
-      console.log(new Date(res.videos[1].date));
       const videos = res.videos.sort((a, b) => {
         const titleA = new Date(a.date);
         const titleB = new Date(b.date);

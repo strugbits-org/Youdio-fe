@@ -1,7 +1,7 @@
 import { ErrorMessage, useField } from "formik";
 import styled from "styled-components";
 import { Error, Label } from "src/components/AdminInput/AdminInpComp";
-import { StyleInput, DropInput } from "./AdminInpComp";
+import { StyleInput, DropInput, } from "./AdminInpComp";
 import { fonts } from "src/helpers";
 const { poppinsRegular } = fonts;
 
@@ -100,6 +100,28 @@ export const TextArea = ({ label, ...props }) => {
     </>
   );
 };
+
+export const UploadButton = ({ label, ...props }) => {
+
+  return (
+    <>
+      {/* <BOX4>
+
+        <input
+          id="userImage"
+          name="userImage"
+          type="file"
+          className="userImage"
+          accept="image/*"
+          onChange={(e) =>
+            formikRef.current.setFieldValue("userImage", e.target.files[0])
+          }
+        />
+
+      </BOX4> */}
+    </>
+  )
+}
 export const TextFieldInput = ({ ...props }) => {
   return (
     <Ipt>

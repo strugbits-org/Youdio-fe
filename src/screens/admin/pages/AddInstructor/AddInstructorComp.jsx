@@ -22,6 +22,7 @@ export const SIDEBAR = styled.div`
 export const FormRow = styled.div`
   margin-bottom: 2rem;
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
 `;
 export const Heading = styled.div`
@@ -56,14 +57,47 @@ export const BrowseBtn = styled(PrimaryButton)`
   display: flex;
   justify-content: center;
 
-  input::file-selector-button {
-    font-weight: bold;
-    padding: 0.5em;
-    border: thin solid grey;
-    border-radius: 3px;
-    margin: 15px;
+`
+export const BOX4 = styled.div`
+  /* align-items: center;
+  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap; */
+  .upload-container {
+    position: relative;
   }
-`;
+.uploadInp {
+    border: none;
+    outline: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: .8rem;
+    font-weight: 600;
+    width: 250px;
+    height: 50px;
+ 
+    &::file-selector-button {
+      color: var(--textHeadingWhite);
+    background:var(--backgroundGreen);
+      padding: 140px;
+      /* font-size: 0px; */
+      border: none;
+      border-radius: 0px;
+      outline: none;
+    }
+    &::after {
+      content: "upload";
+      position: absolute;
+      top: 1vw;
+      left: 6vw;
+    
+      /* width: 50px;
+      height: 50px; */
+      cursor: pointer;
+    }
+    /* .userImage */
+  }
+`
 export const ButtonOne = styled(PrimaryWhiteButton)`
   max-width: 200px;
   min-width: 100px;

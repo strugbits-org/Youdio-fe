@@ -102,20 +102,20 @@ const AddLiveSession = () => {
             <FormRow>
               <DropDownInput
                 label="Difficulty"
-                id="Difficulty"
+                id="difficulty"
                 autofill
-                name="Difficulty"
-                type="Difficulty"
+                name="difficulty"
+                type="text"
                 placeholder="Medium"
                 style={{ fontSize: "16px" }}
                 options={options}
               />
               <DropDownInput
                 label="Intensity"
-                id="Intensity"
+                id="intensity"
                 autofill
-                name="Intensity"
-                type="Intensity"
+                name="intensity"
+                type="text"
                 placeholder="Level 1"
                 style={{ fontSize: "16px" }}
                 options={options}
@@ -124,20 +124,20 @@ const AddLiveSession = () => {
             <FormRow>
               <DropDownInput
                 label="Filter"
-                id="Filter"
+                id="filter"
                 autofill
-                name="Filter"
-                type="Filter"
+                name="filter"
+                type="text"
                 placeholder="Core"
                 style={{ fontSize: "16px" }}
                 options={options}
               />
               <FieldInput
                 label="Total Time"
-                id="Total Time"
+                id="totalTime"
                 autofill
-                name="Total Time"
-                type="Total Time"
+                name="totalTime"
+                type="text"
                 placeholder="30 Mins"
                 style={{ fontSize: "16px" }}
               />
@@ -145,19 +145,19 @@ const AddLiveSession = () => {
             <FormRow>
               <FieldInput
                 label="Zoom Link"
-                id="Zoom Link"
+                id="zoomLink"
                 autofill
-                name="Zoom Link"
-                type="Zoom Link"
+                name="zoomLink"
+                type="text"
                 placeholder="https/eiouuodins"
                 style={{ fontSize: "16px" }}
               />
               <FieldInput
                 label="Time"
-                id="Time"
+                id="time"
                 autofill
-                name="Time"
-                type="Tiem"
+                name="time"
+                type="text"
                 placeholder="6:30-730  AM"
                 style={{ fontSize: "16px" }}
               />
@@ -165,9 +165,9 @@ const AddLiveSession = () => {
             <FormRow>
               <TextArea
                 label="Decription"
-                id="Decription"
+                id="description"
                 autofill
-                name="textarea"
+                name="description"
                 type="textarea"
                 placeholder="l...."
                 style={{ fontSize: "16px" }}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik } from "formik";
 import { H2 } from "src/components";
 import { icons } from "src/helpers";
@@ -17,14 +17,23 @@ import {
     DropDownInput,
     TextArea,
 } from "src/components/AdminInput/AdminInput";
+import { addVideoValidate } from 'src/helpers/forms/AdminValidateForm';
+
+
 const AddVideo = () => {
     const initialValues = {
-        FirstName: "Alexa",
-        lastName: "Morgan",
-        EmailAddress: "Alexa Morgan@,com",
-        PhoneNo: "#########",
-        JobTitle: "Yoga Instructor",
-        PremiumInstructor: "Alex",
+        category: "",
+        date: "",
+        title: "",
+        trainer: "",
+        difficulty: "",
+        intensity: "",
+        filter: "",
+        totalTime: "",
+        feature: "",
+        time: "",
+        image: "",
+        description: "",
     };
     const handleSubmit = () => { };
     const options = [
@@ -33,36 +42,60 @@ const AddVideo = () => {
         { value: 'mercedes', label: 'Mercedes' },
         { value: 'audi', label: 'Audi' },
     ];
+
+    const [fileName, setFileName] = useState('');
+
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        // Do something with the uploaded file
+        console.log(file);
+        setFileName(file.name);
+
+    };
     return (
         <React.Fragment>
             <Container>
                 <SIDEBAR>SideBar</SIDEBAR>
                 <Formik
                     initialValues={initialValues}
+                    validationSchema={addVideoValidate}
                     // validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
                     <form>
                         <Heading>
                             <H2>Add New Video</H2>
+
+                            <label htmlFor="upload-button">
+                                Upload File
+                                <input
+                                    id="upload-button"
+                                    type="file"
+                                    onChange={handleFileUpload}
+                                    style={{ display: 'none' }}
+                                />
+                            </label>
+                            {fileName && <p> {fileName}</p>}
+
                         </Heading>
                         <FormRow>
+
                             <DropDownInput
                                 label="Category"
-                                id="Category"
+                                id="category"
                                 autofill
-                                name="Category"
-                                type="Category"
+                                name="category"
+                                type="text"
                                 placeholder="Yoga"
                                 style={{ fontSize: "16px" }}
                                 options={options}
                             />
                             <FieldInput
                                 label="Date"
-                                id="Date"
+                                id="date"
                                 autofill
-                                name="Date"
-                                type="Date"
+                                name="date"
+                                type="text"
                                 placeholder="dd/mm/yy"
                                 style={{ fontSize: "16px" }}
                             />
@@ -70,19 +103,19 @@ const AddVideo = () => {
                         <FormRow>
                             <FieldInput
                                 label="Title"
-                                id="Title"
+                                id="title"
                                 autofill
-                                name="Title"
-                                type="Title"
+                                name="title"
+                                type="text"
                                 placeholder="Live Back Press"
                                 style={{ fontSize: "16px" }}
                             />
                             <DropDownInput
                                 label="Trainer"
-                                id="Trainer"
+                                id="trainer"
                                 autofill
-                                name="Trainer"
-                                type="Trainer"
+                                name="trainer"
+                                type="text"
                                 placeholder="Elizabeth Lisa"
                                 style={{ fontSize: "16px" }}
                                 options={options}
@@ -91,20 +124,20 @@ const AddVideo = () => {
                         <FormRow>
                             <DropDownInput
                                 label="Difficulty"
-                                id="Difficulty"
+                                id="difficulty"
                                 autofill
-                                name="Difficulty"
-                                type="Difficulty"
+                                name="difficulty"
+                                type="text"
                                 placeholder="Medium"
                                 style={{ fontSize: "16px" }}
                                 options={options}
                             />
                             <DropDownInput
                                 label="Intensity"
-                                id="Intensity"
+                                id="intensity"
                                 autofill
-                                name="Intensity"
-                                type="Intensity"
+                                name="intensity"
+                                type="text"
                                 placeholder="Level 1"
                                 style={{ fontSize: "16px" }}
                                 options={options}
@@ -113,20 +146,20 @@ const AddVideo = () => {
                         <FormRow>
                             <DropDownInput
                                 label="Filter"
-                                id="Filter"
+                                id="filter"
                                 autofill
-                                name="Filter"
-                                type="Filter"
+                                name="filter"
+                                type="text"
                                 placeholder="Core"
                                 style={{ fontSize: "16px" }}
                                 options={options}
                             />
                             <FieldInput
                                 label="Total Time"
-                                id="Total Time"
+                                id="totalTime"
                                 autofill
-                                name="Total Time"
-                                type="Total Time"
+                                name="totalTime"
+                                type="text"
                                 placeholder="30 Mins"
                                 style={{ fontSize: "16px" }}
                             />
@@ -134,10 +167,10 @@ const AddVideo = () => {
                         <FormRow>
                             <DropDownInput
                                 label="You Want to Feature this Video?"
-                                id="Feature"
+                                id="feature"
                                 autofill
-                                name="Feature"
-                                type="Feature"
+                                name="feature"
+                                type="text"
                                 placeholder="Yes"
                                 style={{ fontSize: "16px" }}
                                 options={options}

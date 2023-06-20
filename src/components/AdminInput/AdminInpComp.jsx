@@ -66,6 +66,30 @@ export const DropInput = styled.select`
   }
  
 `
+export const BOX4 = styled.input`
+    height: 50px;
+  border-radius: 0px;
+  /* max-width: 341px; */
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  border:none;
+    outline:none;
+    width: 100%;
+    min-height: 45px;
+    color: var(--textHeadingWhite);
+    background:var(--backgroundGreen);
+    cursor:pointer;
+    transition: var(--transition03s);
+    font-size:18px;
+    
+    &:hover{
+        transition: var(--transition03s); 
+        background:var(--backgroundGreenHover);
+    }
+
+`
 export const Icon = styled.div`
   position: absolute;
   padding: 10px;

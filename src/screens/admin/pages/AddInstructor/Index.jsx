@@ -1,3 +1,4 @@
+// import { useRef } from "react";\
 import React from "react";
 import { Formik } from "formik";
 import {
@@ -8,12 +9,12 @@ import {
   ButtonOne,
   ButtonTwo,
   ImageBrowse,
-  BrowseBtn,
+  BOX4,
   SIDEBAR
 } from "./AddInstructorComp";
 import { H2 } from "src/components";
 import { AddInstructorContent } from "./content";
-import { FieldInput, TextArea } from "src/components/AdminInput/AdminInput";
+import { FieldInput, TextArea, } from "src/components/AdminInput/AdminInput";
 import { icons } from "src/helpers";
 import { instructorFormvalidate } from "src/helpers/forms/AdminValidateForm";
 
@@ -28,6 +29,8 @@ const AddInstructor = () => {
     decription: ""
   };
   const handleSubmit = () => { };
+
+  // const formikRef = useRef();
 
   return (
     <React.Fragment>
@@ -125,6 +128,9 @@ const AddInstructor = () => {
               <ButtonOne>{AddInstructorContent.btncancel}</ButtonOne>
               <ButtonTwo>{AddInstructorContent.btnSave}</ButtonTwo>
             </FormRow>
+
+
+
           </form>
         </Formik>
 
@@ -132,14 +138,28 @@ const AddInstructor = () => {
           <ImageBrowse>
             <img src={icons.upload} alt="upload" />
           </ImageBrowse>
-          <BrowseBtn>
+          <BOX4>
+            <div className="upload-container">
+              <input
+                id="userImage"
+                name="userImage"
+                type="file"
+                className="uploadInp"
+              // onChange={(e) =>
+              //   formikRef.current.setFieldValue("userImage", e.target.files[0])
+              // }
+              />
+            </div>
+          </BOX4>
+
+          {/* <BrowseBtn>
             <input
               type="file"
               id="myFile"
               // value={AddInstructorContent.btnBrowse}
               className="input"
             />
-          </BrowseBtn>
+          </BrowseBtn> */}
         </BrowseFile>
       </Container>
       {/* </MainContainer> */}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { weekdays } from "moment";
 import useFetch from "src/features/hooks/useFetch";
 
-import { getMonth, liveClassStaticContent } from "./constant";
+import { getDate, getMonth, getWeek, liveClassStaticContent } from "./constant";
 import {
   ContentBox,
   MonthBox,
@@ -51,80 +51,44 @@ function LiveClasses() {
   const { filterTags, filters } = useSelector((state) => state.filter);
   const [content, setContent] = useState(liveClassStaticContent);
   const [month, setMonth] = useState(getMonth());
-  const [weekDays] = useState(
-    getDaysArray(initialYear, initialMonth)
-  );
-  const [weekStart, setWeekStart] = useState(0);
+  const [weekDays, setWeekDays] = useState(getDate().daysInWeek);
   const [isDateSelected, setDateSelected] = useState();
-  const [weekEnd, setWeekEnd] = useState(daysInWeek());
   const [sort, setSort] = useState("newest");
   const [isFilters, setIsFilters] = useState(true);
 
-  const weekDaysRef = useRef();
-
   const changeMonth = (action) => {
-    
     const currentMonth = getMonth(action, month);
-    // console.log(currentMonth);
     setMonth(currentMonth);
-    // month !== 0 && setMonth(month - 1);
-    // setWeekDays(getDaysArray(initialYear, month - 1));
-    // setWeekStart(0);
-    // setWeekEnd(daysInWeek());
-    // setDateSelected("");
   };
 
-  // const nextMonth = () => {
-  //   const currentMonth = getMonth('next')
-  //   setMonth(currentMonth)
-
-  //   // month !== monthNames.length - 1 && setMonth(month + 1);
-  //   // setWeekDays(getDaysArray(initialYear, month + 1));
-  //   // setWeekStart(0);
-  //   // setWeekEnd(daysInWeek());
-  //   // setDateSelected("");
   // };
 
-  const previousWeek = () => {
-    if (weekStart > 0) {
-      setWeekStart(weekStart - 1);
-      setWeekEnd(weekEnd - 1);
-    } else {
-      setWeekStart(weekStart);
-      setWeekEnd(weekEnd);
-    }
-    setDateSelected("");
-  };
+  const changeWeek = (action) => {
+    const weekCountDay = daysInWeek();
+    const weekCount = weekCountDay === 3 ? 1 : weekCountDay === 5 ? 2 : 3  
 
-  const nextWeek = () => {
-    if (weekEnd < weekDays.length) {
-      setWeekStart(weekStart + 1);
-      setWeekEnd(weekEnd + 1);
-    } else {
-      setWeekStart(weekStart);
-      setWeekEnd(weekEnd);
-    }
-    setDateSelected("");
+    const currentDate = getDate(action, month, weekCount);
+    // console.log({ currentDate });
+    setWeekDays(currentDate.daysInWeek);
   };
 
   useEffect(() => {
-    contentTranslator({
-      staticContent: liveClassStaticContent,
-      contentToTranslate: content,
-      setContent,
-      language,
-    });
-    !isDateSelected &&
-      setDateSelected(weekDays.slice(weekStart, weekEnd)[0].dateString);
+    // contentTranslator({
+    //   staticContent: liveClassStaticContent,
+    //   contentToTranslate: content,
+    //   setContent,
+    //   language,
+    // });
+    // !isDateSelected && weekDays && setDateSelected(weekDays[3]);
   }, [
     content,
     open,
     weekDays,
     language,
     month,
-    weekStart,
-    weekEnd,
-    isDateSelected,
+    // weekStart,
+    // weekEnd,
+    // isDateSelected,
   ]);
 
   useEffect(() => {
@@ -169,7 +133,7 @@ function LiveClasses() {
         <MonthBox className="month">
           <IconButton
             position="left"
-            onClick={() => changeMonth('prev')}
+            onClick={() => changeMonth("prev")}
             disabled={month === 0 ? true : false}
           >
             <img
@@ -185,7 +149,7 @@ function LiveClasses() {
           <IconButton
             position="right"
             onClick={() => changeMonth("next")}
-            disabled={month === monthNames.length - 1 ? true : false}
+            // disabled={month === monthNames.length - 1 ? true : false}
           >
             <img
               src={icons.rightLongArrow}
@@ -203,25 +167,26 @@ function LiveClasses() {
         paddingBlock="2vw 1vw"
       >
         <WeekBox>
-          <ul ref={weekDaysRef}>
-            {weekdays.length > 0 &&
-              weekDays.slice(weekStart, weekEnd).map(({ dateString }, ind) => {
+          <ul>
+            {weekDays &&
+              weekDays.map((val, ind) => {
+                console.log(val);
                 return (
                   <li key={ind}>
                     <PrimaryWhiteButton
-                      className={
-                        !isDateSelected && ind === 3
-                          ? "selectedDate"
-                          : isDateSelected === dateString
-                          ? "selectedDate"
-                          : ""
+                      className={"active"
+                        // !isDateSelected && ind === 3
+                        //   ? "selectedDate"
+                        //   : isDateSelected === val
+                        //   ? "selectedDate"
+                        //   : ""
                       }
                       key={`weekday-${ind}`}
                       onClick={(e) =>
                         setDateSelected(e.currentTarget.innerText)
                       }
                     >
-                      {dateString}
+                      {val}
                     </PrimaryWhiteButton>
                   </li>
                 );
@@ -229,8 +194,7 @@ function LiveClasses() {
           </ul>
           <div className="buttons">
             <IconButton
-              onClick={() => previousWeek()}
-              disabled={weekStart === 0 ? true : false}
+              onClick={() => changeWeek("prev")}
             >
               <img
                 src={icons.leftArrow}
@@ -241,8 +205,7 @@ function LiveClasses() {
               <span>{content.weekSectionPrev}</span>
             </IconButton>
             <IconButton
-              onClick={() => nextWeek()}
-              disabled={weekEnd === weekDays.length ? true : false}
+              onClick={() => changeWeek("next")}
             >
               <span>{content.weekSectionNext}</span>
               <img

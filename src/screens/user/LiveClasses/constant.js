@@ -106,36 +106,48 @@ const weekDays = [
   "Saturday",
 ];
 
-export const getMonth = (action, current) => {
-  const date = current?.date ? current.date : new Date();
-    console.log(current);
-  if (action === "next") {
-    date.setMonth(current.monthIndex + 1);
-    return {
-      monthName: months[date.getMonth()],
-      year: date.getFullYear(),
-      date,
-      monthIndex: date.getMonth(),
-      weekDay: weekDays[date.getDay()],
-      todayDate: date.getDate(),
-    };
-  } else if (action === "prev") {
-    date.setMonth(current.monthIndex - 1);
-    return {
-      monthName: months[date.getMonth()],
-      year: date.getFullYear(),
-      date,
-      monthIndex: date.getMonth(),
-      weekDay: weekDays[date.getDay()],
-      todayDate: date.getDate(),
-    };
-  }
+const getFormated = (date) => {
+  const d = date.getDay();
+  const m = date.getMonth();
+  const wd = weekDays[date.getDay()].slice(0, 3);
+  return `${m}/${d} (${wd})`
+}
+
+const getDaysInWeek = (dayInWeek, date) => {
+  const currentDate = date
+  const pastDates = [...Array(dayInWeek)].map((_, i) => {
+    const date = new Date(currentDate.getTime() - (i + 1) * 24 * 60 * 60 * 1000);
+    return getFormated(date)
+  });
+  const futureDates = [...Array(dayInWeek)].map((_, i) => {
+    const date = new Date(currentDate.getTime() + (i + 1) * 24 * 60 * 60 * 1000);
+    return getFormated(date)
+  });
+
+  return pastDates.reverse().concat(getFormated(date), futureDates);
+}
+const getDateValues = (date, daysInWeek) => {
   return {
+    monthIndex: date.getMonth(),
     monthName: months[date.getMonth()],
     year: date.getFullYear(),
+    selectedDate: date.getDate(),
+    day: weekDays[date.getDay()],
     date,
-    monthIndex: date.getMonth(),
-    weekDay: weekDays[date.getDay()],
-    todayDate: date.getDate(),
+    daysInWeek: getDaysInWeek(daysInWeek, date),
   };
+};
+
+export const getMonth = (action, current) => {
+  const date = current?.date ? current.date : new Date();
+  if (action === "next") date.setMonth(current.monthIndex + 1);
+  if (action === "prev") date.setMonth(current.monthIndex - 1);
+  return getDateValues(date);
+};
+
+export const getDate = (action, current, daysInWeek) => {
+  const date = current?.date ? current.date : new Date();
+  if (action === "next") date.setDate(date.getDate() + 1);
+  if (action === "prev") date.setDate(date.getDate() - 1);
+  return getDateValues(date, daysInWeek);
 };

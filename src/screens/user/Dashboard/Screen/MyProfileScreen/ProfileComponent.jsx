@@ -35,6 +35,7 @@ export const Box4 = styled(Box)`
   gap: 2rem;
   display: flex;
   flex-wrap: wrap;
+  padding-block: 0px 50px;
   .image-container {
     position: relative;
 

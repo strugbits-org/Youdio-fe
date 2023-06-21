@@ -69,7 +69,7 @@ function ProfileForm({ user, content }) {
           />
         </div>
         <div>
-          <Heading2>{content.profileH2}</Heading2>
+          <Heading2>{user.name}</Heading2>
           <H5 style={{ color: "#999999" }}>{user.nickName}</H5>
         </div>
       </Box4>

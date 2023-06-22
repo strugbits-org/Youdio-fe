@@ -107,8 +107,8 @@ const weekDays = [
 ];
 
 const getFormated = (date) => {
-  const d = date.getDay();
-  const m = date.getMonth();
+  const d = date.getDate();
+  const m = date.getMonth()+1;
   const wd = weekDays[date.getDay()].slice(0, 3);
   return `${m}/${d} (${wd})`
 }
@@ -123,8 +123,8 @@ const getDaysInWeek = (dayInWeek, date) => {
     const date = new Date(currentDate.getTime() + (i + 1) * 24 * 60 * 60 * 1000);
     return getFormated(date)
   });
-
-  return pastDates.reverse().concat(getFormated(date), futureDates);
+  const week = pastDates.reverse().concat(getFormated(date), futureDates);
+  return week;
 }
 const getDateValues = (date, daysInWeek) => {
   return {
@@ -138,14 +138,16 @@ const getDateValues = (date, daysInWeek) => {
   };
 };
 
-export const getMonth = (action, current) => {
+export const getMonth = (action, current, daysInWeek) => {
   const date = current?.date ? current.date : new Date();
   if (action === "next") date.setMonth(current.monthIndex + 1);
   if (action === "prev") date.setMonth(current.monthIndex - 1);
-  return getDateValues(date);
+  // console.log(date);
+  return getDateValues(date, daysInWeek);
 };
 
 export const getDate = (action, current, daysInWeek) => {
+  // console.log({daysInWeek});
   const date = current?.date ? current.date : new Date();
   if (action === "next") date.setDate(date.getDate() + 1);
   if (action === "prev") date.setDate(date.getDate() - 1);

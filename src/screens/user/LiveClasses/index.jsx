@@ -50,42 +50,38 @@ function LiveClasses() {
   const language = useSelector((state) => state.language.lang);
   const { filterTags, filters } = useSelector((state) => state.filter);
   const [content, setContent] = useState(liveClassStaticContent);
-  const [month, setMonth] = useState(getMonth());
-  const [weekDays, setWeekDays] = useState(getDate().daysInWeek);
+  const [month, setMonth] = useState({});
+  const [weekCount, setWeekCount] = useState()
+  const [weekDays, setWeekDays] = useState([]);
   const [isDateSelected, setDateSelected] = useState();
   const [sort, setSort] = useState("newest");
   const [isFilters, setIsFilters] = useState(true);
 
   const changeMonth = (action) => {
-    const currentMonth = getMonth(action, month);
+    const currentMonth = getMonth(action, month, weekCount);
     setMonth(currentMonth);
   };
 
-  // };
-
   const changeWeek = (action) => {
-    const weekCountDay = daysInWeek();
-    const weekCount = weekCountDay === 3 ? 1 : weekCountDay === 5 ? 2 : 3  
-
     const currentDate = getDate(action, month, weekCount);
-    // console.log({ currentDate });
-    setWeekDays(currentDate.daysInWeek);
+    setMonth(currentDate);
   };
 
+  const setInitialDate = () => { 
+    const weekCountDay = daysInWeek();
+    const count = weekCountDay === 3 ? 1 : weekCountDay === 5 ? 2 : 3;
+    const initialDate = getMonth(undefined, undefined, count);
+    setWeekCount(count);
+    setMonth(initialDate)
+  }
+
   useEffect(() => {
-    // contentTranslator({
-    //   staticContent: liveClassStaticContent,
-    //   contentToTranslate: content,
-    //   setContent,
-    //   language,
-    // });
+    
     // !isDateSelected && weekDays && setDateSelected(weekDays[3]);
   }, [
-    content,
     open,
-    weekDays,
-    language,
     month,
+    weekCount,
     // weekStart,
     // weekEnd,
     // isDateSelected,
@@ -96,6 +92,7 @@ function LiveClasses() {
       dispatch(clearFilters());
     }
     setIsFilters(false);
+    setInitialDate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
@@ -134,7 +131,7 @@ function LiveClasses() {
           <IconButton
             position="left"
             onClick={() => changeMonth("prev")}
-            disabled={month === 0 ? true : false}
+            // disabled={month === 0 ? true : false}
           >
             <img
               src={icons.leftLongArrow}
@@ -144,7 +141,7 @@ function LiveClasses() {
             />
           </IconButton>
 
-          <H3>{`${month.monthName} ${month.year}`}</H3>
+          <H3>{`${month?.monthName} ${month?.year}`}</H3>
 
           <IconButton
             position="right"
@@ -168,13 +165,13 @@ function LiveClasses() {
       >
         <WeekBox>
           <ul>
-            {weekDays &&
-              weekDays.map((val, ind) => {
-                console.log(val);
+            {month?.daysInWeek &&
+              month?.daysInWeek.map((val, ind) => {
                 return (
                   <li key={ind}>
                     <PrimaryWhiteButton
-                      className={"active"
+                      className={
+                        "active"
                         // !isDateSelected && ind === 3
                         //   ? "selectedDate"
                         //   : isDateSelected === val
@@ -193,9 +190,7 @@ function LiveClasses() {
               })}
           </ul>
           <div className="buttons">
-            <IconButton
-              onClick={() => changeWeek("prev")}
-            >
+            <IconButton onClick={() => changeWeek("prev")}>
               <img
                 src={icons.leftArrow}
                 alt="Left Arrow"
@@ -204,9 +199,7 @@ function LiveClasses() {
               />
               <span>{content.weekSectionPrev}</span>
             </IconButton>
-            <IconButton
-              onClick={() => changeWeek("next")}
-            >
+            <IconButton onClick={() => changeWeek("next")}>
               <span>{content.weekSectionNext}</span>
               <img
                 src={icons.rightArrow}

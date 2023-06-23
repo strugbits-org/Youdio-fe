@@ -40,7 +40,7 @@ const AddVideo = () => {
     thumbnail: "",
     video: "",
   };
-  const { loading, error, success, postData } = useFetch();
+  const { loading, postData } = useFetch();
 
   const formikRef = useRef();
   const [thumbnailImageValue, setThumbnailImageValue] = useState("");
@@ -259,7 +259,9 @@ const AddVideo = () => {
                   </FormRow>
                   <FormRow>
                     <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
-                    <ButtonTwo type="submit">SAVE</ButtonTwo>
+                    <ButtonTwo type="submit" disabled={loading}>
+                      SAVE
+                    </ButtonTwo>
                   </FormRow>
                 </Form>
               </CenterContainer>

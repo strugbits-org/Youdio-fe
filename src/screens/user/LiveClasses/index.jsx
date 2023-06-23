@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { weekdays } from "moment";
 import useFetch from "src/features/hooks/useFetch";
 
-import { getDate, getMonth, getWeek, liveClassStaticContent } from "./constant";
+import { getDate, getMonth, liveClassStaticContent } from "./constant";
 import {
   ContentBox,
   MonthBox,
@@ -13,7 +12,6 @@ import {
   // H6M,
   NoFoundBox,
 } from "./liveClassesComponents";
-import { contentTranslator } from "src/helpers/translator";
 import {
   // fonts,
   icons,
@@ -24,21 +22,20 @@ import {
   LiveClassCard,
   // DateTag
 } from "src/components/Cards/";
-import { monthNames, getDaysArray } from "./constant";
 import Loader from "src/components/Loader";
 import useInnerWidth from "src/features/hooks/useInnerWidth";
 import MobileFilters from "src/components/MobileFilters";
 import { clearFilters } from "src/features/filterSlice";
 
 function LiveClasses() {
-  const date = new Date();
+  // const date = new Date();
 
   const { postData, res, loading } = useFetch();
   const { innerWidth } = useInnerWidth();
   const [open, setOpen] = useState(false);
 
-  const initialYear = date.getFullYear();
-  const initialMonth = date.getMonth();
+  // const initialYear = date.getFullYear();
+  // const initialMonth = date.getMonth();
 
   const dispatch = useDispatch();
 

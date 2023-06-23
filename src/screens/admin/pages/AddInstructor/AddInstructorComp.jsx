@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Field, ErrorMessage } from "formik";
 import { PrimaryButton, PrimaryWhiteButton } from "src/components";
 
 export const Container = styled.div`
@@ -17,7 +16,10 @@ export const Container = styled.div`
 `;
 
 export const SIDEBAR = styled.div`
-  flex-basis: 15%;
+   width: 200px;
+  background-color: #f1f1f1;
+  padding: 20px;
+
 `;
 export const FormRow = styled.div`
   margin-bottom: 2rem;
@@ -41,11 +43,12 @@ export const ImageBrowse = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px dotted #797979;
-  padding: 70px;
+  padding: 70px 70px;
 
   img {
     width: 100px;
   }
+  
 `;
 export const BrowseBtn = styled(PrimaryButton)`
   /* min-width: 100px; */
@@ -89,10 +92,9 @@ export const BOX4 = styled.div`
       content: "upload";
       position: absolute;
       top: 1vw;
-      left: 6vw;
-    
-      /* width: 50px;
-      height: 50px; */
+      left: 5vw;
+       width: 50px;
+      height: 50px; 
       cursor: pointer;
     }
     /* .userImage */
@@ -113,15 +115,15 @@ export const ButtonTwo = styled(PrimaryButton)`
   border-radius: 0px;
 `;
 
-export const Label = styled.label`
-  margin-right: 0.5rem;
-`;
-export const Input = styled(Field)`
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-`;
+// export const Label = styled.label`
+//   margin-right: 0.5rem;
+// `;
+// export const Input = styled(Field)`
+//   padding: 0.5rem;
+//   border: 1px solid #ccc;
+// `;
 
-export const Error = styled(ErrorMessage)`
-  color: red;
-  font-size: 0.8rem;
-`;
+// export const Error = styled(ErrorMessage)`
+//   color: red;
+//   font-size: 0.8rem;
+// `;

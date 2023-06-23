@@ -29,6 +29,8 @@ export const StyleInput = styled.input`
 `;
 
 export const DropInput = styled.select`
+/* display: flex;
+flex-wrap: wrap; */
     width: 350px;
   height: 45px;
   color: #797979;
@@ -56,13 +58,13 @@ export const DropInput = styled.select`
     background: rgb(247, 247, 247);
     color: rgb(121,121,121);
     font-size: 0.8em;
-
+/* 
     ${(props) =>
     props.highlightOption === 'Yoga' &&
     css`
         font-weight: bold;
         color: red;
-      `}
+      `} */
   }
  
 `

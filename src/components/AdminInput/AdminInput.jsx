@@ -1,7 +1,7 @@
 import { ErrorMessage, useField } from "formik";
 import styled from "styled-components";
 import { Error, Label } from "src/components/AdminInput/AdminInpComp";
-import { StyleInput, DropInput } from "./AdminInpComp";
+import { StyleInput, DropInput, } from "./AdminInpComp";
 import { fonts } from "src/helpers";
 const { poppinsRegular } = fonts;
 
@@ -9,18 +9,19 @@ const Ipt = styled.div`
   /* width: 100%; */
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 4px;
 `;
-const CONTAINER = styled.div`
-  position: relative;
+// const CONTAINER = styled.div`
+//   position: relative;
 
-  .icon {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    /* min-width: 10px; */
-  }
-`;
+//   .icon {
+//     position: absolute;
+//     top: 50%;
+//     right: 10px;
+//     /* min-width: 10px; */
+//   }
+// `;
 const TEXTAREA = styled.textarea`
   width: 720px;
   height: 185px;
@@ -53,22 +54,24 @@ export const FieldInput = ({ label, ...props }) => {
   return (
     <Ipt>
       <Label htmlFor={props.id}>{label}</Label>
-      <StyleInput err={meta.touched && meta.error} {...field} {...props} />
+      <StyleInput err={meta.touched && meta.error}
+        {...field}
+        {...props} />
       <ErrorMessage component={Error} name={field.name} className="error" />
     </Ipt>
   );
 };
 export const DropDownInput = ({ label, options, ...props }) => {
   const [field, meta] = useField(props);
-  const selectedOption = field.value;
+  // const selectedOption = field.value;
 
   return (
     <>
       <Ipt>
         <Label htmlFor={props.id}>{label}</Label>
 
-        <CONTAINER className="input-container">
-          <DropInput err={meta.touched && meta.error} {...field} {...props} highlightOption={selectedOption}
+        {/* <CONTAINER className="input-container"> */}
+          <DropInput err={meta.touched && meta.error} {...field} {...props}
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -76,7 +79,7 @@ export const DropDownInput = ({ label, options, ...props }) => {
               </option>
             ))}
           </DropInput>
-        </CONTAINER>
+        {/* </CONTAINER> */}
         <ErrorMessage component={Error} name={field.name} className="error" />
       </Ipt>
     </>
@@ -98,6 +101,28 @@ export const TextArea = ({ label, ...props }) => {
     </>
   );
 };
+
+export const UploadButton = ({ label, ...props }) => {
+
+  return (
+    <>
+      {/* <BOX4>
+
+        <input
+          id="userImage"
+          name="userImage"
+          type="file"
+          className="userImage"
+          accept="image/*"
+          onChange={(e) =>
+            formikRef.current.setFieldValue("userImage", e.target.files[0])
+          }
+        />
+
+      </BOX4> */}
+    </>
+  )
+}
 export const TextFieldInput = ({ ...props }) => {
   return (
     <Ipt>

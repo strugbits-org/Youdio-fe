@@ -29,6 +29,8 @@ export const StyleInput = styled.input`
 `;
 
 export const DropInput = styled.select`
+/* display: flex;
+flex-wrap: wrap; */
     width: 350px;
   height: 45px;
   color: #797979;
@@ -56,15 +58,39 @@ export const DropInput = styled.select`
     background: rgb(247, 247, 247);
     color: rgb(121,121,121);
     font-size: 0.8em;
-
+/* 
     ${(props) =>
     props.highlightOption === 'Yoga' &&
     css`
         font-weight: bold;
         color: red;
-      `}
+      `} */
   }
  
+`
+export const BOX4 = styled.input`
+    height: 50px;
+  border-radius: 0px;
+  /* max-width: 341px; */
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  border:none;
+    outline:none;
+    width: 100%;
+    min-height: 45px;
+    color: var(--textHeadingWhite);
+    background:var(--backgroundGreen);
+    cursor:pointer;
+    transition: var(--transition03s);
+    font-size:18px;
+    
+    &:hover{
+        transition: var(--transition03s); 
+        background:var(--backgroundGreenHover);
+    }
+
 `
 export const Icon = styled.div`
   position: absolute;

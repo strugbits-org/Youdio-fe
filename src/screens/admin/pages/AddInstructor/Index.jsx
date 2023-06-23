@@ -1,3 +1,4 @@
+// import { useRef } from "react";\
 import React from "react";
 import { Formik } from "formik";
 import {
@@ -8,24 +9,28 @@ import {
   ButtonOne,
   ButtonTwo,
   ImageBrowse,
-  BrowseBtn,
+  BOX4,
   SIDEBAR
 } from "./AddInstructorComp";
 import { H2 } from "src/components";
 import { AddInstructorContent } from "./content";
-import { FieldInput } from "src/components/AdminInput/AdminInput";
+import { FieldInput, TextArea, } from "src/components/AdminInput/AdminInput";
 import { icons } from "src/helpers";
+import { instructorFormvalidate } from "src/helpers/forms/AdminValidateForm";
 
 const AddInstructor = () => {
   const initialValues = {
-    FirstName: "Alexa",
-    lastName: "Morgan",
-    EmailAddress: "Alexa Morgan@,com",
-    PhoneNo: "#########",
-    JobTitle: "Yoga Instructor",
-    PremiumInstructor: "Alex",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    JobTitle: "",
+    isPremium: "",
+    decription: ""
   };
   const handleSubmit = () => { };
+
+  // const formikRef = useRef();
 
   return (
     <React.Fragment>
@@ -34,20 +39,20 @@ const AddInstructor = () => {
         <SIDEBAR>SideBar</SIDEBAR>
         <Formik
           initialValues={initialValues}
-          // validationSchema={validationSchema}
+          validationSchema={instructorFormvalidate}
           onSubmit={handleSubmit}
         >
-          <form>
+          <form autoComplete="off">
             <Heading>
               <H2>{AddInstructorContent.heading}</H2>
             </Heading>
             <FormRow>
               <FieldInput
                 label={AddInstructorContent.fullName}
-                id="fullName"
+                id="firstName"
                 autofill
-                name="fullName"
-                type="fullName"
+                name="firstName"
+                type="text"
                 placeholder={AddInstructorContent.fullNamePlace}
                 style={{ fontSize: "16px" }}
               />
@@ -57,7 +62,7 @@ const AddInstructor = () => {
                 id="lastName"
                 autofill
                 name="lastName"
-                type="lastName"
+                type="text"
                 placeholder={AddInstructorContent.lastNameplace}
                 style={{ fontSize: "16px" }}
               />
@@ -66,7 +71,7 @@ const AddInstructor = () => {
             <FormRow>
               <FieldInput
                 label={AddInstructorContent.email}
-                id="loginEmail"
+                id="email"
                 autofill
                 name="email"
                 type="email"
@@ -76,10 +81,10 @@ const AddInstructor = () => {
 
               <FieldInput
                 label={AddInstructorContent.phoneNo}
-                id="loginEmail"
+                id="phone"
                 autofill
-                name="email"
-                type="email"
+                name="phone"
+                type="number"
                 placeholder={AddInstructorContent.phoneNoPlace}
                 style={{ fontSize: "16px" }}
               />
@@ -88,28 +93,44 @@ const AddInstructor = () => {
             <FormRow>
               <FieldInput
                 label={AddInstructorContent.jobTitle}
-                id="loginEmail"
+                id="JobTitle"
                 autofill
-                name="email"
-                type="email"
+                name="JobTitle"
+                type="text"
                 placeholder={AddInstructorContent.jobTitlePlace}
                 style={{ fontSize: "16px" }}
               />
 
               <FieldInput
                 label={AddInstructorContent.premiumInstr}
-                id="loginEmail"
+                id="isPremium"
                 autofill
-                name="email"
-                type="email"
+                name="isPremium"
+                type="text"
                 placeholder={AddInstructorContent.premiumInstrPlace}
                 style={{ fontSize: "16px" }}
               />
             </FormRow>
+
+            <FormRow>
+              <TextArea
+                label="Decription"
+                id="decription"
+                autofill
+                name="decription"
+                type="textarea"
+                placeholder="l...."
+                style={{ fontSize: "16px" }}
+              />
+            </FormRow>
+
             <FormRow>
               <ButtonOne>{AddInstructorContent.btncancel}</ButtonOne>
               <ButtonTwo>{AddInstructorContent.btnSave}</ButtonTwo>
             </FormRow>
+
+
+
           </form>
         </Formik>
 
@@ -117,14 +138,28 @@ const AddInstructor = () => {
           <ImageBrowse>
             <img src={icons.upload} alt="upload" />
           </ImageBrowse>
-          <BrowseBtn>
+          <BOX4>
+            <div className="upload-container">
+              <input
+                id="userImage"
+                name="userImage"
+                type="file"
+                className="uploadInp"
+              // onChange={(e) =>
+              //   formikRef.current.setFieldValue("userImage", e.target.files[0])
+              // }
+              />
+            </div>
+          </BOX4>
+
+          {/* <BrowseBtn>
             <input
               type="file"
               id="myFile"
               // value={AddInstructorContent.btnBrowse}
               className="input"
             />
-          </BrowseBtn>
+          </BrowseBtn> */}
         </BrowseFile>
       </Container>
       {/* </MainContainer> */}

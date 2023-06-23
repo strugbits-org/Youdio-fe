@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Form, Formik } from "formik";
 import { H2 } from "src/components";
 import { icons } from "src/helpers";
+import useFetch from "src/features/hooks/useFetch";
 import {
   MainContainer,
   Container,
@@ -29,17 +30,20 @@ const AddVideo = () => {
     category: "",
     date: "",
     title: "",
-    trainer: "",
+    instructor: "",
     difficulty: "",
     intensity: "",
     filter: "",
     totalTime: "",
-    feature: "",
-    // time: "",
-    thumbnail: "",
+    isFeatured: "",
     description: "",
-    // image: "",
+    thumbnail: "",
+    video: "",
   };
+  const { loading, error, success, postData } = useFetch();
+
+  const formikRef = useRef();
+  const [thumbnailImageValue, setThumbnailImageValue] = useState("");
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -66,7 +70,13 @@ const AddVideo = () => {
             validationSchema={addVideoValidate}
             onSubmit={(data) => {
               console.log("data", data);
+              const formData = new FormData();
+              Object.keys(data).forEach((key) =>
+                formData.append(key, data[key])
+              );
+              postData("video/upload-video", formData);
             }}
+            innerRef={formikRef}
           >
             {(formik) => (
               <CenterContainer>
@@ -118,17 +128,17 @@ const AddVideo = () => {
                       }}
                     />
                     <DropDownInput
-                      label="Trainer"
-                      id="trainer"
+                      label="Instructor"
+                      id="instructor"
                       autofill
-                      name="trainer"
+                      name="instructor"
                       type="text"
-                      placeholder="Elizabeth Lisa"
+                      placeholder="e.g. Elizabeth Lisa"
                       style={{ fontSize: "16px" }}
                       options={options}
                       value={formik.values.trainer}
                       onChange={(e) => {
-                        formik.setFieldValue("trainer", e.target.value);
+                        formik.setFieldValue("instructor", e.target.value);
                       }}
                     />
                   </FormRow>
@@ -180,12 +190,11 @@ const AddVideo = () => {
                     <FieldInput
                       label="Total Time"
                       id="totalTime"
-                      autofill
                       name="totalTime"
                       type="text"
                       placeholder="30 Mins"
                       style={{ fontSize: "16px" }}
-                      value={formik.values.totalTime}
+                      // value={formik.values.totalTime}
                       onChange={(e) => {
                         formik.setFieldValue("totalTime", e.target.value);
                       }}
@@ -194,30 +203,41 @@ const AddVideo = () => {
                   <FormRow>
                     <DropDownInput
                       label="You Want to Feature this Video?"
-                      id="feature"
+                      id="isFeatured"
                       autofill
-                      name="feature"
+                      name="isFeatured"
                       type="text"
-                      placeholder="Yes"
                       style={{ fontSize: "16px" }}
-                      options={options}
-                      value={formik.values.feature}
+                      options={[
+                        {
+                          label: "Yes",
+                          value: "yes",
+                        },
+                        {
+                          label: "No",
+                          value: "no",
+                        },
+                      ]}
+                      value={formik.values.isFeatured ? "yes" : "no"}
                       onChange={(e) => {
-                        formik.setFieldValue("feature", e.target.value);
+                        let val = false;
+                        if (e.target.value === "yes") val = true;
+                        formik.setFieldValue("isFeatured", val);
                       }}
                     />
-                    <DropDownInput
+                    <FieldInput
                       label="Upload video thumbnail"
                       id="thumbnail"
-                      autofill
                       name="thumbnail"
-                      type="text"
-                      placeholder="Select"
+                      type="file"
+                      className="thubnailSelect"
+                      accept="image/*"
                       style={{ fontSize: "16px" }}
-                      options={options}
-                      value={formik.values.thumbnail}
+                      value={thumbnailImageValue}
                       onChange={(e) => {
-                        formik.setFieldValue("thumbnail", e.target.value);
+                        console.log(e.target.value);
+                        setThumbnailImageValue(e.target.value);
+                        formik.setFieldValue("thumbnail", e.target.files[0]);
                       }}
                     />
                   </FormRow>
@@ -253,13 +273,16 @@ const AddVideo = () => {
             <BOX4>
               <div className="upload-container">
                 <input
-                  id="userImage"
-                  name="userImage"
+                  id="video"
+                  name="video"
                   type="file"
+                  accept="video/*"
                   className="uploadInp"
-                  // onChange={(e) =>
-                  //   formikRef.current.setFieldValue("userImage", e.target.files[0])
-                  // }
+                  value={""}
+                  onChange={(e) => {
+                    console.log(e.target.files[0]);
+                    formikRef.current.setFieldValue("video", e.target.files[0]);
+                  }}
                 />
               </div>
             </BOX4>

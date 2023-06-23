@@ -25,7 +25,7 @@ export const FormRow = styled.div`
 `;
 export const BrowseFile = styled.div`
   flex-basis: 20%;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   padding: 20px;
    /* max-width: 250px; */
    /* min-width: 200px; */
@@ -68,10 +68,10 @@ min-width: 200px;
       outline: none;
     }
     &::after {
-      content: "upload";
+      content: "UPLOAD VIDEO";
       position: absolute;
       top: 1vw;
-      left: 5vw;
+      left: 4.2vw;
       /* width: 100%;
       background: hotpink; */
       cursor: pointer;

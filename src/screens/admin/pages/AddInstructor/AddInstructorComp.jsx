@@ -17,7 +17,7 @@ export const Container = styled.div`
 
 export const SIDEBAR = styled.div`
    width: 200px;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   padding: 20px;
 
 `;
@@ -28,7 +28,7 @@ export const FormRow = styled.div`
   gap: 18px;
 `;
 export const Heading = styled.div`
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 `;
 
 export const BrowseFile = styled.div`

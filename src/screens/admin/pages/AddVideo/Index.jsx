@@ -63,7 +63,7 @@ const AddVideo = () => {
   return (
     <React.Fragment>
       <MainContainer>
-        <SIDEBAR>SideBar</SIDEBAR>
+        <SIDEBAR></SIDEBAR>
         <Container>
           <Formik
             initialValues={initialValues}
@@ -243,7 +243,7 @@ const AddVideo = () => {
                   </FormRow>
                   <FormRow>
                     <TextArea
-                      label="Decription"
+                      label="Description"
                       id="description"
                       autofill
                       name="description"

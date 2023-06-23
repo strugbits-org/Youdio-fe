@@ -108,24 +108,34 @@ const weekDays = [
 
 const getFormated = (date) => {
   const d = date.getDate();
-  const m = date.getMonth()+1;
+  const m = date.getMonth();
   const wd = weekDays[date.getDay()].slice(0, 3);
-  return `${m}/${d} (${wd})`
-}
+  const dateObject = {
+    dateString: `${m + 1}/${d} (${wd})`,
+    d,
+    m,
+  };
+  return dateObject;
+};
 
 const getDaysInWeek = (dayInWeek, date) => {
-  const currentDate = date
+  const currentDate = date;
   const pastDates = [...Array(dayInWeek)].map((_, i) => {
-    const date = new Date(currentDate.getTime() - (i + 1) * 24 * 60 * 60 * 1000);
-    return getFormated(date)
+    const date = new Date(
+      currentDate.getTime() - (i + 1) * 24 * 60 * 60 * 1000
+    );
+    return getFormated(date);
   });
   const futureDates = [...Array(dayInWeek)].map((_, i) => {
-    const date = new Date(currentDate.getTime() + (i + 1) * 24 * 60 * 60 * 1000);
-    return getFormated(date)
+    const date = new Date(
+      currentDate.getTime() + (i + 1) * 24 * 60 * 60 * 1000
+    );
+    return getFormated(date);
   });
   const week = pastDates.reverse().concat(getFormated(date), futureDates);
   return week;
-}
+};
+
 const getDateValues = (date, daysInWeek) => {
   return {
     monthIndex: date.getMonth(),
@@ -142,14 +152,18 @@ export const getMonth = (action, current, daysInWeek) => {
   const date = current?.date ? current.date : new Date();
   if (action === "next") date.setMonth(current.monthIndex + 1);
   if (action === "prev") date.setMonth(current.monthIndex - 1);
-  // console.log(date);
   return getDateValues(date, daysInWeek);
 };
 
-export const getDate = (action, current, daysInWeek) => {
+export const getDate = (action, current, daysInWeek, selectDate) => {
   // console.log({daysInWeek});
   const date = current?.date ? current.date : new Date();
   if (action === "next") date.setDate(date.getDate() + 1);
   if (action === "prev") date.setDate(date.getDate() - 1);
+  if (action === "select") {
+    date.setDate(selectDate.d);
+    date.setMonth(selectDate.m);
+  }
+  // console.log(date);
   return getDateValues(date, daysInWeek);
 };

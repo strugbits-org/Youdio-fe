@@ -32,6 +32,7 @@ export const WeekBox = styled.div`
         color: var(--textHeadingWhite);
         background: var(--backgroundGreen);
         border: 1px solid transparent;
+      /* transform: scale(110%); */
       }
     }
   }

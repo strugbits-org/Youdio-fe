@@ -59,40 +59,35 @@ export const PrimaryButton = styled.button`
 `
 
 export const PrimaryWhiteButton = styled.button`
-    border:1px solid var(--textHeadingBlack);
-    outline:none;
-    width:100%;
-    color: var(--textHeadingBlack);
-    background: var(--backgroundLightGrey);
-    cursor:pointer;
+  border: 1px solid var(--textHeadingBlack);
+  outline: none;
+  width: 100%;
+  color: var(--textHeadingBlack);
+  background: var(--backgroundLightGrey);
+  cursor: pointer;
+  transition: var(--transition03s);
+
+  &:hover {
     transition: var(--transition03s);
-    
-    &:hover {
-        transition: var(--transition03s); 
-        color: var(--textHeadingWhite);
-        background:var(--backgroundGreen);
-        border:1px solid transparent;
-    }
+    background: var(--backgroundGreen05);
+  }
 
-    @media only screen and (min-width: ${mobile}) {
-        min-height: 30px;
-        font-size: 12px;
-        padding: 4px 5px;
-        
-    }
-    @media only screen and (min-width: ${tablet}) {
-        min-height: 30px;
-        font-size: 13px;
-        padding: 5px 8px;
-        
-    }
-    @media only screen and (min-width: ${laptop}) {
-        min-height: 45px;
-        font-size: clamp(15px, 0.9vw, 18px);
-        padding: 0px;
-    }
-
-`
+  @media only screen and (min-width: ${mobile}) {
+    min-height: 30px;
+    font-size: 12px;
+    padding: 4px 5px;
+  }
+  @media only screen and (min-width: ${tablet}) {
+    min-height: 30px;
+    font-size: 13px;
+    padding: 5px 8px;
+  }
+  @media only screen and (min-width: ${laptop}) {
+    min-height: 45px;
+    font-size: clamp(15px, 0.9vw, 18px);
+    padding: 0px;
+  }
+`;
 
 export const IconButton = styled.button`
     display:flex;

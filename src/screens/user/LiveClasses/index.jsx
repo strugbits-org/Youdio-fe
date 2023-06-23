@@ -47,12 +47,10 @@ function LiveClasses() {
     return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
   };
 
-  const language = useSelector((state) => state.language.lang);
   const { filterTags, filters } = useSelector((state) => state.filter);
-  const [content, setContent] = useState(liveClassStaticContent);
+  const [content] = useState(liveClassStaticContent);
   const [month, setMonth] = useState({});
-  const [weekCount, setWeekCount] = useState()
-  const [weekDays, setWeekDays] = useState([]);
+  const [weekCount, setWeekCount] = useState();
   const [isDateSelected, setDateSelected] = useState();
   const [sort, setSort] = useState("newest");
   const [isFilters, setIsFilters] = useState(true);
@@ -60,31 +58,38 @@ function LiveClasses() {
   const changeMonth = (action) => {
     const currentMonth = getMonth(action, month, weekCount);
     setMonth(currentMonth);
+    setDateSelected("");
   };
 
   const changeWeek = (action) => {
     const currentDate = getDate(action, month, weekCount);
     setMonth(currentDate);
+    setDateSelected("");
   };
 
-  const setInitialDate = () => { 
+  const selectDate = (e, { d, m }) => {
+    setDateSelected(e.currentTarget.innerText);
+    const currentDate = getDate("select", month, weekCount, { d, m });
+    // currentDate.date.setDate(d)
+    // currentDate.date.setMonth(m)
+    // console.log(currentDate);
+    setMonth(currentDate);
+  };
+
+  const setInitialDate = () => {
     const weekCountDay = daysInWeek();
     const count = weekCountDay === 3 ? 1 : weekCountDay === 5 ? 2 : 3;
     const initialDate = getMonth(undefined, undefined, count);
     setWeekCount(count);
-    setMonth(initialDate)
-  }
+    setMonth(initialDate);
+  };
 
   useEffect(() => {
-    
     // !isDateSelected && weekDays && setDateSelected(weekDays[3]);
   }, [
     open,
     month,
     weekCount,
-    // weekStart,
-    // weekEnd,
-    // isDateSelected,
   ]);
 
   useEffect(() => {
@@ -171,19 +176,12 @@ function LiveClasses() {
                   <li key={ind}>
                     <PrimaryWhiteButton
                       className={
-                        "active"
-                        // !isDateSelected && ind === 3
-                        //   ? "selectedDate"
-                        //   : isDateSelected === val
-                        //   ? "selectedDate"
-                        //   : ""
+                        isDateSelected === val.dateString ? "selectedDate" : ""
                       }
                       key={`weekday-${ind}`}
-                      onClick={(e) =>
-                        setDateSelected(e.currentTarget.innerText)
-                      }
+                      onClick={(e) => selectDate(e, val)}
                     >
-                      {val}
+                      {val.dateString}
                     </PrimaryWhiteButton>
                   </li>
                 );

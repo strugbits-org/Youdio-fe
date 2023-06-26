@@ -21,28 +21,8 @@ const DifficultyBox = styled.div`
   }
 `;
 
-export default function Difficulty({ addTag, removeTag }) {
+export default function Difficulty({ addTag, removeTag, options }) {
   const { filters } = useSelector((state) => state.filter);
-
-  const difficulties = [
-    {
-      id: 0,
-      name: "BEGINNER",
-    },
-    {
-      id: 1,
-      name: "MODERATE",
-    },
-    {
-      id: 2,
-      name: "INTERMEDIATE",
-    },
-    {
-      id: 3,
-      name: "ADVANCED",
-    },
-  ];
-
   const setSelected = (name) => {
     if (!filters.difficulty.includes(name)) {
       addTag({
@@ -60,8 +40,8 @@ export default function Difficulty({ addTag, removeTag }) {
   return (
     <DifficultyBox>
       <ul className="difficulties">
-        {difficulties.length > 0 &&
-          difficulties.map(({ id, name }) => {
+        {options?.length > 0 &&
+          options.map(({ id, name }) => {
             return (
               <li key={id} onClick={() => setSelected(name)}>
                 <P1

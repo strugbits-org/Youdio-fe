@@ -4,7 +4,43 @@ import { filterKeys } from "src/helpers/constant";
 const initialState = {
   styles: null,
   instructors: null,
-  resetFilters:{
+  difficulties: [
+    {
+      id: 0,
+      name: "BEGINNER",
+    },
+    {
+      id: 1,
+      name: "MODERATE",
+    },
+    {
+      id: 2,
+      name: "INTERMEDIATE",
+    },
+    {
+      id: 3,
+      name: "ADVANCED",
+    },
+  ],
+  intensities: [
+    {
+      id: 0,
+      name: "Level 1",
+    },
+    {
+      id: 1,
+      name: "Level 2",
+    },
+    {
+      id: 2,
+      name: "Level 3",
+    },
+    {
+      id: 3,
+      name: "Level 4",
+    },
+  ],
+  resetFilters: {
     duration: {},
     instructors: [],
     styles: {
@@ -85,7 +121,7 @@ const filterSlice = createSlice({
           (tag) => tag.key !== key && tag
         );
 
-        state.filters.duration = {}
+        state.filters.duration = {};
       } else {
         state.filterTags = state.filterTags.filter(
           (tag) => tag.data !== data && tag
@@ -102,8 +138,8 @@ const filterSlice = createSlice({
 
     clearFilters: (state) => {
       state.filters = state.resetFilters;
-      state.filterTags = []
-    }
+      state.filterTags = [];
+    },
   },
 
   // extraReducers: (builder) => {

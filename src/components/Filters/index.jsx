@@ -47,7 +47,7 @@ const filter = [
 
 export function Filters({videoCount, videoSort, setVideoSort, videoType}) {
   const [filterTab, setFilterTab] = useState(null);
-  const filterTags = useSelector((state) => state.filter.filterTags);
+  const {filterTags, difficulties, intensities} = useSelector((state) => state.filter);
   const { fetchMultipleData } = useFetch();
   const dispatch = useDispatch();
 
@@ -121,10 +121,10 @@ export function Filters({videoCount, videoSort, setVideoSort, videoType}) {
               <Styles removeTag={removeTag} addTag={addTag} />
             )}
             {filterTab === "difficulty" && (
-              <Difficulty removeTag={removeTag} addTag={addTag} />
+              <Difficulty removeTag={removeTag} addTag={addTag} options={difficulties} />
             )}
             {filterTab === "intensity" && (
-              <Intensity removeTag={removeTag} addTag={addTag} />
+              <Intensity removeTag={removeTag} addTag={addTag} options={intensities} />
             )}
           </div>
         </FilterOptions>

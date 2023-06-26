@@ -63,15 +63,16 @@ export const CardMedia = styled.div`
   margin-bottom: 19px;
   @media only screen and (min-width: ${mobile}) {
     img {
-      max-height: 300px;
+      aspect-ratio: 2.5/1.5;
+      /* height: clamp(150px, 15vw, 300px); */
       object-fit: cover;
       object-position: center;
     }
   }
   @media only screen and (min-width: ${tablet}) {
     img {
-      max-height: initial;
-      object-fit: initial;
+      /* height: clamp(150px, 15vw, 300px); */
+      object-fit: cover;
       object-position: initial;
       
     }

@@ -1,7 +1,7 @@
 import { ErrorMessage, useField } from "formik";
 import styled from "styled-components";
 import { Error, Label } from "src/components/AdminInput/AdminInpComp";
-import { StyleInput, DropInput, } from "./AdminInpComp";
+import { StyleInput, DropInput } from "./AdminInpComp";
 import { fonts } from "src/helpers";
 const { poppinsRegular } = fonts;
 
@@ -29,7 +29,7 @@ const TEXTAREA = styled.textarea`
   background: #f7f7f7;
   outline: none;
   font-size: 0.8em;
-  padding-inline:5px;
+  padding-inline: 5px;
   padding-block: 5px;
   font-family: ${poppinsRegular};
   border: ${(props) =>
@@ -54,9 +54,7 @@ export const FieldInput = ({ label, ...props }) => {
   return (
     <Ipt>
       <Label htmlFor={props.id}>{label}</Label>
-      <StyleInput err={meta.touched && meta.error}
-        {...field}
-        {...props} />
+      <StyleInput err={meta.touched && meta.error} {...field} {...props} />
       <ErrorMessage component={Error} name={field.name} className="error" />
     </Ipt>
   );
@@ -71,14 +69,16 @@ export const DropDownInput = ({ label, options, ...props }) => {
         <Label htmlFor={props.id}>{label}</Label>
 
         {/* <CONTAINER className="input-container"> */}
-          <DropInput err={meta.touched && meta.error} {...field} {...props}
-          >
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </DropInput>
+        <DropInput err={meta.touched && meta.error} {...field} {...props}>
+          <option key="disbaled" value="">
+            Select
+          </option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </DropInput>
         {/* </CONTAINER> */}
         <ErrorMessage component={Error} name={field.name} className="error" />
       </Ipt>
@@ -103,7 +103,6 @@ export const TextArea = ({ label, ...props }) => {
 };
 
 export const UploadButton = ({ label, ...props }) => {
-
   return (
     <>
       {/* <BOX4>
@@ -121,8 +120,8 @@ export const UploadButton = ({ label, ...props }) => {
 
       </BOX4> */}
     </>
-  )
-}
+  );
+};
 export const TextFieldInput = ({ ...props }) => {
   return (
     <Ipt>

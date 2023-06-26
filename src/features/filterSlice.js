@@ -74,10 +74,10 @@ const filterSlice = createSlice({
   initialState,
   reducers: {
     setStyles: (state, action) => {
-      state.styles = action.payload;
+      state.styles = action.payload.categories;
     },
     setInstructors: (state, action) => {
-      state.instructors = action.payload;
+      state.instructors = action.payload.instructors;
     },
 
     // Duration

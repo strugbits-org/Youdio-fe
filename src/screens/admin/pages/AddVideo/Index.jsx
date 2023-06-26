@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Form, Formik } from "formik";
 import { H2 } from "src/components";
 import { icons } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
+import { useSelector } from "react-redux";
 import {
   MainContainer,
   Container,
@@ -24,6 +25,7 @@ import {
   TextArea,
 } from "src/components/AdminInput/AdminInput";
 import { addVideoValidate } from "src/helpers/forms/AdminValidateForm";
+import { setInstructors, setStyles } from "src/features/filterSlice";
 
 const AddVideo = () => {
   const initialValues = {
@@ -40,25 +42,71 @@ const AddVideo = () => {
     thumbnail: "",
     video: "",
   };
-  const { loading, postData } = useFetch();
+  const { loading, postData, fetchMultipleData } = useFetch();
 
   const formikRef = useRef();
   const [thumbnailImageValue, setThumbnailImageValue] = useState("");
+  const [category, setCategory] = useState("")
 
   const handleCancel = (e) => {
     e.preventDefault();
+    formikRef.current.resetForm()
   };
-  //   const handleFeatureChange = (e, formik) => {
-  //     console.log(e.target.value);
-  //     formik.setFieldValue("feature", e.target.value);
-  //   };
-  const options = [
-    { value: "", label: "Select" },
-    { value: "Yoga", label: "Yoga" },
-    { value: "saab", label: "Saab" },
-    { value: "mercedes", label: "Mercedes" },
-    { value: "audi", label: "Audi" },
-  ];
+
+  useEffect(() => {
+    fetchMultipleData(
+      ["category/get-sub-category", "instructor/get-instructor"],
+      [setStyles, setInstructors]
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const {difficulties, intensities, instructors, styles} = useSelector((state) => state.filter);
+  const difficultiesOption = useMemo(() => {
+    return difficulties.map((val) => {
+      return ({
+        value: val.name,
+        label: val.name
+      })
+    })
+  }, [difficulties])
+  
+  const intensitiesOption = useMemo(() => {
+    return intensities.map((val) => {
+      return ({
+        value: val.name,
+        label: val.name
+      })
+    })
+  }, [intensities])
+
+  const instructorsOption = useMemo(() => {
+    return instructors?.length > 0 ? instructors.map((val) => {
+      return ({
+        value: val._id,
+        label: `${val?.firstName ? val.firstName : ''} ${val?.lastName ? val.lastName : ''}`
+      }) 
+    }): []
+  }, [instructors])
+
+  const categoriesOption = useMemo(() => {
+    return styles?.length > 0 ? styles.map((val) => {
+      return ({
+        value: val._id,
+        label: val.category
+      }) 
+    }): []
+  }, [styles])
+
+  const subCategoriesOption = useMemo(() => {
+    const getId = styles.filter(val => val._id === category && val)
+    return getId.length === 1 ? getId[0].name.map((val) => {
+      return ({
+        value: val,
+        label: val
+      }) 
+    }): []
+  }, [category, styles])
 
   return (
     <React.Fragment>
@@ -93,9 +141,10 @@ const AddVideo = () => {
                       type="text"
                       placeholder="select"
                       style={{ fontSize: "16px" }}
-                      options={options}
+                      options={categoriesOption}
                       value={formik.values.category}
                       onChange={(e) => {
+                        setCategory(e.target.value)
                         formik.setFieldValue("category", e.target.value);
                       }}
                     />
@@ -135,7 +184,7 @@ const AddVideo = () => {
                       type="text"
                       placeholder="e.g. Elizabeth Lisa"
                       style={{ fontSize: "16px" }}
-                      options={options}
+                      options={instructorsOption}
                       value={formik.values.trainer}
                       onChange={(e) => {
                         formik.setFieldValue("instructor", e.target.value);
@@ -151,7 +200,7 @@ const AddVideo = () => {
                       type="text"
                       placeholder="Medium"
                       style={{ fontSize: "16px" }}
-                      options={options}
+                      options={difficultiesOption}
                       value={formik.values.difficulty}
                       onChange={(e) => {
                         formik.setFieldValue("difficulty", e.target.value);
@@ -165,7 +214,7 @@ const AddVideo = () => {
                       type="text"
                       placeholder="Level 1"
                       style={{ fontSize: "16px" }}
-                      options={options}
+                      options={intensitiesOption}
                       value={formik.values.intensity}
                       onChange={(e) => {
                         formik.setFieldValue("intensity", e.target.value);
@@ -181,11 +230,12 @@ const AddVideo = () => {
                       type="text"
                       placeholder="Core"
                       style={{ fontSize: "16px" }}
-                      options={options}
+                      options={subCategoriesOption}
                       value={formik.values.filter}
                       onChange={(e) => {
                         formik.setFieldValue("filter", e.target.value);
                       }}
+                      disabled = {!category}
                     />
                     <FieldInput
                       label="Total Time"

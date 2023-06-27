@@ -14,7 +14,6 @@ import {
   CenterContainer,
 } from "./AddVideoComp";
 import {
-  Heading,
   ButtonOne,
   ButtonTwo,
   SIDEBAR,
@@ -42,11 +41,11 @@ const AddVideo = () => {
     thumbnail: "",
     video: "",
   };
-  const { loading, postData, fetchMultipleData, res } = useFetch();
+  const { loading, postData, fetchMultipleData } = useFetch();
 
   const formikRef = useRef();
   const [thumbnailImageValue, setThumbnailImageValue] = useState("");
-  const [videoName, setVideoName] = useState("");
+  // const [videoName, setVideoName] = useState("");
   const [category, setCategory] = useState("");
 
   const handleCancel = (e) => {
@@ -70,7 +69,7 @@ const AddVideo = () => {
   const resetFormValues = () => {
     formikRef.current.resetForm();
     setThumbnailImageValue("");
-    setVideoName("");
+    // setVideoName("");
   };
 
   useEffect(() => {

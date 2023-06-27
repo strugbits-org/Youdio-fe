@@ -42,15 +42,35 @@ const AddVideo = () => {
     thumbnail: "",
     video: "",
   };
-  const { loading, postData, fetchMultipleData } = useFetch();
+  const { loading, postData, fetchMultipleData, res } = useFetch();
 
   const formikRef = useRef();
   const [thumbnailImageValue, setThumbnailImageValue] = useState("");
-  const [category, setCategory] = useState("")
+  const [videoName, setVideoName] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleCancel = (e) => {
     e.preventDefault();
-    formikRef.current.resetForm()
+    formikRef.current.resetForm();
+  };
+
+  const handleSubmit = (data, action) => {
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    postData(
+      "video/upload-video",
+      formData,
+      undefined,
+      undefined,
+      true,
+      resetFormValues
+    );
+  };
+
+  const resetFormValues = () => {
+    formikRef.current.resetForm();
+    setThumbnailImageValue("");
+    setVideoName("");
   };
 
   useEffect(() => {
@@ -61,77 +81,78 @@ const AddVideo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const {difficulties, intensities, instructors, styles} = useSelector((state) => state.filter);
+  const { difficulties, intensities, instructors, styles } = useSelector(
+    (state) => state.filter
+  );
   const difficultiesOption = useMemo(() => {
     return difficulties?.map((val) => {
-      return ({
+      return {
         value: val.name,
-        label: val.name
-      })
-    })
-  }, [difficulties])
-  
+        label: val.name,
+      };
+    });
+  }, [difficulties]);
+
   const intensitiesOption = useMemo(() => {
     return intensities?.map((val) => {
-      return ({
+      return {
         value: val.name,
-        label: val.name
-      })
-    })
-  }, [intensities])
+        label: val.name,
+      };
+    });
+  }, [intensities]);
 
   const instructorsOption = useMemo(() => {
-    return instructors?.length > 0 ? instructors.map((val) => {
-      return ({
-        value: val._id,
-        label: `${val?.firstName ? val.firstName : ''} ${val?.lastName ? val.lastName : ''}`
-      }) 
-    }): []
-  }, [instructors])
+    return instructors?.length > 0
+      ? instructors.map((val) => {
+          return {
+            value: val._id,
+            label: `${val?.firstName ? val.firstName : ""} ${
+              val?.lastName ? val.lastName : ""
+            }`,
+          };
+        })
+      : [];
+  }, [instructors]);
 
   const categoriesOption = useMemo(() => {
-    return styles?.length > 0 ? styles.map((val) => {
-      return ({
-        value: val._id,
-        label: val.category
-      }) 
-    }): []
-  }, [styles])
+    return styles?.length > 0
+      ? styles.map((val) => {
+          return {
+            value: val.category,
+            label: val.category,
+          };
+        })
+      : [];
+  }, [styles]);
 
   const subCategoriesOption = useMemo(() => {
-    const getId = styles.filter(val => val._id === category && val)
-    return getId.length === 1 ? getId[0].name.map((val) => {
-      return ({
-        value: val,
-        label: val
-      }) 
-    }): []
-  }, [category, styles])
+    const getId = styles.filter((val) => val.category === category && val);
+    return getId.length === 1
+      ? getId[0].name.map((val) => {
+          return {
+            value: val,
+            label: val,
+          };
+        })
+      : [];
+  }, [category, styles]);
 
   return (
     <React.Fragment>
       <MainContainer>
         <SIDEBAR></SIDEBAR>
         <Container>
+          <H2>Add New Video</H2>
           <Formik
             initialValues={initialValues}
             validationSchema={addVideoValidate}
-            onSubmit={(data) => {
-              console.log("data", data);
-              const formData = new FormData();
-              Object.keys(data).forEach((key) =>
-                formData.append(key, data[key])
-              );
-              postData("video/upload-video", formData, undefined, undefined, true);
-            }}
+            onSubmit={handleSubmit}
             innerRef={formikRef}
           >
             {(formik) => (
               <CenterContainer>
                 <Form className="form">
-                  <Heading>
-                    <H2>Add New Video</H2>
-                  </Heading>
                   <FormRow>
                     <DropDownInput
                       label="Category"
@@ -144,9 +165,10 @@ const AddVideo = () => {
                       options={categoriesOption}
                       value={formik.values.category}
                       onChange={(e) => {
-                        setCategory(e.target.value)
+                        setCategory(e.target.value);
                         formik.setFieldValue("category", e.target.value);
                       }}
+                      disabled={loading}
                     />
                     <FieldInput
                       label="Date"
@@ -160,6 +182,7 @@ const AddVideo = () => {
                       onChange={(e) => {
                         formik.setFieldValue("date", e.target.value);
                       }}
+                      disabled={loading}
                     />
                   </FormRow>
                   <FormRow>
@@ -175,6 +198,7 @@ const AddVideo = () => {
                       onChange={(e) => {
                         formik.setFieldValue("title", e.target.value);
                       }}
+                      disabled={loading}
                     />
                     <DropDownInput
                       label="Instructor"
@@ -189,6 +213,7 @@ const AddVideo = () => {
                       onChange={(e) => {
                         formik.setFieldValue("instructor", e.target.value);
                       }}
+                      disabled={loading}
                     />
                   </FormRow>
                   <FormRow>
@@ -205,6 +230,7 @@ const AddVideo = () => {
                       onChange={(e) => {
                         formik.setFieldValue("difficulty", e.target.value);
                       }}
+                      disabled={loading}
                     />
                     <DropDownInput
                       label="Intensity"
@@ -219,6 +245,7 @@ const AddVideo = () => {
                       onChange={(e) => {
                         formik.setFieldValue("intensity", e.target.value);
                       }}
+                      disabled={loading}
                     />
                   </FormRow>
                   <FormRow>
@@ -235,19 +262,19 @@ const AddVideo = () => {
                       onChange={(e) => {
                         formik.setFieldValue("filter", e.target.value);
                       }}
-                      disabled = {!category}
+                      disabled={!category || loading}
                     />
                     <FieldInput
-                      label="Total Time"
+                      label="Total Time (Min)"
                       id="totalTime"
                       name="totalTime"
                       type="text"
-                      placeholder="30 Mins"
+                      placeholder="e.g. 30"
                       style={{ fontSize: "16px" }}
-                      // value={formik.values.totalTime}
                       onChange={(e) => {
                         formik.setFieldValue("totalTime", e.target.value);
                       }}
+                      disabled={loading}
                     />
                   </FormRow>
                   <FormRow>
@@ -268,12 +295,19 @@ const AddVideo = () => {
                           value: "no",
                         },
                       ]}
-                      value={formik.values.isFeatured ? "yes" : "no"}
+                      value={
+                        formik.values.isFeatured === true
+                          ? "yes"
+                          : formik.values.isFeatured === false
+                          ? "no"
+                          : ""
+                      }
                       onChange={(e) => {
                         let val = false;
                         if (e.target.value === "yes") val = true;
                         formik.setFieldValue("isFeatured", val);
                       }}
+                      disabled={loading}
                     />
                     <FieldInput
                       label="Upload video thumbnail"
@@ -289,6 +323,7 @@ const AddVideo = () => {
                         setThumbnailImageValue(e.target.value);
                         formik.setFieldValue("thumbnail", e.target.files[0]);
                       }}
+                      disabled={loading}
                     />
                   </FormRow>
                   <FormRow>
@@ -305,6 +340,7 @@ const AddVideo = () => {
                         console.log(e.target.value);
                         formik.setFieldValue("description", e.target.value);
                       }}
+                      disabled={loading}
                     />
                   </FormRow>
                   <FormRow>

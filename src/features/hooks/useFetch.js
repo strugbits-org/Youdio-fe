@@ -80,7 +80,14 @@ const useFetch = () => {
   };
 
   // Post
-  const postData = async (url, payload, cbFunction, resetToken, formData) => {
+  const postData = async (
+    url,
+    payload,
+    cbFunction,
+    resetToken,
+    formData,
+    setLocalState
+  ) => {
     setLoading(true);
     const headers = resetToken
       ? await getHeaders(resetToken)
@@ -92,6 +99,7 @@ const useFetch = () => {
         setLoading(false);
         setSuccess(true);
         cbFunction && dispatch(cbFunction(response.data));
+        setLocalState && setLocalState();
         if (response.data?.message) notify("success", response.data.message);
       }
     } catch (e) {

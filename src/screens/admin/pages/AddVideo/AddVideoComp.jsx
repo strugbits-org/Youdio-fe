@@ -9,7 +9,11 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+
+  h2{
+    width: 100%;
+    margin-bottom: 2rem;
+  }
   
 `;
 export const CenterContainer = styled.div`

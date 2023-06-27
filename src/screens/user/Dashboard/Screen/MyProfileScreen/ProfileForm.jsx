@@ -36,8 +36,8 @@ function ProfileForm({ user, content }) {
   }, [error, success]);
 
   const handleSubmit = (data) => {
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    // const formData = new FormData();
+    // Object.keys(data).forEach((key) => formData.append(key, data[key]));
     patchData("user/update-profile", data, setUser, resetFormValues);
   };
 

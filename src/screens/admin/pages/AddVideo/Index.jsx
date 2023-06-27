@@ -63,7 +63,7 @@ const AddVideo = () => {
 
   const {difficulties, intensities, instructors, styles} = useSelector((state) => state.filter);
   const difficultiesOption = useMemo(() => {
-    return difficulties.map((val) => {
+    return difficulties?.map((val) => {
       return ({
         value: val.name,
         label: val.name
@@ -72,7 +72,7 @@ const AddVideo = () => {
   }, [difficulties])
   
   const intensitiesOption = useMemo(() => {
-    return intensities.map((val) => {
+    return intensities?.map((val) => {
       return ({
         value: val.name,
         label: val.name
@@ -122,7 +122,7 @@ const AddVideo = () => {
               Object.keys(data).forEach((key) =>
                 formData.append(key, data[key])
               );
-              postData("video/upload-video", formData);
+              postData("video/upload-video", formData, undefined, undefined, true);
             }}
             innerRef={formikRef}
           >

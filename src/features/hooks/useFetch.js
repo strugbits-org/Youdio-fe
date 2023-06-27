@@ -80,11 +80,11 @@ const useFetch = () => {
   };
 
   // Post
-  const postData = async (url, payload, cbFunction, resetToken) => {
+  const postData = async (url, payload, cbFunction, resetToken, formData) => {
     setLoading(true);
     const headers = resetToken
       ? await getHeaders(resetToken)
-      : await getHeaders(token);
+      : await getHeaders(token, formData);
     try {
       const response = await apiClient.post(url, payload, { headers });
       if (response?.data) {

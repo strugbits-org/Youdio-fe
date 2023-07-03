@@ -25,7 +25,9 @@ import {
 import Loader from "src/components/Loader";
 import useInnerWidth from "src/features/hooks/useInnerWidth";
 import MobileFilters from "src/components/MobileFilters";
-import { clearFilters } from "src/features/filterSlice";
+import { clearFilters, filterDate } from "src/features/filterSlice";
+import { filterKeys } from "src/helpers/constant";
+import moment from "moment";
 
 function LiveClasses() {
   const { postData, res, loading } = useFetch();
@@ -73,7 +75,8 @@ function LiveClasses() {
     const currentDate = getDate("select", month, days, { d, m });
     setDateSelected(e.currentTarget.innerText);
     setMonth(currentDate);
-    // console.log(moment(currentDate.date).format("YYYY-MM-DD"));
+    const formatDate = moment(currentDate.date).format("YYYY-MM-DD");
+    dispatch(filterDate({ key: filterKeys.date, data: formatDate }));
   };
 
   const setInitialDate = () => {
@@ -169,7 +172,9 @@ function LiveClasses() {
                   <li key={ind}>
                     <PrimaryWhiteButton
                       className={
-                        isDateSelected === val.dateString ? "selectedDate" : ""
+                        isDateSelected === val.dateString && filters.date
+                          ? "selectedDate"
+                          : ""
                       }
                       key={`weekday-${ind}`}
                       onClick={(e) => selectDate(e, val, ind)}
@@ -208,7 +213,7 @@ function LiveClasses() {
         <DayBox>
           <div className="blank"></div>
           <div>
-            <H4>{isDateSelected}</H4>
+            <H4>{filters.date && isDateSelected}</H4>
           </div>
           <div className="searchBox">
             <InputIcon

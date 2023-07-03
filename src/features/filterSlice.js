@@ -52,6 +52,7 @@ const initialState = {
     },
     difficulty: [],
     intensity: [],
+    date: null,
   },
   filters: {
     duration: {},
@@ -65,6 +66,7 @@ const initialState = {
     },
     difficulty: [],
     intensity: [],
+    date: null,
   },
   filterTags: [],
 };
@@ -115,13 +117,19 @@ const filterSlice = createSlice({
     },
     removeFromFilter: (state, action) => {
       const { key, subKey, data } = action.payload;
-
+      console.log(key, data);
       if (key === filterKeys.duration) {
         state.filterTags = state.filterTags.filter(
           (tag) => tag.key !== key && tag
         );
 
         state.filters.duration = {};
+      } else if (key === filterKeys.date) {
+        state.filterTags = state.filterTags.filter(
+          tag => tag.key !== key && tag
+        );
+
+        state.filters.date = null;
       } else {
         state.filterTags = state.filterTags.filter(
           (tag) => tag.data !== data && tag
@@ -134,6 +142,24 @@ const filterSlice = createSlice({
           state.filters[key] = old.filter((val) => val !== data && val);
         }
       }
+    },
+
+    // Duration
+    filterDate: (state, action) => {
+      const { key, data } = action.payload;
+      state.filters.date = data
+
+      state.filterTags = state.filterTags.filter(
+        (tag) => tag.key !== key && tag
+      );
+      const dateTag = {
+        data,
+        key,
+      };
+      state.filterTags.push(dateTag);
+    },
+    removeDate: (state) => {
+      state.filters.date = null;
     },
 
     clearFilters: (state) => {
@@ -154,6 +180,8 @@ export const {
   removeDuration,
   pushToFilters,
   removeFromFilter,
+  filterDate,
+  removeDate,
   clearFilters,
 } = filterSlice.actions;
 export default filterSlice.reducer;

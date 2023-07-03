@@ -40,4 +40,5 @@ export const filterKeys = {
   setYourIntention: "setYourIntention",
   difficulty: "difficulty",
   intensity: "intensity",
+  date: "date"
 };

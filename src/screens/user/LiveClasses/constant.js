@@ -118,15 +118,15 @@ const getFormated = (date) => {
   return dateObject;
 };
 
-const getDaysInWeek = (dayInWeek, date) => {
+const getDaysInWeek = (dayInWeek, date, { prevDays, nextDays}) => {
   const currentDate = date;
-  const pastDates = [...Array(dayInWeek)].map((_, i) => {
+  const pastDates = [...Array(prevDays)].map((_, i) => {
     const date = new Date(
       currentDate.getTime() - (i + 1) * 24 * 60 * 60 * 1000
     );
     return getFormated(date);
   });
-  const futureDates = [...Array(dayInWeek)].map((_, i) => {
+  const futureDates = [...Array(nextDays)].map((_, i) => {
     const date = new Date(
       currentDate.getTime() + (i + 1) * 24 * 60 * 60 * 1000
     );
@@ -136,7 +136,7 @@ const getDaysInWeek = (dayInWeek, date) => {
   return week;
 };
 
-const getDateValues = (date, daysInWeek) => {
+const getDateValues = (date, daysInWeek, prevNextDays) => {
   return {
     monthIndex: date.getMonth(),
     monthName: months[date.getMonth()],
@@ -144,18 +144,18 @@ const getDateValues = (date, daysInWeek) => {
     selectedDate: date.getDate(),
     day: weekDays[date.getDay()],
     date,
-    daysInWeek: getDaysInWeek(daysInWeek, date),
+    daysInWeek: getDaysInWeek(daysInWeek, date, prevNextDays),
   };
 };
 
-export const getMonth = (action, current, daysInWeek) => {
+export const getMonth = (action, current, daysInWeek, prevNextDays) => {
   const date = current?.date ? current.date : new Date();
   if (action === "next") date.setMonth(current.monthIndex + 1);
   if (action === "prev") date.setMonth(current.monthIndex - 1);
-  return getDateValues(date, daysInWeek);
+  return getDateValues(date, daysInWeek, prevNextDays);
 };
 
-export const getDate = (action, current, daysInWeek, selectDate) => {
+export const getDate = (action, current, daysInWeek, selectDate, prevNextDays) => {
   // console.log({daysInWeek});
   const date = current?.date ? current.date : new Date();
   if (action === "next") date.setDate(date.getDate() + 1);
@@ -165,5 +165,5 @@ export const getDate = (action, current, daysInWeek, selectDate) => {
     date.setMonth(selectDate.m);
   }
   // console.log(date);
-  return getDateValues(date, daysInWeek);
+  return getDateValues(date, daysInWeek, prevNextDays);
 };

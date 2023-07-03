@@ -26,16 +26,12 @@ import Loader from "src/components/Loader";
 import useInnerWidth from "src/features/hooks/useInnerWidth";
 import MobileFilters from "src/components/MobileFilters";
 import { clearFilters } from "src/features/filterSlice";
+import moment from "moment";
 
 function LiveClasses() {
-  // const date = new Date();
-
   const { postData, res, loading } = useFetch();
   const { innerWidth } = useInnerWidth();
   const [open, setOpen] = useState(false);
-
-  // const initialYear = date.getFullYear();
-  // const initialMonth = date.getMonth();
 
   const dispatch = useDispatch();
 
@@ -49,35 +45,44 @@ function LiveClasses() {
   const [month, setMonth] = useState({});
   const [weekCount, setWeekCount] = useState();
   const [isDateSelected, setDateSelected] = useState();
+  const [selectedIndex, setSelectedIndex] = useState();
   const [sort, setSort] = useState("newest");
   const [isFilters, setIsFilters] = useState(true);
 
   const changeMonth = (action) => {
-    const currentMonth = getMonth(action, month, weekCount);
+    const weekCountDay = daysInWeek();
+    const prevDays = selectedIndex >= 0 ? selectedIndex : 0;
+    const nextDays = selectedIndex >= 0 ? weekCountDay - 1 - selectedIndex : 6;
+    const currentMonth = getMonth(action, month, weekCount, {prevDays, nextDays});
     setMonth(currentMonth);
-    setDateSelected("");
   };
 
   const changeWeek = (action) => {
-    const currentDate = getDate(action, month, weekCount);
+    const weekCountDay = daysInWeek();
+    const prevDays = selectedIndex >= 0 ? selectedIndex : 0;
+    const nextDays = selectedIndex >= 0 ? weekCountDay - 1 - selectedIndex : 6;
+    const currentDate = getDate(action, month, weekCount, undefined, {prevDays, nextDays});
     setMonth(currentDate);
-    setDateSelected("");
   };
 
-  const selectDate = (e, { d, m }) => {
+  const selectDate = (e, { d, m }, ind) => {
+    const weekCountDay = daysInWeek();
+    setSelectedIndex(ind);
+    const prevDays = ind
+    const nextDays = ind >= 0 ? (weekCountDay - 1) - ind  : 6;
     setDateSelected(e.currentTarget.innerText);
-    const currentDate = getDate("select", month, weekCount, { d, m });
-    // currentDate.date.setDate(d)
-    // currentDate.date.setMonth(m)
-    // console.log(currentDate);
+    const currentDate = getDate("select", month, weekCount, { d, m }, {prevDays, nextDays});
     setMonth(currentDate);
+    console.log(moment(currentDate.date).format('YYYY-MM-DD'));
   };
 
   const setInitialDate = () => {
     const weekCountDay = daysInWeek();
-    const count = weekCountDay === 3 ? 1 : weekCountDay === 5 ? 2 : 3;
-    const initialDate = getMonth(undefined, undefined, count);
-    setWeekCount(count);
+    // const count = weekCountDay === 3 ? 1 : weekCountDay === 5 ? 2 : 3;
+    const prevDays = 0
+    const nextDays = weekCountDay === 3 ? 2 : weekCountDay === 5 ? 4 : 6;
+    const initialDate = getMonth(undefined, undefined, weekCountDay, {prevDays, nextDays});
+    setWeekCount(weekCountDay);
     setMonth(initialDate);
   };
 
@@ -176,7 +181,7 @@ function LiveClasses() {
                         isDateSelected === val.dateString ? "selectedDate" : ""
                       }
                       key={`weekday-${ind}`}
-                      onClick={(e) => selectDate(e, val)}
+                      onClick={(e) => selectDate(e, val, ind)}
                     >
                       {val.dateString}
                     </PrimaryWhiteButton>

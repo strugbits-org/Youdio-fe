@@ -1,36 +1,40 @@
-import { Input, Label, PrimaryButton } from "src/components";
+import { PrimaryButton } from "src/components";
 import { HorizontalLine } from "src/components/Footer/footerComponents";
 import { Box } from "src/screens/user/Dashboard/Screen/MembershipScreen/MembershipScreenComponent";
 import Camera from "src/assets/icons/camera.png";
 import styled from "styled-components";
 import { Container } from "../../Components/Container";
-// import { layout } from "src/helpers";
+import { layout } from "src/helpers";
 
-// const { mobile, tablet, desktop ,laptop} = layout
+const { mobile, tablet} = layout
 
-export const ProfileInput = styled(Input)`
-  max-width: 541px;
-  min-width: 80px;
-  border-radius: 0px;
-`;
-export const ProfileLabel = styled(Label)`
-  min-width: 100px;
-  max-width: 541px;
-  display: flex;
+
+export const FormRow = styled.div`
+  max-width: 959px;
+  padding-block: 32px;
+  display: grid;
   align-items: center;
-  font-weight: bold;
-`;
-
-export const Box3 = styled.div`
-  .btn_gap {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    flex-wrap: wrap;
+  input {
+    border-radius: 2px;
+    border-color: var(--borderLightGrey);
+  }
+  
+  @media only screen and (min-width: ${mobile}){
+    grid-template-columns: 1fr;
+  }
+  @media only screen and (min-width: ${tablet}){
+    grid-template-columns: 0.8fr 1fr;
   }
 `;
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 16px;
+`;
 
-export const Box4 = styled(Box)`
+export const ProfileFormHeader = styled(Box)`
   align-items: center;
   gap: 2rem;
   display: flex;
@@ -39,9 +43,9 @@ export const Box4 = styled(Box)`
   .image-container {
     position: relative;
 
-    img{
-      width: clamp(140px, 18vw, 240px);
-      height: clamp(140px, 18vw, 240px);
+    img {
+      width: clamp(140px, 19vw, 350px);
+      height: clamp(140px, 19vw, 350px);
       object-fit: cover;
       border-radius: 100%;
     }
@@ -52,7 +56,7 @@ export const Box4 = styled(Box)`
     color: transparent;
     width: 0px;
     height: 0px;
- 
+
     &::file-selector-button {
       color: transparent;
       padding: 0;
@@ -64,32 +68,16 @@ export const Box4 = styled(Box)`
     &::after {
       content: "";
       position: absolute;
-      bottom: 1vw;
-      right: 1vw;
-      width: 50px;
-      height: 50px;
+      bottom: 1.3vw;
+      right: 1.3vw;
+      width: 30px;
+      height: 30px;
       cursor: pointer;
       background-image: url(${Camera});
       background-size: cover;
     }
     /* .userImage */
   }
-`;
-export const FormRow2 = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding-block: 50px;
-  justify-content: space-between;
-`;
-
-export const CancelButton = styled(PrimaryButton)`
-  color: black;
-  max-width: 200px;
-  min-width: 100px;
-  border: 1px solid #e6e7e9;
-  background-color: #ffff;
-  border-radius: 0px;
 `;
 
 export const SaveButton = styled(PrimaryButton)`

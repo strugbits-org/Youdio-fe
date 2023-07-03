@@ -1,12 +1,17 @@
 import React, { useRef } from "react";
 import { Formik, Form } from "formik";
-import styled from "styled-components";
 
-import { FieldInput, FieldPassword } from "src/components";
+import { FieldInput, FieldPassword, Label } from "src/components";
 import {
   userFormValidate,
 } from "src/helpers/forms/validateForms";
-import { SaveButton, Box3 } from "./ProfileComponent";
+import {
+  SaveButton,
+  ProfileFormHeader,
+  Buttons,
+  HorizontalLine2,
+  FormRow,
+} from "./ProfileComponent";
 import useFetch from "src/features/hooks/useFetch";
 import { setUser } from "src/features/userSlice";
 import { useEffect } from "react";
@@ -14,12 +19,9 @@ import { toast, ToastContainer } from "react-toastify";
 
 import { Heading2 } from "src/screens/user/Dashboard/Components/Heading";
 import { H5 } from "src/components";
-import { Box4 } from "./ProfileComponent";
 import userIcon from "src/assets/icons/user.png"
 
-const FormRow = styled.div`
-  margin-bottom: 20px;
-`;
+
 
 function ProfileForm({ user, content }) {
   const { loading, error, success, patchData } = useFetch();
@@ -50,7 +52,7 @@ function ProfileForm({ user, content }) {
 
   return (
     <React.Fragment>
-      <Box4>
+      <ProfileFormHeader>
         <div className="image-container">
           <img
             className="profile-img"
@@ -72,7 +74,7 @@ function ProfileForm({ user, content }) {
           <Heading2>{user.name}</Heading2>
           <H5 style={{ color: "#999999" }}>{user.nickName}</H5>
         </div>
-      </Box4>
+      </ProfileFormHeader>
 
       <Formik
         initialValues={{
@@ -90,30 +92,30 @@ function ProfileForm({ user, content }) {
         {(formik) => (
           <Form>
             <FormRow>
+              <Label htmlFor="name">{content.name}</Label>
               <FieldInput
-                label={content.name}
                 id="name"
                 name="name"
                 type="text"
                 style={{ fontSize: "16px" }}
               />
             </FormRow>
-            {/* <HorizontalLine2 /> */}
+            <HorizontalLine2 />
 
             <FormRow>
+              <Label htmlFor="nickName">{content.nickName}</Label>
               <FieldInput
-                label={content.nickName}
                 id="nickName"
                 name="nickName"
                 type="text"
                 style={{ fontSize: "16px" }}
               />
             </FormRow>
-            {/* <HorizontalLine2 /> */}
+            <HorizontalLine2 />
 
             <FormRow>
+              <Label htmlFor="userEmail">{content.email}</Label>
               <FieldInput
-                label={content.email}
                 id="userEmail"
                 name="userEmail"
                 type="email"
@@ -121,21 +123,22 @@ function ProfileForm({ user, content }) {
                 style={{ fontSize: "16px" }}
               />
             </FormRow>
-            {/* <HorizontalLine2 /> */}
+            <HorizontalLine2 />
 
             <FormRow>
+              <Label htmlFor="oldPassword">{content.currentPassword}</Label>
               <FieldPassword
-                label={content.currentPassword}
                 id="oldPassword"
                 name="oldPassword"
                 placeholder="Type your current password"
                 style={{ fontSize: "16px" }}
               />
             </FormRow>
+            <HorizontalLine2 />
 
             <FormRow>
+              <Label htmlFor="newPassword">{content.newPassword}</Label>
               <FieldPassword
-                label={content.newPassword}
                 id="newPassword"
                 name="newPassword"
                 placeholder="Type your new password"
@@ -144,14 +147,11 @@ function ProfileForm({ user, content }) {
               />
             </FormRow>
 
-            <Box3>
-              <div className="btn_gap">
-                {/* <CancelButton>{content.cancelBtn}</CancelButton> */}
-                <SaveButton type="submit" disabled={loading}>
-                  {content.saveBTn}
-                </SaveButton>
-              </div>
-            </Box3>
+            <Buttons>
+              <SaveButton type="submit" disabled={loading}>
+                {content.saveBTn}
+              </SaveButton>
+            </Buttons>
           </Form>
         )}
       </Formik>

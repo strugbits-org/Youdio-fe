@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFetch from "src/features/hooks/useFetch";
 
-import { getDate, getMonth, liveClassStaticContent } from "./constant";
+import { getDate, liveClassStaticContent } from "./constant";
 import {
   ContentBox,
   MonthBox,
@@ -26,7 +26,6 @@ import Loader from "src/components/Loader";
 import useInnerWidth from "src/features/hooks/useInnerWidth";
 import MobileFilters from "src/components/MobileFilters";
 import { clearFilters } from "src/features/filterSlice";
-import moment from "moment";
 
 function LiveClasses() {
   const { postData, res, loading } = useFetch();
@@ -43,56 +42,49 @@ function LiveClasses() {
   const { filterTags, filters } = useSelector((state) => state.filter);
   const [content] = useState(liveClassStaticContent);
   const [month, setMonth] = useState({});
-  const [weekCount, setWeekCount] = useState();
   const [isDateSelected, setDateSelected] = useState();
-  const [selectedIndex, setSelectedIndex] = useState();
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [sort, setSort] = useState("newest");
   const [isFilters, setIsFilters] = useState(true);
+  const [nextPrevDays, setNextPrevDays] = useState();
 
-  const changeMonth = (action) => {
+  const setWeekDays = (ind) => {
     const weekCountDay = daysInWeek();
-    const prevDays = selectedIndex >= 0 ? selectedIndex : 0;
-    const nextDays = selectedIndex >= 0 ? weekCountDay - 1 - selectedIndex : 6;
-    const currentMonth = getMonth(action, month, weekCount, {prevDays, nextDays});
+    const prevDays = ind;
+    const nextDays = ind >= 0 ? weekCountDay - 1 - ind : 6;
+    setNextPrevDays({ prevDays, nextDays });
+    setSelectedIndex(ind);
+    return { prevDays, nextDays };
+  };
+
+  const changeDate = (action, isMonth) => {
+    const currentMonth = getDate(
+      action,
+      month,
+      nextPrevDays,
+      undefined,
+      isMonth
+    );
     setMonth(currentMonth);
   };
 
-  const changeWeek = (action) => {
-    const weekCountDay = daysInWeek();
-    const prevDays = selectedIndex >= 0 ? selectedIndex : 0;
-    const nextDays = selectedIndex >= 0 ? weekCountDay - 1 - selectedIndex : 6;
-    const currentDate = getDate(action, month, weekCount, undefined, {prevDays, nextDays});
-    setMonth(currentDate);
-  };
-
   const selectDate = (e, { d, m }, ind) => {
-    const weekCountDay = daysInWeek();
-    setSelectedIndex(ind);
-    const prevDays = ind
-    const nextDays = ind >= 0 ? (weekCountDay - 1) - ind  : 6;
+    const days = setWeekDays(ind);
+    const currentDate = getDate("select", month, days, { d, m });
     setDateSelected(e.currentTarget.innerText);
-    const currentDate = getDate("select", month, weekCount, { d, m }, {prevDays, nextDays});
     setMonth(currentDate);
-    console.log(moment(currentDate.date).format('YYYY-MM-DD'));
+    // console.log(moment(currentDate.date).format("YYYY-MM-DD"));
   };
 
   const setInitialDate = () => {
-    const weekCountDay = daysInWeek();
-    // const count = weekCountDay === 3 ? 1 : weekCountDay === 5 ? 2 : 3;
-    const prevDays = 0
-    const nextDays = weekCountDay === 3 ? 2 : weekCountDay === 5 ? 4 : 6;
-    const initialDate = getMonth(undefined, undefined, weekCountDay, {prevDays, nextDays});
-    setWeekCount(weekCountDay);
+    const days = setWeekDays(selectedIndex);
+    const initialDate = getDate(undefined, undefined, days);
     setMonth(initialDate);
   };
 
   useEffect(() => {
     // !isDateSelected && weekDays && setDateSelected(weekDays[3]);
-  }, [
-    open,
-    month,
-    weekCount,
-  ]);
+  }, [open, month, selectedIndex]);
 
   useEffect(() => {
     if (filterTags.length > 0) {
@@ -112,9 +104,8 @@ function LiveClasses() {
       const videos = res.videos.sort((a, b) => {
         const titleA = new Date(a.date);
         const titleB = new Date(b.date);
-
         if (sort === "newest") return titleB - titleA;
-        else return titleA - titleB;
+        return titleA - titleB;
       });
       return videos;
     }
@@ -137,7 +128,7 @@ function LiveClasses() {
         <MonthBox className="month">
           <IconButton
             position="left"
-            onClick={() => changeMonth("prev")}
+            onClick={() => changeDate("prev", true)}
             // disabled={month === 0 ? true : false}
           >
             <img
@@ -152,7 +143,7 @@ function LiveClasses() {
 
           <IconButton
             position="right"
-            onClick={() => changeMonth("next")}
+            onClick={() => changeDate("next", true)}
             // disabled={month === monthNames.length - 1 ? true : false}
           >
             <img
@@ -190,7 +181,7 @@ function LiveClasses() {
               })}
           </ul>
           <div className="buttons">
-            <IconButton onClick={() => changeWeek("prev")}>
+            <IconButton onClick={() => changeDate("prev")}>
               <img
                 src={icons.leftArrow}
                 alt="Left Arrow"
@@ -199,7 +190,7 @@ function LiveClasses() {
               />
               <span>{content.weekSectionPrev}</span>
             </IconButton>
-            <IconButton onClick={() => changeWeek("next")}>
+            <IconButton onClick={() => changeDate("next")}>
               <span>{content.weekSectionNext}</span>
               <img
                 src={icons.rightArrow}

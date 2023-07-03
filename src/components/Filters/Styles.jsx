@@ -67,8 +67,8 @@ export default function Styles({ addTag, removeTag }) {
   return (
     <StylesBox>
       <ul className="styles">
-        {styles?.categories?.length > 0 &&
-          styles.categories.map(({ _id, category, name }) => {
+        {styles?.length > 0 &&
+          styles.map(({ _id, category, name }) => {
             return (
               <li key={_id}>
                 <H6

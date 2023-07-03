@@ -11,7 +11,7 @@ export const Section = styled.section`
     }};
     
     padding-block: ${({ paddingBlock }) => paddingBlock ? paddingBlock : '20px'};
-    
+
     @media only screen and (min-width: ${mobile}) {
         padding-inline: 3vw;
     }

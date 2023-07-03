@@ -70,8 +70,8 @@ export default function Instructors({ removeTag, addTag }) {
       </div> */}
       <div className="instructorList">
         <ul>
-          {instructors &&
-            instructors.instructors.map((val, ind) => {
+          {instructors && 
+            instructors.map((val, ind) => {
               return (
                 <Instructor
                   selected={

@@ -11,7 +11,6 @@ import useFetch from "src/features/hooks/useFetch";
 import { useSelector } from "react-redux";
 import useWindowSize from "src/features/hooks/useInnerWidth";
 import {
-  MainContainer,
   Container,
   BrowseFile,
   FormRow,
@@ -21,7 +20,6 @@ import {
 import {
   ButtonOne,
   ButtonTwo,
-  SIDEBAR,
 } from "../AddInstructor/AddInstructorComp";
 import {
   FieldInput,
@@ -49,13 +47,13 @@ const AddVideo = () => {
   const { loading, postData, fetchMultipleData } = useFetch();
   const { width } = useWindowSize()
   const formikRef = useRef();
-  const [thumbnailImageValue, setThumbnailImageValue] = useState('');
-  const [videoName, setVideoName] = useState("");
+  const [thumbnailImageValue, setThumbnailImageValue] = useState('Select');
+  const [videoName, setVideoName] = useState("Select");
   const [category, setCategory] = useState("");
 
   const handleCancel = (e) => {
     e.preventDefault();
-    formikRef.current.resetForm();
+    resetFormValues();
   };
 
   const handleSubmit = (data, action) => {
@@ -73,8 +71,8 @@ const AddVideo = () => {
 
   const resetFormValues = () => {
     formikRef.current.resetForm();
-    setThumbnailImageValue("");
-    setVideoName("");
+    setThumbnailImageValue("Select");
+    setVideoName("Select");
   }; 
 
   useEffect(() => {
@@ -144,273 +142,270 @@ const AddVideo = () => {
 
   return (
     <React.Fragment>
-      <MainContainer>
-        <SIDEBAR></SIDEBAR>
-        <Container>
-          <H2>Add New Video</H2>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={addVideoValidate}
-            onSubmit={handleSubmit}
-            innerRef={formikRef}
-          >
-            {(formik) => (
-              <CenterContainer>
-                <Form className="form">
-                  <FormRow>
-                    <DropDownInput
-                      label="Category"
-                      id="category"
-                      autofill
-                      name="category"
-                      type="text"
-                      placeholder="select"
-                      style={{ fontSize: "16px" }}
-                      options={categoriesOption}
-                      value={formik.values.category}
-                      onChange={(e) => {
-                        setCategory(e.target.value);
-                        formik.setFieldValue("category", e.target.value);
-                      }}
-                      disabled={loading}
-                    />
+      <Container>
+        <H2>Add New Video</H2>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={addVideoValidate}
+          onSubmit={handleSubmit}
+          innerRef={formikRef}
+        >
+          {(formik) => (
+            <CenterContainer>
+              <Form className="form">
+                <FormRow>
+                  <DropDownInput
+                    label="Category"
+                    id="category"
+                    autofill
+                    name="category"
+                    type="text"
+                    placeholder="select"
+                    style={{ fontSize: "16px" }}
+                    options={categoriesOption}
+                    value={formik.values.category}
+                    onChange={(e) => {
+                      setCategory(e.target.value);
+                      formik.setFieldValue("category", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
 
-                    <DropDownInput
-                      label="Filter"
-                      id="filter"
-                      autofill
-                      name="filter"
-                      type="text"
-                      placeholder="Core"
-                      style={{ fontSize: "16px" }}
-                      options={subCategoriesOption}
-                      value={formik.values.filter}
-                      onChange={(e) => {
-                        formik.setFieldValue("filter", e.target.value);
-                      }}
-                      disabled={!category || loading}
-                    />
-                  </FormRow>
+                  <DropDownInput
+                    label="Filter"
+                    id="filter"
+                    autofill
+                    name="filter"
+                    type="text"
+                    placeholder="Core"
+                    style={{ fontSize: "16px" }}
+                    options={subCategoriesOption}
+                    value={formik.values.filter}
+                    onChange={(e) => {
+                      formik.setFieldValue("filter", e.target.value);
+                    }}
+                    disabled={!category || loading}
+                  />
+                </FormRow>
+                <FormRow>
+                  <FieldInput
+                    label="Title"
+                    id="title"
+                    autofill
+                    name="title"
+                    type="text"
+                    placeholder="Live Back Press"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.title}
+                    onChange={(e) => {
+                      formik.setFieldValue("title", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                  <DropDownInput
+                    label="Instructor"
+                    id="instructor"
+                    autofill
+                    name="instructor"
+                    type="text"
+                    placeholder="e.g. Elizabeth Lisa"
+                    style={{ fontSize: "16px" }}
+                    options={instructorsOption}
+                    value={formik.values.trainer}
+                    onChange={(e) => {
+                      formik.setFieldValue("instructor", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                </FormRow>
+                <FormRow>
+                  <DropDownInput
+                    label="Difficulty"
+                    id="difficulty"
+                    autofill
+                    name="difficulty"
+                    type="text"
+                    placeholder="Medium"
+                    style={{ fontSize: "16px" }}
+                    options={difficultiesOption}
+                    value={formik.values.difficulty}
+                    onChange={(e) => {
+                      formik.setFieldValue("difficulty", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                  <DropDownInput
+                    label="Intensity"
+                    id="intensity"
+                    autofill
+                    name="intensity"
+                    type="text"
+                    placeholder="Level 1"
+                    style={{ fontSize: "16px" }}
+                    options={intensitiesOption}
+                    value={formik.values.intensity}
+                    onChange={(e) => {
+                      formik.setFieldValue("intensity", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                </FormRow>
+                <FormRow>
+                  <FieldInput
+                    label="Date"
+                    id="date"
+                    autofill
+                    name="date"
+                    type="date"
+                    placeholder="dd/mm/yy"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.date}
+                    onChange={(e) => {
+                      formik.setFieldValue("date", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                  <FieldInput
+                    label="Total Time (Min)"
+                    id="totalTime"
+                    name="totalTime"
+                    type="text"
+                    placeholder="e.g. 30"
+                    style={{ fontSize: "16px" }}
+                    onChange={(e) => {
+                      formik.setFieldValue("totalTime", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                </FormRow>
+                <FormRow>
+                  <DropDownInput
+                    label="You Want to Feature this Video?"
+                    id="isFeatured"
+                    autofill
+                    name="isFeatured"
+                    type="text"
+                    style={{ fontSize: "16px" }}
+                    options={[
+                      {
+                        label: "Yes",
+                        value: "yes",
+                      },
+                      {
+                        label: "No",
+                        value: "no",
+                      },
+                    ]}
+                    value={
+                      formik.values.isFeatured === true
+                        ? "yes"
+                        : formik.values.isFeatured === false
+                        ? "no"
+                        : ""
+                    }
+                    onChange={(e) => {
+                      let val = false;
+                      if (e.target.value === "yes") val = true;
+                      formik.setFieldValue("isFeatured", val);
+                    }}
+                    disabled={loading}
+                  />
+                  <FieldInput
+                    label="Upload video thumbnail"
+                    id="thumbnail"
+                    name="thumbnail"
+                    type="file"
+                    className="customUploadMedia"
+                    accept="image/*"
+                    style={{ fontSize: "16px" }}
+                    value={""}
+                    onChange={(e) => {
+                      setThumbnailImageValue(e.target.value);
+                      formik.setFieldValue("thumbnail", e.target.files[0]);
+                    }}
+                    disabled={loading}
+                    {...{
+                      "data-before": thumbnailImageValue,
+                    }}
+                  />
+                </FormRow>
+                {/* Upload Video for small screens */}
+                {width < 1468 && (
                   <FormRow>
                     <FieldInput
-                      label="Title"
-                      id="title"
-                      autofill
-                      name="title"
-                      type="text"
-                      placeholder="Live Back Press"
-                      style={{ fontSize: "16px" }}
-                      value={formik.values.title}
-                      onChange={(e) => {
-                        formik.setFieldValue("title", e.target.value);
-                      }}
-                      disabled={loading}
-                    />
-                    <DropDownInput
-                      label="Instructor"
-                      id="instructor"
-                      autofill
-                      name="instructor"
-                      type="text"
-                      placeholder="e.g. Elizabeth Lisa"
-                      style={{ fontSize: "16px" }}
-                      options={instructorsOption}
-                      value={formik.values.trainer}
-                      onChange={(e) => {
-                        formik.setFieldValue("instructor", e.target.value);
-                      }}
-                      disabled={loading}
-                    />
-                  </FormRow>
-                  <FormRow>
-                    <DropDownInput
-                      label="Difficulty"
-                      id="difficulty"
-                      autofill
-                      name="difficulty"
-                      type="text"
-                      placeholder="Medium"
-                      style={{ fontSize: "16px" }}
-                      options={difficultiesOption}
-                      value={formik.values.difficulty}
-                      onChange={(e) => {
-                        formik.setFieldValue("difficulty", e.target.value);
-                      }}
-                      disabled={loading}
-                    />
-                    <DropDownInput
-                      label="Intensity"
-                      id="intensity"
-                      autofill
-                      name="intensity"
-                      type="text"
-                      placeholder="Level 1"
-                      style={{ fontSize: "16px" }}
-                      options={intensitiesOption}
-                      value={formik.values.intensity}
-                      onChange={(e) => {
-                        formik.setFieldValue("intensity", e.target.value);
-                      }}
-                      disabled={loading}
-                    />
-                  </FormRow>
-                  <FormRow>
-                    <FieldInput
-                      label="Date"
-                      id="date"
-                      autofill
-                      name="date"
-                      type="date"
-                      placeholder="dd/mm/yy"
-                      style={{ fontSize: "16px" }}
-                      value={formik.values.date}
-                      onChange={(e) => {
-                        formik.setFieldValue("date", e.target.value);
-                      }}
-                      disabled={loading}
-                    />
-                    <FieldInput
-                      label="Total Time (Min)"
-                      id="totalTime"
-                      name="totalTime"
-                      type="text"
-                      placeholder="e.g. 30"
-                      style={{ fontSize: "16px" }}
-                      onChange={(e) => {
-                        formik.setFieldValue("totalTime", e.target.value);
-                      }}
-                      disabled={loading}
-                    />
-                  </FormRow>
-                  <FormRow>
-                    <DropDownInput
-                      label="You Want to Feature this Video?"
-                      id="isFeatured"
-                      autofill
-                      name="isFeatured"
-                      type="text"
-                      style={{ fontSize: "16px" }}
-                      options={[
-                        {
-                          label: "Yes",
-                          value: "yes",
-                        },
-                        {
-                          label: "No",
-                          value: "no",
-                        },
-                      ]}
-                      value={
-                        formik.values.isFeatured === true
-                          ? "yes"
-                          : formik.values.isFeatured === false
-                          ? "no"
-                          : ""
-                      }
-                      onChange={(e) => {
-                        let val = false;
-                        if (e.target.value === "yes") val = true;
-                        formik.setFieldValue("isFeatured", val);
-                      }}
-                      disabled={loading}
-                    />
-                    <FieldInput
-                      label="Upload video thumbnail"
-                      id="thumbnail"
-                      name="thumbnail"
+                      label="Upload Video"
+                      id="video"
+                      name="video"
                       type="file"
                       className="customUploadMedia"
-                      accept="image/*"
+                      accept="video/*"
                       style={{ fontSize: "16px" }}
-                      value={thumbnailImageValue}
+                      value={""}
                       onChange={(e) => {
-                        setThumbnailImageValue(e.target.value);
-                        formik.setFieldValue("thumbnail", e.target.files[0]);
+                        setVideoName(e.target.value);
+                        formik.setFieldValue("video", e.target.files[0]);
                       }}
                       disabled={loading}
                       {...{
-                        "data-before": thumbnailImageValue,
+                        "data-before": videoName,
                       }}
                     />
                   </FormRow>
-                  {/* Upload Video for small screens */}
-                  {width < 1468 && (
-                    <FormRow>
-                      <FieldInput
-                        label="Upload Video"
-                        id="video"
-                        name="video"
-                        type="file"
-                        className="customUploadMedia"
-                        accept="video/*"
-                        style={{ fontSize: "16px" }}
-                        value={videoName}
-                        onChange={(e) => {
-                          setVideoName(e.target.value);
-                          formik.setFieldValue("video", e.target.files[0]);
-                        }}
-                        disabled={loading}
-                        {...{
-                          "data-before": videoName,
-                        }}
-                      />
-                    </FormRow>
-                  )}
-                  <FormRow>
-                    <TextArea
-                      label="Description"
-                      id="description"
-                      autofill
-                      name="description"
-                      type="textarea"
-                      placeholder="Description"
-                      style={{ fontSize: "16px" }}
-                      value={formik.values.description}
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                        formik.setFieldValue("description", e.target.value);
-                      }}
-                      disabled={loading}
-                    />
-                  </FormRow>
-                  <ButtonGroup>
-                    <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
-                    <ButtonTwo type="submit" disabled={loading}>
-                      SAVE
-                    </ButtonTwo>
-                  </ButtonGroup>
-                </Form>
-                {/* Upload Video For Desktop Large */}
-                {width >= 1468 && (
-                  <BrowseFile>
-                    <div className="imageBox">
-                      <img src={icons.upload} alt="upload" />
-                    </div>
-                    <div className="uploadButton">
-                      <input
-                        id="video"
-                        name="video"
-                        type="file"
-                        accept="video/*"
-                        className="uploadInp"
-                        value={""}
-                        onChange={(e) => {
-                          setVideoName(e.target.files[0].name);
-                          formikRef.current.setFieldValue(
-                            "video",
-                            e.target.files[0]
-                          );
-                        }}
-                      />
-                    </div>
-                    {videoName && <span>{videoName}</span>}
-                  </BrowseFile>
                 )}
-              </CenterContainer>
-            )}
-          </Formik>
-        </Container>
-      </MainContainer>
+                <FormRow {...{'data-type': 'textarea'}}>
+                  <TextArea
+                    label="Description"
+                    id="description"
+                    autofill
+                    name="description"
+                    type="textarea"
+                    placeholder="Description"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.description}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      formik.setFieldValue("description", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                </FormRow>
+                <ButtonGroup>
+                  <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
+                  <ButtonTwo type="submit" disabled={loading}>
+                    SAVE
+                  </ButtonTwo>
+                </ButtonGroup>
+              </Form>
+              {/* Upload Video For Desktop Large */}
+              {width >= 1468 && (
+                <BrowseFile>
+                  <div className="imageBox">
+                    <img src={icons.upload} alt="upload" />
+                  </div>
+                  <div className="uploadButton">
+                    <input
+                      id="video"
+                      name="video"
+                      type="file"
+                      accept="video/*"
+                      className="uploadInp"
+                      value={""}
+                      onChange={(e) => {
+                        setVideoName(e.target.files[0].name);
+                        formikRef.current.setFieldValue(
+                          "video",
+                          e.target.files[0]
+                        );
+                      }}
+                    />
+                  </div>
+                  {videoName && videoName !== 'Select' && <span>{videoName}</span>}
+                </BrowseFile>
+              )}
+            </CenterContainer>
+          )}
+        </Formik>
+      </Container>
     </React.Fragment>
   );
 };

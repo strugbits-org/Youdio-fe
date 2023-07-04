@@ -21,6 +21,29 @@ export const path = {
   forgotPassword: "/forgot-password",
 };
 
+export const adminDashboardMenu = [
+  {
+    name: "Admin Profile",
+    path: "",
+  },
+  {
+    name: "Premium Instrutors",
+    path: "",
+  },
+  {
+    name: "Live Sessions",
+    path: "",
+  },
+  {
+    name: "Video Listing",
+    path: "",
+  },
+  {
+    name: "Add Video",
+    path: "/dashboard/add-video",
+  },
+];
+
 export const layout = {
     mobile: '280px',
     mobileMedium:'420px',

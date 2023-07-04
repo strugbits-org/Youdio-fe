@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import { layout } from "src/helpers";
 
 export const MainContainer = styled.div`
   display: grid;
   grid-template-columns: 380px 1fr;
 `;
 export const Container = styled.div`
-  padding: 24px;
   h2 {
     width: 100%;
     margin-bottom: 2rem;
@@ -13,27 +13,31 @@ export const Container = styled.div`
 `;
 
 export const CenterContainer = styled.div`
-  /* background: yellow; */
   display: flex;
   justify-content: space-between;
   gap: 48px;
   max-width: 1375px;
 
   .form {
+    width: 100%;
     max-width: 730px;
   }
 `;
 export const FormRow = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 18px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 18px;
+  grid-template-columns: 1fr 1fr;
 
+  &[data-type="textarea"] {
+    grid-template-columns: 1fr;
+  }
   .customUploadMedia {
     position: relative;
     padding-inline: 0px;
     color: transparent;
     font-size: 0px;
+    width: 100%;
     &::file-selector-button {
       font-size: 0px;
       border: none;
@@ -52,6 +56,13 @@ export const FormRow = styled.div`
       text-overflow: ellipsis;
       /* transform: translate(-50%, -50%); */
     }
+  }
+
+  @media only screen and (min-width: ${layout.mobile}) {
+    grid-template-columns: 1fr;
+  }
+  @media only screen and (min-width: ${layout.tablet}) {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 

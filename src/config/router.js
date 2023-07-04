@@ -36,6 +36,7 @@ import AddLiveSession from "src/screens/admin/pages/AddLiveSession/Index";
 
 import SingleVideo from "src/screens/user/SingleVideo/Index";
 import AddVideo from "src/screens/admin/pages/AddVideo/Index";
+import AdminDashboard from "src/screens/admin/pages";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
@@ -132,18 +133,23 @@ export default function Router() {
           />
 
           {/* Admin Dashboard */}
-          <Route
-            path="/add-instructor"
-            element={<ProtectedRoute children={<AddInstructor />} />}
-          />
-          <Route
-            path="/add-video"
-            element={<ProtectedRoute children={<AddVideo />} />}
-          />
-          <Route
-            path="/add-live-session"
-            element={<ProtectedRoute children={<AddLiveSession />} />}
-          />
+          <Route path="dashboard" element={<AdminDashboard />}>
+            {/* <Route
+              path="/"
+              element={<ProtectedRoute element={<AddVideo />} />}
+            /> */}
+            <Route
+              path="add-instructor"
+              key="add-instructor"
+              element={<AddInstructor />}
+            />
+            <Route path="add-video" key="add-video" element={<AddVideo />} />
+            <Route
+              path="add-live-session"
+              key="add-live-session"
+              element={<AddLiveSession />}
+            />
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>

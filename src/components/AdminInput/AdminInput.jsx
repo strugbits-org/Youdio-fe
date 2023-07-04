@@ -23,11 +23,12 @@ const Ipt = styled.div`
 //   }
 // `;
 const TEXTAREA = styled.textarea`
-  width: 720px;
+  width: 100%;
   height: 185px;
   color: #797979;
   background: #f7f7f7;
   outline: none;
+  resize: none;
   font-size: 0.8em;
   padding-inline: 5px;
   padding-block: 5px;

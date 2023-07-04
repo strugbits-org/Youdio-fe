@@ -16,7 +16,7 @@ import { path } from "src/helpers";
 import { contentTranslator } from "src/helpers/translator";
 import { icons } from "src/helpers";
 import { IconButton } from "src/components";
-import userIcon from "src/assets/icons/user.png"
+import userIcon from "src/assets/icons/user.png";
 
 import { logout } from "src/features/userSlice";
 
@@ -109,7 +109,7 @@ function Header({ isLoggedin }) {
               <li>
                 <NavLink to={path.membership}>
                   <ProfileImageCircle
-                    src={auth?.user?.userImage ? auth.user.userImage : userIcon }
+                    src={auth?.user?.userImage ? auth.user.userImage : userIcon}
                     alt="profile"
                     width="30px"
                     height="30px"
@@ -135,12 +135,34 @@ function Header({ isLoggedin }) {
               height="auto"
             />
           </li>
-          <li onClick={reset}>
-            <NavLink to={path.signIn}>{content.signIn}</NavLink>
-          </li>
-          <li onClick={reset}>
-            <NavLink to={path.register}>{content.register}</NavLink>
-          </li>
+          {!auth.token ? (
+            <React.Fragment>
+              <li onClick={reset}>
+                <NavLink to={path.signIn}>{content.signIn}</NavLink>
+              </li>
+              <li onClick={reset}>
+                <NavLink to={path.register}>{content.register}</NavLink>
+              </li>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <li>
+                <span className="txtLogout" onClick={() => btnLogout()}>
+                  {content.logout}
+                </span>
+              </li>
+              <li>
+                <NavLink to={path.membership}>
+                  <ProfileImageCircle
+                    src={auth?.user?.userImage ? auth.user.userImage : userIcon}
+                    alt="profile"
+                    width="30px"
+                    height="30px"
+                  />
+                </NavLink>
+              </li>
+            </React.Fragment>
+          )}
         </MobileUL>
 
         <ul className="links">
@@ -149,9 +171,6 @@ function Header({ isLoggedin }) {
           </li>
           <li onClick={reset}>
             <NavLink to={path.videos}>{content.videos}</NavLink>
-          </li>
-          <li onClick={reset}>
-            <NavLink to={path.membership}>{content.membership}</NavLink>
           </li>
           <li onClick={reset}>
             <NavLink to={path.instructor}>{content.instructor}</NavLink>

@@ -1,122 +1,108 @@
 import styled from "styled-components";
 
-
 export const MainContainer = styled.div`
-display: flex;
-
-`
+  display: grid;
+  grid-template-columns: 380px 1fr;
+`;
 export const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  h2{
+  padding: 24px;
+  h2 {
     width: 100%;
     margin-bottom: 2rem;
   }
-  
 `;
+
 export const CenterContainer = styled.div`
-  flex-basis: 70%;
-  padding: 20px;
-`
+  /* background: yellow; */
+  display: flex;
+  justify-content: space-between;
+  gap: 48px;
+  max-width: 1375px;
+
+  .form {
+    max-width: 730px;
+  }
+`;
 export const FormRow = styled.div`
   margin-bottom: 2rem;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 18px;
-/* justify-content: space-between; */
-`;
-export const BrowseFile = styled.div`
-  flex-basis: 20%;
-  /* background-color: #f1f1f1; */
-  padding: 20px;
-   /* max-width: 250px; */
-   /* min-width: 200px; */
 
-`;
-export const ImageBrowse = styled.div`
-  border: 1px dotted #797979;
-padding: 70px;
-  img {
-    width: 100px;
-  }
-  
-`;
-
-export const BOX4 = styled.div`
-max-width: 250px;
-min-width: 200px;
-
-.upload-container {
+  .customUploadMedia {
     position: relative;
-  }
-.uploadInp {
-    border: none;
-    outline: none;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: .8rem;
-    font-weight: 600;
-    max-width: 250px;
-    min-width: 200px;
-    height: 50px;
- 
+    padding-inline: 0px;
+    color: transparent;
+    font-size: 0px;
     &::file-selector-button {
-      color: var(--textHeadingWhite);
-    background:var(--backgroundGreen);
-      padding: 140px;
-      /* font-size: 0px; */
+      font-size: 0px;
       border: none;
       border-radius: 0px;
       outline: none;
     }
+    &::before {
+      content: attr(data-before);
+      position: absolute;
+      width: 90%;
+      color: #797979;
+      top: 50%;
+      transform: translateY(-50%);
+      padding-inline: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* transform: translate(-50%, -50%); */
+    }
+  }
+`;
+
+export const ButtonGroup = styled.div`
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 18px;
+`
+
+export const BrowseFile = styled.div`
+  width: clamp(200px, 16.5vw, 320px);
+  height: clamp(250px, 20vw, 400px);
+  position: relative;
+  text-align: center;
+  .imageBox {
+    border: 1px dashed #e6e6e6;
+    border-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    img {
+      width: 50%;
+      margin-bottom: 60px;
+    }
+  }
+
+  input {
+    border: none;
+    outline: none;
+    color: transparent;
+    width: 0px;
+    height: 0px;
+
     &::after {
       content: "UPLOAD VIDEO";
+      color: #fff;
+      background-color: var(--backgroundGreen);
       position: absolute;
-      top: 1vw;
-      left: 4.2vw;
-      /* width: 100%;
-      background: hotpink; */
+      width: 100%;
+      padding-block: 24px;
+      font-size: 12px;
+      left: 0px;
+      text-align: center;
+      bottom: 0px;
       cursor: pointer;
     }
-    /* .userImage */
   }
-/* align-items: center;
-gap: 2rem;
-display: flex;
-flex-wrap: wrap; */
-/* .upload-container {
-  position: relative;
-}
-.uploadInp {
-  border: none;
-  outline: none;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: .8rem;
-  font-weight: 600;
-  width: 250px;
-  height: 50px;
- 
-  &::file-selector-button {
-    color: var(--textHeadingWhite);
-  background:var(--backgroundGreen);
-    padding: 140px;
-   
-    border: none;
-    border-radius: 0px;
-    outline: none;
+
+  span {
+    margin-block: 16px;
+    font-size: small;
   }
-  &::after {
-    content: "upload";
-    position: absolute;
-    top: 1vw;
-    left: 5vw;
-     width: 50px;
-    height: 50px; 
-    cursor: pointer;
-  }
- 
-} */
-`
+`;

@@ -1,19 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 
-const useInnerWidth = () => {
-  const [innerWidth, setInnerWidth] = useState();
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({});
 
-  const getInnerWidth = () => {
-    const windowWidth = window.innerWidth;
-    const width = windowWidth < 768 ? "mobileFilters" : "webFilters";
-    setInnerWidth(width)
+  const handleScreenSize = () => {
+    console.log("window");
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
   };
 
-    useEffect(() => {
-      getInnerWidth();
+  useLayoutEffect(() => {
+    handleScreenSize();
+
+    window.addEventListener("resize", handleScreenSize);
+    return window.removeEventListener("resize", handleScreenSize);
   }, []);
 
-  return { innerWidth, getInnerWidth };
+  return windowSize;
 };
 
-export default useInnerWidth;
+export default useWindowSize;

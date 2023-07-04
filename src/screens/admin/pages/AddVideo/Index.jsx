@@ -1,17 +1,22 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Form, Formik } from "formik";
 import { H2 } from "src/components";
 import { icons } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
 import { useSelector } from "react-redux";
+import useWindowSize from "src/features/hooks/useInnerWidth";
 import {
   MainContainer,
   Container,
   BrowseFile,
-  BOX4,
-  ImageBrowse,
   FormRow,
   CenterContainer,
+  ButtonGroup,
 } from "./AddVideoComp";
 import {
   ButtonOne,
@@ -42,10 +47,10 @@ const AddVideo = () => {
     video: "",
   };
   const { loading, postData, fetchMultipleData } = useFetch();
-
+  const { width } = useWindowSize()
   const formikRef = useRef();
-  const [thumbnailImageValue, setThumbnailImageValue] = useState("");
-  // const [videoName, setVideoName] = useState("");
+  const [thumbnailImageValue, setThumbnailImageValue] = useState('');
+  const [videoName, setVideoName] = useState("");
   const [category, setCategory] = useState("");
 
   const handleCancel = (e) => {
@@ -69,8 +74,8 @@ const AddVideo = () => {
   const resetFormValues = () => {
     formikRef.current.resetForm();
     setThumbnailImageValue("");
-    // setVideoName("");
-  };
+    setVideoName("");
+  }; 
 
   useEffect(() => {
     fetchMultipleData(
@@ -169,19 +174,21 @@ const AddVideo = () => {
                       }}
                       disabled={loading}
                     />
-                    <FieldInput
-                      label="Date"
-                      id="date"
+
+                    <DropDownInput
+                      label="Filter"
+                      id="filter"
                       autofill
-                      name="date"
-                      type="date"
-                      placeholder="dd/mm/yy"
+                      name="filter"
+                      type="text"
+                      placeholder="Core"
                       style={{ fontSize: "16px" }}
-                      value={formik.values.date}
+                      options={subCategoriesOption}
+                      value={formik.values.filter}
                       onChange={(e) => {
-                        formik.setFieldValue("date", e.target.value);
+                        formik.setFieldValue("filter", e.target.value);
                       }}
-                      disabled={loading}
+                      disabled={!category || loading}
                     />
                   </FormRow>
                   <FormRow>
@@ -248,20 +255,19 @@ const AddVideo = () => {
                     />
                   </FormRow>
                   <FormRow>
-                    <DropDownInput
-                      label="Filter"
-                      id="filter"
+                    <FieldInput
+                      label="Date"
+                      id="date"
                       autofill
-                      name="filter"
-                      type="text"
-                      placeholder="Core"
+                      name="date"
+                      type="date"
+                      placeholder="dd/mm/yy"
                       style={{ fontSize: "16px" }}
-                      options={subCategoriesOption}
-                      value={formik.values.filter}
+                      value={formik.values.date}
                       onChange={(e) => {
-                        formik.setFieldValue("filter", e.target.value);
+                        formik.setFieldValue("date", e.target.value);
                       }}
-                      disabled={!category || loading}
+                      disabled={loading}
                     />
                     <FieldInput
                       label="Total Time (Min)"
@@ -313,18 +319,43 @@ const AddVideo = () => {
                       id="thumbnail"
                       name="thumbnail"
                       type="file"
-                      className="thubnailSelect"
+                      className="customUploadMedia"
                       accept="image/*"
                       style={{ fontSize: "16px" }}
                       value={thumbnailImageValue}
                       onChange={(e) => {
-                        console.log(e.target.value);
                         setThumbnailImageValue(e.target.value);
                         formik.setFieldValue("thumbnail", e.target.files[0]);
                       }}
                       disabled={loading}
+                      {...{
+                        "data-before": thumbnailImageValue,
+                      }}
                     />
                   </FormRow>
+                  {/* Upload Video for small screens */}
+                  {width < 1468 && (
+                    <FormRow>
+                      <FieldInput
+                        label="Upload Video"
+                        id="video"
+                        name="video"
+                        type="file"
+                        className="customUploadMedia"
+                        accept="video/*"
+                        style={{ fontSize: "16px" }}
+                        value={videoName}
+                        onChange={(e) => {
+                          setVideoName(e.target.value);
+                          formik.setFieldValue("video", e.target.files[0]);
+                        }}
+                        disabled={loading}
+                        {...{
+                          "data-before": videoName,
+                        }}
+                      />
+                    </FormRow>
+                  )}
                   <FormRow>
                     <TextArea
                       label="Description"
@@ -342,38 +373,42 @@ const AddVideo = () => {
                       disabled={loading}
                     />
                   </FormRow>
-                  <FormRow>
+                  <ButtonGroup>
                     <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
                     <ButtonTwo type="submit" disabled={loading}>
                       SAVE
                     </ButtonTwo>
-                  </FormRow>
+                  </ButtonGroup>
                 </Form>
+                {/* Upload Video For Desktop Large */}
+                {width >= 1468 && (
+                  <BrowseFile>
+                    <div className="imageBox">
+                      <img src={icons.upload} alt="upload" />
+                    </div>
+                    <div className="uploadButton">
+                      <input
+                        id="video"
+                        name="video"
+                        type="file"
+                        accept="video/*"
+                        className="uploadInp"
+                        value={""}
+                        onChange={(e) => {
+                          setVideoName(e.target.files[0].name);
+                          formikRef.current.setFieldValue(
+                            "video",
+                            e.target.files[0]
+                          );
+                        }}
+                      />
+                    </div>
+                    {videoName && <span>{videoName}</span>}
+                  </BrowseFile>
+                )}
               </CenterContainer>
             )}
           </Formik>
-
-          <BrowseFile>
-            <ImageBrowse>
-              <img src={icons.upload} alt="upload" />
-            </ImageBrowse>
-            <BOX4>
-              <div className="upload-container">
-                <input
-                  id="video"
-                  name="video"
-                  type="file"
-                  accept="video/*"
-                  className="uploadInp"
-                  value={""}
-                  onChange={(e) => {
-                    console.log(e.target.files[0]);
-                    formikRef.current.setFieldValue("video", e.target.files[0]);
-                  }}
-                />
-              </div>
-            </BOX4>
-          </BrowseFile>
         </Container>
       </MainContainer>
     </React.Fragment>

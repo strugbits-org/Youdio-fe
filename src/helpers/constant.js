@@ -1,12 +1,12 @@
 export const fonts = {
-    poppinsRegular: "PoppinsRegular",
-    poppinsMedium : "PoppinsMedium",
-    poppinsSemiBold : "PoppinsSemiBold",
-    poppinsBold : "PoppinsBold",
-    comfortaaRegular: "ComfortaaRegular",
-    comfortaaBold: "ComfortaaBold",
-    interBold: "InterBold",
-}
+  poppinsRegular: "PoppinsRegular",
+  poppinsMedium: "PoppinsMedium",
+  poppinsSemiBold: "PoppinsSemiBold",
+  poppinsBold: "PoppinsBold",
+  comfortaaRegular: "ComfortaaRegular",
+  comfortaaBold: "ComfortaaBold",
+  interBold: "InterBold",
+};
 
 export const path = {
   home: "/",
@@ -68,12 +68,13 @@ export const userDashboardMenu = [
 ];
 
 export const layout = {
-    mobile: '280px',
-    mobileMedium:'420px',
-    tablet: '768px',
-    laptop: '1001px',
-    desktop: '1368px',
-}
+  mobile: "280px",
+  mobileMedium: "420px",
+  mobileLarge: "650px",
+  tablet: "768px",
+  laptop: "1001px",
+  desktop: "1368px",
+};
 
 export const filterKeys = {
   duration: "duration",
@@ -86,5 +87,5 @@ export const filterKeys = {
   setYourIntention: "setYourIntention",
   difficulty: "difficulty",
   intensity: "intensity",
-  date: "date"
+  date: "date",
 };

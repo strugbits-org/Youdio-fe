@@ -49,6 +49,17 @@ const userFormValidate = Yup.object({
   newPassword: Yup.string().min(6, "Password should be 6 or more characters"),
 });
 
+// User Form For Payment
+const paymentFormValidate = Yup.object({
+  email: textField({}),
+  expiry: textField({ reqMesg: "Expiry is Required" }),
+  monthYear: textField({ reqMesg: "Month is Required" }),
+  cardNumber: textField({ reqMesg: "Card number is Required" }),
+  nameOnCard: textField({ reqMesg: "Name on Card is Required" }),
+  countryOrRegion: textField({ reqMesg: "Country is Required" }),
+  paymentAcceptRadio: textField({}),
+});
+
 
 
 
@@ -69,4 +80,5 @@ export {
   resetPasswordFormValidate,
   userFormValidate,
   userProfileFormValidate,
+  paymentFormValidate,
 };

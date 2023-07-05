@@ -1,58 +1,76 @@
-import { Input, PrimaryButton ,Label} from "src/components";
+import { PrimaryButton} from "src/components";
 import styled from "styled-components";
+import { layout } from "src/helpers";
 
+const { tablet } = layout;
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 541px;
   gap: 1rem;
 
-  form{
-  display: flex;
-  flex-direction: column;
-
-  gap: 1rem;
-
+  .form h2{
+    margin-bottom: 40px;
   }
 
-  .payment-left-top-div{
-    display:flex;
+  .payment-left-top-div {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-
   }
-  
-`;
-export const PaymentInput = styled(Input)`
-  max-width: 100%;
-  min-width: 50%;
-  border-radius: 0px;
-
-`;
-
-export const Input3 = styled(Input)`
-  width: 50%;
-  border-radius: 0px;
+  @media only screen and (min-width: ${tablet}) {
+    max-width: 541px;
+  }
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap-reverse;
-  width:100%;
-  justify-content:space-between;
-  gap:1rem;
+  width: 100%;
+  justify-content: space-between;
+  gap: 1rem;
 `;
 
-export const PaymentBtn = styled(PrimaryButton)`
- background-color: #FFE7DA;
- border-radius:0px;
- color: #1F1F1F;
-font-size:16px;
+export const FormRow = styled.div`
+  margin-bottom: 24px;
+  input[type="text"] {
+    border-radius: 0px;
+    border-color: var(--borderLightGrey);
+  }
+  label{
+    margin-bottom: 2px;
+  }
 `;
-export const PaymentLabel = styled(Label)`
-color:#676767;
-font-weight: 500;
-font-size: 16px;
- 
+
+export const CardInfoRow = styled(FormRow)`
+  .expiryCVC {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px;
+  }
+`;
+export const RadioFormRow = styled(FormRow)`
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  input[type="radio"] {
+    margin-top: 4px;
+  }
+`;
+
+export const SaveButton = styled(PrimaryButton)`
+  padding-block: 16px;
+  color: black;
+  border: 1px solid #ffe7da;
+  background-color: #ffe7da;
+  border-radius: 0px;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 16px;
 `;

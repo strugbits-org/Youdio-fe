@@ -31,6 +31,10 @@ const Container = styled.div`
   }
 `;
 
+const OutletContainer = styled.div`
+  max-width: 1379px;
+`;
+
 const DashboardHeader = styled.div`
   h1 {
     margin-block: 45px 26px;
@@ -47,8 +51,12 @@ function Dashboard({ menu }) {
         <HorizontalLine />
       </DashboardHeader>
       <Container>
-        {width >= 1001 && <SideBar menu={menu} active={active} setActive={setActive} />}
-        <Outlet />
+        {width >= 1001 && (
+          <SideBar menu={menu} active={active} setActive={setActive} />
+        )}
+        <OutletContainer>
+          <Outlet />
+        </OutletContainer>
       </Container>
     </CustomSection>
   );

@@ -29,16 +29,12 @@ export const FieldInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
 
     return (
-        <Ipt>
-            <Label htmlFor={props.id}>{label}</Label>
-            <Input
-                err={meta.touched && meta.error}
-                {...field}
-                {...props}
-            />
-            <ErrorMessage component={Error} name={field.name} className="error" />
-        </Ipt>
-    )
+      <Ipt>
+        {label && <Label htmlFor={props.id}>{label}</Label>}
+        <Input err={meta.touched && meta.error} {...field} {...props} />
+        <ErrorMessage component={Error} name={field.name} className="error" />
+      </Ipt>
+    );
 }
 
 export const FieldPassword = ({ src, label, ...props }) => {

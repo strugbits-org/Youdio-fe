@@ -14,7 +14,7 @@ const History = () => {
           return (
             <React.Fragment>
               <HistoryCard {...value} />
-              <HorizontalLine2 style={{ marginBlock: "20px" }} />
+              <HorizontalLine2 style={{ marginBlock: "40px" }} />
             </React.Fragment>
           );
         })}

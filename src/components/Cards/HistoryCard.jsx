@@ -7,7 +7,6 @@ import IntensityLevel from "../IntensityLevel";
 
 const { mobile, desktop, mobileLarge } = layout;
 const Card = styled.div`
-  max-width: 982px;
   display: flex;
   align-items: center;
   gap: 5vw;
@@ -19,7 +18,7 @@ const Card = styled.div`
   @media only screen and (min-width: ${mobileLarge}) {
     flex-direction: row;
     align-items: center;
-    max-width: initial;
+    max-width: 982px;
   }
   @media only screen and (min-width: ${desktop}) {
     gap: 104px;

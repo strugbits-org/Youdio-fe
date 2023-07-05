@@ -22,7 +22,6 @@ import SingleInstructor from "src/screens/user/SingleInstructor";
 
 // User Dashboard
 import History from "src/screens/user/Dashboard/Screen/HistoryScreen/Index";
-import MembershipScreen2 from "src/screens/user/Dashboard/Screen/MembershipScreen2/MembershipScreen2";
 import Membership from "src/screens/user/Dashboard/Screen/MembershipScreen/Index";
 import MyProfile from "src/screens/user/Dashboard/Screen/MyProfileScreen/Index";
 import Payment from "src/screens/user/Dashboard/Screen/PaymentScreen/Index";
@@ -37,6 +36,7 @@ import AddLiveSession from "src/screens/admin/pages/AddLiveSession/Index";
 import SingleVideo from "src/screens/user/SingleVideo/Index";
 import AddVideo from "src/screens/admin/pages/AddVideo/Index";
 import AdminDashboard from "src/screens/admin/pages";
+import UserDashboard from "src/screens/user/Dashboard";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
@@ -108,47 +108,22 @@ export default function Router() {
 
           {/* User Dashboard */}
           <Route
-            path="/membership"
-            element={<ProtectedRoute children={<Membership />} />}
-          />
-          <Route
-            path="/myprofile"
-            element={<ProtectedRoute children={<MyProfile />} />}
-          />
-          <Route
-            path="/membership2"
-            element={<ProtectedRoute children={<MembershipScreen2 />} />}
-          />
-          <Route
-            path="/payment"
-            element={<ProtectedRoute children={<Payment />} />}
-          />
-          <Route
-            path="/history"
-            element={<ProtectedRoute children={<History />} />}
-          />
-          <Route
-            path="/liveBooking"
-            element={<ProtectedRoute children={<LiveBooking />} />}
-          />
+            path="user"
+            element={<ProtectedRoute children={<UserDashboard />} />}
+          >
+            <Route path="membership" element={<Membership />} />
+            <Route path="profile" element={<MyProfile />} />
+            <Route path="payment" element={<Payment />} />
+            <Route path="history" element={<History />} />
+            <Route path="live-booking" element={<LiveBooking />} />
+          </Route>
 
           {/* Admin Dashboard */}
-          <Route path="dashboard" element={<AdminDashboard />}>
-            {/* <Route
-              path="/"
-              element={<ProtectedRoute element={<AddVideo />} />}
-            /> */}
-            <Route
-              path="add-instructor"
-              key="add-instructor"
-              element={<AddInstructor />}
-            />
-            <Route path="add-video" key="add-video" element={<AddVideo />} />
-            <Route
-              path="add-live-session"
-              key="add-live-session"
-              element={<AddLiveSession />}
-            />
+          <Route path="dashboard" element={<ProtectedRoute children={<AdminDashboard />}/>}>
+            {/* <Route path="/" index={true} element={<AddVideo />} /> */}
+            <Route path="add-instructor" element={<AddInstructor />} />
+            <Route path="add-video" element={<AddVideo />} />
+            <Route path="add-live-session" element={<AddLiveSession />} />
           </Route>
         </Routes>
         <Footer />

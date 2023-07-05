@@ -1,57 +1,8 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import { H1, Section } from "src/components";
-import styled from "styled-components";
-import { layout } from "src/helpers";
-import SideBar from "src/components/Sidebar";
-import { HorizontalLine } from "src/components/BreakLines";
+import Dashboard from "src/components/Dashboard";
 import { adminDashboardMenu } from "src/helpers/constant";
-import useWindowSize from "src/features/hooks/useInnerWidth";
-
-const { laptop, desktop, mobile } = layout;
-const CustomSection = styled(Section)`
-  @media only screen and (min-width: ${laptop}) {
-    padding-inline: 42px;
-  }
-  @media only screen and (min-width: ${desktop}) {
-    padding-inline: 122px;
-  }
-`;
-const Container = styled.div`
-  display: grid;
-  padding-block: 24px;
-  gap: 4.5vw;
-  
-  @media only screen and (min-width: ${mobile}) {
-    grid-template-columns: 1fr;
-  }
-
-  @media only screen and (min-width: ${laptop}) {
-    grid-template-columns: 220px 1fr;
-    gap: 69px;
-  }
-`;
-
-const DashboardHeader = styled.div`
-  h1 {
-    margin-block: 45px 26px;
-  }
-`;
 
 function AdminDashboard() {
-  const { width } = useWindowSize()
-  return (
-    <CustomSection paddingBlock="0px" backgroundColor="white">
-      <DashboardHeader>
-        <H1>Admin</H1>
-        <HorizontalLine />
-      </DashboardHeader>
-      <Container>
-        {width >= 1001 && <SideBar menu={adminDashboardMenu} />}
-        <Outlet />
-      </Container>
-    </CustomSection>
-  );
+  return <Dashboard menu={adminDashboardMenu} />;
 }
 
 export default AdminDashboard;

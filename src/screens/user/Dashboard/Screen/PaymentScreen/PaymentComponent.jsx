@@ -1,12 +1,10 @@
 import { Input, PrimaryButton ,Label} from "src/components";
 import styled from "styled-components";
-import { Container } from "../../Components/Container";
 
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 541px;
-  min-width: 100px;
   gap: 1rem;
 
   form{
@@ -38,9 +36,8 @@ export const Input3 = styled(Input)`
   border-radius: 0px;
 `;
 
-export const Container2 = styled(Container)`
+export const Container = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap-reverse;
   width:100%;
   justify-content:space-between;

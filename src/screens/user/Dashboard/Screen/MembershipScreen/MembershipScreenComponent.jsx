@@ -4,14 +4,15 @@ export const Description = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 12px;
   flex-wrap: wrap;
 
   img {
     width: 20px;
     height: 20px;
   }
-  .sub_heading {
+  .sub-heading {
+    width: 300px;
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -32,7 +33,10 @@ export const Description = styled.div`
 export const Box = styled.div`
   padding-block: 50px;
   display: flex;
-  flex-direction: rows;
+  align-items: flex-start;
   gap: 1rem;
-`;
 
+  input[type=radio]{
+    margin-top: 4px;
+  }
+`;

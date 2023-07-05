@@ -2,9 +2,7 @@ import React, { useRef } from "react";
 import { Formik, Form } from "formik";
 
 import { FieldInput, FieldPassword, Label } from "src/components";
-import {
-  userFormValidate,
-} from "src/helpers/forms/validateForms";
+import { userFormValidate } from "src/helpers/forms/validateForms";
 import {
   SaveButton,
   ProfileFormHeader,
@@ -19,9 +17,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import { Heading2 } from "src/screens/user/Dashboard/Components/Heading";
 import { H5 } from "src/components";
-import userIcon from "src/assets/icons/user.png"
-
-
+import userIcon from "src/assets/icons/user.png";
 
 function ProfileForm({ user, content }) {
   const { loading, error, success, patchData } = useFetch();
@@ -44,11 +40,11 @@ function ProfileForm({ user, content }) {
   };
 
   const resetFormValues = () => {
-    const formik = formikRef.current
-    formik.setFieldValue('userIamge', "")
-    formik.setFieldValue('oldPassword', "")
-    formik.setFieldValue('newPassword', "")
-  }
+    const formik = formikRef.current;
+    formik.setFieldValue("userIamge", "");
+    formik.setFieldValue("oldPassword", "");
+    formik.setFieldValue("newPassword", "");
+  };
 
   return (
     <React.Fragment>

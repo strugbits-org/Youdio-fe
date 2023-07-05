@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -26,30 +26,31 @@ const Container = styled.div`
     }
   }
 `;
-function SideBar({ menu }) {
-  const [active, setActive] = useState("");
+function SideBar({ menu, active, setActive }) {
   const navigate = useNavigate();
 
   const handleMenuItem = (item) => {
     navigate(item.path);
-    setActive(item.name)
+    setActive(item.name);
   };
   return (
     <Container>
-      <ul className="vericalMenu">
-        {menu &&
-          menu.map((item) => {
-            return (
-              <li
-                key={item.path}
-                data-active={item?.name === active ? "active" : ""}
-                onClick={() => handleMenuItem(item)}
-              >
-                {item.name}
-              </li>
-            );
-          })}
-      </ul>
+      <nav>
+        <ul className="vericalMenu">
+          {menu &&
+            menu.map((item) => {
+              return (
+                <li
+                  key={item.path}
+                  data-active={item?.name === active ? "active" : ""}
+                  onClick={() => handleMenuItem(item)}
+                >
+                  {item.name}
+                </li>
+              );
+            })}
+        </ul>
+      </nav>
     </Container>
   );
 }

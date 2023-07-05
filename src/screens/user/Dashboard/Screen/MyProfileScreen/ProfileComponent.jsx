@@ -3,11 +3,9 @@ import { HorizontalLine } from "src/components/Footer/footerComponents";
 import { Box } from "src/screens/user/Dashboard/Screen/MembershipScreen/MembershipScreenComponent";
 import Camera from "src/assets/icons/camera.png";
 import styled from "styled-components";
-import { Container } from "../../Components/Container";
 import { layout } from "src/helpers";
 
 const { mobile, tablet} = layout
-
 
 export const FormRow = styled.div`
   max-width: 959px;
@@ -39,7 +37,7 @@ export const ProfileFormHeader = styled(Box)`
   gap: 2rem;
   display: flex;
   flex-wrap: wrap;
-  padding-block: 0px 50px;
+  /* padding-block: 0px 50px; */
   .image-container {
     position: relative;
 
@@ -92,8 +90,4 @@ export const SaveButton = styled(PrimaryButton)`
 export const HorizontalLine2 = styled(HorizontalLine)`
   background-color: #e6e6e6;
   min-height: 1px;
-`;
-
-export const ProfileContainer = styled(Container)`
-  width: 100%;
 `;

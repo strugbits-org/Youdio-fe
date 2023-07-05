@@ -13,7 +13,7 @@ export const path = {
   liveClasses: "",
   videos: "/videoclasses",
 
-  membership: "/myprofile",
+  membership: "/user/profile",
   instructor: "/instructor",
 
   signIn: "/login",
@@ -41,6 +41,29 @@ export const adminDashboardMenu = [
   {
     name: "Add Video",
     path: "/dashboard/add-video",
+  },
+];
+
+export const userDashboardMenu = [
+  {
+    name: "My Profile",
+    path: "/user/profile",
+  },
+  {
+    name: "Membership",
+    path: "/user/membership",
+  },
+  {
+    name: "Payment",
+    path: "/user/payment",
+  },
+  {
+    name: "History",
+    path: "/user/history",
+  },
+  {
+    name: "Live Booking",
+    path: "/user/live-booking",
   },
 ];
 

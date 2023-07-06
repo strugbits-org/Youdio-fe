@@ -38,10 +38,10 @@ function SideBar({ menu, active, setActive }) {
       <nav>
         <ul className="vericalMenu">
           {menu &&
-            menu.map((item) => {
+            menu.map((item, ind) => {
               return (
                 <li
-                  key={item.path}
+                  key={`${item.path}-${ind}`}
                   data-active={item?.name === active ? "active" : ""}
                   onClick={() => handleMenuItem(item)}
                 >

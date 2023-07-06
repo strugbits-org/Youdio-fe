@@ -37,6 +37,7 @@ import SingleVideo from "src/screens/user/SingleVideo/Index";
 import AddVideo from "src/screens/admin/pages/AddVideo/Index";
 import AdminDashboard from "src/screens/admin/pages";
 import UserDashboard from "src/screens/user/Dashboard";
+import usePermission from "src/features/hooks/usePermission";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
@@ -45,12 +46,16 @@ export default function Router() {
   //     // Calling a auth function if user logged in setUser with id or something. Else setUser to null.
   // }, [])
 
-  const ProtectedRoute = ({ children }) => {
+  const ProtectedRoute = ({ children, permission }) => {
     const base = useSelector((state) => state.user);
     let location = useLocation();
+    const { hasPermission } = usePermission();
 
     if (!base.token) {
       return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+    if (base.token && permission && !hasPermission(permission)) {
+      return <Navigate to="/" state={{ from: location }} replace />;
     }
     return children;
   };
@@ -109,7 +114,12 @@ export default function Router() {
           {/* User Dashboard */}
           <Route
             path="user"
-            element={<ProtectedRoute children={<UserDashboard />} />}
+            element={
+              <ProtectedRoute
+                children={<UserDashboard />}
+                permission="user.dashboard"
+              />
+            }
           >
             <Route path="membership" element={<Membership />} />
             <Route path="profile" element={<MyProfile />} />
@@ -119,8 +129,17 @@ export default function Router() {
           </Route>
 
           {/* Admin Dashboard */}
-          <Route path="dashboard" element={<ProtectedRoute children={<AdminDashboard />}/>}>
+          <Route
+            path="dashboard"
+            element={
+              <ProtectedRoute
+                children={<AdminDashboard />}
+                permission="admin.dashboard"
+              />
+            }
+          >
             {/* <Route path="/" index={true} element={<AddVideo />} /> */}
+            <Route path="admin" element={<AddVideo />} />
             <Route path="add-instructor" element={<AddInstructor />} />
             <Route path="add-video" element={<AddVideo />} />
             <Route path="add-live-session" element={<AddLiveSession />} />

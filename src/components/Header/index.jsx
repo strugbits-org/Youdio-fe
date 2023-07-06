@@ -49,6 +49,11 @@ function Header({ isLoggedin }) {
     dispatch(logout());
   };
 
+  const handleDashboard = () => {
+    if(auth?.user.role === 'admin') return path.admin
+    if(auth?.user.role === 'user') return path.membership
+  }
+
   return (
     <Section>
       <Nav>
@@ -107,7 +112,7 @@ function Header({ isLoggedin }) {
                 </span>
               </li>
               <li>
-                <NavLink to={path.membership}>
+                <NavLink to={handleDashboard()}>
                   <ProfileImageCircle
                     src={auth?.user?.userImage ? auth.user.userImage : userIcon}
                     alt="profile"
@@ -152,7 +157,7 @@ function Header({ isLoggedin }) {
                 </span>
               </li>
               <li>
-                <NavLink to={path.membership}>
+                <NavLink to={handleDashboard()}>
                   <ProfileImageCircle
                     src={auth?.user?.userImage ? auth.user.userImage : userIcon}
                     alt="profile"

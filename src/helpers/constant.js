@@ -14,6 +14,7 @@ export const path = {
   videos: "/videoclasses",
 
   membership: "/user/profile",
+  admin: "/dashboard/admin",
   instructor: "/instructor",
 
   signIn: "/login",
@@ -24,7 +25,7 @@ export const path = {
 export const adminDashboardMenu = [
   {
     name: "Admin Profile",
-    path: "",
+    path: "/dashboard/admin",
   },
   {
     name: "Premium Instrutors",

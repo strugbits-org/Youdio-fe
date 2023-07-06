@@ -32,21 +32,10 @@ function VideoClasses() {
   const sortedVideos = useMemo(() => {
     if (res?.videos && res.videos.length > 0) {
       const videos = res.videos.sort((a, b) => {
-        const titleA = a.title.toUpperCase();
-        const titleB = b.date.toUpperCase();
-
-        if (sort === "newest") {
-          if (titleA > titleB) return -1;
-          if (titleA < titleB) return 1;
-          return 0;
-        }
-
-        if (sort === "oldest") {
-          if (titleB > titleA) return -1;
-          if (titleB < titleA) return 1;
-          return 0;
-        }
-        return 0;
+        const titleA = new Date(a.date);
+        const titleB = new Date(b.date);
+        if (sort === "newest") return titleB - titleA;
+        return titleA - titleB;
       });
       return videos;
     }

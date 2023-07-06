@@ -4,10 +4,7 @@ import { layout } from "src/helpers";
 
 const { mobile, tablet, laptop } = layout;
 
-export const Card = styled.div`
-  /* flex:1; */
-  flex-basis: clamp(280px, 20vw, 392px);
-`;
+export const Card = styled.div``;
 export const BoxCard = styled.div`
   /* flex-basis: clamp(280px, 20vw, 392px); */
   background-color: #f9f9f9;
@@ -59,23 +56,27 @@ export const Spacediv = styled.div`
   margin-bottom: 1em;
 `;
 export const CardMedia = styled.div`
-  position: relative;
-  margin-bottom: 19px;
-  @media only screen and (min-width: ${mobile}) {
-    img {
-      aspect-ratio: 2.5/1.5;
-      /* height: clamp(150px, 15vw, 300px); */
-      object-fit: cover;
-      object-position: center;
+  img {
+    width: 100%;
+    aspect-ratio: 1.65/1;
+    object-fit: cover;
+    object-position: center;
+  }
+`;
+export const CardContent = styled.div`
+  .timeRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    .timeIntensity {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
   }
-  @media only screen and (min-width: ${tablet}) {
-    img {
-      /* height: clamp(150px, 15vw, 300px); */
-      object-fit: cover;
-      object-position: initial;
-      
-    }
+  h5 {
+    margin-bottom: 14px;
   }
 `;
 
@@ -88,96 +89,7 @@ export const Tag = styled.span`
   position: absolute;
 `;
 
-export const CardContent = styled.div`
-  .timeRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* background-color: red; */
-    /* margin-bottom: 10px; */
-    div {
-      min-width: 66px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      /* background-color: red; */
-    }
-    .x {
-      transform: translateY(-0.5rem);
-    }
-  }
 
-  h5 {
-    width: 95%;
-    margin-bottom: 14px;
-  }
-
-  .profileRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1vw;
-
-    .profileBox {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      img{
-        border-radius: 100%;
-        object-fit: cover;
-      }
-    }
-  }
-  .trainerP3 {
-    margin-top: -2em;
-  }
-  .intensityInstructor {
-    flex: 1;
-    align-items: center;
-    justify-content: right;
-    display: flex;
-    gap: 5px;
-  }
-  .p3 {
-    margin-bottom: 1em;
-  }
-  h3 {
-    margin-bottom: 1em;
-    text-align: left !important;
-  }
-
-  .reviewSec {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1em;
-    .star {
-      color: #3ac4b2;
-    }
-  }
-  .reviewProfile {
-    display: flex;
-    gap: 8px;
-
-    img {
-      width: 40px;
-      height: 40px;
-    }
-  }
-  .chef {
-    padding-left: 3.9em;
-    transform: translateY(-1.3em);
-  }
-  .reviewP2 {
-    align-items: center;
-    margin-bottom: 1em;
-    p {
-      color: #848484;
-    }
-  }
-`;
 
 export const ContentInside = styled.div`
   padding-inline: 1em;

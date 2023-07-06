@@ -5,43 +5,46 @@ import { Input, InputIcon, Error, Label } from "./Inputs"
 import { H1, H2, H3, H4, H5, H6, P1, P2, P3 } from "./Typography"
 import { LiveClassCard } from "./Cards"
 import { Filters } from "./Filters"
+import IntensityLevel from "./IntensityLevel"
+import { ClockTime } from "./ClockTime"
 
-export { 
-    // Banners
-    Section,
+export {
+  // Banners
+  Section,
 
-    // Formik Inputs
-    FieldInput,
-    TextFieldInput,
-    FieldPassword,
+  // Formik Inputs
+  FieldInput,
+  TextFieldInput,
+  FieldPassword,
 
-    // Buttons
-    PrimaryButton,
-    PrimaryWhiteButton,
-    IconButton,
-    WhiteIconButton,
-    
-    // Inputs
-    Input,
-    InputIcon,
-    Error,
-    Label,
+  // Buttons
+  PrimaryButton,
+  PrimaryWhiteButton,
+  IconButton,
+  WhiteIconButton,
 
-    // Typography
-    H1,
-    H2,
-    H3,
-    H4,
-    H5,
-    H6,
-    P1,
-    P2,
-    P3,
+  // Inputs
+  Input,
+  InputIcon,
+  Error,
+  Label,
 
-    // Cards
-    LiveClassCard,
+  // Typography
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  P1,
+  P2,
+  P3,
 
-    // Filters
-    Filters
+  // Cards
+  LiveClassCard,
 
-}
+  // Filters
+    Filters,
+  IntensityLevel,
+  ClockTime,
+};

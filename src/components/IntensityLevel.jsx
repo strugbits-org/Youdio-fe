@@ -7,9 +7,10 @@ const IntensityBox = styled.div`
   justify-content: right;
   display: flex;
   gap: 10px;
+  min-height: 2px;
 `;
 
-const IntensityLevel = ({ level }) => {
+const IntensityLevel = ({ level, text }) => {
   const [color] = useState({
     dark: "#413735",
     light: "#D5D5D5",
@@ -57,7 +58,9 @@ const IntensityLevel = ({ level }) => {
         />
       </svg>
 
-      <P3>Level {level}</P3>
+      <P3>
+        {text ? text : "Level"} {level}
+      </P3>
     </IntensityBox>
   );
 };

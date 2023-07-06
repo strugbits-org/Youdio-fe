@@ -38,6 +38,7 @@ import AddVideo from "src/screens/admin/pages/AddVideo/Index";
 import AdminDashboard from "src/screens/admin/pages";
 import UserDashboard from "src/screens/user/Dashboard";
 import usePermission from "src/features/hooks/usePermission";
+// import useFetch from "src/features/hooks/useFetch";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 
@@ -45,6 +46,8 @@ export default function Router() {
   // useEffect(() => {
   //     // Calling a auth function if user logged in setUser with id or something. Else setUser to null.
   // }, [])
+
+  // const { fetchData } = useFetch();
 
   const ProtectedRoute = ({ children, permission }) => {
     const base = useSelector((state) => state.user);
@@ -109,7 +112,13 @@ export default function Router() {
           <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
 
           {/* SINGLE VIDEO */}
-          <Route path="/singlevideo" element={<SingleVideo />} />
+          <Route
+            path="/singlevideo"
+            element={<SingleVideo />}
+            // loader={async ({params}) => { 
+            //   await fetchData(`video/${params.id}`);
+            // }}
+          />
 
           {/* User Dashboard */}
           <Route

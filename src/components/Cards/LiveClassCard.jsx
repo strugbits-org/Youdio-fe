@@ -4,14 +4,21 @@ import { H3, P3, H4 } from "src/components";
 import { Card, CardMedia, Tag, CardContent } from "./cardsComponent";
 import { icons } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
+import { useNavigate } from "react-router-dom";
 
 function LiveClassCard({ data }) {
+  const navigate = useNavigate()  
   const intensityLevel = useMemo(() => {
     return data.intensity.slice(-1)
   }, [data])
+
+  const handleNavigate = () => { 
+    navigate("/singlevideo");
+  }
+
   return (
     <Card>
-      <CardMedia>
+      <CardMedia onClick={handleNavigate}>
         <img src={data.thumbnail} alt={data.title} width="100%" height="auto" />
         <Tag>
           <H4>{data.category}</H4>

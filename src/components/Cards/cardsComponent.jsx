@@ -89,8 +89,6 @@ export const Tag = styled.span`
   position: absolute;
 `;
 
-
-
 export const ContentInside = styled.div`
   padding-inline: 1em;
   padding-block: 1em;
@@ -155,3 +153,5 @@ export const DateTag = styled.div`
     }
   }
 `;
+
+

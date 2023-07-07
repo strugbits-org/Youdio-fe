@@ -8,13 +8,21 @@ import {
   InstructorVideos,
   InstructorSessions,
   InstructorBio,
+  ReviewsList,
+  Reviews,
 } from "./SingleVideoComp";
 import { icons } from "src/helpers";
-import { ClockTime, H2, H5, P1, IntensityLevel } from "src/components";
+import {
+  ClockTime,
+  H2,
+  H5,
+  P1,
+  IntensityLevel,
+  PrimaryWhiteButton,
+} from "src/components";
 import { HorizontalLine } from "src/components/BreakLines";
-import { SingleInstructorCard } from "src/components/Cards";
+import { ReviewCard, SingleInstructorCard } from "src/components/Cards";
 import { VideoClassCard } from "src/components/Cards/VideoClassCard";
-
 const SingleVideo = () => {
   const videoURL =
     "https://yodio-videos-bucket.s3.amazonaws.com/Instructor+Videos/1679323525856-high.mp4";
@@ -77,6 +85,7 @@ const SingleVideo = () => {
           </P1>
         </div>
       </InstructorBio>
+      <HorizontalLine />
       <InstructorClasses>
         <H2>Jackie Stewart Classes</H2>
         <InstructorVideos>
@@ -94,6 +103,16 @@ const SingleVideo = () => {
           })}
         </InstructorSessions>
       </InstructorClasses>
+      <HorizontalLine />
+      <Reviews>
+        <H2>Instructor Review</H2>
+        <ReviewsList>
+          {[...Array(6).keys()].map(() => {
+            return <ReviewCard />;
+          })}
+        </ReviewsList>
+        <PrimaryWhiteButton>See More</PrimaryWhiteButton>
+      </Reviews>
     </CustomSection>
   );
 };

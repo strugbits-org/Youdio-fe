@@ -3,9 +3,8 @@ import { Section } from "src/components";
 import { fonts } from "src/helpers";
 import { layout } from "src/helpers";
 
-const { tablet, laptop, desktop, mobileLarge} = layout
-export const CustomSection = styled(Section)`
-`;
+const { tablet, laptop, desktop, mobileLarge } = layout;
+export const CustomSection = styled(Section)``;
 
 export const VideoContainer = styled.div`
   max-width: 1589px;
@@ -40,7 +39,7 @@ export const VideoBox = styled.div`
     gap: 16px;
     color: #fff;
     background: rgba(0, 0, 0, 0.5);
-    img{
+    img {
       width: clamp(40px, 4.2vw, 86px);
     }
     .content {
@@ -75,9 +74,9 @@ export const VideoDetail = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: left;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     gap: 16px;
-    h5{
+    h5 {
       flex-basis: 100%;
     }
   }
@@ -103,7 +102,10 @@ export const InstructorBio = styled.div`
   max-width: 1516px;
   margin-inline: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
   gap: 3.5vw;
   img {
     width: clamp(220px, 18.6vw, 359px);
@@ -120,7 +122,16 @@ export const InstructorBio = styled.div`
       margin-bottom: 30px;
     }
   }
+
+  @media only screen and (min-width: ${tablet}) {
+    flex-direction: row;
+    align-items: flex-start;
+    margin-block: 90px;
+    gap: 70px;
+    text-align: initial;
+  }
   @media only screen and (min-width: ${desktop}) {
+    align-items: center;
     margin-block: 90px;
     gap: 70px;
   }
@@ -143,7 +154,7 @@ export const InstructorVideos = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-  
+
   @media only screen and (min-width: ${tablet}) {
     grid-template-columns: 1fr 1fr;
   }
@@ -165,5 +176,39 @@ export const InstructorSessions = styled.div`
   }
   @media only screen and (min-width: ${laptop}) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+`;
+
+export const Reviews = styled.div`
+  margin-block: 4vw;
+  max-width: 1221px;
+  margin-inline: auto;
+  h2 {
+    text-align: center;
+    margin-bottom: 4vw;
+  }
+  @media only screen and (min-width: ${desktop}) {
+    margin-block: 80px;
+    h2 {
+      margin-bottom: 78px;
+    }
+  }
+  button{
+    max-width: 180px;
+    margin-inline: auto;
+  }
+`;
+
+export const ReviewsList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8vw;
+  margin-bottom: 60px;
+  @media only screen and (min-width: ${mobileLarge}) {
+    grid-template-columns: 1fr 1fr;
+    gap: 6vw;
+  }
+  @media only screen and (min-width: ${desktop}) {
+    gap: 80px;
   }
 `;

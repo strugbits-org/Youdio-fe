@@ -8,15 +8,22 @@ const IntensityBox = styled.div`
   display: flex;
   gap: 10px;
   min-height: 2px;
+  svg {
+    width: ${({ fontSize }) => (fontSize ? fontSize : "initial")};
+    height: ${({ fontSize }) => (fontSize ? fontSize : "initial")};
+  }
+  p {
+    color: ${({ fontColor }) => (fontColor ? fontColor : "initial")};
+  }
 `;
 
-const IntensityLevel = ({ level, text }) => {
+const IntensityLevel = ({ level, text, fontSize, fontColor }) => {
   const [color] = useState({
     dark: "#413735",
     light: "#D5D5D5",
   });
   return (
-    <IntensityBox>
+    <IntensityBox fontSize={fontSize} fontColor={fontColor}>
       <svg
         width="15"
         height="14"
@@ -58,7 +65,7 @@ const IntensityLevel = ({ level, text }) => {
         />
       </svg>
 
-      <P3>
+      <P3 fontSize={fontSize}>
         {text ? text : "Level"} {level}
       </P3>
     </IntensityBox>

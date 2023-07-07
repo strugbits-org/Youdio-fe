@@ -60,7 +60,7 @@ export const VideoBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 32px;
     color: #fff;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 2px;
@@ -89,8 +89,15 @@ export const VideoDetail = styled.div`
     display: grid;
     gap: 7px;
 
+    h5, p {
+      color: var(--textParaGrey);
+    }
+
     .description {
       max-width: 1087px;
+    }
+    .bold{
+      font-weight: 700;
     }
   }
 
@@ -100,7 +107,6 @@ export const VideoDetail = styled.div`
     align-items: center;
     justify-content: left;
     flex-wrap: wrap;
-    gap: 16px;
     h5 {
       flex-basis: 100%;
     }
@@ -116,7 +122,7 @@ export const VideoDetail = styled.div`
         margin-block: 32px 12px;
       }
       .intensity {
-        margin-block: auto 24px;
+        margin-block: auto 16px;
       }
     }
   }
@@ -140,6 +146,9 @@ export const InstructorBio = styled.div`
   }
   .instructorBio {
     flex: 1;
+    p {
+      color: var(--backgroundGrey);
+    }
     h2 {
       margin-bottom: 20px;
     }

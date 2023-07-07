@@ -68,9 +68,14 @@ const SingleVideo = () => {
 
           <div className="totalRunTime">
             <H5>TOTAL RUN TIME</H5>
-            <ClockTime time="5 min 47 sec" />
+            <ClockTime time="5 min 47 sec" fontSize={"18px"}/>
             <div className="intensity">
-              <IntensityLevel text="Intensitiy" level={1} />
+              <IntensityLevel
+                text="Intensitiy"
+                level={1}
+                fontSize={"18px"}
+                fontColor={"var(--backgroundGrey)"}
+              />
             </div>
           </div>
         </VideoDetail>
@@ -105,7 +110,7 @@ const SingleVideo = () => {
       </InstructorClasses>
       <HorizontalLine />
       <InstructorClasses>
-        <H2>Jackie Stewart Live Sessions</H2>
+        <H2>Jackie Stewart Live Lessons</H2>
         <InstructorSessions>
           {[...Array(4).keys()].map(() => {
             return <VideoClassCard />;

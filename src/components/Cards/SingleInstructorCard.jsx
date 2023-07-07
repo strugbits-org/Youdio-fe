@@ -12,6 +12,7 @@ const CardMedia = styled.div`
     aspect-ratio: 1.65/1;
     object-fit: cover;
     object-position: center;
+    margin-bottom: 18px;
   }
 `;
 const CardContent = styled.div`
@@ -28,7 +29,9 @@ const CardContent = styled.div`
       gap: 8px;
     }
   }
-  
+  .desctiption {
+    color: var(--backgroundGrey);
+  }
 `;
 
 export const SingleInstructorCard = () => {
@@ -42,11 +45,18 @@ export const SingleInstructorCard = () => {
         <div className="timeRow">
           <H3>LOREUM ISPUM DUMMY</H3>
           <div className="timeIntensity">
-            <ClockTime time="5 min 47 sec" />
-            <IntensityLevel level={2} text="Intensity" />
+            <ClockTime
+              time="5 min 47 sec"
+              fontColor={"var(--backgroundGrey)"}
+            />
+            <IntensityLevel
+              level={2}
+              text="Intensity"
+              fontColor={"var(--backgroundGrey)"}
+            />
           </div>
         </div>
-        <P3>
+        <P3 className="desctiption">
           Lorem ipsum dolor sit amet consectetur. Eget vulputate sed posuere
           sit. Integer in ac sem adipiscing nulla arcu Enim placerat nunc
           tincidunt gravida vitae tincidunt

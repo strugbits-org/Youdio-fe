@@ -1,7 +1,7 @@
 import React from "react";
 import { icons } from "src/helpers";
 import styled from "styled-components";
-import { P2 } from ".";
+import { P3 } from ".";
 
 const Time = styled.div`
   display: flex;
@@ -9,13 +9,20 @@ const Time = styled.div`
   align-items: center;
   justify-content: right;
   min-height: 2px;
+  p {
+    color: ${({ fontColor }) => (fontColor ? fontColor : "initial")};
+  }
+  svg{
+    width: ${({fontSize}) => (fontSize ? fontSize : "initial")};
+    height: ${({fontSize}) => (fontSize ? fontSize : "initial")};
+  }
 `;
 
-export const ClockTime = ({ time }) => {
+export const ClockTime = ({ time, fontColor, fontSize }) => {
   return (
-    <Time>
+    <Time fontColor={fontColor} fontSize={fontSize}>
       <img src={icons.timeClock} alt="Time Clock" width="" height="" />
-      {time && <P2>{time}</P2>}
+      {time && <P3 fontSize={fontSize}>{time}</P3>}
     </Time>
   );
 };

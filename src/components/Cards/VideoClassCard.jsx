@@ -21,13 +21,14 @@ const CardContent = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 8px;
+    margin-bottom: 4px;
     p {
       font-weight: 600;
     }
 
-    h3 {
-      margin-bottom: 14px;
-    }
+  }
+  h3 {
+    margin-bottom: 14px;
   }
 `;
 

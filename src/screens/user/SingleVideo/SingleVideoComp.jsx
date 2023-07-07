@@ -98,8 +98,36 @@ export const VideoDetail = styled.div`
   }
 `;
 
+export const InstructorBio = styled.div`
+  margin-block: 5vw;
+  max-width: 1516px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 3.5vw;
+  img {
+    width: clamp(220px, 18.6vw, 359px);
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius: 100%;
+  }
+  .instructorBio {
+    flex: 1;
+    h2 {
+      margin-bottom: 20px;
+    }
+    .bio {
+      margin-bottom: 30px;
+    }
+  }
+  @media only screen and (min-width: ${desktop}) {
+    margin-block: 90px;
+    gap: 70px;
+  }
+`;
+
 export const InstructorClasses = styled.div`
-  margin-top: 4vw;
+  margin-block: 4vw;
   max-width: 1680px;
   margin-inline: auto;
   h2 {
@@ -107,9 +135,10 @@ export const InstructorClasses = styled.div`
     margin-bottom: 30px;
   }
   @media only screen and (min-width: ${desktop}) {
-    margin-top: 80px;
+    margin-block: 80px;
   }
 `;
+
 export const InstructorVideos = styled.div`
   display: grid;
   grid-template-columns: 1fr;

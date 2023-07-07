@@ -7,6 +7,7 @@ import {
   InstructorClasses,
   InstructorVideos,
   InstructorSessions,
+  InstructorBio,
 } from "./SingleVideoComp";
 import { icons } from "src/helpers";
 import { ClockTime, H2, H5, P1, IntensityLevel } from "src/components";
@@ -58,6 +59,24 @@ const SingleVideo = () => {
         </VideoDetail>
       </VideoContainer>
       <HorizontalLine />
+      <InstructorBio>
+        <img src={icons.profile} alt="Instructor" width="" height="" />
+        <div className="instructorBio">
+          <H2>Jackie Stewart Bio</H2>
+          <P1 className="bio">
+            Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu tempus
+            pellentesque varius volutpat enim eget. Velit sed sed commodo nec
+            vestibulum tellus tincidunt mollis. Nascetur et tellus integer
+            integer. Viverra integer imperdiet phasellus ridiculus neque.
+          </P1>
+          <P1>
+            Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu tempus
+            pellentesque varius volutpat enim eget. Velit sed sed commodo nec
+            vestibulum tellus tincidunt mollis. Nascetur et tellus integer
+            integer. Viverra integer imperdiet phasellus ridiculus neque.
+          </P1>
+        </div>
+      </InstructorBio>
       <InstructorClasses>
         <H2>Jackie Stewart Classes</H2>
         <InstructorVideos>
@@ -70,7 +89,7 @@ const SingleVideo = () => {
       <InstructorClasses>
         <H2>Jackie Stewart Live Sessions</H2>
         <InstructorSessions>
-          {[...Array(8).keys()].map(() => {
+          {[...Array(4).keys()].map(() => {
             return <VideoClassCard />;
           })}
         </InstructorSessions>

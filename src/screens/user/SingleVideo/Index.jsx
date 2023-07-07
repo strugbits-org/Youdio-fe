@@ -19,21 +19,30 @@ import {
   P1,
   IntensityLevel,
   PrimaryWhiteButton,
+  IconButton,
 } from "src/components";
 import { HorizontalLine } from "src/components/BreakLines";
 import { ReviewCard, SingleInstructorCard } from "src/components/Cards";
 import { VideoClassCard } from "src/components/Cards/VideoClassCard";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+
 const SingleVideo = () => {
-  const videoURL =
-    "https://yodio-videos-bucket.s3.amazonaws.com/Instructor+Videos/1679323525856-high.mp4";
+  // const videoURL =
+  //   "https://yodio-videos-bucket.s3.amazonaws.com/Instructor+Videos/1679323525856-high.mp4";
 
   return (
     <CustomSection backgroundColor="#fff">
       <VideoContainer>
         <VideoBox>
-          <video src={videoURL} width="100%" height="100%"></video>
+          {/* <video src={videoURL} width="100%" height="100%"></video> */}
+          <div className="thumbnailImage">
+            <img src={icons.videoThumbnail} alt="" height="" width="" />
+            <IconButton aria-label="play" size="large" color="green">
+              <PlayArrowRoundedIcon fontSize="large" />
+            </IconButton>
+          </div>
           <div className="unLockOverlay">
-            <img src={icons.timeClock} alt="Lock" width="" height="" />
+            <img src={icons.videoLock} alt="Lock" width="" height="" />
             <div className="content">
               <H2 fontSize="clamp(20px, 2.3vw, 46px)">UNLOCK THIS CLASS</H2>
               <H5 fontSize="clamp(14px, 1.2vw, 18px)">

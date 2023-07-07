@@ -44,7 +44,7 @@ export {
   LiveClassCard,
 
   // Filters
-    Filters,
+  Filters,
   IntensityLevel,
   ClockTime,
 };

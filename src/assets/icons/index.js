@@ -47,6 +47,8 @@ import upload from "src/assets/sample/upload.png"
 // Assets/Logo
 import footerLogo from "src/assets/logo/footer_logo.svg"
 import youdio from "src/assets/logo/youdio.svg"
+import videoThumbnail from "src/assets/sample/VideoThumbnail.jpg"
+import videoLock from "src/assets/icons/VideoLock.svg"
 
 
 const icons = {
@@ -93,7 +95,9 @@ const icons = {
   browseFile,
   upload,
   dropDown,
-  videoPlay
+  videoPlay,
+  videoThumbnail,
+  videoLock,
 };
 
 export default icons

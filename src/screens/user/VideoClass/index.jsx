@@ -23,10 +23,10 @@ import {
 } from "src/components";
 import { HorizontalLine } from "src/components/BreakLines";
 import { ReviewCard, SingleInstructorCard } from "src/components/Cards";
-import { VideoClassCard } from "src/components/Cards/VideoClassCard";
+import { LiveLessonCard } from "src/components/Cards";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 
-const SingleVideo = () => {
+const VideoClass = () => {
   // const videoURL =
   //   "https://yodio-videos-bucket.s3.amazonaws.com/Instructor+Videos/1679323525856-high.mp4";
 
@@ -113,7 +113,7 @@ const SingleVideo = () => {
         <H2>Jackie Stewart Live Lessons</H2>
         <InstructorSessions>
           {[...Array(4).keys()].map(() => {
-            return <VideoClassCard />;
+            return <LiveLessonCard />;
           })}
         </InstructorSessions>
       </InstructorClasses>
@@ -131,4 +131,4 @@ const SingleVideo = () => {
   );
 };
 
-export default SingleVideo;
+export default VideoClass;

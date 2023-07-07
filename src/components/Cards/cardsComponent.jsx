@@ -5,6 +5,7 @@ import { layout } from "src/helpers";
 const { mobile, tablet, laptop } = layout;
 
 export const Card = styled.div``;
+
 export const BoxCard = styled.div`
   /* flex-basis: clamp(280px, 20vw, 392px); */
   background-color: #f9f9f9;

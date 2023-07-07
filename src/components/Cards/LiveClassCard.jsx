@@ -1,20 +1,60 @@
 import React, { useMemo } from "react";
-
-import { H3, P3, H4 } from "src/components";
-import { Card, CardMedia, Tag, CardContent } from "./cardsComponent";
-import { icons } from "src/helpers";
+import styled from "styled-components";
+import { H3, H4, ClockTime } from "src/components";
+import { path } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
+import { InstructorLink } from "src/components";
+
+export const Card = styled.div``;
+
+export const CardMedia = styled.div`
+  margin-bottom: 18px;
+  position: relative;
+  img {
+    width: 100%;
+    aspect-ratio: 0.83/1;
+    object-fit: cover;
+    object-position: center;
+  }
+`;
+export const CardContent = styled.div`
+  .timeRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  h3{
+    text-align: left;
+    margin-block: 6px 12px;
+  }
+  .profileRow{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+`;
+
+export const Tag = styled.span`
+  background: var(--backgroundGreen);
+  color: var(--textHeadingWhite);
+  padding: 0.5vw 1.5vw;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+`;
 
 function LiveClassCard({ data }) {
-  const navigate = useNavigate()  
+  const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
-    return data.intensity.slice(-1)
-  }, [data])
+    return data.intensity.slice(-1);
+  }, [data]);
 
-  const handleNavigate = () => { 
-    navigate("/singlevideo");
-  }
+  const handleNavigate = () => {
+    navigate(path.liveClass);
+  };
 
   return (
     <Card>
@@ -28,22 +68,15 @@ function LiveClassCard({ data }) {
       <CardContent>
         <div className="timeRow">
           <H4>06:30-07:30</H4>
-          <div>
-            <img src={icons.timeClock} alt="" width="15px" height="auto" />
-            <P3>{data.totalTime} min</P3>
-          </div>
+          <ClockTime time={"44 min"} />
         </div>
         <H3>{data.title}</H3>
         <div className="profileRow">
-          <div className="profileBox">
-            <img
-              src={data.instructor.image}
-              alt=""
-              width="30px"
-              height="30px"
+            <InstructorLink
+              imageSrc={data.instructor.image}
+              title={data.instructor.name}
             />
-            <H4>{data.instructor.name}</H4>
-          </div>
+          
           <div className="intensityBox">
             <IntensityLevel level={intensityLevel} />
           </div>

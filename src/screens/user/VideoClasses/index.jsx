@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ContentBox, CardsBox, NoFoundBox } from "./liveClassesComponents";
 import useFetch from "src/features/hooks/useFetch";
 import { H1, H2, H3, P1, P2, Section, Filters } from "src/components";
-import { LiveClassCard } from "src/components/Cards/";
+import { VideoClassCard } from "src/components/Cards/";
 import { Box } from "src/components/Banners";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFilters } from "src/features/filterSlice";
@@ -80,7 +80,7 @@ function VideoClasses() {
         {!loading && res?.videos.length > 0 ? (
           <CardsBox>
             {sortedVideos.map((val) => (
-              <LiveClassCard key={`card-${val._id}`} data={val} />
+              <VideoClassCard key={`card-${val._id}`} data={val} />
             ))}
           </CardsBox>
         ) : (

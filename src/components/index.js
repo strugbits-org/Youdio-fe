@@ -7,6 +7,7 @@ import { LiveClassCard } from "./Cards"
 import { Filters } from "./Filters"
 import IntensityLevel from "./IntensityLevel"
 import { ClockTime } from "./ClockTime"
+import InstructorLink from "./InstructorLink"
 
 export {
   // Banners
@@ -47,4 +48,5 @@ export {
   Filters,
   IntensityLevel,
   ClockTime,
+  InstructorLink,
 };

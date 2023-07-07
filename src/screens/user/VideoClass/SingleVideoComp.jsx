@@ -63,7 +63,7 @@ export const VideoBox = styled.div`
     gap: 32px;
     color: #fff;
     background: rgba(0, 0, 0, 0.5);
-    border-radius: 2px;
+    border-radius: 5px;
     img {
       width: clamp(40px, 4.2vw, 86px);
     }

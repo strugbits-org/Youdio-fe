@@ -33,7 +33,7 @@ import VideoClasses from "src/screens/user/VideoClasses";
 import AddInstructor from "src/screens/admin/pages/AddInstructor/Index";
 import AddLiveSession from "src/screens/admin/pages/AddLiveSession/Index";
 
-import SingleVideo from "src/screens/user/SingleVideo/Index";
+import VideoClass from "src/screens/user/VideoClass";
 import AddVideo from "src/screens/admin/pages/AddVideo/Index";
 import AdminDashboard from "src/screens/admin/pages";
 import UserDashboard from "src/screens/user/Dashboard";
@@ -107,15 +107,15 @@ export default function Router() {
           {/* User */}
           <Route path="/" element={<LiveClasses />} />
           <Route path="/instructor" element={<Instructor />} />
-          <Route path="/livevideo" element={<LiveVideo />} />
+          <Route path="/live-class" element={<LiveVideo />} />
           <Route path="/videoclasses" element={<VideoClasses />} />
           <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
 
           {/* SINGLE VIDEO */}
           <Route
-            path="/singlevideo"
-            element={<SingleVideo />}
-            // loader={async ({params}) => { 
+            path="/video-class"
+            element={<VideoClass />}
+            // loader={async ({params}) => {
             //   await fetchData(`video/${params.id}`);
             // }}
           />

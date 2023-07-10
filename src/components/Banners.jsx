@@ -34,3 +34,7 @@ export const Box = styled.div`
     margin-bottom: 65px;
     margin-inline: auto;
 `;
+
+export const CardsSection = styled(Section)`
+    min-height: 40vh ;
+`

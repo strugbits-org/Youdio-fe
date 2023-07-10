@@ -6,56 +6,6 @@ const { mobile, tablet, laptop } = layout;
 
 export const Card = styled.div``;
 
-export const BoxCard = styled.div`
-  /* flex-basis: clamp(280px, 20vw, 392px); */
-  background-color: #f9f9f9;
-  transition: var(--transition03s);
-  border: 1px solid transparent;
-  border-radius: 5px;
-  .imgReview {
-    max-width: 55px; /* adjust to desired max width */
-    max-height: 60px;
-    line-height: 30px;
-    /* color: #ffff; */
-    background-color: #3ac4b2;
-    padding: 0.6em;
-    text-align: center;
-    border-radius: 4px;
-    transform: translate(1.5em, -1.5em);
-    opacity: 0.9;
-  }
-
-  &:hover {
-    background-color: #3ac4b2;
-    color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
-    .reviewP2 {
-      p {
-        color: #fff;
-      }
-    }
-    .reviewSec {
-      .star {
-        color: #fff;
-      }
-    }
-    .imgReview {
-      background-color: whitesmoke;
-     
-
-      img {
-        /* filter: hue-rotate(30deg); */
-        /* filter : contrast(110%);
-        filter: grayscale(110%); */
-        color: #3ac4b2;
-      }
-    }
-  }
-`;
-export const Spacediv = styled.div`
-  margin-bottom: 1em;
-`;
 export const CardMedia = styled.div`
   img {
     width: 100%;
@@ -88,11 +38,6 @@ export const Tag = styled.span`
   top: 0px;
   left: 0px;
   position: absolute;
-`;
-
-export const ContentInside = styled.div`
-  padding-inline: 1em;
-  padding-block: 1em;
 `;
 
 export const DateTag = styled.div`

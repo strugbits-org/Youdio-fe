@@ -4,7 +4,6 @@ const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({});
 
   const handleScreenSize = () => {
-    console.log("window");
     setWindowSize({
       width: window.innerWidth,
       height: window.innerHeight,
@@ -17,7 +16,6 @@ const useWindowSize = () => {
     window.addEventListener("resize", handleScreenSize);
     return window.removeEventListener("resize", handleScreenSize);
   }, []);
-console.log(windowSize);
   return windowSize;
 };
 

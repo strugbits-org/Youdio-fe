@@ -13,4 +13,10 @@ const Loader = ({width, height}) => {
     )
 }
 
+export const NoFoundBox = styled.div`
+  h3 {
+    text-align: center;
+  }
+`;
+
 export default Loader

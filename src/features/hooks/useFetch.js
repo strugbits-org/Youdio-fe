@@ -48,15 +48,15 @@ const useFetch = () => {
   };
 
   // Get Data From Multiple endpoints
-  const fetchMultipleData = async (url, cbFunction, setLocalState) => {
+  const fetchMultipleData = async (url, cbFunction, payload) => {
     setLoading(true);
     const headers = await getHeaders(token);
     try {
       if (typeof url === "object" && url.length > 0) {
         const response = await axios.all(
-          url.map((endpoint) => {
+          url.map((endpoint, ind) => {
             return apiClient
-              .get(endpoint, { headers })
+              .post(endpoint, payload[ind], { headers })
               .then((res) => res)
               .catch((e) => console.error(e));
           })
@@ -64,12 +64,12 @@ const useFetch = () => {
         const isResponseValid = response.some((val) => val?.data && true);
         if (isResponseValid) {
           const responseData = [];
-          response.forEach((res) => res?.data && responseData.push(res.data));
+          response.forEach((res) => res?.data ? responseData.push(res.data) : undefined);
           setResponse(responseData);
           setLoading(false);
           setError("");
           cbFunction &&
-            cbFunction.forEach((cb, ind) => dispatch(cb(responseData[ind], "Hamza")));
+            cbFunction.forEach((cb, ind) => dispatch(cb(responseData[ind])));
           // setLocalState && setLocalState(response.data);
         }
       }

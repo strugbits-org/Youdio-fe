@@ -56,7 +56,8 @@ export function Filters({videoCount, videoSort, setVideoSort, videoType}) {
   useEffect(() => {
     fetchMultipleData(
       ["category/get-sub-category", "instructor/get-instructor"],
-      [setStyles, setInstructors]
+      [setStyles, setInstructors],
+      [{}, {}]
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

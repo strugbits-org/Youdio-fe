@@ -34,7 +34,6 @@ function LiveClasses() {
   const { postData, res, loading } = useFetch();
   const windowSize = useInnerWidth();
   const [open, setOpen] = useState(false);
-  console.log(windowSize);
   const dispatch = useDispatch();
 
   const daysInWeek = () => {

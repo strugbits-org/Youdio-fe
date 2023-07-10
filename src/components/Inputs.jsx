@@ -31,11 +31,11 @@ export const Input = styled.input`
 export const InputIcon = styled.input`
   width: 100%;
   max-width: 384px;
-  /* background: url(${({ isIcon }) => (isIcon ? isIcon : "")});
+  background: url(${({ isIcon }) => (isIcon ? isIcon : "")});
   background-repeat: no-repeat;
   background-size: 16px;
   background-position-x: 95%;
-  background-position-y: center; */
+  background-position-y: center;
   color: var(--backgroundGrey);
   border-radius: 0px;
   outline: none;

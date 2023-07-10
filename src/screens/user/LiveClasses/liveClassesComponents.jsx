@@ -96,10 +96,10 @@ export const CardsBox = styled.div`
     margin-block: 90px;
   }
   @media only screen and (min-width: ${laptop}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
     margin-block: 60px;
   }
   @media only screen and (min-width: ${desktop}) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
 

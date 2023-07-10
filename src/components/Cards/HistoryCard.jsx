@@ -6,6 +6,7 @@ import styled from "styled-components";
 import IntensityLevel from "../IntensityLevel";
 
 const { mobile, desktop, mobileLarge } = layout;
+
 const Card = styled.div`
   display: flex;
   align-items: center;

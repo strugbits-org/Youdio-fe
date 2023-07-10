@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CustomSection,
   VideoContainer,
@@ -29,7 +29,10 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 const VideoClass = () => {
   // const videoURL =
   //   "https://yodio-videos-bucket.s3.amazonaws.com/Instructor+Videos/1679323525856-high.mp4";
-
+  const [videosLength, setVideosLength] = useState(6)
+  const handleSeeMore = () => {
+    setVideosLength(8)
+  }
   return (
     <CustomSection backgroundColor="#fff">
       <VideoContainer>
@@ -68,7 +71,7 @@ const VideoClass = () => {
 
           <div className="totalRunTime">
             <H5>TOTAL RUN TIME</H5>
-            <ClockTime time="5 min 47 sec" fontSize={"18px"}/>
+            <ClockTime time="5 min 47 sec" fontSize={"18px"} />
             <div className="intensity">
               <IntensityLevel
                 text="Intensitiy"
@@ -121,11 +124,15 @@ const VideoClass = () => {
       <Reviews>
         <H2>Instructor Review</H2>
         <ReviewsList>
-          {[...Array(6).keys()].map(() => {
+          {[...Array(videosLength).keys()].map(() => {
             return <ReviewCard />;
           })}
         </ReviewsList>
-        <PrimaryWhiteButton>See More</PrimaryWhiteButton>
+        {videosLength < 8 && (
+          <PrimaryWhiteButton onClick={handleSeeMore}>
+            See More
+          </PrimaryWhiteButton>
+        )}
       </Reviews>
     </CustomSection>
   );

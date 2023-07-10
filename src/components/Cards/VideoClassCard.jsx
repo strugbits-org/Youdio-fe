@@ -23,10 +23,10 @@ export const CardContent = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 8px;
+    margin-bottom: 12px;
   }
   h3 {
     text-align: initial;
-    margin-block: 6px 12px;
   }
   .profileRow {
     display: flex;
@@ -34,12 +34,15 @@ export const CardContent = styled.div`
     align-items: center;
     margin-bottom: 12px;
   }
+  .detail{
+    max-width: 482px;
+  }
 `;
 
 export const Tag = styled.span`
   background: var(--backgroundGreen);
   color: var(--textHeadingWhite);
-  padding: 0.5vw 1.5vw;
+  padding: 4px 1.5vw;
   top: 0px;
   left: 0px;
   position: absolute;
@@ -76,7 +79,7 @@ function VideoClassCard({ data }) {
           />
           <IntensityLevel level={intensityLevel} />
         </div>
-        <P3>
+        <P3 className="detail">
           Lorem ipsum dolor sit amet consectetur. Eget vulputate sed posuere
           sit. Integer in ac sem adipiscing nulla arcu Enim placerat nunc
           tincidunt gravida vitae tincidunt.

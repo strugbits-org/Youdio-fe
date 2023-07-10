@@ -6,9 +6,9 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
-    img{
+    /* img{
         border-radius: 100%;
-    }
+    } */
 `
 const InstructorLink = ({ imageSrc, title, link }) => {
   return (

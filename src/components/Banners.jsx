@@ -29,5 +29,8 @@ export const Box = styled.div`
     flex-direction: ${({direction}) => (direction ? direction : "initial")};
     gap: ${({ gap }) => (gap ? gap : "initial")};
     align-items: ${({ alignment }) => (alignment ? alignment : "center")};
+    max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : "initial")};
+    text-align: ${({ textAlign }) => (textAlign ? textAlign : "initial")};
     margin-bottom: 65px;
+    margin-inline: auto;
 `;

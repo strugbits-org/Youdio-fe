@@ -11,6 +11,7 @@ import {
   CardsBox,
   // H6M,
   NoFoundBox,
+  CustomVideoSection,
 } from "./liveClassesComponents";
 import {
   // fonts,
@@ -245,7 +246,7 @@ function LiveClasses() {
       </Section>
 
       {/* Cards Section */}
-      <Section backgroundColor="white">
+      <CustomVideoSection backgroundColor="white">
         {loading && <Loader width="35px" height="35px" />}
         {/* <CardsBox> */}
         {!loading && res?.videos.length > 0 ? (
@@ -267,7 +268,7 @@ function LiveClasses() {
           )
         )}
         {/* </CardsBox> */}
-      </Section>
+      </CustomVideoSection>
     </React.Fragment>
   );
 }

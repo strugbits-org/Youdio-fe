@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ContentBox, CardsBox, NoFoundBox } from "./liveClassesComponents";
+import { ContentBox, CardsBox, NoFoundBox, CustomVideoSection } from "./liveClassesComponents";
 import useFetch from "src/features/hooks/useFetch";
 import { H1, H2, H3, P1, P2, Section, Filters } from "src/components";
 import { VideoClassCard } from "src/components/Cards/";
@@ -58,7 +58,7 @@ function VideoClasses() {
 
       {/* Filter, Tags and Search Section */}
       <Section backgroundColor="#fff" paddingBlock="3vw">
-        <Box gap="16px" direction="column">
+        <Box gap="16px" direction="column" maxWidth="771px" textAlign="center">
           <H2>Our Videos</H2>
           <P2>
             Imagining professional yoga lessons without the hassle of travelling
@@ -74,7 +74,7 @@ function VideoClasses() {
       </Section>
 
       {/* Cards Section */}
-      <Section backgroundColor="white">
+      <CustomVideoSection backgroundColor="white">
         {loading && <Loader width="35px" height="35px" />}
 
         {!loading && res?.videos.length > 0 ? (
@@ -90,7 +90,7 @@ function VideoClasses() {
             </NoFoundBox>
           )
         )}
-      </Section>
+      </CustomVideoSection>
     </React.Fragment>
   );
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { H4 } from "src/components";
+import { H4, Section } from "src/components";
 import { fonts, layout } from "src/helpers";
 
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
@@ -107,6 +107,10 @@ export const NoFoundBox = styled.div`
   h3 {
     text-align: center;
   }
+`;
+
+export const CustomVideoSection = styled(Section)`
+  min-height: 40dvh;
 `;
 
 export const H6M = styled(H4)`

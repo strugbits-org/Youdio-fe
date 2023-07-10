@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { H4 } from "src/components";
+import { H4, Section } from "src/components";
 import { fonts, layout } from "src/helpers";
 
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout
@@ -97,7 +97,7 @@ export const CardsBox = styled.div`
         margin-block:90px;
     }
     @media only screen and (min-width: ${laptop}) {
-        grid-template-columns:1fr 1fr 1fr 1fr;
+        grid-template-columns:1fr 1fr 1fr;
         margin-block:60px;
     }
     @media only screen and (min-width: ${desktop}) {
@@ -108,6 +108,10 @@ export const H6M = styled(H4)`
     font-family:${fonts.poppinsMedium};
     font-weight:500;
 
+`
+
+export const CustomVideoSection = styled(Section)`
+    min-height: 40dvh;
 `
 
 export const NoFoundBox = styled.div`

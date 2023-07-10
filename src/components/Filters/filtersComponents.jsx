@@ -42,8 +42,9 @@ export const FilterBox = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 1vw;
-  background: whitesmoke;
+  /* background: whitesmoke; */
   padding: ${({ open }) => (open !== null ? "15px" : "0px")};
+  padding-inline: 0px;
   /* margin-bottom:40px; */
   /* height:auto;
     transition: 1s all ease-in-out; */

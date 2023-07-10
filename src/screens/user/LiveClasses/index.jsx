@@ -32,9 +32,9 @@ import moment from "moment";
 
 function LiveClasses() {
   const { postData, res, loading } = useFetch();
-  const { innerWidth } = useInnerWidth();
+  const windowSize = useInnerWidth();
   const [open, setOpen] = useState(false);
-
+  console.log(windowSize);
   const dispatch = useDispatch();
 
   const daysInWeek = () => {
@@ -225,7 +225,7 @@ function LiveClasses() {
           </div>
         </DayBox>
 
-        {innerWidth === "mobileFilters" ? (
+        {windowSize.width < 768 ? (
           <React.Fragment>
             <PrimaryWhiteButton onClick={() => setOpen(true)}>
               Filters

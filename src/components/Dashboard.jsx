@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import { H1, Section } from "src/components";
 import styled from "styled-components";
 import { layout } from "src/helpers";
@@ -44,6 +44,19 @@ const DashboardHeader = styled.div`
 function Dashboard({ menu }) {
   const { width } = useWindowSize();
   const [active, setActive] = useState("");
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.activePath) {
+      setActive(location.state.activePath);
+    } else {
+      menu.forEach((item) => {
+        item.path === location.pathname && setActive(item.name);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
   return (
     <CustomSection paddingBlock="0px" backgroundColor="white">
       <DashboardHeader>

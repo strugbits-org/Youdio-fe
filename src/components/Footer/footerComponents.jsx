@@ -43,6 +43,9 @@ const UpperBox = styled.div`
                 a{
                     font-size:16px;
                 }
+                .active{
+                    text-decoration: underline;
+                }
             }
         }
         

@@ -68,11 +68,6 @@ const Nav = styled.nav`
     display:flex;
     justify-content:space-between;
     align-items:center;
-    /* grid-template-columns: 1fr auto 1fr ;
-    place-items:center;
-    place-content: center; */
-    /* align-items:center; */
-    /* border:1px solid red; */
     gap:10px;
 
     .logo img{
@@ -109,6 +104,12 @@ const UL = styled.ul`
     align-items:center;
     justify-content:${({align}) => align ? align : 'center' };
     /* border:1px solid red; */
+
+    li{
+        .active{
+            font-weight: 600;
+        }
+    }
 
     .txtLogout{
         cursor: pointer;
@@ -149,32 +150,37 @@ const UL = styled.ul`
 `
 
 const SideMenu = styled.div`
-	height: 100vh;
-	width: 0%;
-	position: fixed;
-	z-index: -1;
-	top: 0px;
-	right: 0;
-	background-color: white;
-	transition: 0.5s all ease-in-out;
-	padding-top: 80px;
-	text-align: center;
-    display:flex;
-    overflow:hidden;
-    
-    .links{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        gap:15px;
-        font-size:20px;
-    }
-    ul{
-        opacity:0;
-        transition: 0.3s all ease-in-out;
-    }
+  height: 100vh;
+  width: 0%;
+  position: fixed;
+  z-index: -1;
+  top: 0px;
+  right: 0;
+  background-color: white;
+  transition: 0.5s all ease-in-out;
+  padding-top: 80px;
+  text-align: center;
+  display: flex;
+  overflow: hidden;
 
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 18px;
+
+    li {
+      .active {
+        font-weight: 600;
+      }
+    }
+  }
+  ul {
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+  }
 `;
 
 const MobileUL = styled.ul`
@@ -184,7 +190,6 @@ const MobileUL = styled.ul`
     gap:3vw;
     font-size:18px;
     margin-bottom:30px;
-
 
     .langChange{
         display:flex;

@@ -50,9 +50,9 @@ function Header({ isLoggedin }) {
   };
 
   const handleDashboard = () => {
-    if(auth?.user.role === 'admin') return path.admin
-    if(auth?.user.role === 'user') return path.membership
-  }
+    if (auth?.user.role === "admin") return path.admin;
+    if (auth?.user.role === "user") return path.membership;
+  };
 
   return (
     <Section>

@@ -106,7 +106,7 @@ export function HistoryCard({ img }) {
         <div className="intensityRow">
           <div className="instrutor">
             <img src={icons.shortpicWomen} alt="Instructor" />
-            <p4>Elizebeth Lisa</p4>
+            <P3>Elizebeth Lisa</P3>
           </div>
           <IntensityLevel level={3} />
         </div>

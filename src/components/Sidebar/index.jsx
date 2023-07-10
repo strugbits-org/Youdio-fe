@@ -1,38 +1,37 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   .vericalMenu {
     padding-inline: 8px;
     li {
-      padding: 8px 16px;
       margin-block: 8px;
-      transition: var(--transition01s);
-      cursor: pointer;
-      color: var(--textHeadingBlack);
-      font-size: 18px;
-      font-weight: 500;
-
-      &[data-active="active"] {
+      a {
+        width: 100%;
+        padding: 8px 16px;
+        transition: var(--transition01s);
+        color: var(--textHeadingBlack);
+        font-size: 18px;
+        font-weight: 500;
+        display: inline-block;
+      }
+      .active {
         background: var(--backgroundGreen);
         color: white;
       }
+
       &:hover {
-        transition: var(--transition01s);
-        background: var(--backgroundGreen);
-        color: white;
+        a {
+          transition: var(--transition01s);
+          background: var(--backgroundGreen);
+          color: white;
+        }
       }
     }
   }
 `;
-function SideBar({ menu, active, setActive }) {
-  const navigate = useNavigate();
-
-  const handleMenuItem = (item) => {
-    navigate(item.path);
-    setActive(item.name);
-  };
+function SideBar({ menu, setActive }) {
   return (
     <Container>
       <nav>
@@ -42,10 +41,11 @@ function SideBar({ menu, active, setActive }) {
               return (
                 <li
                   key={`${item.path}-${ind}`}
-                  data-active={item?.name === active ? "active" : ""}
-                  onClick={() => handleMenuItem(item)}
+                  onclick={() => setActive(item.name)}
                 >
-                  {item.name}
+                  <NavLink to={item.path} state={{ activePath: item.name }}>
+                    {item.name}
+                  </NavLink>
                 </li>
               );
             })}

@@ -4,35 +4,10 @@ import { NavLink } from 'react-router-dom'
 
 import { H4, P2, P3 } from 'src/components'
 import { FooterContent, UpperBox, BottomBox, HorizontalLine } from './footerComponents'
-import { icons } from "src/helpers"
+import { icons, path } from "src/helpers"
 import { Section, Input, IconButton } from 'src/components'
 
-// import youdio from '../../assets/logo/youdio.svg'
-// import worldMap from '../../assets/icons/language_world.svg'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { setLang } from '../../store/slices/language'
-// import { staticContent } from './constant'
-// import { path } from '../../helpers/constant'
-// import { contentTranslator } from "../../helpers/translator"
-
 function Header() {
-    //   const [content, setContent] = useState(staticContent)
-
-    //   const dispatch = useDispatch()
-    //   const language = useSelector(state => state.language.lang)
-
-    //   useEffect(() => {
-    //     contentTranslator({ staticContent, setContent, language })
-    //     console.log("Main chala when state change");
-
-    //   }, [language]);
-
-
-    //   // Language Listener
-    //   const handleLanguage = e => {
-    //     dispatch(setLang(e.target.value))
-    //   }
-
     return (
         <Section backgroundColor="var(--textHeadingBlack)">
             <FooterContent>
@@ -44,11 +19,10 @@ function Header() {
                     <div className='quickLinks'>
                         <H4>QUICK LINKS</H4>
                         <ul>
-                            <li><NavLink to={"/"}>Home</NavLink></li>
-                            <li><NavLink to={"/"}>Live Classes</NavLink></li>
-                            <li><NavLink to={"/"}>Videos</NavLink></li>
-                            <li><NavLink to={"/"}>Membership</NavLink></li>
-                            <li><NavLink to={"/"}>Instructor</NavLink></li>
+                            <li><NavLink to={path.home}>Home</NavLink></li>
+                            <li><NavLink to={path.liveClasses}>Live Classes</NavLink></li>
+                            <li><NavLink to={path.videos}>Videos</NavLink></li>
+                            <li><NavLink to={path.instructor}>Instructor</NavLink></li>
                         </ul>
                     </div>
                     <div className='quickLinks'>

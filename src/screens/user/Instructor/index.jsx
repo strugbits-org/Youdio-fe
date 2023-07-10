@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { ArrInstructor, instructorClassStaticContent } from "./constant";
+import { instructorClassStaticContent } from "./constant";
 import { ContentBox, SearchBox, CardsBox } from "./instructorClassComponent";
 import { H1, P1, Section, InputIcon, H3 } from "src/components";
 import { icons } from "src/helpers";
@@ -16,6 +15,7 @@ function Instructor() {
 
   useEffect(() => {
     postData("instructor/get-instructor", { search });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const handleSearch = (e) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { H3, P2, P3 } from "src/components";
+import { H3, P2} from "src/components";
 import styled from "styled-components";
 
 export const Card = styled.div``;

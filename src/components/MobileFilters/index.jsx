@@ -94,20 +94,71 @@
 //   );
 // }
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import { FilterBox } from "./filtersComponents";
+import { IconButton } from "../Button";
+import { icons } from "src/helpers";
+import { HorizontalLine } from "../BreakLines";
+import Instructors from "./Instructors";
+import { setInstructors, setStyles } from "src/features/filterSlice";
+import useFetch from "src/features/hooks/useFetch";
+import Duration from "./Duration";
+
+// const filter = [
+//   {
+//     label: "DURATION",
+//     value: "duration",
+//   },
+//   {
+//     label: "INSTRUCTORS",
+//     value: "instructors",
+//   },
+//   {
+//     label: "STYLES",
+//     value: "styles",
+//   },
+//   {
+//     label: "DIFFICULTY",
+//     value: "difficulty",
+//   },
+//   {
+//     label: "INTENSITY",
+//     value: "intensity",
+//   },
+// ];
 
 export default function MobileFilters({ open, setOpen, onClose }) {
+  const [filterTab, setFilterTab] = useState("")
+  const { fetchMultipleData} = useFetch()
+  useEffect(() => {
+    fetchMultipleData(
+      ["category/get-sub-category", "instructor/get-instructor"],
+      [setStyles, setInstructors],
+      [{}, {}]
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const list = () => (
-    <FilterBox
-      sx={{
-        width: "auto",
-        height: "50vh",
-      }}
-    >
-      <button onClick={() => setOpen(false)}>Close</button>
-      <h1>Mobile Filters</h1>
+    <FilterBox>
+      <IconButton className="btnClose" onClick={() => setOpen(false)}>
+        <img src={icons.cross} alt="" width="16" />
+      </IconButton>
+      <HorizontalLine />
+      <button onClick={() => setFilterTab("instructors")}>Instructors</button>
+      {filterTab === "instructors" && (
+        <Instructors removeTag={() => {}} addTag={() => {}} />
+      )}
+      <HorizontalLine />
+      <button onClick={() => setFilterTab("duration")}>Duration</button>
+      {filterTab === "duration" && <Duration addDuration={() => {}} />}
+      <HorizontalLine />
+      <button>Difficulty</button>
+      <HorizontalLine />
+      <button>Intensity</button>
+      <HorizontalLine />
+      <button>Styles</button>
+      <HorizontalLine />
     </FilterBox>
   );
 

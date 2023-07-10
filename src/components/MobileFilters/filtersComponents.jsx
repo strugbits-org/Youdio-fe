@@ -35,8 +35,6 @@ export const SelectionBox = styled.div`
   }
 `;
 
-
-
 export const FilterOptions = styled.div`
   width: 100%;
   min-height: 0px;
@@ -115,15 +113,15 @@ export const SelectionButton = ({ name }) => {
   );
 };
 
-
 export const FilterBox = styled.div`
   height: 100dvh;
   background: #26262677;
-
-  /* @media only screen and (min-width: ${mobile}) {
-    display: none;
+  padding-inline: 16px;
+  padding-block: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  .btnClose {
+    margin-inline: auto 0px;
   }
-  @media only screen and (min-width: ${tablet}) {
-    display: flex;
-  } */
 `;

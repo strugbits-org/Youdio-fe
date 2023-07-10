@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
-import { H4, P3 } from "src/components";
-import { fonts } from "src/helpers";
+import { H4 } from "src/components";
+// import { fonts } from "src/helpers";
 import { Instructor } from "./filtersComponents";
 import { useSelector } from "react-redux";
-import useFetch from "src/features/hooks/useFetch";
-import { setInstructors } from "src/features/filterSlice";
+import { filterKeys } from "src/helpers/constant";
 
 const InstructorsBox = styled.div`
   & :is(.allInstructors) {
@@ -28,33 +27,32 @@ const InstructorsBox = styled.div`
     }
   }
 `;
-export default function Instructors() {
-  const { instructors } = useSelector((state) => state.filter);
-  const { fetchData } = useFetch();
+export default function Instructors({ removeTag, addTag }) {
+  const { instructors, filters } = useSelector((state) => state.filter);
 
-  const [isAll, setAll] = useState(false);
-  const [instructorsList, setInstructorsList] = useState([]);
+  const [isAll] = useState(false);
 
   const setSelected = (name) => {
-    !instructorsList.includes(name)
-      ? setInstructorsList([...instructorsList, name])
-      : setInstructorsList(
-          instructorsList.filter((val) => val !== name && val)
-        );
+    if (!filters.instructors.includes(name)) {
+      addTag({
+        data: name,
+        key: filterKeys.instructors,
+      });
+    } else {
+      removeTag({
+        data: name,
+        key: filterKeys.instructors,
+      });
+    }
   };
-
-  useEffect(() => {
-    fetchData("instructor/get-instructor", setInstructors);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <InstructorsBox>
-      <div
+      {/* <div
         className="allInstructors"
         onClick={() => {
           setAll(!isAll);
-          setInstructorsList([]);
+          isAll && setSelected('All')
         }}
       >
         {isAll && (
@@ -69,15 +67,15 @@ export default function Instructors() {
           </svg>
         )}
         <P3 fontFamily={fonts.poppinsMedium}>All Instructors</P3>
-      </div>
+      </div> */}
       <div className="instructorList">
         <ul>
           {instructors &&
-            instructors.instructors.map((val, ind) => {
+            instructors.map((val, ind) => {
               return (
                 <Instructor
                   selected={
-                    isAll ? isAll : instructorsList.includes(val.firstName)
+                    isAll ? isAll : filters.instructors.includes(val.firstName)
                   }
                   key={val._id}
                   onClick={() => setSelected(val.firstName)}

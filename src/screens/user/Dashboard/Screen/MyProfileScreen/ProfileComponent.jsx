@@ -5,7 +5,7 @@ import Camera from "src/assets/icons/camera.png";
 import styled from "styled-components";
 import { layout } from "src/helpers";
 
-const { mobile, tablet} = layout
+const { mobile, tablet, laptop, desktop, largeDesktop } = layout;
 
 export const FormRow = styled.div`
   max-width: 959px;
@@ -16,11 +16,11 @@ export const FormRow = styled.div`
     border-radius: 2px;
     border-color: var(--borderLightGrey);
   }
-  
-  @media only screen and (min-width: ${mobile}){
+
+  @media only screen and (min-width: ${mobile}) {
     grid-template-columns: 1fr;
   }
-  @media only screen and (min-width: ${tablet}){
+  @media only screen and (min-width: ${tablet}) {
     grid-template-columns: 0.8fr 1fr;
   }
 `;
@@ -73,6 +73,20 @@ export const ProfileFormHeader = styled(Box)`
       cursor: pointer;
       background-image: url(${Camera});
       background-size: cover;
+
+      @media only screen and (min-width: ${laptop}) {
+        bottom: 1.7vw;
+        right: 1.7vw;
+      }
+      @media only screen and (min-width: ${desktop}) {
+        bottom: 2vw;
+        right: 2vw;
+      }
+
+      @media only screen and (min-width: ${largeDesktop}) {
+        bottom: 38px;
+        right: 38px;
+      }
     }
     /* .userImage */
   }

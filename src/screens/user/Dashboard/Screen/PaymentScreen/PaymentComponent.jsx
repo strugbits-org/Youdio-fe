@@ -1,4 +1,4 @@
-import { PrimaryButton} from "src/components";
+import { PrimaryButton } from "src/components";
 import styled from "styled-components";
 import { layout } from "src/helpers";
 
@@ -8,7 +8,7 @@ export const Main = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  .form h2{
+  .form h2 {
     margin-bottom: 40px;
   }
 
@@ -37,8 +37,24 @@ export const FormRow = styled.div`
     border-radius: 0px;
     border-color: var(--borderLightGrey);
   }
-  label{
+  label {
     margin-bottom: 2px;
+  }
+`;
+
+export const DisbaleEmailBox = styled.div`
+  background: #f7f7f7;
+  padding-inline: 16px;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: center;
+  min-height: 45px;
+  border: 1px solid var(--borderLightGrey);
+  gap: 24px;
+  .email {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
   }
 `;
 
@@ -60,7 +76,7 @@ export const RadioFormRow = styled(FormRow)`
 `;
 
 export const SaveButton = styled(PrimaryButton)`
-  padding-block: 16px;
+  padding-block: 8px;
   color: black;
   border: 1px solid #ffe7da;
   background-color: #ffe7da;

@@ -51,7 +51,7 @@ const userFormValidate = Yup.object({
 
 // User Form For Payment
 const paymentFormValidate = Yup.object({
-  email: textField({}),
+  // email: textField({}),
   expiry: textField({ reqMesg: "Expiry is Required" }),
   monthYear: textField({ reqMesg: "Month is Required" }),
   cardNumber: textField({ reqMesg: "Card number is Required" }),

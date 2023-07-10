@@ -1,17 +1,17 @@
+import React from "react";
 import { HorizontalLine2 } from "../MyProfileScreen/ProfileComponent";
 import {
   Heading2,
   Heading3,
 } from "src/screens/user/Dashboard/Components/Heading";
 import { P2, H3 } from "src/components";
-import { Description, Box } from "./MembershipScreenComponent";
+import { Description} from "./MembershipScreenComponent";
 import { membershipScreenStaticContent as content } from "./Constant";
-import React, { useState } from "react";
 const Membership = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+  // const [selectedOption, setSelectedOption] = useState("");
+  // const handleOptionChange = (event) => {
+  //   setSelectedOption(event.target.value);
+  // };
   return (
     <div>
       <Heading2>{content.yourPlan}</Heading2>
@@ -47,7 +47,7 @@ const Membership = () => {
 
         <P2 className="lorem_text">{content.lorem}</P2>
       </Description>
-      <HorizontalLine2 />
+      {/* <HorizontalLine2 />
       <Box>
         <input
           type="radio"
@@ -57,7 +57,7 @@ const Membership = () => {
           onChange={handleOptionChange}
         />
         <label htmlFor="yourPlanOption">{content.lorem}</label>
-      </Box>
+      </Box> */}
     </div>
   );
 };

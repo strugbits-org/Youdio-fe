@@ -11,21 +11,23 @@ import {
   CardInfoRow,
   RadioFormRow,
   SaveButton,
+  DisbaleEmailBox,
 } from "./PaymentComponent";
 import { paymentFormValidate } from "src/helpers/forms/validateForms";
+import { useSelector } from "react-redux";
 
 const Payment = () => {
   const handleSubmit = (data) => {
-    console.log('ahmza');
     console.log(data);
   };
 
+  const { user } = useSelector((state) => state.user);
   return (
     <Container>
       <Main>
         <Formik
           initialValues={{
-            email: "dummy@gmail.com",
+            // email: "dummy@gmail.com",
             expiry: "",
             monthYear: "",
             cardNumber: "",
@@ -40,14 +42,12 @@ const Payment = () => {
             <Form className="form">
               <H2>Enter Payment Details</H2>
               <FormRow>
-                <FieldInput
-                  id="email"
-                  name="email"
-                  type="text"
-                  value={formik.values.email}
-                  readOnly={true}
-                  style={{ fontSize: "16px" }}
-                />
+                <DisbaleEmailBox>
+                  <P3>Email</P3>
+                  <P3 className="email">
+                    {user.email}
+                  </P3>
+                </DisbaleEmailBox>
               </FormRow>
               <CardInfoRow>
                 <FieldInput

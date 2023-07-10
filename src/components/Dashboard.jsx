@@ -33,6 +33,7 @@ const Container = styled.div`
 
 const OutletContainer = styled.div`
   max-width: 1379px;
+  margin-bottom: 12dvh;
 `;
 
 const DashboardHeader = styled.div`

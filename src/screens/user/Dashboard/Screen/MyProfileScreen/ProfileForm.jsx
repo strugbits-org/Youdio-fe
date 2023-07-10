@@ -33,10 +33,11 @@ function ProfileForm({ user, content }) {
       });
   }, [error, success]);
 
-  const handleSubmit = (data) => {
-    // const formData = new FormData();
-    // Object.keys(data).forEach((key) => formData.append(key, data[key]));
-    patchData("user/update-profile", data, setUser, resetFormValues);
+  const handleSubmit = (data, action) => {
+    console.log(action);
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    patchData("user/update-profile", formData, setUser, resetFormValues);
   };
 
   const resetFormValues = () => {
@@ -45,6 +46,7 @@ function ProfileForm({ user, content }) {
     formik.setFieldValue("oldPassword", "");
     formik.setFieldValue("newPassword", "");
   };
+
 
   return (
     <React.Fragment>

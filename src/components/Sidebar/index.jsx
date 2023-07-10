@@ -41,7 +41,7 @@ function SideBar({ menu, setActive }) {
               return (
                 <li
                   key={`${item.path}-${ind}`}
-                  onclick={() => setActive(item.name)}
+                  onClick={() => setActive(item.name)}
                 >
                   <NavLink to={item.path} state={{ activePath: item.name }}>
                     {item.name}

@@ -77,6 +77,7 @@ export const layout = {
   tablet: "768px",
   laptop: "1001px",
   desktop: "1368px",
+  largeDesktop: "1980px",
 };
 
 export const filterKeys = {

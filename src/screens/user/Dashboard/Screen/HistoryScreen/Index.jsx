@@ -10,9 +10,9 @@ const History = () => {
     <div>
       <Heading2>{content.historyH2}</Heading2>
       <HistoryList>
-        {ArrHistory.map((value) => {
+        {ArrHistory.map((value, ind) => {
           return (
-            <React.Fragment>
+            <React.Fragment key={`history-${ind}`}>
               <HistoryCard {...value} />
               <HorizontalLine2 style={{ marginBlock: "40px" }} />
             </React.Fragment>

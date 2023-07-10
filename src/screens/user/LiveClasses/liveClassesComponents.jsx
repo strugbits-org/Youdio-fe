@@ -84,10 +84,6 @@ export const CardsBox = styled.div`
   gap: 6vw 1.8vw;
   position: relative;
 
-  h3 {
-    text-align: center;
-  }
-
   @media only screen and (min-width: ${mobile}) {
     grid-template-columns: 1fr;
     margin-block: 70px;

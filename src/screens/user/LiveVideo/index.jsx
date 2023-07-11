@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { H2, H4, H3, P1, P2, P3, Section, H6, ClockTime, IntensityLevel, InstructorLink, PrimaryButton } from "src/components";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { H2, P1, P2, P3, Section, H6, ClockTime, IntensityLevel, InstructorLink, PrimaryButton } from "src/components";
 import { LiveBookingBox, ContentBox, MediaBox } from "./liveVideoComponent";
 import { icons } from "src/helpers";
 // import Modal from "./Modal";

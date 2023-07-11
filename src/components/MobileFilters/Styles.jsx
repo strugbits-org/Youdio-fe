@@ -25,6 +25,7 @@ const StylesBox = styled.div`
         gap: 16px;
         li {
           padding: 2px 8px;
+          border: 1px solid transparent;
           p {
             white-space: nowrap;
           }
@@ -32,8 +33,9 @@ const StylesBox = styled.div`
       }
     }
     .active {
+      border-color: #fff;
       color: var(--textHeadingWhite);
-      background: rgba(255, 255, 255, 0.2);
+      background: #000;
     }
   }
 `;
@@ -83,7 +85,7 @@ export default function Styles({ addTag, removeTag }) {
           {styles?.length > 0 &&
             styles.map(({ _id, category, name }) => {
               return (
-                <li key={_id}>
+                <li key={_id} aria-selected={ false}>
                   <H6 className={""} style={{ cursor: "default" }}>
                     {category}
                   </H6>

@@ -3,10 +3,7 @@ import styled from "styled-components";
 
 import { H4, P3 } from "src/components";
 // import { fonts } from "src/helpers";
-import {
-  MobileFilterButton,
-  MobileFilterHeader,
-} from "./filtersComponents";
+import { MobileFilterButton, MobileFilterHeader } from "./filtersComponents";
 import { useSelector } from "react-redux";
 import { filterKeys } from "src/helpers/constant";
 
@@ -28,14 +25,16 @@ const InstructorsBox = styled.div`
       justify-content: left;
       flex-wrap: wrap;
       list-style-type: none;
-      gap: 10px 24px;
+      gap: 10px;
     }
   }
 `;
 
 const Instructor = styled.li`
   padding: 2px 8px;
-  background: ${({ selected }) => (selected ? "rgba(255,255,255, 0.2)" : "transparent")};
+  background: ${({ selected }) => (selected ? "#000" : "transparent")};
+  border: 1px solid transparent;
+  border-color: ${({ selected }) => (selected ? "#fff" : "transparent")};
   h4 {
     color: var(--textHeadingWhite);
     white-space: nowrap;
@@ -67,7 +66,7 @@ export default function Instructors({ removeTag, addTag }) {
         <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
           Instructor
         </MobileFilterButton>
-        <P3>{ filters.instructors.join(", ")}</P3>
+        <P3>{filters.instructors.join(", ")}</P3>
       </MobileFilterHeader>
       {isVisible && (
         <div className="instructorList">

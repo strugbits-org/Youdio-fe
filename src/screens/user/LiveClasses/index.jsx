@@ -98,13 +98,13 @@ function LiveClasses() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    !isFilters && postData("video/filter", filters);
+    !isFilters && postData("liveSession/get", filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterTags, isFilters]);
 
   const sortedVideos = useMemo(() => {
-    if (res?.videos && res.videos.length > 0) {
-      const videos = res.videos.sort((a, b) => {
+    if (res?.liveSessions && res.liveSessions.length > 0) {
+      const videos = res.liveSessions.sort((a, b) => {
         const titleA = new Date(a.date);
         const titleB = new Date(b.date);
         if (sort === "newest") return titleB - titleA;
@@ -114,7 +114,7 @@ function LiveClasses() {
     }
     return [];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sort, res?.videos]);
+  }, [sort, res?.liveSessions]);
 
   return (
     <React.Fragment>
@@ -235,7 +235,7 @@ function LiveClasses() {
           <React.Fragment>
             <div className="seperatorLine"></div>
             <Filters
-              videoCount={res?.videos ? res.videos.length : 0}
+              videoCount={res?.liveSessions ? res.liveSessions.length : 0}
               videoSort={sort}
               setVideoSort={setSort}
               videoType="CLASSES"
@@ -248,7 +248,7 @@ function LiveClasses() {
       <CustomVideoSection backgroundColor="white">
         {loading && <Loader width="35px" height="35px" />}
         {/* <CardsBox> */}
-        {!loading && res?.videos.length > 0 ? (
+        {!loading && res?.liveSessions.length > 0 ? (
           <CardsBox>
             {sortedVideos.map((val) => (
               <LiveClassCard key={`card-${val._id}`} data={val} />

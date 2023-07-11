@@ -72,11 +72,11 @@ function LiveClassCard({ data }) {
         </div>
         <H3>{data.title}</H3>
         <div className="profileRow">
-            <InstructorLink
-              imageSrc={data.instructor.image}
-              title={data.instructor.name}
-            />
-          
+          <InstructorLink
+            imageSrc={data.instructor.image}
+            title={`${data.instructor.firstName} ${data.instructor.lastName}`}
+          />
+
           <div className="intensityBox">
             <IntensityLevel level={intensityLevel} />
           </div>

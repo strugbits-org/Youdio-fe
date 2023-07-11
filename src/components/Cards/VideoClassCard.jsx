@@ -75,7 +75,7 @@ function VideoClassCard({ data }) {
         <div className="profileRow">
           <InstructorLink
             imageSrc={data.instructor.image}
-            title={data.instructor.name}
+            title={`${data.instructor.firstName} ${data.instructor.lastName}`}
           />
           <IntensityLevel level={intensityLevel} />
         </div>

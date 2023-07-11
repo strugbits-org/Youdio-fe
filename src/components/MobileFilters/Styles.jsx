@@ -85,7 +85,7 @@ export default function Styles({ addTag, removeTag }) {
           {styles?.length > 0 &&
             styles.map(({ _id, category, name }) => {
               return (
-                <li key={_id} aria-selected={ false}>
+                <li key={_id}>
                   <H6 className={""} style={{ cursor: "default" }}>
                     {category}
                   </H6>

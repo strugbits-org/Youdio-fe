@@ -5,32 +5,19 @@ import {
   NoFoundBox,
   CustomVideoSection,
 } from "./liveClassesComponents";
-import useInnerWidth from "src/features/hooks/useInnerWidth";
 import useFetch from "src/features/hooks/useFetch";
-import {
-  H1,
-  H2,
-  H3,
-  P1,
-  P2,
-  Section,
-  Filters,
-  PrimaryWhiteButton,
-} from "src/components";
+import { H1, H2, H3, P1, P2, Section, FilterComponent } from "src/components";
 import { VideoClassCard } from "src/components/Cards/";
 import { Box } from "src/components/Banners";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFilters } from "src/features/filterSlice";
 import Loader from "src/components/Loader";
-import MobileFilters from "src/components/MobileFilters";
 
 function VideoClasses() {
   const { postData, res, loading } = useFetch();
   const { filters, filterTags } = useSelector((state) => state.filter);
   const [isFilters, setIsFilters] = useState(true);
   const [sort, setSort] = useState("newest");
-  const windowSize = useInnerWidth();
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -83,24 +70,12 @@ function VideoClasses() {
           </P2>
         </Box>
 
-        {windowSize.width < 768 ? (
-          <React.Fragment>
-            <PrimaryWhiteButton onClick={() => setOpen(true)}>
-              Filters
-            </PrimaryWhiteButton>
-            <MobileFilters open={open} setOpen={setOpen} />
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <div className="seperatorLine"></div>
-            <Filters
-              videoSort={sort}
-              setVideoSort={setSort}
-              videoCount={res?.videos ? res.videos.length : 0}
-              videoType="VIDEOS"
-            />
-          </React.Fragment>
-        )}
+        <FilterComponent
+          sort={sort}
+          setSort={setSort}
+          videoCount={sortedVideos.length}
+          videoType="VIDEOS"
+        />
       </Section>
 
       {/* Cards Section */}

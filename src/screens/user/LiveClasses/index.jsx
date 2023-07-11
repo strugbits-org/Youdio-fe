@@ -17,30 +17,28 @@ import {
   // fonts,
   icons,
 } from "src/helpers";
-import { H1, H3, H4, P1, Section, InputIcon, Filters } from "src/components";
+import {
+  H1,
+  H3,
+  H4,
+  P1,
+  Section,
+  InputIcon,
+  FilterComponent,
+} from "src/components";
 import { IconButton, PrimaryWhiteButton } from "src/components";
 import {
   LiveClassCard,
   // DateTag
 } from "src/components/Cards/";
 import Loader from "src/components/Loader";
-import useInnerWidth from "src/features/hooks/useInnerWidth";
-import MobileFilters from "src/components/MobileFilters";
 import { clearFilters, filterDate } from "src/features/filterSlice";
 import { filterKeys } from "src/helpers/constant";
 import moment from "moment";
 
 function LiveClasses() {
   const { postData, res, loading } = useFetch();
-  const windowSize = useInnerWidth();
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-
-  const daysInWeek = () => {
-    const windowWidth = window.innerWidth;
-    return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
-  };
-
   const { filterTags, filters } = useSelector((state) => state.filter);
   const [content] = useState(liveClassStaticContent);
   const [month, setMonth] = useState({});
@@ -49,6 +47,28 @@ function LiveClasses() {
   const [sort, setSort] = useState("newest");
   const [isFilters, setIsFilters] = useState(true);
   const [nextPrevDays, setNextPrevDays] = useState();
+
+  useEffect(() => {
+    // !isDateSelected && weekDays && setDateSelected(weekDays[3]);
+  }, [month, selectedIndex]);
+
+  useEffect(() => {
+    if (filterTags.length > 0) {
+      dispatch(clearFilters());
+    }
+    setIsFilters(false);
+    setInitialDate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    !isFilters && postData("liveSession/get", filters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterTags, isFilters]);
+
+  const daysInWeek = () => {
+    const windowWidth = window.innerWidth;
+    return windowWidth < 540 ? 3 : windowWidth < 768 ? 5 : 7;
+  };
 
   const setWeekDays = (ind) => {
     const weekCountDay = daysInWeek();
@@ -84,23 +104,6 @@ function LiveClasses() {
     const initialDate = getDate(undefined, undefined, days);
     setMonth(initialDate);
   };
-
-  useEffect(() => {
-    // !isDateSelected && weekDays && setDateSelected(weekDays[3]);
-  }, [open, month, selectedIndex]);
-
-  useEffect(() => {
-    if (filterTags.length > 0) {
-      dispatch(clearFilters());
-    }
-    setIsFilters(false);
-    setInitialDate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    !isFilters && postData("liveSession/get", filters);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterTags, isFilters]);
 
   const sortedVideos = useMemo(() => {
     if (res?.liveSessions && res.liveSessions.length > 0) {
@@ -223,25 +226,12 @@ function LiveClasses() {
             />
           </div>
         </DayBox>
-
-        {windowSize.width < 768 ? (
-          <React.Fragment>
-            <PrimaryWhiteButton onClick={() => setOpen(true)}>
-              Filters
-            </PrimaryWhiteButton>
-            <MobileFilters open={open} setOpen={setOpen} />
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <div className="seperatorLine"></div>
-            <Filters
-              videoCount={res?.liveSessions ? res.liveSessions.length : 0}
-              videoSort={sort}
-              setVideoSort={setSort}
-              videoType="CLASSES"
-            />
-          </React.Fragment>
-        )}
+        <FilterComponent
+          sort={sort}
+          setSort={setSort}
+          videoCount={sortedVideos.length}
+          videoType="CLASSES"
+        />
       </Section>
 
       {/* Cards Section */}

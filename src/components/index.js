@@ -8,6 +8,8 @@ import { Filters } from "./Filters"
 import IntensityLevel from "./IntensityLevel"
 import { ClockTime } from "./ClockTime"
 import InstructorLink from "./InstructorLink"
+import MobileFilters from "./MobileFilters"
+import FilterComponent from "./FilterComponent"
 
 export {
   // Banners
@@ -46,7 +48,9 @@ export {
 
   // Filters
   Filters,
+  MobileFilters,
   IntensityLevel,
   ClockTime,
   InstructorLink,
+  FilterComponent,
 };

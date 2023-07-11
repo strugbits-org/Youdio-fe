@@ -1,15 +1,12 @@
 import styled from "styled-components";
 import { H6, P3 } from "src/components";
-import { layout } from "src/helpers";
 import { useSelector } from "react-redux";
 import { filterKeys } from "src/helpers/constant";
-import { MobileFilterButton } from "./filtersComponents";
-import { useState } from "react";
-
-const { tablet, laptop } = layout;
+import { MobileFilterButton, MobileFilterHeader } from "./filtersComponents";
+import { useMemo, useState } from "react";
 
 const StylesBox = styled.div`
-  padding-inline: 16px;
+  padding-inline: 8px;
   .styles {
     margin-top: 16px;
     display: flex;
@@ -24,31 +21,32 @@ const StylesBox = styled.div`
       cursor: pointer;
       ul {
         display: flex;
+        flex-wrap: wrap;
         gap: 16px;
+        li {
+          padding: 2px 8px;
+          p {
+            white-space: nowrap;
+          }
+        }
       }
     }
     .active {
       color: var(--textHeadingWhite);
+      background: rgba(255, 255, 255, 0.2);
     }
   }
-
-  /* @media only screen and (min-width: ${tablet}) {
-    .styles {
-      justify-content: left;
-      flex-wrap: wrap;
-    }
-  }
-  @media only screen and (min-width: ${laptop}) {
-    .styles {
-      justify-content: center;
-      flex-wrap: initial;
-    }
-  } */
 `;
 
-export default function Styles({ addTag, removeTag, tab, setTab }) {
+export default function Styles({ addTag, removeTag }) {
   const { styles, filters } = useSelector((state) => state.filter);
   const [isVisible, setIsVisible] = useState(false);
+
+  const allStyles = useMemo(() => { 
+    return Object.keys(filters.styles).map((key) => { 
+      return filters.styles[key].length > 0 ? filters.styles[key].join(", ") : ""
+    }).join("")  
+  }, [filters.styles])
 
   const setSpecific = (name, subKey) => {
     const customSubKey = camelCase(subKey);
@@ -74,16 +72,19 @@ export default function Styles({ addTag, removeTag, tab, setTab }) {
 
   return (
     <StylesBox>
-      <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-        Styles
-      </MobileFilterButton>
+      <MobileFilterHeader>
+        <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
+          Styles
+        </MobileFilterButton>
+        <P3>{allStyles}</P3>
+      </MobileFilterHeader>
       {isVisible && (
         <ul className="styles">
           {styles?.length > 0 &&
             styles.map(({ _id, category, name }) => {
               return (
                 <li key={_id}>
-                  <H6 className={"active"} style={{ cursor: "default" }}>
+                  <H6 className={""} style={{ cursor: "default" }}>
                     {category}
                   </H6>
                   <ul>

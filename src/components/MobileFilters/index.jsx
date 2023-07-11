@@ -1,31 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Drawer from "@mui/material/Drawer";
 import styled from "styled-components";
-import { FilterBox } from "./filtersComponents";
+import { FilterBox, ResetButton } from "./filtersComponents";
+import {
+  setStyles,
+  setInstructors,
+  pushToFilters,
+  removeFromFilter,
+  filterDuration,
+  clearFilters,
+} from "src/features/filterSlice";
 import { IconButton } from "../Button";
 import { icons } from "src/helpers";
 import { HorizontalLine } from "../BreakLines";
 import Instructors from "./Instructors";
-import { setInstructors, setStyles } from "src/features/filterSlice";
 import useFetch from "src/features/hooks/useFetch";
 import Duration from "./Duration";
 import Difficulty from "./Difficulty";
 import Intensity from "./Intensity";
 import Styles from "./Styles";
+import { useDispatch, useSelector } from "react-redux";
 
 const CustomDrawe = styled(Drawer)({
   marginTop: "16px",
   color: "var(--textHeadingWhite)",
   "& .MuiDrawer-paper": {
-    background: "transparent"
+    background: "transparent",
   },
 });
 
 export default function MobileFilters({ open, setOpen, onClose }) {
-  const [filterTab, setFilterTab] = useState("");
-  const [isVisible, setIsVisible] = useState(true);
-
   const { fetchMultipleData } = useFetch();
+  const { filterTags } = useSelector(state => state.filter)
+  const dispatch = useDispatch();
+
   useEffect(() => {
     fetchMultipleData(
       ["category/get-sub-category", "instructor/get-instructor"],
@@ -35,42 +43,57 @@ export default function MobileFilters({ open, setOpen, onClose }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleToggle = (tab) => {
-    if (!isVisible) { 
-      if (tab !== filterTab) {
-        setFilterTab(tab)
-        setIsVisible(true)
-      } else { 
-        setIsVisible(!isVisible);
-        setFilterTab("")
-      }
-    }
-    else {
-      setFilterTab(tab);
-      setIsVisible(!isVisible);
+  const removeTag = (tag) => {
+    if (tag?.subKey) {
+      dispatch(removeFromFilter(tag));
+    } else {
+      dispatch(removeFromFilter(tag));
     }
   };
+
+  const addTag = (tag) => {
+    if (tag?.subKey) {
+      dispatch(pushToFilters(tag));
+    } else {
+      dispatch(pushToFilters(tag));
+    }
+  };
+
+  const addDuration = (duration) => {
+    dispatch(filterDuration(duration));
+  };
+
   const list = () => (
     <FilterBox>
       <IconButton className="btnClose" onClick={() => setOpen(false)}>
         <img src={icons.cross} alt="" width="16" />
       </IconButton>
       <HorizontalLine />
-      <Instructors tab={filterTab} setTab={handleToggle} />
+      <Instructors removeTag={removeTag} addTag={addTag} />
       <HorizontalLine />
-      <Duration tab={filterTab} setTab={handleToggle} />
+      <Duration addDuration={addDuration} />
       <HorizontalLine />
-      <Difficulty tab={filterTab} setTab={handleToggle} />
+      <Difficulty removeTag={removeTag} addTag={addTag} />
       <HorizontalLine />
-      <Intensity tab={filterTab} setTab={handleToggle} />
+      <Intensity removeTag={removeTag} addTag={addTag} />
       <HorizontalLine />
-      <Styles tab={filterTab} setTab={handleToggle} />
+      <Styles removeTag={removeTag} addTag={addTag} />
+      <HorizontalLine />
+      <ResetButton
+        onClick={() => filterTags.length > 0 && dispatch(clearFilters())}
+      >
+        Reset Filters
+      </ResetButton>
     </FilterBox>
   );
 
   return (
     <React.Fragment>
-      <CustomDrawe anchor="top" open={open} onClose={() => console.log("closed")}>
+      <CustomDrawe
+        anchor="top"
+        open={open}
+        onClose={() => console.log("closed")}
+      >
         {list()}
       </CustomDrawe>
     </React.Fragment>

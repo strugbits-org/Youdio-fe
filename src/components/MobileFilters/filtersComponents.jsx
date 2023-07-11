@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { IconButton, WhiteIconButton } from "src/components";
-import { icons, layout } from "src/helpers";
+import { fonts, icons, layout } from "src/helpers";
 
 const { mobile, tablet } = layout;
 
@@ -109,7 +109,7 @@ export const SelectionButton = ({ name }) => {
 
 export const FilterBox = styled.div`
   height: 100dvh;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.8);
   padding-inline: 8px;
   padding-block: 16px;
   display: flex;
@@ -129,10 +129,32 @@ export const MobileFilterButton = styled.button`
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 20px;
+  font-family: ${fonts.poppinsRegular};
+
+`;
+
+export const ResetButton = styled(MobileFilterButton)`
+  outline: none;
+  border: none;
+  background: transparent;
+  color: var(--textHeadingWhite);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 24px;
+  font-family: ${fonts.poppinsRegular};
+  margin-block: 20px;
 `;
 export const MobileFilterHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  /* background: hotpink; */
+  gap: 24px;
+  p{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: right;
+    color: white;
+    font-family: ${fonts.poppinsRegular};
+  }
 `;

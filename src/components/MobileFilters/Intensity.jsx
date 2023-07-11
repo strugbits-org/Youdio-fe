@@ -1,12 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { P2 } from "src/components";
-import { icons } from "src/helpers";
-import { MobileFilterButton } from "./filtersComponents";
+import { P2, P3 } from "src/components";
+import { MobileFilterButton, MobileFilterHeader } from "./filtersComponents";
+import { useSelector } from "react-redux";
+import { filterKeys } from "src/helpers/constant";
 
 const IntensityBox = styled.div`
-  padding-inline: 16px;
+  padding-inline: 8px;
   .intensities {
     margin-top: 16px;
     display: grid;
@@ -35,40 +36,32 @@ const IntensityBox = styled.div`
   }
 `;
 
-export default function Intensity() {
-  const [intensitiy, setIntensitiy] = useState([]);
+export default function Intensity({addTag, removeTag}) {
   const [isVisible, setIsVisible] = useState(false);
-
-  const intensities = [
-    {
-      id: 0,
-      name: "Level 1",
-    },
-    {
-      id: 1,
-      name: "Level 2",
-    },
-    {
-      id: 2,
-      name: "Level 3",
-    },
-    {
-      id: 3,
-      name: "Level 4",
-    },
-  ];
+  const { filters, intensities } = useSelector((state) => state.filter);
 
   const setSelected = (name) => {
-    !intensitiy.includes(name)
-      ? setIntensitiy([...intensitiy, name])
-      : setIntensitiy(intensitiy.filter((val) => val !== name && val));
+    if (!filters.intensity.includes(name)) {
+      addTag({
+        data: name,
+        key: filterKeys.intensity,
+      });
+    } else {
+      removeTag({
+        data: name,
+        key: filterKeys.intensity,
+      });
+    }
   };
 
   return (
     <IntensityBox>
-      <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-        Intensity
-      </MobileFilterButton>
+      <MobileFilterHeader>
+        <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
+          Intensity
+        </MobileFilterButton>
+        <P3>{filters.intensity.join(", ")}</P3>
+      </MobileFilterHeader>
 
       {isVisible && (
         <ul className="intensities">
@@ -76,7 +69,7 @@ export default function Intensity() {
             intensities.map(({ id, name }) => {
               return (
                 <li
-                  className={intensitiy.includes(name) ? "active" : ""}
+                  className={filters.intensity.includes(name) ? "active" : ""}
                   key={id}
                   onClick={() => setSelected(name)}
                 >

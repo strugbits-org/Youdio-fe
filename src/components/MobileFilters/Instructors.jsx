@@ -1,14 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { H4 } from "src/components";
+import { H4, P3 } from "src/components";
 // import { fonts } from "src/helpers";
-import { Instructor, MobileFilterButton } from "./filtersComponents";
+import {
+  MobileFilterButton,
+  MobileFilterHeader,
+} from "./filtersComponents";
 import { useSelector } from "react-redux";
 import { filterKeys } from "src/helpers/constant";
 
 const InstructorsBox = styled.div`
-  padding-inline: 16px;
+  padding-inline: 8px;
   & :is(.allInstructors) {
     display: flex;
     align-items: center;
@@ -25,15 +28,17 @@ const InstructorsBox = styled.div`
       justify-content: left;
       flex-wrap: wrap;
       list-style-type: none;
-      gap: 10px 6vw;
-
-      li {
-        h4 {
-          color: var(--textHeadingWhite);
-          font-weight: ${({ selected }) => (selected ? 800 : 200)};
-        }
-      }
+      gap: 10px 24px;
     }
+  }
+`;
+
+const Instructor = styled.li`
+  padding: 2px 8px;
+  background: ${({ selected }) => (selected ? "rgba(255,255,255, 0.2)" : "transparent")};
+  h4 {
+    color: var(--textHeadingWhite);
+    white-space: nowrap;
   }
 `;
 export default function Instructors({ removeTag, addTag }) {
@@ -58,16 +63,19 @@ export default function Instructors({ removeTag, addTag }) {
 
   return (
     <InstructorsBox>
-      <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-        Instructor
-      </MobileFilterButton>
+      <MobileFilterHeader>
+        <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
+          Instructor
+        </MobileFilterButton>
+        <P3>{ filters.instructors.join(", ")}</P3>
+      </MobileFilterHeader>
       {isVisible && (
         <div className="instructorList">
           <ul>
             {instructors &&
               instructors.map((val, ind) => {
                 return (
-                  <li
+                  <Instructor
                     selected={
                       isAll
                         ? isAll
@@ -77,7 +85,7 @@ export default function Instructors({ removeTag, addTag }) {
                     onClick={() => setSelected(val.firstName)}
                   >
                     <H4>{`${val.firstName} ${val.lastName}`}</H4>
-                  </li>
+                  </Instructor>
                 );
               })}
           </ul>

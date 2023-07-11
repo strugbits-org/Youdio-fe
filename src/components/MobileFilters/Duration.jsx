@@ -5,14 +5,14 @@ import { Slider, Box } from "@mui/material";
 
 import { H3, P3 } from "src/components";
 import { fonts } from "src/helpers";
-import { MobileFilterButton } from "./filtersComponents";
+import { MobileFilterButton, MobileFilterHeader } from "./filtersComponents";
+import { filterKeys } from "src/helpers/constant";
 
 function valuetext(value) {
   return `${value}min`;
 }
 
 const DurationSlider = styled(Slider)({
-  marginTop: "16px",
   color: "var(--textHeadingWhite)",
 
   "& .MuiSlider-track": {
@@ -42,25 +42,26 @@ const DurationSlider = styled(Slider)({
   },
 });
 
-function RangeSlider() {
-  const [value, setValue] = useState([0, 90]);
+function RangeSlider({ setSelection, selection, addDuration }) {
+  const [value, setValue] = useState(selection.value);
   const timeDuration = useMemo(() => {
-    return value[0] !== 0 || value[0] !== 90
-      ? `${value[0]} - ${value[1]} +`
-      : "All Durations";
+    return value[0] !== 0 || value[1] !== 90
+      ? `${value[0]} - ${value[1]}+ Mins`
+      : "";
   }, [value]);
   const handleChange = (event, newValue) => {
     const startTime = newValue[0] % 10 === 0;
     const endTime = newValue[1] % 10 === 0;
     if (startTime && endTime) {
       setValue(newValue);
-      //   addDuration({
-      //     duration: {
-      //       startTime: newValue[0],
-      //       endTime: newValue[1],
-      //     },
-      //     key: filterKeys.duration,
-      //   });
+      setSelection({ label: timeDuration, value: newValue });
+      addDuration({
+        duration: {
+          startTime: newValue[0],
+          endTime: newValue[1],
+        },
+        key: filterKeys.duration,
+      });
     }
   };
 
@@ -77,7 +78,9 @@ function RangeSlider() {
         <P3 className="points" fontFamily={fonts.poppinsMedium}>
           0 MINS
         </P3>
-        <H3 fontFamily={fonts.poppinsSemiBold}>{timeDuration}</H3>
+        <H3 fontFamily={fonts.poppinsSemiBold}>
+          {timeDuration ? timeDuration : "All Duration"}
+        </H3>
         <P3 className="points" fontFamily={fonts.poppinsMedium}>
           90+ MINS
         </P3>
@@ -87,7 +90,7 @@ function RangeSlider() {
 }
 
 const SliderBox = styled.div`
-  padding-inline: 16px;
+  padding-inline: 8px;
   .sliderContent {
     display: flex;
     justify-content: space-between;
@@ -103,14 +106,25 @@ const SliderBox = styled.div`
   }
 `;
 
-export default function Duration() {
+export default function Duration({ addDuration }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [selection, setSelection] = useState({ label: "", value: [0, 90] });
+
   return (
     <SliderBox>
-      <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-        Duration
-      </MobileFilterButton>
-      {isVisible && <RangeSlider />}
+      <MobileFilterHeader>
+        <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
+          Duration
+        </MobileFilterButton>
+        <P3>{selection.label}</P3>
+      </MobileFilterHeader>
+      {isVisible && (
+        <RangeSlider
+          setSelection={setSelection}
+          selection={selection}
+          addDuration={addDuration}
+        />
+      )}
     </SliderBox>
   );
 }

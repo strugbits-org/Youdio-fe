@@ -1,10 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { P1, P2 } from "src/components";
+import { P1, P3 } from "src/components";
 import { MobileFilterButton, MobileFilterHeader } from "./filtersComponents";
+import { useSelector } from "react-redux";
+import { filterKeys } from "src/helpers/constant";
 
 const DifficultyBox = styled.div`
-  padding-inline: 16px;
+  padding-inline: 8px;
   .difficulties {
     margin-top: 16px;
     display: grid;
@@ -33,33 +35,22 @@ const DifficultyBox = styled.div`
   }
 `;
 
-export default function Difficulty() {
-  const [difficult, setDifficult] = useState([]);
+export default function Difficulty({ addTag,removeTag}) {
   const [isVisible, setIsVisible] = useState(false);
-
-  const difficulties = [
-    {
-      id: 0,
-      name: "Beginner",
-    },
-    {
-      id: 1,
-      name: "Moderate",
-    },
-    {
-      id: 2,
-      name: "Intermediate",
-    },
-    {
-      id: 3,
-      name: "Advanced",
-    },
-  ];
+  const { filters, difficulties } = useSelector((state) => state.filter);
 
   const setSelected = (name) => {
-    !difficult.includes(name)
-      ? setDifficult([...difficult, name])
-      : setDifficult(difficult.filter((val) => val !== name && val));
+     if (!filters.difficulty.includes(name)) {
+       addTag({
+         data: name,
+         key: filterKeys.difficulty,
+       });
+     } else {
+       removeTag({
+         data: name,
+         key: filterKeys.difficulty,
+       });
+     }
   };
 
   return (
@@ -68,7 +59,7 @@ export default function Difficulty() {
         <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
           Difficulties
         </MobileFilterButton>
-        <P2>Selections</P2>
+        <P3>{filters.difficulty.join(", ")}</P3>
       </MobileFilterHeader>
       {isVisible && (
         <ul className="difficulties">
@@ -76,7 +67,7 @@ export default function Difficulty() {
             difficulties.map(({ id, name }) => {
               return (
                 <li
-                  className={difficult.includes(name) ? "active" : ""}
+                  className={filters.difficulty.includes(name) ? "active" : ""}
                   key={id}
                   onClick={() => setSelected(name)}
                 >

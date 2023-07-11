@@ -1,33 +1,38 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { H6, P3 } from "src/components";
 import { layout } from "src/helpers";
 import { useSelector } from "react-redux";
-import useFetch from "src/features/hooks/useFetch";
-import { setStyles } from "src/features/filterSlice";
+import { filterKeys } from "src/helpers/constant";
+import { MobileFilterButton } from "./filtersComponents";
+import { useState } from "react";
 
 const { tablet, laptop } = layout;
 
 const StylesBox = styled.div`
-  padding: 22px;
+  padding-inline: 16px;
   .styles {
+    margin-top: 16px;
     display: flex;
-    justify-content: center;
-    gap: 5vw;
-    color: var(--backgroundBrown);
+    flex-direction: column;
+    gap: 16px;
+    color: var(--textHeadingWhite);
     h6 {
-      margin-bottom: 24px;
+      margin-bottom: 4px;
       cursor: pointer;
     }
     li {
       cursor: pointer;
+      ul {
+        display: flex;
+        gap: 16px;
+      }
     }
     .active {
-      color: var(--textHeadingBlack);
+      color: var(--textHeadingWhite);
     }
   }
 
-  @media only screen and (min-width: ${tablet}) {
+  /* @media only screen and (min-width: ${tablet}) {
     .styles {
       justify-content: left;
       flex-wrap: wrap;
@@ -38,73 +43,72 @@ const StylesBox = styled.div`
       justify-content: center;
       flex-wrap: initial;
     }
-  }
+  } */
 `;
 
-export default function Styles({ setAllFilters, allFilters }) {
-  const { styles } = useSelector((state) => state.filter);
-  const { fetchData } = useFetch()
+export default function Styles({ addTag, removeTag, tab, setTab }) {
+  const { styles, filters } = useSelector((state) => state.filter);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const [allStyles, setAllStyles] = useState([]);
-  const [styleList, setStyleList] = useState([]);
-
-  const setAll = (name) => {
-    // setAllFilters([...allFilters, name]);
-
-    !allStyles.includes(name)
-      ? setAllStyles([...allStyles, name])
-      : setAllStyles(allStyles.filter((val) => val !== name && val));
+  const setSpecific = (name, subKey) => {
+    const customSubKey = camelCase(subKey);
+    if (!filters.styles[customSubKey].includes(name)) {
+      addTag({
+        data: name,
+        key: filterKeys.styles,
+        subKey: customSubKey,
+      });
+    } else {
+      removeTag({
+        data: name,
+        key: filterKeys.styles,
+        subKey: customSubKey,
+      });
+    }
   };
 
-  const setSpecific = (name) => {
-    // setAllFilters([...allFilters, name]);
-    !styleList.includes(name)
-      ? setStyleList([...styleList, name])
-      : setStyleList(styleList.filter((val) => val !== name && val));
+  const camelCase = (text) => {
+    if (text === "Set your intention") return "setYourIntention";
+    return text.toLowerCase();
   };
-
-  useEffect(() => {
-    fetchData("category/get-sub-category", setStyles);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <StylesBox>
-      <ul className="styles">
-        {styles?.categories?.length > 0 &&
-          styles.categories.map(({ _id, category, name }) => {
-            return (
-              <li key={_id}>
-                <H6
-                  className={allStyles.includes(category) ? "active" : ""}
-                  onClick={() => setAll(category)}
-                >
-                  {category}
-                </H6>
-                <ul>
-                  {name.length > 0 &&
-                    name.map((val, ind) => {
-                      return (
-                        <li
-                          key={`sub-design-${ind}`}
-                          className={
-                            allStyles.includes(category)
-                              ? "active"
-                              : styleList.includes(val)
-                              ? "active"
-                              : ""
-                          }
-                          onClick={() => setSpecific(val)}
-                        >
-                          <P3>{val}</P3>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </li>
-            );
-          })}
-      </ul>
+      <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
+        Styles
+      </MobileFilterButton>
+      {isVisible && (
+        <ul className="styles">
+          {styles?.length > 0 &&
+            styles.map(({ _id, category, name }) => {
+              return (
+                <li key={_id}>
+                  <H6 className={"active"} style={{ cursor: "default" }}>
+                    {category}
+                  </H6>
+                  <ul>
+                    {name.length > 0 &&
+                      name.map((val, ind) => {
+                        return (
+                          <li
+                            key={`sub-design-${ind}`}
+                            className={
+                              filters.styles[camelCase(category)].includes(val)
+                                ? "active"
+                                : ""
+                            }
+                            onClick={() => setSpecific(val, category)}
+                          >
+                            <P3>{val}</P3>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </li>
+              );
+            })}
+        </ul>
+      )}
     </StylesBox>
   );
 }

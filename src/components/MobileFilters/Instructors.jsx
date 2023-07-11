@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 import { H4 } from "src/components";
 // import { fonts } from "src/helpers";
-import { Instructor } from "./filtersComponents";
+import { Instructor, MobileFilterButton } from "./filtersComponents";
 import { useSelector } from "react-redux";
 import { filterKeys } from "src/helpers/constant";
 
 const InstructorsBox = styled.div`
+  padding-inline: 16px;
   & :is(.allInstructors) {
     display: flex;
     align-items: center;
@@ -16,6 +17,7 @@ const InstructorsBox = styled.div`
     margin-bottom: 2.5vw;
   }
   .instructorList {
+    margin-top: 16px;
     ul {
       width: 100%;
       display: flex;
@@ -24,11 +26,19 @@ const InstructorsBox = styled.div`
       flex-wrap: wrap;
       list-style-type: none;
       gap: 10px 6vw;
+
+      li {
+        h4 {
+          color: var(--textHeadingWhite);
+          font-weight: ${({ selected }) => (selected ? 800 : 200)};
+        }
+      }
     }
   }
 `;
 export default function Instructors({ removeTag, addTag }) {
   const { instructors, filters } = useSelector((state) => state.filter);
+  const [isVisible, setIsVisible] = useState(false);
 
   const [isAll] = useState(false);
 
@@ -48,44 +58,31 @@ export default function Instructors({ removeTag, addTag }) {
 
   return (
     <InstructorsBox>
-      {/* <div
-        className="allInstructors"
-        onClick={() => {
-          setAll(!isAll);
-          isAll && setSelected('All')
-        }}
-      >
-        {isAll && (
-          <svg
-            width="15"
-            height="11"
-            viewBox="0 0 17 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M1 6.2L5 11L16 1" stroke="black" strokeWidth="1.5" />
-          </svg>
-        )}
-        <P3 fontFamily={fonts.poppinsMedium}>All Instructors</P3>
-      </div> */}
-      <div className="instructorList">
-        <ul>
-          {instructors &&
-            instructors.map((val, ind) => {
-              return (
-                <Instructor
-                  selected={
-                    isAll ? isAll : filters.instructors.includes(val.firstName)
-                  }
-                  key={val._id}
-                  onClick={() => setSelected(val.firstName)}
-                >
-                  <H4>{val.firstName}</H4>
-                </Instructor>
-              );
-            })}
-        </ul>
-      </div>
+      <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
+        Instructor
+      </MobileFilterButton>
+      {isVisible && (
+        <div className="instructorList">
+          <ul>
+            {instructors &&
+              instructors.map((val, ind) => {
+                return (
+                  <li
+                    selected={
+                      isAll
+                        ? isAll
+                        : filters.instructors.includes(val.firstName)
+                    }
+                    key={val._id}
+                    onClick={() => setSelected(val.firstName)}
+                  >
+                    <H4>{`${val.firstName} ${val.lastName}`}</H4>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
+      )}
     </InstructorsBox>
   );
 }

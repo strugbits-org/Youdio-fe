@@ -6,12 +6,6 @@ import { icons, layout } from "src/helpers";
 
 const { mobile, tablet } = layout;
 
-export const Instructor = styled.li`
-  h4 {
-    font-weight: ${({ selected }) => (selected ? 700 : 400)};
-  }
-  cursor: pointer;
-`;
 
 const IconButtonM = styled(IconButton)`
   padding: 5px 5px 5px 0px;
@@ -115,13 +109,30 @@ export const SelectionButton = ({ name }) => {
 
 export const FilterBox = styled.div`
   height: 100dvh;
-  background: #26262677;
-  padding-inline: 16px;
+  background: rgba(0,0,0,0.7);
+  padding-inline: 8px;
   padding-block: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  overflow-y: scroll;
   .btnClose {
     margin-inline: auto 0px;
   }
+`;
+
+export const MobileFilterButton = styled.button`
+  outline: none;
+  border: none;
+  background: transparent;
+  color: var(--textHeadingWhite);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 20px;
+`;
+export const MobileFilterHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: hotpink; */
 `;

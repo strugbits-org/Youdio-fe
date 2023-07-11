@@ -1,101 +1,6 @@
-// import React, { useEffect, useState } from "react";
-// import Duration from "./Duration";
-// import Difficulty from "./Difficulty";
-// import Intensity from "./Intensity";
-// import Instructors from "./Instructors";
-// import Styles from "./Styles";
-// import {
-//   FilterBox,
-//   FilterButton,
-//   FilterOptions,
-//   SelectionBox,
-//   SelectionButton,
-// } from "./filtersComponents";
-// import { P3 } from "src/components";
-
-// const filter = [
-//   {
-//     label: "DURATION",
-//     value: "duration",
-//   },
-//   {
-//     label: "INSTRUCTORS",
-//     value: "instructors",
-//   },
-//   {
-//     label: "STYLES",
-//     value: "styles",
-//   },
-//   {
-//     label: "DIFFICULTY",
-//     value: "difficulty",
-//   },
-//   {
-//     label: "INTENSITY",
-//     value: "intensity",
-//   },
-// ];
-
-// export function Filters() {
-//   const [selectedFilter, setFilter] = useState(null);
-//   const [allFilters, setAllFilters] = useState([]);
-//   const [sort, setSort] = useState("newest");
-
-//   useEffect(() => {}, [selectedFilter]);
-
-//   const filterHandler = (filter) => {
-//     filter === selectedFilter ? setFilter(null) : setFilter(filter);
-//   };
-
-//   return (
-//     <React.Fragment>
-//       <FilterBox>
-//         {filter.map(({ label, value }, ind) => {
-//           return (
-//             <div key={`filter-button-${ind}`}>
-//               <FilterButton
-//                 name={label}
-//                 selected={selectedFilter}
-//                 clickEvent={() => filterHandler(value)}
-//               />
-//             </div>
-//           );
-//         })}
-
-//         {selectedFilter !== null && (
-//           <FilterOptions>
-//             <P3 className="videoCount">SHOWING 316 VIDEOS</P3>
-//             <div className="filters">
-//               {selectedFilter === "duration" && <Duration />}
-//               {selectedFilter === "instructors" && <Instructors />}
-//               {selectedFilter === "styles" && (
-//                 <Styles setAllFilters={setAllFilters} allFilters={allFilters} />
-//               )}
-//               {selectedFilter === "difficulty" && <Difficulty />}
-//               {selectedFilter === "intensity" && <Intensity />}
-//             </div>
-//             <div className="sortOption">
-//               <P3>SORT BY:</P3>
-//               <select value={sort} onChange={(e) => setSort(e.target.value)}>
-//                 <option value="newest">NEWEST</option>
-//                 <option value="oldest">OLDEST</option>
-//               </select>
-//             </div>
-//           </FilterOptions>
-//         )}
-//       </FilterBox>
-//       <SelectionBox>
-//         {allFilters.length > 0 &&
-//           allFilters.map((value, index) => (
-//             <SelectionButton key={`selected-${value}`} name={value} />
-//           ))}
-//       </SelectionBox>
-//     </React.Fragment>
-//   );
-// }
-
 import React, { useEffect, useState } from "react";
 import Drawer from "@mui/material/Drawer";
+import styled from "styled-components";
 import { FilterBox } from "./filtersComponents";
 import { IconButton } from "../Button";
 import { icons } from "src/helpers";
@@ -104,33 +9,23 @@ import Instructors from "./Instructors";
 import { setInstructors, setStyles } from "src/features/filterSlice";
 import useFetch from "src/features/hooks/useFetch";
 import Duration from "./Duration";
+import Difficulty from "./Difficulty";
+import Intensity from "./Intensity";
+import Styles from "./Styles";
 
-// const filter = [
-//   {
-//     label: "DURATION",
-//     value: "duration",
-//   },
-//   {
-//     label: "INSTRUCTORS",
-//     value: "instructors",
-//   },
-//   {
-//     label: "STYLES",
-//     value: "styles",
-//   },
-//   {
-//     label: "DIFFICULTY",
-//     value: "difficulty",
-//   },
-//   {
-//     label: "INTENSITY",
-//     value: "intensity",
-//   },
-// ];
+const CustomDrawe = styled(Drawer)({
+  marginTop: "16px",
+  color: "var(--textHeadingWhite)",
+  "& .MuiDrawer-paper": {
+    background: "transparent"
+  },
+});
 
 export default function MobileFilters({ open, setOpen, onClose }) {
-  const [filterTab, setFilterTab] = useState("")
-  const { fetchMultipleData} = useFetch()
+  const [filterTab, setFilterTab] = useState("");
+  const [isVisible, setIsVisible] = useState(true);
+
+  const { fetchMultipleData } = useFetch();
   useEffect(() => {
     fetchMultipleData(
       ["category/get-sub-category", "instructor/get-instructor"],
@@ -139,34 +34,45 @@ export default function MobileFilters({ open, setOpen, onClose }) {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleToggle = (tab) => {
+    if (!isVisible) { 
+      if (tab !== filterTab) {
+        setFilterTab(tab)
+        setIsVisible(true)
+      } else { 
+        setIsVisible(!isVisible);
+        setFilterTab("")
+      }
+    }
+    else {
+      setFilterTab(tab);
+      setIsVisible(!isVisible);
+    }
+  };
   const list = () => (
     <FilterBox>
       <IconButton className="btnClose" onClick={() => setOpen(false)}>
         <img src={icons.cross} alt="" width="16" />
       </IconButton>
       <HorizontalLine />
-      <button onClick={() => setFilterTab("instructors")}>Instructors</button>
-      {filterTab === "instructors" && (
-        <Instructors removeTag={() => {}} addTag={() => {}} />
-      )}
+      <Instructors tab={filterTab} setTab={handleToggle} />
       <HorizontalLine />
-      <button onClick={() => setFilterTab("duration")}>Duration</button>
-      {filterTab === "duration" && <Duration addDuration={() => {}} />}
+      <Duration tab={filterTab} setTab={handleToggle} />
       <HorizontalLine />
-      <button>Difficulty</button>
+      <Difficulty tab={filterTab} setTab={handleToggle} />
       <HorizontalLine />
-      <button>Intensity</button>
+      <Intensity tab={filterTab} setTab={handleToggle} />
       <HorizontalLine />
-      <button>Styles</button>
-      <HorizontalLine />
+      <Styles tab={filterTab} setTab={handleToggle} />
     </FilterBox>
   );
 
   return (
     <React.Fragment>
-      <Drawer anchor="top" open={open} onClose={() => console.log("closed")}>
+      <CustomDrawe anchor="top" open={open} onClose={() => console.log("closed")}>
         {list()}
-      </Drawer>
+      </CustomDrawe>
     </React.Fragment>
   );
 }

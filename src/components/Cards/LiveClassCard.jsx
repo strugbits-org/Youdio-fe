@@ -61,7 +61,7 @@ function LiveClassCard({ data }) {
       <CardMedia onClick={handleNavigate}>
         <img src={data.thumbnail} alt={data.title} width="100%" height="auto" />
         <Tag>
-          <H4>{data.category}</H4>
+          <H4>{data.category.name}</H4>
           {/* <H4>{new Date(data.date).toDateString()}</H4> */}
         </Tag>
       </CardMedia>

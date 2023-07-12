@@ -64,7 +64,9 @@ const useFetch = () => {
         const isResponseValid = response.some((val) => val?.data && true);
         if (isResponseValid) {
           const responseData = [];
-          response.forEach((res) => res?.data ? responseData.push(res.data) : undefined);
+          response.forEach((res) =>
+            res?.data ? responseData.push(res.data) : undefined
+          );
           setResponse(responseData);
           setLoading(false);
           setError("");
@@ -122,13 +124,58 @@ const useFetch = () => {
         setError("");
         setSuccess(true);
         cbFunction && dispatch(cbFunction(response.data));
-        setValues && setValues()
+        setValues && setValues();
       }
     } catch (e) {
       setLoading(false);
       setSuccess(false);
       setError(e.message);
+    }
+  };
+
+  // Get Data For Dynamic page and videos
+  const fetchIdAndVideos = async (url, cbFunction, payload) => {
+    setLoading(true);
+    console.log({url, cbFunction, payload});
+    const headers = await getHeaders(token);
+    try {
+      if (typeof url === "object" && url.length > 0) {
+        const response = await axios.all(
+          url.map((link, ind) => {
+            if (link.method === "post") { 
+              return apiClient
+                .post(link.endpoint, payload[ind], { headers })
+                .then((res) => res)
+                .catch((e) => console.error(e));
+            }
+            if (link.method === "get") { 
+              return apiClient
+                .get(link.endpoint, { headers })
+                .then((res) => res)
+                .catch((e) => console.error(e));
+            }
+            return false
+          })
+        );
+        const isResponseValid = response.some((val) => val?.data && true);
+        console.log(response);
+        if (isResponseValid) {
+          const responseData = [];
+          response.forEach((res) =>
+            res?.data ? responseData.push(res.data) : undefined
+          );
+          setResponse(responseData);
+          setLoading(false);
+          setError("");
+          cbFunction &&
+            cbFunction.forEach((cb, ind) => dispatch(cb(responseData[ind])));
+          // setLocalState && setLocalState(response.data);
+        }
       }
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
   };
 
   useEffect(() => {
@@ -145,6 +192,7 @@ const useFetch = () => {
     fetchMultipleData,
     postData,
     patchData,
+    fetchIdAndVideos,
   };
 };
 

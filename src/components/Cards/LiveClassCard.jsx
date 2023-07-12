@@ -59,7 +59,7 @@ function LiveClassCard({ data }) {
   }, [data]);
 
   const handleNavigate = () => {
-    navigate(path.liveClass);
+    navigate(`${path.liveClass}/${data._id}`, { state: {_id: data._id} });
   };
 
   return (
@@ -75,7 +75,7 @@ function LiveClassCard({ data }) {
         <div className="timeRow">
           <H4>{data.date}</H4>
           <H4>{data.time}</H4>
-          <ClockTime time={"44 min"} />
+          <ClockTime time={`${data.totalTime} min`} />
         </div>
         <H3>{data.title}</H3>
         <div className="profileRow">

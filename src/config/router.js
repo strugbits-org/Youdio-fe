@@ -47,8 +47,6 @@ export default function Router() {
   //     // Calling a auth function if user logged in setUser with id or something. Else setUser to null.
   // }, [])
 
-  // const { fetchData } = useFetch();
-
   const ProtectedRoute = ({ children, permission }) => {
     const base = useSelector((state) => state.user);
     let location = useLocation();
@@ -74,88 +72,87 @@ export default function Router() {
   };
 
   return (
-    <div>
-      <BrowserRouter>
-        {/* {user ? <DashboardHeader /> : <Header />} */}
-        <Header />
+    <BrowserRouter>
+      {/* {user ? <DashboardHeader /> : <Header />} */}
+      <Header />
 
-        <Routes>
-          {/* Authenticate */}
-          <Route
-            path="/login"
-            element={<ProtectedAuthRoute children={<Login />} />}
-          />
-          <Route
-            path="/register"
-            element={<ProtectedAuthRoute children={<Register />} />}
-          />
+      <Routes>
+        {/* Authenticate */}
+        <Route
+          path="/login"
+          element={<ProtectedAuthRoute children={<Login />} />}
+        />
+        <Route
+          path="/register"
+          element={<ProtectedAuthRoute children={<Register />} />}
+        />
 
-          <Route
-            path="/forgot-password"
-            element={
-              <ProtectedAuthRoute
-                children={<ForgotPassword isReset={false} />}
-              />
-            }
-          />
+        <Route
+          path="/forgot-password"
+          element={
+            <ProtectedAuthRoute children={<ForgotPassword isReset={false} />} />
+          }
+        />
 
-          <Route
-            path="/reset-password/:token"
-            element={<ProtectedAuthRoute children={<ResetPassword />} />}
-          />
+        <Route
+          path="/reset-password/:token"
+          element={<ProtectedAuthRoute children={<ResetPassword />} />}
+        />
 
-          {/* User */}
-          <Route path="/" element={<LiveClasses />} />
-          <Route path="/instructor" element={<Instructor />} />
-          <Route path="/live-class" element={<LiveVideo />} />
-          <Route path="/videoclasses" element={<VideoClasses />} />
-          <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
+        {/* User */}
+        <Route path="/" element={<LiveClasses />} />
+        <Route path="/instructor" element={<Instructor />} />
+        <Route
+          path="/live-class/:id"
+          element={<LiveVideo />}
+        />
+        <Route path="/videoclasses" element={<VideoClasses />} />
+        <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
 
-          {/* SINGLE VIDEO */}
-          <Route
-            path="/video-class"
-            element={<VideoClass />}
-            // loader={async ({params}) => {
-            //   await fetchData(`video/${params.id}`);
-            // }}
-          />
+        {/* SINGLE VIDEO */}
+        <Route
+          path="/video-class"
+          element={<VideoClass />}
+          // loader={async ({params}) => {
+          //   await fetchData(`liveSession/get/${params.id}`);
+          // }}
+        />
 
-          {/* User Dashboard */}
-          <Route
-            path="user"
-            element={
-              <ProtectedRoute
-                children={<UserDashboard />}
-                permission="user.dashboard"
-              />
-            }
-          >
-            <Route path="membership" element={<Membership />} />
-            <Route path="profile" element={<MyProfile />} />
-            <Route path="payment" element={<Payment />} />
-            <Route path="history" element={<History />} />
-            <Route path="live-booking" element={<LiveBooking />} />
-          </Route>
+        {/* User Dashboard */}
+        <Route
+          path="user"
+          element={
+            <ProtectedRoute
+              children={<UserDashboard />}
+              permission="user.dashboard"
+            />
+          }
+        >
+          <Route path="membership" element={<Membership />} />
+          <Route path="profile" element={<MyProfile />} />
+          <Route path="payment" element={<Payment />} />
+          <Route path="history" element={<History />} />
+          <Route path="live-booking" element={<LiveBooking />} />
+        </Route>
 
-          {/* Admin Dashboard */}
-          <Route
-            path="dashboard"
-            element={
-              <ProtectedRoute
-                children={<AdminDashboard />}
-                permission="admin.dashboard"
-              />
-            }
-          >
-            {/* <Route path="/" index={true} element={<AddVideo />} /> */}
-            <Route path="admin" element={<AddVideo />} />
-            <Route path="add-instructor" element={<AddInstructor />} />
-            <Route path="add-video" element={<AddVideo />} />
-            <Route path="add-live-session" element={<AddLiveSession />} />
-          </Route>
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </div>
+        {/* Admin Dashboard */}
+        <Route
+          path="dashboard"
+          element={
+            <ProtectedRoute
+              children={<AdminDashboard />}
+              permission="admin.dashboard"
+            />
+          }
+        >
+          {/* <Route path="/" index={true} element={<AddVideo />} /> */}
+          <Route path="admin" element={<AddVideo />} />
+          <Route path="add-instructor" element={<AddInstructor />} />
+          <Route path="add-video" element={<AddVideo />} />
+          <Route path="add-live-session" element={<AddLiveSession />} />
+        </Route>
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }

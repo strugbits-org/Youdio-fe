@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo} from "react";
 import {
   H2,
   P1,
@@ -9,7 +9,8 @@ import {
   ClockTime,
   IntensityLevel,
   InstructorLink,
-  FilterComponent,
+  // FilterComponent,
+  Loader,
 } from "src/components";
 import {
   LiveBookingBox,
@@ -20,105 +21,120 @@ import {
 } from "./liveVideoComponent";
 import { icons } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
-import { useDispatch, useSelector } from "react-redux";
-import { clearFilters } from "src/features/filterSlice";
 import { LiveClassesCards } from "src/components/CardsSection";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 // import Modal from "./Modal";
 
 function LiveVideo() {
-  const { postData, res, loading } = useFetch();
-  const dispatch = useDispatch();
-  const { filterTags, filters } = useSelector((state) => state.filter);
-  const [isFilters, setIsFilters] = useState(true);
+  const { fetchIdAndVideos, res, loading } = useFetch();
+  const { resetFilters } = useSelector((state) => state.filter);
+  const location = useLocation();
   useEffect(() => {
-    !isFilters && postData("liveSession/get", filters);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterTags, isFilters]);
-
-  useEffect(() => {
-    if (filterTags.length > 0) {
-      dispatch(clearFilters());
-    }
-    setIsFilters(false);
+    liveSessionId &&
+      fetchIdAndVideos(
+        [
+          { endpoint: `liveSession/get`, method: "post" },
+          { endpoint: `liveSession/get/${liveSessionId}`, method: "get" },
+        ],
+        [undefined, undefined],
+        [resetFilters]
+      );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const sortedVideos = useMemo(() => {
-    if (res?.liveSessions && res.liveSessions.length > 0) {
-      return res.liveSessions;
+
+  const liveSession = useMemo(() => {
+    if (res && res.length > 0) {
+      return res.map((data, ind) => {
+        if (ind === 0) return data.liveSessions;
+        if (ind === 1) return data.liveSession;
+        return {}
+      });
     }
-    return [];
+    return [{}, {}];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [res?.liveSessions]);
+  }, [res]);
+
+  const liveSessionId = useMemo(() => {
+    let path = location.pathname;
+    path = path.slice(path.lastIndexOf("/") + 1);
+    return path;
+  }, [location]);
 
   return (
     <React.Fragment>
       <Section backgroundColor="white" paddingBlock="5vw 0px">
-        <LiveBookingBox>
-          <MediaBox>
-            <img
-              src={icons.InstructorElizebeth}
-              alt="Instructor"
-              width=""
-              height=""
-            />
-            <div className="overlay"></div>
-            <img
-              className="videoCamera"
-              src={icons.videoCamera}
-              alt="Camera"
-              width=""
-              height=""
-            />
-          </MediaBox>
-          <ContentBox>
-            <H2>LIVE BACK PRESS YOGA</H2>
-            <P1 className="cardP">
-              From Ocean Breath by <span className="bold">Jackie Stewart</span>
-            </P1>
-            <div className="sessionDetail">
-              <div className="totalRunTme detail">
-                <H6>TOTAL RUN TIME</H6>
-                <ClockTime time="5 min" align={"left"} />
-              </div>
-              <div className="date detail">
-                <H6>DATE</H6>
-                <div>
-                  <img
-                    src={icons.calendarImg}
-                    alt="Calendar"
-                    width="16"
-                    height=""
+        {!loading ? (
+          <LiveBookingBox>
+            <MediaBox>
+              <img
+                src={liveSession[1].trainer?.image}
+                alt="Trainer"
+                width=""
+                height=""
+              />
+              <div className="overlay"></div>
+              <img
+                className="videoCamera"
+                src={icons.videoCamera}
+                alt="Camera"
+                width=""
+                height=""
+              />
+            </MediaBox>
+            <ContentBox>
+              <H2>{liveSession[1].title}</H2>
+              <P1 className="cardP">
+                by{" "}
+                <span className="bold">{`${liveSession[1].trainer?.firstName} ${liveSession[1].trainer?.lastName}`}</span>
+              </P1>
+              <div className="sessionDetail">
+                <div className="totalRunTme detail">
+                  <H6>TOTAL RUN TIME</H6>
+                  <ClockTime
+                    time={`${liveSession[1].totalTime} min`}
+                    align={"left"}
                   />
-                  <P3>5 / Jan / 2023</P3>
+                </div>
+                <div className="date detail">
+                  <H6>DATE</H6>
+                  <div>
+                    <img
+                      src={icons.calendarImg}
+                      alt="Calendar"
+                      width="16"
+                      height=""
+                    />
+                    <P3>{liveSession[1].date}</P3>
+                  </div>
+                </div>
+                <div className="intensity detail">
+                  <H6>INTENSITY</H6>
+                  <IntensityLevel
+                    level={liveSession[1].intensity}
+                    align={"left"}
+                  />
                 </div>
               </div>
-              <div className="intensity detail">
-                <H6>INTENSITY</H6>
-                <IntensityLevel level={3} align={"left"} />
-              </div>
-            </div>
-            <InstructorLink
-              imageSrc={icons.InstructorElizebeth}
-              title="Eliza Beth"
-            />
-            <P2 className="cardP lastP">
-              Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu tempus
-              pellentesque varius volutpat enim eget. Velit sed commodo nec
-              vestibulum tellus tincidunt mollis. Nascetur et tellus nteger to
-              integer. Viverra integer imperdiet neque.
-            </P2>
-            <CustomPrimaryButton onClick={() => {}}>
-              Book Now
-            </CustomPrimaryButton>
-          </ContentBox>
-        </LiveBookingBox>
+              <InstructorLink
+                imageSrc={liveSession[1].trainer?.image}
+                title={`${liveSession[1].trainer?.firstName} ${liveSession[1].trainer?.lastName}`}
+              />
+              <P2 className="cardP lastP">{liveSession[1].description}</P2>
+              <CustomPrimaryButton onClick={() => {}}>
+                Book Now
+              </CustomPrimaryButton>
+            </ContentBox>
+          </LiveBookingBox>
+        ) : <Loader />}
       </Section>
       <Section backgroundColor="white" paddingBlock="0px 30px">
         <LiveLessonBox>
           <H2>Other Live Lesson</H2>
-          <FilterComponent />
+          {/* <FilterComponent /> */}
 
-          <LiveClassesCards classes={sortedVideos} loading={loading} />
+          <LiveClassesCards classes={liveSession[0]} loading={loading} />
         </LiveLessonBox>
       </Section>
     </React.Fragment>

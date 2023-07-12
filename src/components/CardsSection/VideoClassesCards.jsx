@@ -1,14 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
-import { layout } from 'src/helpers';
-import { LiveClassCard, Loader, NoFoundBox, H3 } from 'src/components';
+import React from "react";
+import styled from "styled-components";
+import { layout } from "src/helpers";
+import { Loader, NoFoundBox, H3 } from "src/components";
+import { VideoClassCard } from "../Cards";
 
-const { mobile , mobileMedium, tablet, laptop, desktop} = layout;
+const { mobile, mobileMedium, tablet, laptop } = layout;
 const Container = styled.div`
   min-height: 30vh;
   margin-top: 30px;
-
-`
+`;
 const Box = styled.div`
   display: grid;
   gap: 6vw 1.8vw;
@@ -27,18 +27,17 @@ const Box = styled.div`
   @media only screen and (min-width: ${laptop}) {
     margin-block: 40px;
   }
-  @media only screen and (min-width: ${desktop}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
 `;
-function LiveClassesCards({ classes, loading }) {
+
+function VideoClassesCards({ videos, loading }) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
-      {!loading && classes.length > 0 ? (
+
+      {!loading && videos.length > 0 ? (
         <Box>
-          {classes.map((val) => (
-            <LiveClassCard key={`card-${val._id}`} data={val} />
+          {videos.map((val) => (
+            <VideoClassCard key={`card-${val._id}`} data={val} />
           ))}
         </Box>
       ) : (
@@ -52,4 +51,4 @@ function LiveClassesCards({ classes, loading }) {
   );
 }
 
-export default LiveClassesCards
+export default VideoClassesCards;

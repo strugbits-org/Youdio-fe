@@ -224,7 +224,7 @@ function LiveClasses() {
       </Section>
 
       {/* Cards Section */}
-      <Section backgroundColor="white" paddingBlock="0px">
+      <Section backgroundColor="white" paddingBlock="0px 30px">
         <LiveClassesCards classes={sortedVideos} loading={loading} />
       </Section>
     </React.Fragment>

@@ -73,7 +73,7 @@ function LiveClassCard({ data }) {
       </CardMedia>
       <CardContent>
         <div className="timeRow">
-          <H4>{`(${data.date})`}</H4>
+          <H4>{data.date}</H4>
           <H4>{data.time}</H4>
           <ClockTime time={"44 min"} />
         </div>

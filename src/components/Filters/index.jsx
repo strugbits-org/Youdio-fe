@@ -91,6 +91,7 @@ export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
 
   return (
     <React.Fragment>
+      <HorizontalLine marginBlock="24px" />
       <FilterBox>
         {filter.map(({ label, value }, ind) => {
           return (
@@ -151,7 +152,6 @@ export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
         </FilterOptions>
       )}
 
-      <HorizontalLine marginBlock="24px" />
       <SelectionBox>
         {filterTags?.length > 0 &&
           filterTags.map((value, index) => (

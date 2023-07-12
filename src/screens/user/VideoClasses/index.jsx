@@ -1,17 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
   ContentBox,
-  CardsBox,
-  NoFoundBox,
-  CustomVideoSection,
 } from "./liveClassesComponents";
 import useFetch from "src/features/hooks/useFetch";
-import { H1, H2, H3, P1, P2, Section, FilterComponent } from "src/components";
-import { VideoClassCard } from "src/components/Cards/";
+import { H1, H2, P1, P2, Section, FilterComponent } from "src/components";
 import { Box } from "src/components/Banners";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFilters } from "src/features/filterSlice";
-import Loader from "src/components/Loader";
+import { VideoClassesCards } from "src/components/CardsSection";
 
 function VideoClasses() {
   const { postData, res, loading } = useFetch();
@@ -61,7 +57,7 @@ function VideoClasses() {
       </Section>
 
       {/* Filter, Tags and Search Section */}
-      <Section backgroundColor="#fff" paddingBlock="3vw">
+      <Section backgroundColor="#fff" paddingBlock="40px 0px">
         <Box gap="16px" direction="column" maxWidth="771px" textAlign="center">
           <H2>Our Videos</H2>
           <P2>
@@ -79,23 +75,9 @@ function VideoClasses() {
       </Section>
 
       {/* Cards Section */}
-      <CustomVideoSection backgroundColor="white">
-        {loading && <Loader width="35px" height="35px" />}
-
-        {!loading && res?.videos.length > 0 ? (
-          <CardsBox>
-            {sortedVideos.map((val) => (
-              <VideoClassCard key={`card-${val._id}`} data={val} />
-            ))}
-          </CardsBox>
-        ) : (
-          !loading && (
-            <NoFoundBox>
-              <H3>No Data Found</H3>
-            </NoFoundBox>
-          )
-        )}
-      </CustomVideoSection>
+      <Section backgroundColor="white" paddingBlock="0px 30px">
+        <VideoClassesCards videos={sortedVideos} loading={loading}/>
+      </Section>
     </React.Fragment>
   );
 }

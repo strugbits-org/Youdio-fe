@@ -51,72 +51,77 @@ function LiveVideo() {
   }, [res?.liveSessions]);
 
   return (
-    <Section backgroundColor="white">
-      <LiveBookingBox>
-        <MediaBox>
-          <img
-            src={icons.InstructorElizebeth}
-            alt="Instructor"
-            width=""
-            height=""
-          />
-          <div className="overlay"></div>
-          <img
-            className="videoCamera"
-            src={icons.videoCamera}
-            alt="Camera"
-            width=""
-            height=""
-          />
-        </MediaBox>
-        <ContentBox>
-          <H2>LIVE BACK PRESS YOGA</H2>
-          <P1 className="cardP">
-            From Ocean Breath by <span className="bold">Jackie Stewart</span>
-          </P1>
-          <div className="sessionDetail">
-            <div className="totalRunTme detail">
-              <H6>TOTAL RUN TIME</H6>
-              <ClockTime time="5 min" align={"left"} />
-            </div>
-            <div className="date detail">
-              <H6>DATE</H6>
-              <div>
-                <img
-                  src={icons.calendarImg}
-                  alt="Calendar"
-                  width="16"
-                  height=""
-                />
-                <P3>5 / Jan / 2023</P3>
+    <React.Fragment>
+      <Section backgroundColor="white" paddingBlock="5vw 0px">
+        <LiveBookingBox>
+          <MediaBox>
+            <img
+              src={icons.InstructorElizebeth}
+              alt="Instructor"
+              width=""
+              height=""
+            />
+            <div className="overlay"></div>
+            <img
+              className="videoCamera"
+              src={icons.videoCamera}
+              alt="Camera"
+              width=""
+              height=""
+            />
+          </MediaBox>
+          <ContentBox>
+            <H2>LIVE BACK PRESS YOGA</H2>
+            <P1 className="cardP">
+              From Ocean Breath by <span className="bold">Jackie Stewart</span>
+            </P1>
+            <div className="sessionDetail">
+              <div className="totalRunTme detail">
+                <H6>TOTAL RUN TIME</H6>
+                <ClockTime time="5 min" align={"left"} />
+              </div>
+              <div className="date detail">
+                <H6>DATE</H6>
+                <div>
+                  <img
+                    src={icons.calendarImg}
+                    alt="Calendar"
+                    width="16"
+                    height=""
+                  />
+                  <P3>5 / Jan / 2023</P3>
+                </div>
+              </div>
+              <div className="intensity detail">
+                <H6>INTENSITY</H6>
+                <IntensityLevel level={3} align={"left"} />
               </div>
             </div>
-            <div className="intensity detail">
-              <H6>INTENSITY</H6>
-              <IntensityLevel level={3} align={"left"} />
-            </div>
-          </div>
-          <InstructorLink
-            imageSrc={icons.InstructorElizebeth}
-            title="Eliza Beth"
-          />
-          <P2 className="cardP lastP">
-            Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu tempus
-            pellentesque varius volutpat enim eget. Velit sed commodo nec
-            vestibulum tellus tincidunt mollis. Nascetur et tellus nteger to
-            integer. Viverra integer imperdiet neque.
-          </P2>
-          <CustomPrimaryButton onClick={() => {}}>Book Now</CustomPrimaryButton>
-        </ContentBox>
-      </LiveBookingBox>
+            <InstructorLink
+              imageSrc={icons.InstructorElizebeth}
+              title="Eliza Beth"
+            />
+            <P2 className="cardP lastP">
+              Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu tempus
+              pellentesque varius volutpat enim eget. Velit sed commodo nec
+              vestibulum tellus tincidunt mollis. Nascetur et tellus nteger to
+              integer. Viverra integer imperdiet neque.
+            </P2>
+            <CustomPrimaryButton onClick={() => {}}>
+              Book Now
+            </CustomPrimaryButton>
+          </ContentBox>
+        </LiveBookingBox>
+      </Section>
+      <Section backgroundColor="white" paddingBlock="0px 30px">
+        <LiveLessonBox>
+          <H2>Other Live Lesson</H2>
+          <FilterComponent />
 
-      <LiveLessonBox>
-        <H2>Other Live Lesson</H2>
-        <FilterComponent />
-
-        <LiveClassesCards classes={sortedVideos} loading={loading} />
-      </LiveLessonBox>
-    </Section>
+          <LiveClassesCards classes={sortedVideos} loading={loading} />
+        </LiveLessonBox>
+      </Section>
+    </React.Fragment>
   );
 }
 

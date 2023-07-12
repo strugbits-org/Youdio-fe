@@ -120,8 +120,7 @@ function LiveVideo() {
         <H2>Other Live Lesson</H2>
         <FilterComponent />
 
-        <LiveClassesCards classes={sortedVideos} loading={loading}/>
-     
+        <LiveClassesCards classes={sortedVideos} loading={loading} />
       </LiveLessonBox>
     </Section>
   );

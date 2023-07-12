@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {  PrimaryButton } from "src/components";
+import { PrimaryButton } from "src/components";
 import { layout } from "src/helpers";
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 
@@ -54,7 +54,8 @@ export const MediaBox = styled.div`
   }
 
   @media only screen and (min-width: ${tablet}) {
-    img, .overlay {
+    img,
+    .overlay {
       max-width: 435px;
     }
     .videoCamera {
@@ -146,14 +147,18 @@ export const ContentBox = styled.div`
 
 export const CustomPrimaryButton = styled(PrimaryButton)`
   border-radius: 0px;
-  max-width: 269px;
-`
+  max-width: 196px;
+  @media only screen and (min-width: ${tablet}) {
+    max-width: 296px;
+  }
+`;
 
 export const LiveLessonBox = styled.div`
-  h2{
+  h2 {
     text-align: center;
+    margin-block: 6vw 4vw;
   }
-`
+`;
 
 export const CardsBox = styled.div`
   display: grid;

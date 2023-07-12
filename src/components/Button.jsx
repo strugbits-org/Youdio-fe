@@ -4,58 +4,62 @@ import { layout } from "src/helpers";
 const { mobile, tablet, laptop } = layout
 
 export const PrimaryButton = styled.button`
-    border:none;
-    outline:none;
-    width: 100%;
-    min-height: 45px;
-    border-radius:7px;
-    color: var(--textHeadingWhite);
-    background:var(--backgroundGreen);
-    cursor:pointer;
+  border: none;
+  outline: none;
+  width: 100%;
+  min-height: 35px;
+  border-radius: 7px;
+  color: var(--textHeadingWhite);
+  background: var(--backgroundGreen);
+  cursor: pointer;
+  transition: var(--transition03s);
+  font-size: 16px;
+
+  &:hover {
     transition: var(--transition03s);
-    font-size:18px;
-    
-    &:hover{
-        transition: var(--transition03s); 
-        background:var(--backgroundGreenHover);
+    background: var(--backgroundGreenHover);
+  }
+
+  &:disabled {
+    background: var(--backgroundBrown);
+    cursor: default;
+    position: relative;
+    color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & img {
+      display: none;
     }
 
-    &:disabled{
-        background: var(--backgroundBrown);
-        cursor: default;
-        position: relative;
-        color: transparent;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        & img{
-            display: none;
-        }
-
-        
-        &::after{
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border-radius: 50px;
-            border-width: 5px;
-            border: 4px solid var(--backgroundLightGrey);
-            border-bottom: 4px solid transparent;
-            animation: rotate 1s linear infinite;
-        }
-
-        @keyframes rotate {
-	        0% {
-		        transform: rotate(0deg);
-	        }
-            100% {
-		        transform: rotate(360deg);
-	        }
-        }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50px;
+      border-width: 5px;
+      border: 4px solid var(--backgroundLightGrey);
+      border-bottom: 4px solid transparent;
+      animation: rotate 1s linear infinite;
     }
-`
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  @media only screen and (min-width: ${tablet}) {
+    min-height: 45px;
+    font-size: 18px;
+  }
+`;
 
 export const PrimaryWhiteButton = styled.button`
   border: 1px solid var(--textHeadingBlack);

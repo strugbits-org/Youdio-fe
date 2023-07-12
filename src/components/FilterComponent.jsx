@@ -2,7 +2,6 @@ import React, { useState} from "react";
 import useInnerWidth from "src/features/hooks/useInnerWidth";
 import { PrimaryWhiteButton, Filters, MobileFilters } from "src/components";
 import styled from "styled-components";
-import { HorizontalLine } from "./BreakLines";
 
 const Box = styled.div`
   margin-block: 22px;

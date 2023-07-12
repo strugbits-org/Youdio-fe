@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { H3, H4, ClockTime } from "src/components";
+import { H3, H4, ClockTime, P3 } from "src/components";
 import { path } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ export const CardContent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
     gap: 8px;
   }
   h3{
@@ -33,6 +34,11 @@ export const CardContent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 12px;
+  }
+  .detail{
+    color: var(--backgroundGrey);
+    max-width: 482px;
   }
   
 `;
@@ -67,7 +73,8 @@ function LiveClassCard({ data }) {
       </CardMedia>
       <CardContent>
         <div className="timeRow">
-          <H4>06:30-07:30</H4>
+          <H4>{`(${data.date})`}</H4>
+          <H4>{data.time}</H4>
           <ClockTime time={"44 min"} />
         </div>
         <H3>{data.title}</H3>
@@ -81,6 +88,7 @@ function LiveClassCard({ data }) {
             <IntensityLevel level={intensityLevel} />
           </div>
         </div>
+        <P3 className="detail">{data.description}</P3>
       </CardContent>
     </Card>
   );

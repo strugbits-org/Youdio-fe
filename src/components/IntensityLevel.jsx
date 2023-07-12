@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const IntensityBox = styled.div`
   align-items: center;
-  justify-content: right;
+  justify-content: ${({ align }) => (align ? align : "right")};
   display: flex;
   gap: 10px;
   min-height: 2px;
@@ -17,13 +17,13 @@ const IntensityBox = styled.div`
   }
 `;
 
-const IntensityLevel = ({ level, text, fontSize, fontColor }) => {
+const IntensityLevel = ({ level, text, fontSize, fontColor, align }) => {
   const [color] = useState({
     dark: "#413735",
     light: "#D5D5D5",
   });
   return (
-    <IntensityBox fontSize={fontSize} fontColor={fontColor}>
+    <IntensityBox fontSize={fontSize} fontColor={fontColor} align={align}>
       <svg
         width="15"
         height="14"

@@ -13,7 +13,7 @@ const H1 = styled.h1`
 const H2 = styled.h2`
   font-family: ${poppinsSemiBold};
   font-size: ${({ fontSize }) =>
-    fontSize ? fontSize : "clamp(32px, 2.2vw, 46px)"};
+    fontSize ? fontSize : "clamp(30px, 2.2vw, 46px)"};
 `;
 
 const H3 = styled.h3`

@@ -10,6 +10,7 @@ import { ClockTime } from "./ClockTime"
 import InstructorLink from "./InstructorLink"
 import MobileFilters from "./MobileFilters"
 import FilterComponent from "./FilterComponent"
+import Loader, { NoFoundBox } from "./Loader"
 
 export {
   // Banners
@@ -53,4 +54,6 @@ export {
   ClockTime,
   InstructorLink,
   FilterComponent,
+  Loader,
+  NoFoundBox
 };

@@ -19,9 +19,10 @@ export const Section = styled.section`
         padding-inline: 6vw;
     }
     @media only screen and (min-width: ${laptop}) {
-        padding-inline: 122px;
+        padding-inline: 42px;
     }
     @media only screen and (min-width: ${desktop}) {
+        padding-inline: 122px;
     }
 `
 export const Box = styled.div`

@@ -10,7 +10,7 @@ import {
   FilterOptions,
   SelectionBox,
   SelectionButton,
-  SortingOption
+  SortingOption,
 } from "./filtersComponents";
 import { P3 } from "src/components";
 import useFetch from "src/features/hooks/useFetch";
@@ -45,9 +45,11 @@ const filter = [
   },
 ];
 
-export function Filters({videoCount, videoSort, setVideoSort, videoType}) {
+export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
   const [filterTab, setFilterTab] = useState(null);
-  const {filterTags, difficulties, intensities} = useSelector((state) => state.filter);
+  const { filterTags, difficulties, intensities } = useSelector(
+    (state) => state.filter
+  );
   const { fetchMultipleData } = useFetch();
   const dispatch = useDispatch();
 
@@ -101,15 +103,22 @@ export function Filters({videoCount, videoSort, setVideoSort, videoType}) {
           );
         })}
       </FilterBox>
-      <SortingOption >
-        <P3 className="videoCount">{`SHOWING ${videoCount} ${videoType}`}</P3>
-        <div className="sortOption">
-          <P3>SORT BY:</P3>
-          <select value={videoSort} onChange={(e) => setVideoSort(e.target.value)}>
-            <option value="newest">NEWEST</option>
-            <option value="oldest">OLDEST</option>
-          </select>
-        </div>
+      <SortingOption>
+        {videoCount && (
+          <P3 className="videoCount">{`SHOWING ${videoCount} ${videoType}`}</P3>
+        )}
+        {videoSort && (
+          <div className="sortOption">
+            <P3>SORT BY:</P3>
+            <select
+              value={videoSort}
+              onChange={(e) => setVideoSort(e.target.value)}
+            >
+              <option value="newest">NEWEST</option>
+              <option value="oldest">OLDEST</option>
+            </select>
+          </div>
+        )}
       </SortingOption>
       {filterTab !== null && (
         <FilterOptions>
@@ -122,10 +131,18 @@ export function Filters({videoCount, videoSort, setVideoSort, videoType}) {
               <Styles removeTag={removeTag} addTag={addTag} />
             )}
             {filterTab === "difficulty" && (
-              <Difficulty removeTag={removeTag} addTag={addTag} options={difficulties} />
+              <Difficulty
+                removeTag={removeTag}
+                addTag={addTag}
+                options={difficulties}
+              />
             )}
             {filterTab === "intensity" && (
-              <Intensity removeTag={removeTag} addTag={addTag} options={intensities} />
+              <Intensity
+                removeTag={removeTag}
+                addTag={addTag}
+                options={intensities}
+              />
             )}
           </div>
         </FilterOptions>

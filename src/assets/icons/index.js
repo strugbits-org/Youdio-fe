@@ -50,6 +50,8 @@ import youdio from "src/assets/logo/youdio.svg"
 import videoThumbnail from "src/assets/sample/VideoThumbnail.jpg"
 import videoLock from "src/assets/icons/VideoLock.svg"
 
+import videoCamera from "src/assets/icons/videoCamera.svg"
+
 
 const icons = {
   leftArrow,
@@ -98,6 +100,7 @@ const icons = {
   videoPlay,
   videoThumbnail,
   videoLock,
+  videoCamera,
 };
 
 export default icons

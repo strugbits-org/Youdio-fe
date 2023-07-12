@@ -8,10 +8,6 @@ import {
   MonthBox,
   WeekBox,
   DayBox,
-  CardsBox,
-  // H6M,
-  NoFoundBox,
-  CustomVideoSection,
 } from "./liveClassesComponents";
 import {
   // fonts,
@@ -27,14 +23,10 @@ import {
   FilterComponent,
 } from "src/components";
 import { IconButton, PrimaryWhiteButton } from "src/components";
-import {
-  LiveClassCard,
-  // DateTag
-} from "src/components/Cards/";
-import Loader from "src/components/Loader";
 import { clearFilters, filterDate } from "src/features/filterSlice";
 import { filterKeys } from "src/helpers/constant";
 import moment from "moment";
+import { LiveClassesCards } from "src/components/CardsSection";
 
 function LiveClasses() {
   const { postData, res, loading } = useFetch();
@@ -235,29 +227,9 @@ function LiveClasses() {
       </Section>
 
       {/* Cards Section */}
-      <CustomVideoSection backgroundColor="white">
-        {loading && <Loader width="35px" height="35px" />}
-        {/* <CardsBox> */}
-        {!loading && res?.liveSessions.length > 0 ? (
-          <CardsBox>
-            {sortedVideos.map((val) => (
-              <LiveClassCard key={`card-${val._id}`} data={val} />
-            ))}
-            {/* <DateTag>
-              <H4>31</H4>
-              <hr />
-              <H6M fontFamily={fonts.poppinsMedium}>Fri</H6M>
-            </DateTag> */}
-          </CardsBox>
-        ) : (
-          !loading && (
-            <NoFoundBox>
-              <H3>No Data Found</H3>
-            </NoFoundBox>
-          )
-        )}
-        {/* </CardsBox> */}
-      </CustomVideoSection>
+      <Section backgroundColor="white">
+        <LiveClassesCards classes={sortedVideos} loading={loading} />
+      </Section>
     </React.Fragment>
   );
 }

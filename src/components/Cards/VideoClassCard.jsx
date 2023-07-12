@@ -34,7 +34,8 @@ export const CardContent = styled.div`
     align-items: center;
     margin-bottom: 12px;
   }
-  .detail{
+  .detail {
+    color: var(--backgroundGrey);
     max-width: 482px;
   }
 `;

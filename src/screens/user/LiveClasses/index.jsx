@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useFetch from "src/features/hooks/useFetch";
 
 import { getDate, liveClassStaticContent } from "./constant";
-import {
-  ContentBox,
-  MonthBox,
-  WeekBox,
-  DayBox,
-} from "./liveClassesComponents";
+import { ContentBox, MonthBox, WeekBox, DayBox } from "./liveClassesComponents";
 import {
   // fonts,
   icons,
@@ -204,20 +199,22 @@ function LiveClasses() {
       </Section>
 
       {/* Filter, Tags and Search Section */}
-      <Section backgroundColor="#fff" paddingBlock="3vw">
-        <DayBox>
-          <div className="blank"></div>
-          <div>
-            <H4>{filters.date && isDateSelected}</H4>
-          </div>
-          <div className="searchBox">
-            <InputIcon
-              isIcon={icons.searchIcon}
-              placeholder={content.searchPlaceholder}
-              style={{ visibility: "hidden" }}
-            />
-          </div>
-        </DayBox>
+      <Section backgroundColor="#fff" paddingBlock="40px 0px">
+        {filters.date && (
+          <DayBox>
+            <div className="blank"></div>
+            <div>
+              <H4>{filters.date && isDateSelected}</H4>
+            </div>
+            <div className="searchBox">
+              <InputIcon
+                isIcon={icons.searchIcon}
+                placeholder={content.searchPlaceholder}
+                style={{ visibility: "hidden" }}
+              />
+            </div>
+          </DayBox>
+        )}
         <FilterComponent
           sort={sort}
           setSort={setSort}
@@ -227,7 +224,7 @@ function LiveClasses() {
       </Section>
 
       {/* Cards Section */}
-      <Section backgroundColor="white">
+      <Section backgroundColor="white" paddingBlock="0px">
         <LiveClassesCards classes={sortedVideos} loading={loading} />
       </Section>
     </React.Fragment>

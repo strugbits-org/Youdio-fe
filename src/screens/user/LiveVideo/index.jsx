@@ -44,12 +44,6 @@ function LiveVideo() {
   }, []);
   const sortedVideos = useMemo(() => {
     if (res?.liveSessions && res.liveSessions.length > 0) {
-      // const videos = res.liveSessions.sort((a, b) => {
-      //   const titleA = new Date(a.date);
-      //   const titleB = new Date(b.date);
-      //   if (sort === "newest") return titleB - titleA;
-      //   return titleA - titleB;
-      // });
       return res.liveSessions;
     }
     return [];

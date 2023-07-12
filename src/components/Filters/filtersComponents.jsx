@@ -118,7 +118,7 @@ export const SortingOption = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  margin-block: 24px 8px;
+  margin-block: 8px;
 
   .videoCount {
     color: #d6ccc3;

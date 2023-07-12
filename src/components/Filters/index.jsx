@@ -22,6 +22,7 @@ import {
   filterDuration,
 } from "src/features/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { HorizontalLine } from "../BreakLines";
 const filter = [
   {
     label: "DURATION",
@@ -121,6 +122,7 @@ export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
           </div>
         )}
       </SortingOption>
+
       {filterTab !== null && (
         <FilterOptions>
           <div className="filters">
@@ -148,6 +150,8 @@ export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
           </div>
         </FilterOptions>
       )}
+
+      <HorizontalLine marginBlock="24px" />
       <SelectionBox>
         {filterTags?.length > 0 &&
           filterTags.map((value, index) => (

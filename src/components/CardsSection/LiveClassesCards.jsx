@@ -16,20 +16,20 @@ const Box = styled.div`
 
   @media only screen and (min-width: ${mobile}) {
     grid-template-columns: 1fr;
-    margin-block: 70px;
+    margin-block: 6vw;
   }
   @media only screen and (min-width: ${mobileMedium}) {
     grid-template-columns: 1fr 1fr;
   }
   @media only screen and (min-width: ${tablet}) {
     grid-template-columns: 1fr 1fr 1fr;
-    margin-block: 90px;
   }
   @media only screen and (min-width: ${laptop}) {
-    margin-block: 60px;
+    margin-block: 40px;
   }
   @media only screen and (min-width: ${desktop}) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-block: 60px;
   }
 `;
 function LiveClassesCards({ classes, loading }) {

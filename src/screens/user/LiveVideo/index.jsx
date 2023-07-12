@@ -91,7 +91,7 @@ function LiveVideo() {
                 <img
                   src={icons.calendarImg}
                   alt="Calendar"
-                  width=""
+                  width="16"
                   height=""
                 />
                 <P3>5 / Jan / 2023</P3>

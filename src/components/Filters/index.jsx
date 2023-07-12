@@ -104,9 +104,10 @@ export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
         })}
       </FilterBox>
       <SortingOption>
-        {videoCount && (
-          <P3 className="videoCount">{`SHOWING ${videoCount} ${videoType}`}</P3>
-        )}
+        <P3 className="videoCount">
+          {videoCount ? `SHOWING ${videoCount} ${videoType}` : ""}
+        </P3>
+
         {videoSort && (
           <div className="sortOption">
             <P3>SORT BY:</P3>

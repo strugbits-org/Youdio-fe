@@ -36,7 +36,7 @@ const CardContent = styled.div`
 
 export const SingleInstructorCard = () => {
   return (
-    <Card>
+    <Card >
       <CardMedia>
         <img src={icons.cardInstructor} alt={"Instructor"} width="" height="" />
       </CardMedia>

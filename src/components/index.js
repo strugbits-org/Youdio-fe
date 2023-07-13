@@ -10,6 +10,7 @@ import { ClockTime } from "./ClockTime"
 import InstructorLink from "./InstructorLink"
 import MobileFilters from "./MobileFilters"
 import FilterComponent from "./FilterComponent"
+import InstructorDetail from "./InstructorDetail"
 import Loader, { NoFoundBox } from "./Loader"
 
 export {
@@ -55,5 +56,6 @@ export {
   InstructorLink,
   FilterComponent,
   Loader,
-  NoFoundBox
+  NoFoundBox,
+  InstructorDetail,
 };

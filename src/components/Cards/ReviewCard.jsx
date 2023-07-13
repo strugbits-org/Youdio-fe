@@ -101,7 +101,7 @@ const CustomerBox = styled.div`
 
 export const ReviewCard = () => {
   return (
-    <Card>
+    <Card >
       <QuotationIcon className="quotation">
         <svg
           width="52"

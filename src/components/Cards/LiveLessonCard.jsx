@@ -34,7 +34,7 @@ const CardContent = styled.div`
 
 const LiveLessonCard = () => {
   return (
-    <Card>
+    <Card >
       <CardMedia>
         <img src={icons.cardInstructor} alt={"Instructor"} width="" height="" />
       </CardMedia>

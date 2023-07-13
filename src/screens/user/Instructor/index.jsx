@@ -52,7 +52,7 @@ function Instructor() {
         {!loading && res?.instructors && res.instructors?.length > 0 ? (
           <CardsBox>
             {res.instructors.map((instructor) => {
-              return <InstructorCard instructor={instructor} />;
+              return <InstructorCard key={`instructor-card-${instructor._id}`} instructor={instructor} />;
             })}
           </CardsBox>
         ) : (

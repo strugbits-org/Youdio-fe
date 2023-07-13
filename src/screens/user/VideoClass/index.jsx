@@ -106,8 +106,8 @@ const VideoClass = () => {
       <InstructorClasses>
         <H2>Jackie Stewart Classes</H2>
         <InstructorVideos>
-          {[...Array(3).keys()].map(() => {
-            return <SingleInstructorCard />;
+          {[...Array(3).keys()].map((_, ind) => {
+            return <SingleInstructorCard key={`instructor-card-${ind}`} />;
           })}
         </InstructorVideos>
       </InstructorClasses>
@@ -115,8 +115,8 @@ const VideoClass = () => {
       <InstructorClasses>
         <H2>Jackie Stewart Live Lessons</H2>
         <InstructorSessions>
-          {[...Array(4).keys()].map(() => {
-            return <LiveLessonCard />;
+          {[...Array(4).keys()].map((_, ind) => {
+            return <LiveLessonCard key={`live-lesson-card-${ind}`} />;
           })}
         </InstructorSessions>
       </InstructorClasses>
@@ -124,8 +124,8 @@ const VideoClass = () => {
       <Reviews>
         <H2>Instructor Review</H2>
         <ReviewsList>
-          {[...Array(videosLength).keys()].map(() => {
-            return <ReviewCard />;
+          {[...Array(videosLength).keys()].map((_, ind) => {
+            return <ReviewCard key={`review-card-${ind}`} />;
           })}
         </ReviewsList>
         {videosLength < 8 && (

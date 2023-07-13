@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   H2,
   P1,
@@ -22,14 +22,24 @@ import {
 import { icons } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
 import { LiveClassesCards } from "src/components/CardsSection";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import BookingModal from "./BookingModal";
+import usePostAPI from "src/features/hooks/usePostAPI";
+import { setUser } from "src/features/userSlice";
 
 // import Modal from "./Modal";
 
 function LiveVideo() {
   const { fetchIdAndVideos, res, loading } = useFetch();
+  const { postData, postSuccess } = usePostAPI()
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
   const { resetFilters } = useSelector((state) => state.filter);
+  const { user, token } = useSelector((state) => state.user);
+  const navigate= useNavigate()
+
   const location = useLocation();
   useEffect(() => {
     liveSessionId &&
@@ -49,7 +59,7 @@ function LiveVideo() {
       return res.map((data, ind) => {
         if (ind === 0) return data.liveSessions;
         if (ind === 1) return data.liveSession;
-        return {}
+        return {};
       });
     }
     return [{}, {}];
@@ -61,6 +71,33 @@ function LiveVideo() {
     path = path.slice(path.lastIndexOf("/") + 1);
     return path;
   }, [location]);
+
+  
+
+  const handleBookNow = () => {
+    if (token) {
+      if (user.subscription.isActive) { 
+        // Hit Book Session API
+        const payload = {
+          liveSession: liveSessionId,
+        };
+        postData(
+          "booking/bookSession",
+          payload,
+          setUser,
+          undefined,
+          undefined,
+          () => navigate("/user/live-booking")
+        );
+      }
+      else {
+        window.open("https://www.google.com", "_self");
+      }
+    } else {
+      window.open("https://www.google.com", "_self");
+    }
+    
+  }
 
   return (
     <React.Fragment>
@@ -122,7 +159,7 @@ function LiveVideo() {
                 title={`${liveSession[1].trainer?.firstName} ${liveSession[1].trainer?.lastName}`}
               />
               <P2 className="cardP lastP">{liveSession[1].description}</P2>
-              <CustomPrimaryButton onClick={() => {}}>
+              <CustomPrimaryButton onClick={handleBookNow}>
                 Book Now
               </CustomPrimaryButton>
             </ContentBox>
@@ -143,6 +180,11 @@ function LiveVideo() {
           />
         </LiveLessonBox>
       </Section>
+      {/* <BookingModal
+        open={open}
+        handleClose={handleClose}
+        data={liveSession[1]}
+      /> */}
     </React.Fragment>
   );
 }

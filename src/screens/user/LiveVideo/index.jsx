@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   H2,
   P1,
@@ -24,7 +24,7 @@ import useFetch from "src/features/hooks/useFetch";
 import { LiveClassesCards } from "src/components/CardsSection";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import BookingModal from "./BookingModal";
+// import BookingModal from "./BookingModal";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { setUser } from "src/features/userSlice";
 
@@ -32,7 +32,7 @@ import { setUser } from "src/features/userSlice";
 
 function LiveVideo() {
   const { fetchIdAndVideos, res, loading } = useFetch();
-  const { postData, postSuccess } = usePostAPI()
+  const { postData } = usePostAPI()
   // const [open, setOpen] = useState(false);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);

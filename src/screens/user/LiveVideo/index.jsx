@@ -42,7 +42,7 @@ function LiveVideo() {
         [resetFilters]
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
 
   const liveSession = useMemo(() => {
     if (res && res.length > 0) {
@@ -69,7 +69,7 @@ function LiveVideo() {
           <LiveBookingBox>
             <MediaBox>
               <img
-                src={liveSession[1].trainer?.image}
+                src={liveSession[1].thumbnail}
                 alt="Trainer"
                 width=""
                 height=""
@@ -127,14 +127,20 @@ function LiveVideo() {
               </CustomPrimaryButton>
             </ContentBox>
           </LiveBookingBox>
-        ) : <Loader />}
+        ) : (
+          <Loader />
+        )}
       </Section>
       <Section backgroundColor="white" paddingBlock="0px 30px">
         <LiveLessonBox>
           <H2>Other Live Lesson</H2>
           {/* <FilterComponent /> */}
 
-          <LiveClassesCards classes={liveSession[0]} loading={loading} />
+          <LiveClassesCards
+            classes={liveSession[0]}
+            loading={loading}
+            currentLiveSessionId={liveSessionId}
+          />
         </LiveLessonBox>
       </Section>
     </React.Fragment>

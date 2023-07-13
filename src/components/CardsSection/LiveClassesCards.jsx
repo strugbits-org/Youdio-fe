@@ -1,14 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
-import { layout } from 'src/helpers';
-import { LiveClassCard, Loader, NoFoundBox, H3 } from 'src/components';
+import React from "react";
+import styled from "styled-components";
+import { layout } from "src/helpers";
+import { LiveClassCard, Loader, NoFoundBox, H3 } from "src/components";
 
-const { mobile , mobileMedium, tablet, laptop, desktop} = layout;
+const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 const Container = styled.div`
   min-height: 30vh;
   margin-top: 30px;
-
-`
+`;
 const Box = styled.div`
   display: grid;
   gap: 6vw 1.8vw;
@@ -31,15 +30,18 @@ const Box = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
-function LiveClassesCards({ classes, loading }) {
+function LiveClassesCards({ classes, loading, currentLiveSessionId }) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
       {!loading && classes.length > 0 ? (
         <Box>
-          {classes.map((val) => (
-            <LiveClassCard key={`card-${val._id}`} data={val} />
-          ))}
+          {classes.map(
+            (val) =>
+              val._id !== currentLiveSessionId ? (
+                <LiveClassCard key={`card-${val._id}`} data={val} />
+              ) : ""
+          )}
         </Box>
       ) : (
         !loading && (
@@ -52,4 +54,4 @@ function LiveClassesCards({ classes, loading }) {
   );
 }
 
-export default LiveClassesCards
+export default LiveClassesCards;

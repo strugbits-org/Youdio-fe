@@ -11,6 +11,7 @@ import InstructorLink from "./InstructorLink"
 import MobileFilters from "./MobileFilters"
 import FilterComponent from "./FilterComponent"
 import InstructorDetail from "./InstructorDetail"
+import LiveBookingCard from "./Cards/LiveBookingCard"
 import Loader, { NoFoundBox } from "./Loader"
 
 export {
@@ -58,4 +59,5 @@ export {
   Loader,
   NoFoundBox,
   InstructorDetail,
+  LiveBookingCard,
 };

@@ -46,7 +46,7 @@ function LiveVideo() {
       fetchIdAndVideos(
         [
           { endpoint: `liveSession/get`, method: "post" },
-          { endpoint: `liveSession/get/${liveSessionId}`, method: "get" },
+          { endpoint: liveSessionId.link, method: "get" },
         ],
         [undefined, undefined],
         [resetFilters]
@@ -69,17 +69,18 @@ function LiveVideo() {
   const liveSessionId = useMemo(() => {
     let path = location.pathname;
     path = path.slice(path.lastIndexOf("/") + 1);
-    return path;
-  }, [location]);
-
-  
+    const link = token
+      ? `liveSession/get/${path}`
+      : `liveSession/get-unauth/${path}`;
+    return {_id: path, link};
+  }, [location, token]);
 
   const handleBookNow = () => {
     if (token) {
       if (user.subscription.isActive) { 
         // Hit Book Session API
         const payload = {
-          liveSession: liveSessionId,
+          liveSession: liveSessionId._id,
         };
         postData(
           "booking/bookSession",
@@ -102,7 +103,7 @@ function LiveVideo() {
   return (
     <React.Fragment>
       <Section backgroundColor="white" paddingBlock="5vw 0px">
-        {!loading ? (
+        {!loading && liveSession[1] ? (
           <LiveBookingBox>
             <MediaBox>
               <img
@@ -159,8 +160,11 @@ function LiveVideo() {
                 title={`${liveSession[1].trainer?.firstName} ${liveSession[1].trainer?.lastName}`}
               />
               <P2 className="cardP lastP">{liveSession[1].description}</P2>
-              <CustomPrimaryButton onClick={handleBookNow}>
-                Book Now
+              <CustomPrimaryButton
+                onClick={handleBookNow}
+                disabled={liveSession[1].bookedByMe}
+              >
+                {liveSession[1]?.bookedByMe ?  "Booked" : "Book Now"}
               </CustomPrimaryButton>
             </ContentBox>
           </LiveBookingBox>
@@ -176,7 +180,7 @@ function LiveVideo() {
           <LiveClassesCards
             classes={liveSession[0]}
             loading={loading}
-            currentLiveSessionId={liveSessionId}
+            currentLiveSessionId={liveSessionId._id}
           />
         </LiveLessonBox>
       </Section>

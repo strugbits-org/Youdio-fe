@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PrimaryButton } from "src/components";
+import { SimplePrimaryButton } from "src/components";
 import { layout } from "src/helpers";
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 
@@ -145,7 +145,7 @@ export const ContentBox = styled.div`
   }
 `;
 
-export const CustomPrimaryButton = styled(PrimaryButton)`
+export const CustomPrimaryButton = styled(SimplePrimaryButton)`
   border-radius: 0px;
   max-width: 196px;
   @media only screen and (min-width: ${tablet}) {

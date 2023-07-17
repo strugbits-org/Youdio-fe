@@ -57,7 +57,7 @@ const paymentFormValidate = Yup.object({
   cardNumber: textField({ reqMesg: "Card number is Required" }),
   nameOnCard: textField({ reqMesg: "Name on Card is Required" }),
   countryOrRegion: textField({ reqMesg: "Country is Required" }),
-  paymentAcceptRadio: textField({}),
+  // paymentAcceptRadio: textField({}),
 });
 
 

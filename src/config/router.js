@@ -19,12 +19,12 @@ import Register from "src/screens/Authenticate/Register";
 import LiveClasses from "src/screens/user/LiveClasses";
 import Instructor from "src/screens/user/Instructor";
 import SingleInstructor from "src/screens/user/SingleInstructor";
+import Payment from "src/screens/user/Payment";
 
 // User Dashboard
 import History from "src/screens/user/Dashboard/Screen/HistoryScreen/Index";
 import Membership from "src/screens/user/Dashboard/Screen/MembershipScreen/Index";
 import MyProfile from "src/screens/user/Dashboard/Screen/MyProfileScreen/Index";
-import Payment from "src/screens/user/Dashboard/Screen/PaymentScreen/Index";
 import LiveBooking from "src/screens/user/Dashboard/Screen/LiveBookingScreen/Index";
 import LiveVideo from "src/screens/user/LiveVideo";
 import ForgotPassword from "src/screens/Authenticate/ForgotPassword";
@@ -39,6 +39,7 @@ import AdminDashboard from "src/screens/admin/pages";
 import UserDashboard from "src/screens/user/Dashboard";
 import usePermission from "src/features/hooks/usePermission";
 import useScrollToTop from "src/features/hooks/useScrollToTop";
+import PaymentDetail from "src/screens/user/Dashboard/Screen/PaymentScreen/Index";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 const AllRoutes = () => {
@@ -97,6 +98,7 @@ const AllRoutes = () => {
       <Route path="/live-class/:id" element={<LiveVideo />} />
       <Route path="/videoclasses" element={<VideoClasses />} />
       <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
+      <Route path="/payment" element={<Payment />} />
 
       {/* SINGLE VIDEO */}
       <Route
@@ -119,7 +121,7 @@ const AllRoutes = () => {
       >
         <Route path="membership" element={<Membership />} />
         <Route path="profile" element={<MyProfile />} />
-        <Route path="payment" element={<Payment />} />
+        <Route path="payment" element={<PaymentDetail />} />
         <Route path="history" element={<History />} />
         <Route path="live-booking" element={<LiveBooking />} />
       </Route>

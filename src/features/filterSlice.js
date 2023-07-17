@@ -117,7 +117,6 @@ const filterSlice = createSlice({
     },
     removeFromFilter: (state, action) => {
       const { key, subKey, data } = action.payload;
-      console.log(key, data);
       if (key === filterKeys.duration) {
         state.filterTags = state.filterTags.filter(
           (tag) => tag.key !== key && tag

@@ -16,7 +16,7 @@ import {
 import { paymentFormValidate } from "src/helpers/forms/validateForms";
 import { useSelector } from "react-redux";
 
-const Payment = () => {
+const PaymentDetail = () => {
   const handleSubmit = (data) => {
     console.log(data);
   };
@@ -145,4 +145,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default PaymentDetail;

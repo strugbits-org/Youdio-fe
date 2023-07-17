@@ -9,6 +9,8 @@ import {
   P2,
   InstructorLink,
 } from "src/components";
+import useFetch from "src/features/hooks/useFetch";
+import usePostAPI from "src/features/hooks/usePostAPI";
 const { mobileLarge, laptop, desktop } = layout;
 
 const Card = styled.div`
@@ -167,7 +169,16 @@ const CustomH6 = styled(H6)`
   font-size: clamp(9px, 0.6vw, 12px);
 `;
 
-const LiveBookingCard = ({ bookedSession, _id, disabled }) => {
+const LiveBookingCard = ({
+  bookedSession,
+  _id,
+  disabled,
+  getBookedSession,
+}) => {
+  const { deleteData } = useFetch();
+  const handleCancelBooking = () => {
+    deleteData(`booking/cancel/${_id}`, getBookedSession);
+  };
   return (
     <Card disabled={disabled}>
       <MediaBox>
@@ -223,7 +234,9 @@ const LiveBookingCard = ({ bookedSession, _id, disabled }) => {
           />
           <P2 className="cardP lastP">{bookedSession.description}</P2>
         </div>
-        <CustomPrimaryButton disabled={disabled}>Cancel</CustomPrimaryButton>
+        <CustomPrimaryButton onClick={handleCancelBooking} disabled={disabled}>
+          Cancel
+        </CustomPrimaryButton>
       </ContentBox>
     </Card>
   );

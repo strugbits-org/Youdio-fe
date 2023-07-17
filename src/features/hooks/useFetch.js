@@ -133,28 +133,49 @@ const useFetch = () => {
     }
   };
 
+  // Post
+  const deleteData = async (
+    url,
+    setLocalState
+  ) => {
+     setLoading(true);
+     const headers = await getHeaders(token);
+     try {
+       const response = await apiClient.delete(url, { headers });
+       if (response?.data) {
+         setResponse(response.data);
+         setLoading(false);
+         setError("");
+         setLocalState && setLocalState();
+       }
+     } catch (e) {
+       setLoading(false);
+       setError(e.message);
+     }
+  };
+
   // Get Data For Dynamic page and videos
   const fetchIdAndVideos = async (url, cbFunction, payload) => {
     setLoading(true);
-    console.log({url, cbFunction, payload});
+    console.log({ url, cbFunction, payload });
     const headers = await getHeaders(token);
     try {
       if (typeof url === "object" && url.length > 0) {
         const response = await axios.all(
           url.map((link, ind) => {
-            if (link.method === "post") { 
+            if (link.method === "post") {
               return apiClient
                 .post(link.endpoint, payload[ind], { headers })
                 .then((res) => res)
                 .catch((e) => console.error(e));
             }
-            if (link.method === "get") { 
+            if (link.method === "get") {
               return apiClient
                 .get(link.endpoint, { headers })
                 .then((res) => res)
                 .catch((e) => console.error(e));
             }
-            return false
+            return false;
           })
         );
         const isResponseValid = response.some((val) => val?.data && true);
@@ -189,6 +210,7 @@ const useFetch = () => {
     error,
     success,
     fetchData,
+    deleteData,
     fetchMultipleData,
     postData,
     patchData,

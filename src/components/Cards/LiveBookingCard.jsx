@@ -10,7 +10,7 @@ import {
   InstructorLink,
 } from "src/components";
 import useFetch from "src/features/hooks/useFetch";
-import usePostAPI from "src/features/hooks/usePostAPI";
+import moment from "moment";
 const { mobileLarge, laptop, desktop } = layout;
 
 const Card = styled.div`
@@ -211,7 +211,10 @@ const LiveBookingCard = ({
             <div className="date detail">
               <CustomH6>DATE</CustomH6>
               <ClockTime
-                time={bookedSession.date}
+                time={
+                  bookedSession.date &&
+                  moment(bookedSession.date).format("MM-DD-YYYY")
+                }
                 align={"left"}
                 fontSize={"clamp(11px, 0.7vw, 14px)"}
                 icon={icons.calendarImg}

@@ -5,6 +5,7 @@ import { path } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
 import { InstructorLink } from "src/components";
+import moment from "moment";
 
 export const Card = styled.div``;
 
@@ -62,6 +63,7 @@ function LiveClassCard({ data }) {
     navigate(`${path.liveClass}/${data._id}`, { state: {_id: data._id} });
   };
 
+
   return (
     <Card>
       <CardMedia onClick={handleNavigate}>
@@ -73,7 +75,7 @@ function LiveClassCard({ data }) {
       </CardMedia>
       <CardContent>
         <div className="timeRow">
-          <H4>{data.date}</H4>
+          <H4>{data.date && moment(data.date).format("MM-DD-YYYY")}</H4>
           <H4>{data.time}</H4>
           <ClockTime time={`${data.totalTime} min`} />
         </div>

@@ -9,6 +9,7 @@ import usePostAPI from "src/features/hooks/usePostAPI";
 import { Loader } from "src/components";
 import styled from "styled-components";
 import useFetch from "src/features/hooks/useFetch";
+import InfoPupup from "src/components/InfoPopup";
 const stripePromise = loadStripe(
   "pk_test_51NSIlJCz6A0J32KfawEKMFsfzwVOcuGJSQkJTGcwtbXtYE0jTQFQk628ZlUNP6kApZy8JUlnDYrQPEj1Ksmak1m600VisDRfA7"
 );
@@ -70,10 +71,7 @@ const Payment = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    console.log(paymentIntent);
-    if (postError) {
-      alert(postError)  
-    }
+    
   }, [paymentIntent, postError]);
 
   const planDetails = useMemo(() => {
@@ -83,15 +81,19 @@ const Payment = () => {
     return {};
   }, [res]);
 
+  const handleLink = () => {
+    navigate("/user/membership")
+  }
+
   return (
     <CustomSection backgroundColor="#fff">
       <div className="plan-details">
         <div className="plan-info">
-          <div >
+          <div>
             {planDetails && <H4>{planDetails?.name}</H4>}
             {planDetails && (
               <H4>
-                ${planDetails?.price}/
+                {`$${planDetails?.price}/`}
                 <span style={{ fontSize: "12px" }}>{planDetails?.type}</span>
               </H4>
             )}
@@ -113,6 +115,7 @@ const Payment = () => {
         </Elements>
       )}
       {(paymentIntent || getId) && postLoading && <Loader />}
+      <InfoPupup open={postError} data={postError} handleLink={handleLink} />
     </CustomSection>
   );
 };

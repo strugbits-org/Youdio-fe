@@ -27,7 +27,7 @@ const Container = styled.div`
 const Payment = () => {
   const [searchParams] = useSearchParams();
   const [paymentIntent, setPaymentIntent] = useState(null);
-  const { postData, postLoading } = usePostAPI();
+  const { postData } = usePostAPI();
 
   const { user } = useSelector((state) => state.user);
 
@@ -47,6 +47,7 @@ const Payment = () => {
       return;
     }
     setPaymentIntent({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   const getId = useMemo(() => {

@@ -26,6 +26,7 @@ export const MediaBox = styled.div`
   img {
     width: 100%;
     max-width: 335px;
+    min-width: 185px;
     aspect-ratio: 0.75/1;
     object-fit: cover;
     border-radius: 3px;
@@ -33,6 +34,7 @@ export const MediaBox = styled.div`
   .overlay {
     aspect-ratio: 0.75/1;
     width: 100%;
+    min-width: 185px;
     max-width: 335px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 3px;
@@ -45,6 +47,7 @@ export const MediaBox = styled.div`
     width: clamp(35px, 3.25vw, 65px);
     aspect-ratio: 1/1;
     border: 3px solid #fff;
+    min-width: initial;
     border-radius: 100%;
     background: #fff;
     position: absolute;

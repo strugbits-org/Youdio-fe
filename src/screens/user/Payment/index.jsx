@@ -5,7 +5,7 @@ import { icons } from "src/helpers";
 import { useSelector } from "react-redux";
 import PaymentForm from "./PaymentForm";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { Loader } from "src/components";
@@ -28,11 +28,16 @@ const Payment = () => {
   const [searchParams] = useSearchParams();
   const [paymentIntent, setPaymentIntent] = useState(null);
   const { postData } = usePostAPI();
+  const navigate = useNavigate()
 
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (getId.type === "plan") {
+    if (!getId) {
+      navigate("/page-not-found");
+      return;
+    }
+    if (getId?.type === "plan") {
       const payload = {
         planId: getId.id,
       };
@@ -83,7 +88,7 @@ const Payment = () => {
         eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
         Magna lacus accumsan arcu ultrices varius.
       </P3>
-      {paymentIntent ? (
+      {paymentIntent && getId ? (
         <Elements
           stripe={stripePromise}
           options={

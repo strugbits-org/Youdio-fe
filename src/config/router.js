@@ -40,6 +40,7 @@ import UserDashboard from "src/screens/user/Dashboard";
 import usePermission from "src/features/hooks/usePermission";
 import useScrollToTop from "src/features/hooks/useScrollToTop";
 import PaymentDetail from "src/screens/user/Dashboard/Screen/PaymentScreen/Index";
+import PageNotFound from "src/screens/PageNotFound";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 const AllRoutes = () => {
@@ -142,6 +143,8 @@ const AllRoutes = () => {
         <Route path="add-video" element={<AddVideo />} />
         <Route path="add-live-session" element={<AddLiveSession />} />
       </Route>
+      <Route path="page-not-found" element={<PageNotFound />} />
+      <Route path="/*" element={<PageNotFound />} />
     </Routes>
   );
 };

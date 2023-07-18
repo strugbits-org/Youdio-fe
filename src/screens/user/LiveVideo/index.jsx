@@ -27,6 +27,7 @@ import { useSelector } from "react-redux";
 // import BookingModal from "./BookingModal";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { setUser } from "src/features/userSlice";
+import moment from "moment";
 
 // import Modal from "./Modal";
 
@@ -144,7 +145,9 @@ function LiveVideo() {
                       width="16"
                       height=""
                     />
-                    <P3>{liveSession[1].date}</P3>
+                    <P3>
+                      {liveSession[1].date && moment(liveSession[1].date).format("MM-DD-YYYY")}
+                    </P3>
                   </div>
                 </div>
                 <div className="intensity detail">
@@ -164,7 +167,7 @@ function LiveVideo() {
                 onClick={handleBookNow}
                 disabled={liveSession[1].bookedByMe}
               >
-                {liveSession[1]?.bookedByMe ?  "Booked" : "Book Now"}
+                {liveSession[1]?.bookedByMe ? "Booked" : "Book Now"}
               </CustomPrimaryButton>
             </ContentBox>
           </LiveBookingBox>

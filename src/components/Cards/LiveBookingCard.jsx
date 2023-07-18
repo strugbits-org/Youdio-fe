@@ -38,6 +38,7 @@ const MediaBox = styled.div`
   position: relative;
   img {
     width: 100%;
+    min-width: 147px;
     max-width: 217px;
     aspect-ratio: 0.75/1;
     object-fit: cover;
@@ -46,6 +47,7 @@ const MediaBox = styled.div`
   .overlay {
     aspect-ratio: 0.75/1;
     width: 100%;
+    min-width: 147px;
     max-width: 217px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 3px;

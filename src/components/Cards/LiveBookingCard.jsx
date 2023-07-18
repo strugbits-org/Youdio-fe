@@ -61,6 +61,7 @@ const MediaBox = styled.div`
     aspect-ratio: 1/1;
     border: 3px solid #fff;
     border-radius: 100%;
+    min-width: initial;
     background: #fff;
     position: absolute;
     object-position: center;

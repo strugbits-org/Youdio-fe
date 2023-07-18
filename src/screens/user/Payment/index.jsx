@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { H4, P3 } from "src/components";
-import { icons } from "src/helpers";
-// import { Main, Container } from "./PaymentComponent";
+import { H4, P3, Section } from "src/components";
 import { useSelector } from "react-redux";
 import PaymentForm from "./PaymentForm";
 import { loadStripe } from "@stripe/stripe-js";
@@ -10,25 +8,31 @@ import { Elements } from "@stripe/react-stripe-js";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { Loader } from "src/components";
 import styled from "styled-components";
+import useFetch from "src/features/hooks/useFetch";
 const stripePromise = loadStripe(
   "pk_test_51NSIlJCz6A0J32KfawEKMFsfzwVOcuGJSQkJTGcwtbXtYE0jTQFQk628ZlUNP6kApZy8JUlnDYrQPEj1Ksmak1m600VisDRfA7"
 );
 
-const Container = styled.div`
+const CustomSection = styled(Section)`
   max-width: 540px;
   margin-inline: auto;
   min-height: 740px;
-
-  .plan-info{
-    text-align: center;
+  .plan-details {
+    .plan-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
   }
 `;
 
 const Payment = () => {
   const [searchParams] = useSearchParams();
   const [paymentIntent, setPaymentIntent] = useState(null);
-  const { postData } = usePostAPI();
-  const navigate = useNavigate()
+  const { postData, postError, postLoading } = usePostAPI();
+  const { fetchData, res } = useFetch();
+  const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.user);
 
@@ -49,8 +53,10 @@ const Payment = () => {
         undefined,
         setPaymentIntent
       );
+      fetchData(`/subscriptionPlan/${getId.id}`);
       return;
     }
+    fetchData(`/subscriptionPlan/${user.subscription.plan}`);
     setPaymentIntent({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
@@ -65,30 +71,38 @@ const Payment = () => {
 
   useEffect(() => {
     console.log(paymentIntent);
-  }, [paymentIntent]);
+    if (postError) {
+      alert(postError)  
+    }
+  }, [paymentIntent, postError]);
+
+  const planDetails = useMemo(() => {
+    if (res && res.subscriptionPlan) {
+      return res.subscriptionPlan;
+    }
+    return {};
+  }, [res]);
 
   return (
-    <Container>
-      <div className="plan-info">
-        <img src={icons.youdio} alt="youdio" width="130px" height="90px" />
-        <div>
-          <H4>Monthly</H4>
-          <H4>
-            20$/ <span style={{ fontSize: "12px" }}>month</span>
-          </H4>
+    <CustomSection backgroundColor="#fff">
+      <div className="plan-details">
+        <div className="plan-info">
+          <div >
+            {planDetails && <H4>{planDetails?.name}</H4>}
+            {planDetails && (
+              <H4>
+                ${planDetails?.price}/
+                <span style={{ fontSize: "12px" }}>{planDetails?.type}</span>
+              </H4>
+            )}
+          </div>
         </div>
+        {planDetails?.description?.length > 0 &&
+          planDetails.description.map((desc) => {
+            return <P3>{desc}</P3>;
+          })}
       </div>
-      <P3>
-        Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
-        eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
-        Magna lacus accumsan arcu ultrices varius.
-      </P3>
-      <P3>
-        Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
-        eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
-        Magna lacus accumsan arcu ultrices varius.
-      </P3>
-      {paymentIntent && getId ? (
+      {paymentIntent && getId && (
         <Elements
           stripe={stripePromise}
           options={
@@ -97,40 +111,9 @@ const Payment = () => {
         >
           <PaymentForm user={user} intent={paymentIntent} plan={getId} />
         </Elements>
-      ) : (
-        <Loader />
       )}
-    </Container>
-    // <Container>
-    //   <Main>
-    //     <Elements stripe={stripePromise} options={options}>
-    //       <PaymentForm user={user} />
-    //     </Elements>
-    //   </Main>
-    //   <Main>
-    //     <div className="payment-left-top-div">
-    //       <img src={icons.youdio} alt="youdio" width="130px" height="90px" />
-    //       <div>
-    //         <H4>Monthly</H4>
-    //         <H4>
-    //           20$/
-    //           <span style={{ fontSize: "12px" }}>month</span>
-    //         </H4>
-    //       </div>
-    //     </div>
-
-    //     <P3>
-    //       Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
-    //       eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
-    //       Magna lacus accumsan arcu ultrices varius.
-    //     </P3>
-    //     <P3>
-    //       Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
-    //       eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
-    //       Magna lacus accumsan arcu ultrices varius.
-    //     </P3>
-    //   </Main>
-    // </Container>
+      {(paymentIntent || getId) && postLoading && <Loader />}
+    </CustomSection>
   );
 };
 

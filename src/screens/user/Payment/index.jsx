@@ -1,72 +1,131 @@
-import React, { useEffect, useMemo } from "react";
-// import { H4, P3 } from "src/components";
-// import { icons } from "src/helpers";
+import React, { useEffect, useMemo, useState } from "react";
+import { H4, P3 } from "src/components";
+import { icons } from "src/helpers";
 // import { Main, Container } from "./PaymentComponent";
 import { useSelector } from "react-redux";
 import PaymentForm from "./PaymentForm";
 import { loadStripe } from "@stripe/stripe-js";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js";
-// import { Elements } from "@stripe/react-stripe-js";
+import usePostAPI from "src/features/hooks/usePostAPI";
+import { Loader } from "src/components";
+import styled from "styled-components";
 const stripePromise = loadStripe(
   "pk_test_51NSIlJCz6A0J32KfawEKMFsfzwVOcuGJSQkJTGcwtbXtYE0jTQFQk628ZlUNP6kApZy8JUlnDYrQPEj1Ksmak1m600VisDRfA7"
 );
-// process.env.
+
+const Container = styled.div`
+  max-width: 540px;
+  margin-inline: auto;
+  min-height: 740px;
+
+  .plan-info{
+    text-align: center;
+  }
+`;
 
 const Payment = () => {
-  const location = useLocation();
-  const options = {
-    clientSecret:
-      "pi_3NUtrICz6A0J32Kf1MmR4Cvv_secret_7wjVISvS9WNbQnTolHCKHIXRB",
-  };
+  const [searchParams] = useSearchParams();
+  const [paymentIntent, setPaymentIntent] = useState(null);
+  const { postData, postLoading } = usePostAPI();
 
   const { user } = useSelector((state) => state.user);
 
-  useEffect(() => {}, [location]);
+  useEffect(() => {
+    if (getId.type === "plan") {
+      const payload = {
+        planId: getId.id,
+      };
+      postData(
+        "subscription/create-payment-intent",
+        payload,
+        undefined,
+        undefined,
+        undefined,
+        setPaymentIntent
+      );
+      return;
+    }
+    setPaymentIntent({});
+  }, [searchParams]);
 
-//   const link = useMemo(() => {
-//     let path = location.pathname;
-//     path = path.slice(path.lastIndexOf("/") + 1);
-//     const planId = path;
-//     return { _id: path, link };
-//   }, [location]);
-    return (
-      <div style={{maxWidth: '450px', marginInline:"auto", minHeight:"740px"}}>
-        <Elements stripe={stripePromise} options={options} >
-          <PaymentForm user={user} />
-        </Elements>
+  const getId = useMemo(() => {
+    const planId = searchParams.get("plan");
+    const sessionId = searchParams.get("session");
+    if (planId) return { id: planId, type: "plan" };
+    if (sessionId) return { id: sessionId, type: "session" };
+    return null;
+  }, [searchParams]);
+
+  useEffect(() => {
+    console.log(paymentIntent);
+  }, [paymentIntent]);
+
+  return (
+    <Container>
+      <div className="plan-info">
+        <img src={icons.youdio} alt="youdio" width="130px" height="90px" />
+        <div>
+          <H4>Monthly</H4>
+          <H4>
+            20$/ <span style={{ fontSize: "12px" }}>month</span>
+          </H4>
+        </div>
       </div>
-      // <Container>
-      //   <Main>
-      //     <Elements stripe={stripePromise} options={options}>
-      //       <PaymentForm user={user} />
-      //     </Elements>
-      //   </Main>
-      //   <Main>
-      //     <div className="payment-left-top-div">
-      //       <img src={icons.youdio} alt="youdio" width="130px" height="90px" />
-      //       <div>
-      //         <H4>Monthly</H4>
-      //         <H4>
-      //           20$/
-      //           <span style={{ fontSize: "12px" }}>month</span>
-      //         </H4>
-      //       </div>
-      //     </div>
+      <P3>
+        Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
+        eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
+        Magna lacus accumsan arcu ultrices varius.
+      </P3>
+      <P3>
+        Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
+        eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
+        Magna lacus accumsan arcu ultrices varius.
+      </P3>
+      {paymentIntent ? (
+        <Elements
+          stripe={stripePromise}
+          options={
+            paymentIntent ? { clientSecret: paymentIntent.clientSecret } : {}
+          }
+        >
+          <PaymentForm user={user} intent={paymentIntent} plan={getId} />
+        </Elements>
+      ) : (
+        <Loader />
+      )}
+    </Container>
+    // <Container>
+    //   <Main>
+    //     <Elements stripe={stripePromise} options={options}>
+    //       <PaymentForm user={user} />
+    //     </Elements>
+    //   </Main>
+    //   <Main>
+    //     <div className="payment-left-top-div">
+    //       <img src={icons.youdio} alt="youdio" width="130px" height="90px" />
+    //       <div>
+    //         <H4>Monthly</H4>
+    //         <H4>
+    //           20$/
+    //           <span style={{ fontSize: "12px" }}>month</span>
+    //         </H4>
+    //       </div>
+    //     </div>
 
-      //     <P3>
-      //       Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
-      //       eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
-      //       Magna lacus accumsan arcu ultrices varius.
-      //     </P3>
-      //     <P3>
-      //       Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
-      //       eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
-      //       Magna lacus accumsan arcu ultrices varius.
-      //     </P3>
-      //   </Main>
-      // </Container>
-    );
+    //     <P3>
+    //       Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
+    //       eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
+    //       Magna lacus accumsan arcu ultrices varius.
+    //     </P3>
+    //     <P3>
+    //       Lorem ipsum dolor sit amet consectetur. In tristique nunc in tellus id
+    //       eu. Porttitor egestas viverra ultricies tincidunt nulla in nisl eget.
+    //       Magna lacus accumsan arcu ultrices varius.
+    //     </P3>
+    //   </Main>
+    // </Container>
+  );
 };
 
 export default Payment;

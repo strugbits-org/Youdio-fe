@@ -1,63 +1,73 @@
-import React from "react";
-import { P3, H2 } from "src/components";
-import {
-  CardElement,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import React, { useState } from "react";
+import { P3, H2, Error } from "src/components";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import {
   Buttons,
   DisbaleEmailBox,
   FormRow,
   SaveButton,
 } from "../Dashboard/Screen/PaymentScreen/PaymentComponent";
+import styled from "styled-components";
+import usePostAPI from "src/features/hooks/usePostAPI";
+import { useNavigate } from "react-router-dom";
 
-function PaymentForm({ user }) {
+
+const Form = styled.form`
+  h2{
+    margin-block: 16px;
+    text-align: center;
+  }
+`
+const Box = styled.div`
+  .card-element {
+    border: 1px solid grey;
+    padding: 16px 16px;
+    margin-bottom: 4px;
+  }
+`;
+
+function PaymentForm({ user, intent, plan }) {
   const elements = useElements();
   const stripe = useStripe();
+  const [cardError, setCardError] = useState("");
+  const navigate = useNavigate();
+  const { postData, postLoading } = usePostAPI();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) {
       return;
     }
-    const cardElement = elements.getElement(PaymentElement);
-    console.log(cardElement);
+    const cardElement = elements.getElement(CardElement);
+    const result = await stripe.createToken(cardElement);
 
-    stripe
-      .createToken(cardElement)
-      .then((res) => {
-        console.log({res});
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
-    // const result = await stripe.confirmPayment({
-    //   elements,
-    //   // confirmParams: {
-    //   //   return_url: "https://www.google.com",
-    //   // },
-    //     redirect: "if_required",
-    // });
-
-    // if (result.error) {
-    //   console.log("Error", result.error);
-    // } else {
-    //   console.log("Success", result);
-    //   // const { token, err } = await stripe.createToken(cardElement);
-    //   stripe.createToken(cardElement).then((res) => {
-    //     console.log(res);
-    //    }).catch(e => {
-    //     console.log(e);
-    //   })
-    //   // token && console.log({ token });
-    //   // err && console.log({ err });
-    // }
+    if (result.error) {
+      setCardError(result.error.message);
+    } else {
+      setCardError("");
+      let payload = {};
+      let apiUrl = "subscription/subscribe";
+      payload = {
+        token: result.token.id,
+        planId: plan.id,
+        paymentIntentId: intent.paymentIntentId,
+      };
+      if (plan.type === "session") {
+        payload = {
+          token: {
+            id: result.token.id,
+          },
+          liveSession: plan.id,
+        };
+        apiUrl = "booking/buySingleSession";
+      }
+      postData(apiUrl, payload, undefined, undefined, undefined, () =>
+        navigate("/user/profile")
+      );
+    }
   };
 
   return (
-    <form>
+    <Form>
       <H2>Enter Payment Details</H2>
       <FormRow>
         <DisbaleEmailBox>
@@ -65,13 +75,16 @@ function PaymentForm({ user }) {
           <P3 className="email">{user.email}</P3>
         </DisbaleEmailBox>
       </FormRow>
-      <PaymentElement />
+      <Box id="box">
+        <CardElement className="card-element" />
+        {cardError && <Error>{cardError}</Error>}
+      </Box>
       <Buttons>
-        <SaveButton type="submit" onClick={handleSubmit}>
+        <SaveButton disabled={postLoading} type="submit" onClick={handleSubmit}>
           Start Trial
         </SaveButton>
       </Buttons>
-    </form>
+    </Form>
   );
 }
 

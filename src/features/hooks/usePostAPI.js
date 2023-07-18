@@ -47,14 +47,16 @@ const usePostAPI = () => {
         setLoading(false);
         setSuccess(true);
         cbFunction && dispatch(cbFunction(response.data));
-        setLocalState && setLocalState();
+        setLocalState && setLocalState(response.data);
         if (response.data?.message) notify("success", response.data.message);
+        if (response.data?.msg) notify("success", response.data.msg);
       }
     } catch (e) {
       setLoading(false);
       setSuccess(false);
       setError(e.message);
-      notify("error", e.message);
+      e.message && notify("error", e.message);
+      e.errors && e.errors.length > 0 && notify("error", e.errors[0].msg);
     }
   };
 

@@ -19,7 +19,7 @@ import { Heading2 } from "src/screens/user/Dashboard/Components/Heading";
 import { H5 } from "src/components";
 import userIcon from "src/assets/icons/user.png";
 
-function ProfileForm({ user, content }) {
+function ProfileForm({ user }) {
   const { loading, error, success, patchData } = useFetch();
   const formikRef = useRef();
   useEffect(() => {
@@ -90,7 +90,7 @@ function ProfileForm({ user, content }) {
         {(formik) => (
           <Form>
             <FormRow>
-              <Label htmlFor="name">{content.name}</Label>
+              <Label htmlFor="name">Full Name</Label>
               <FieldInput
                 id="name"
                 name="name"
@@ -101,7 +101,7 @@ function ProfileForm({ user, content }) {
             <HorizontalLine2 />
 
             <FormRow>
-              <Label htmlFor="nickName">{content.nickName}</Label>
+              <Label htmlFor="nickName">Nick Name</Label>
               <FieldInput
                 id="nickName"
                 name="nickName"
@@ -112,7 +112,7 @@ function ProfileForm({ user, content }) {
             <HorizontalLine2 />
 
             <FormRow>
-              <Label htmlFor="userEmail">{content.email}</Label>
+              <Label htmlFor="userEmail">Email</Label>
               <FieldInput
                 id="userEmail"
                 name="userEmail"
@@ -124,7 +124,7 @@ function ProfileForm({ user, content }) {
             <HorizontalLine2 />
 
             <FormRow>
-              <Label htmlFor="oldPassword">{content.currentPassword}</Label>
+              <Label htmlFor="oldPassword">Current Password</Label>
               <FieldPassword
                 id="oldPassword"
                 name="oldPassword"
@@ -135,7 +135,7 @@ function ProfileForm({ user, content }) {
             <HorizontalLine2 />
 
             <FormRow>
-              <Label htmlFor="newPassword">{content.newPassword}</Label>
+              <Label htmlFor="newPassword">New Password</Label>
               <FieldPassword
                 id="newPassword"
                 name="newPassword"
@@ -147,7 +147,7 @@ function ProfileForm({ user, content }) {
 
             <Buttons>
               <SaveButton type="submit" disabled={loading}>
-                {content.saveBTn}
+                Save
               </SaveButton>
             </Buttons>
           </Form>

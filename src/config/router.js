@@ -43,6 +43,7 @@ import PaymentDetail from "src/screens/user/Dashboard/Screen/PaymentScreen/Index
 import PageNotFound from "src/screens/PageNotFound";
 import LiveSessions from "src/screens/admin/pages/LiveSessions";
 import VideoListing from "src/screens/admin/pages/VideoListing";
+import Profile from "src/screens/admin/pages/Profile";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 const AllRoutes = () => {
@@ -149,7 +150,7 @@ const AllRoutes = () => {
         }
       >
         {/* <Route path="/" index={true} element={<AddVideo />} /> */}
-        <Route path="admin" element={<AddVideo />} />
+        <Route path="admin" element={<Profile />} />
         <Route path="live-sessions" element={<LiveSessions />} />
         <Route path="video-listing" element={<VideoListing />} />
         <Route path="add-instructor" element={<AddInstructor />} />

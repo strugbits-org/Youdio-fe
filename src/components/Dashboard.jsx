@@ -6,6 +6,7 @@ import { layout } from "src/helpers";
 import SideBar from "src/components/Sidebar";
 import { HorizontalLine } from "src/components/BreakLines";
 import useWindowSize from "src/features/hooks/useInnerWidth";
+import { useSelector } from "react-redux";
 
 const { laptop, desktop, mobile } = layout;
 const CustomSection = styled(Section)`
@@ -46,6 +47,7 @@ function Dashboard({ menu }) {
   const { width } = useWindowSize();
   const [active, setActive] = useState("");
   const location = useLocation();
+  const { user } = useSelector(state => state.user)
 
   useEffect(() => {
     if (location.state?.activePath) {
@@ -61,7 +63,7 @@ function Dashboard({ menu }) {
   return (
     <CustomSection paddingBlock="0px" backgroundColor="white">
       <DashboardHeader>
-        <H1>{active}</H1>
+        <H1>{ user && user.role === 'admin' ? "Admin" : "My Profile"  }</H1>
         <HorizontalLine />
       </DashboardHeader>
       <Container>

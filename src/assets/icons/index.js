@@ -51,6 +51,10 @@ import videoThumbnail from "src/assets/sample/VideoThumbnail.jpg"
 import videoLock from "src/assets/icons/VideoLock.svg"
 
 import videoCamera from "src/assets/icons/videoCamera.svg"
+import bin from "src/assets/icons/bin.svg"
+import pen from "src/assets/icons/pen.svg"
+import crossDark from "src/assets/icons/crossDark.svg"
+import binGreen from "src/assets/icons/binGreen.svg";
 
 
 const icons = {
@@ -101,6 +105,10 @@ const icons = {
   videoThumbnail,
   videoLock,
   videoCamera,
+  bin,
+  binGreen,
+  pen,
+  crossDark,
 };
 
 export default icons

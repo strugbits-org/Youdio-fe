@@ -5,4 +5,4 @@ function AdminDashboard() {
   return <Dashboard menu={adminDashboardMenu} />;
 }
 
-export default AdminDashboard;
+export default AdminDashboard; 

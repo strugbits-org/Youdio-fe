@@ -7,6 +7,7 @@ const roles = {
 
 const permissions = {
   "user.dashboard": [roles.user],
+  "user.checkout":[roles.user],
   "admin.dashboard": [roles.admin],
 };
 

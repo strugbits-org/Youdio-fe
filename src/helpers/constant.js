@@ -31,15 +31,15 @@ export const adminDashboardMenu = [
   },
   {
     name: "Premium Instrutors",
-    path: "",
+    path: "/dashboard/premium-instructors",
   },
   {
     name: "Live Sessions",
-    path: "",
+    path: "/dashboard/live-sessions",
   },
   {
     name: "Video Listing",
-    path: "",
+    path: "/dashboard/video-listing",
   },
   {
     name: "Add Video",

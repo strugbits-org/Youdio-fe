@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { layout } from "src/helpers";
 import { Loader, NoFoundBox, H3 } from "src/components";
@@ -29,15 +29,19 @@ const Box = styled.div`
   }
 `;
 
-function VideoClassesCards({ videos, loading }) {
+function VideoClassesCards({ videos, loading, hoverChildren }) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
 
-      {!loading && videos.length > 0 ? (
+      {!loading && videos?.length > 0 ? (
         <Box>
           {videos.map((val) => (
-            <VideoClassCard key={`card-${val._id}`} data={val} />
+            <VideoClassCard
+              key={`card-${val._id}`}
+              data={val}
+              hoverChildren={hoverChildren}
+            />
           ))}
         </Box>
       ) : (

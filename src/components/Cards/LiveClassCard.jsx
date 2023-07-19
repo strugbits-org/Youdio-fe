@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { H3, H4, ClockTime, P3 } from "src/components";
-import { path } from "src/helpers";
+import { icons, path } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
 import { InstructorLink } from "src/components";
@@ -17,6 +17,15 @@ export const CardMedia = styled.div`
     aspect-ratio: 0.83/1;
     object-fit: cover;
     object-position: center;
+    cursor: pointer;
+  }
+
+  &:hover {
+    .hoverBox {
+      display: flex;
+      transition: var(--transition1s);
+      
+    }
   }
 `;
 export const CardContent = styled.div`
@@ -27,21 +36,20 @@ export const CardContent = styled.div`
     flex-wrap: wrap;
     gap: 8px;
   }
-  h3{
+  h3 {
     text-align: left;
     margin-block: 6px 12px;
   }
-  .profileRow{
+  .profileRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
   }
-  .detail{
+  .detail {
     color: var(--backgroundGrey);
     max-width: 482px;
   }
-  
 `;
 
 export const Tag = styled.span`
@@ -53,25 +61,47 @@ export const Tag = styled.span`
   position: absolute;
 `;
 
-function LiveClassCard({ data }) {
+const HoverBox = styled.div`
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  width: 100%;
+  /* height: 100%; */
+  aspect-ratio: 0.83/1;
+  top: 0px;
+  left: 0px;
+  transition: var(--transition1s);
+`;
+
+function LiveClassCard({ data, hoverChildren }) {
   const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
     return data.intensity.slice(-1);
   }, [data]);
 
   const handleNavigate = () => {
-    navigate(`${path.liveClass}/${data._id}`, { state: {_id: data._id} });
+    navigate(`${path.liveClass}/${data._id}`, { state: { _id: data._id } });
   };
-
 
   return (
     <Card>
-      <CardMedia onClick={handleNavigate}>
-        <img src={data.thumbnail} alt={data.title} width="100%" height="auto" />
+      <CardMedia isHoverBox={hoverChildren ? true : false}>
+        <img
+          onClick={!hoverChildren ? handleNavigate : () => {}}
+          src={data.thumbnail}
+          alt={data.title}
+          width="100%"
+          height="auto"
+        />
         <Tag>
           <H4>{data.category.name}</H4>
-          {/* <H4>{new Date(data.date).toDateString()}</H4> */}
         </Tag>
+        {/* <H4>{new Date(data.date).toDateString()}</H4> */}
+        {hoverChildren && (
+          <HoverBox className="hoverBox">{hoverChildren}</HoverBox>
+        )}
       </CardMedia>
       <CardContent>
         <div className="timeRow">

@@ -30,17 +30,27 @@ const Box = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
-function LiveClassesCards({ classes, loading, currentLiveSessionId }) {
+function LiveClassesCards({
+  classes,
+  loading,
+  currentLiveSessionId,
+  hoverChildren,
+}) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
       {!loading && classes.length > 0 ? (
         <Box>
-          {classes.map(
-            (val) =>
-              val._id !== currentLiveSessionId ? (
-                <LiveClassCard key={`card-${val._id}`} data={val} />
-              ) : ""
+          {classes.map((val) =>
+            val._id !== currentLiveSessionId ? (
+              <LiveClassCard
+                key={`card-${val._id}`}
+                data={val}
+                hoverChildren={hoverChildren}
+              />
+            ) : (
+              ""
+            )
           )}
         </Box>
       ) : (

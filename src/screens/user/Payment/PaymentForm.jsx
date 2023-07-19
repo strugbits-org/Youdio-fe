@@ -72,7 +72,7 @@ function PaymentForm({ user, intent, plan }) {
       <FormRow>
         <DisbaleEmailBox>
           <P3>Email</P3>
-          <P3 className="email">{user.email}</P3>
+          <P3 className="email">{user?.email}</P3>
         </DisbaleEmailBox>
       </FormRow>
       <Box id="box">

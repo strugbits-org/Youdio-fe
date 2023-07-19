@@ -41,6 +41,8 @@ import usePermission from "src/features/hooks/usePermission";
 import useScrollToTop from "src/features/hooks/useScrollToTop";
 import PaymentDetail from "src/screens/user/Dashboard/Screen/PaymentScreen/Index";
 import PageNotFound from "src/screens/PageNotFound";
+import LiveSessions from "src/screens/admin/pages/LiveSessions";
+import VideoListing from "src/screens/admin/pages/VideoListing";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 const AllRoutes = () => {
@@ -99,7 +101,12 @@ const AllRoutes = () => {
       <Route path="/live-class/:id" element={<LiveVideo />} />
       <Route path="/videoclasses" element={<VideoClasses />} />
       <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
-      <Route path="/payment" element={<Payment />} />
+      <Route
+        path="/payment"
+        element={
+          <ProtectedRoute children={<Payment />} permission="user.checkout" />
+        }
+      />
 
       {/* SINGLE VIDEO */}
       <Route
@@ -139,6 +146,8 @@ const AllRoutes = () => {
       >
         {/* <Route path="/" index={true} element={<AddVideo />} /> */}
         <Route path="admin" element={<AddVideo />} />
+        <Route path="live-sessions" element={<LiveSessions />} />
+        <Route path="video-listing" element={<VideoListing />} />
         <Route path="add-instructor" element={<AddInstructor />} />
         <Route path="add-video" element={<AddVideo />} />
         <Route path="add-live-session" element={<AddLiveSession />} />

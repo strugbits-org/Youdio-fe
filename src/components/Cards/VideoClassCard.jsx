@@ -5,9 +5,9 @@ import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
 import { path } from "src/helpers";
 
-export const Card = styled.div``;
+const Card = styled.div``;
 
-export const CardMedia = styled.div`
+const CardMedia = styled.div`
   margin-bottom: 18px;
   position: relative;
   img {
@@ -16,8 +16,15 @@ export const CardMedia = styled.div`
     object-fit: cover;
     object-position: center;
   }
+
+  &:hover {
+    .hoverBox {
+      display: flex;
+      transition: var(--transition1s);
+    }
+  }
 `;
-export const CardContent = styled.div`
+const CardContent = styled.div`
   .timeRow {
     display: flex;
     justify-content: space-between;
@@ -40,7 +47,7 @@ export const CardContent = styled.div`
   }
 `;
 
-export const Tag = styled.span`
+const Tag = styled.span`
   background: var(--backgroundGreen);
   color: var(--textHeadingWhite);
   padding: 4px 1.5vw;
@@ -49,7 +56,20 @@ export const Tag = styled.span`
   position: absolute;
 `;
 
-function VideoClassCard({ data }) {
+const HoverBox = styled.div`
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 1.64/1;
+  top: 0px;
+  left: 0px;
+  transition: var(--transition1s);
+`;
+
+function VideoClassCard({ data, hoverChildren }) {
   const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
     return data.intensity.slice(-1);
@@ -61,12 +81,21 @@ function VideoClassCard({ data }) {
 
   return (
     <Card>
-      <CardMedia onClick={handleNavigate}>
-        <img src={data.thumbnail} alt={data.title} width="100%" height="auto" />
+      <CardMedia isHoverBox={hoverChildren ? true : false}>
+        <img
+          src={data.thumbnail}
+          alt={data.title}
+          onClick={!hoverChildren ? handleNavigate : () => {}}
+          width="100%"
+          height="auto"
+        />
         <Tag>
           <H4>{data.category}</H4>
-          {/* <H4>{new Date(data.date).toDateString()}</H4> */}
         </Tag>
+        {/* <H4>{new Date(data.date).toDateString()}</H4> */}
+        {hoverChildren && (
+          <HoverBox className="hoverBox">{hoverChildren}</HoverBox>
+        )}
       </CardMedia>
       <CardContent>
         <div className="timeRow">

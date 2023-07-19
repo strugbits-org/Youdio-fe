@@ -36,7 +36,7 @@ function VideoListing() {
     navigate("/");
   };
   const handleAddSession = () => {
-    navigate("/");
+    navigate("/dashboard/add-video");
   };
   const handleClose = () => {
     setOpen(!open);

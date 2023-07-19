@@ -132,6 +132,10 @@ const AllRoutes = () => {
         <Route path="payment" element={<PaymentDetail />} />
         <Route path="history" element={<History />} />
         <Route path="live-booking" element={<LiveBooking />} />
+        <Route
+          path="*"
+          element={<PageNotFound width="528px" height="60dvh" />}
+        />
       </Route>
 
       {/* Admin Dashboard */}
@@ -151,6 +155,10 @@ const AllRoutes = () => {
         <Route path="add-instructor" element={<AddInstructor />} />
         <Route path="add-video" element={<AddVideo />} />
         <Route path="add-live-session" element={<AddLiveSession />} />
+        <Route
+          path="*"
+          element={<PageNotFound width="528px" height="60dvh" />}
+        />
       </Route>
       <Route path="page-not-found" element={<PageNotFound />} />
       <Route path="/*" element={<PageNotFound />} />

@@ -42,8 +42,8 @@ export const adminDashboardMenu = [
     path: "/dashboard/video-listing",
   },
   {
-    name: "Add Video",
-    path: "/dashboard/add-video",
+    name: "Feature Lesson",
+    path: "/dashboard/feature-lesson",
   },
 ];
 

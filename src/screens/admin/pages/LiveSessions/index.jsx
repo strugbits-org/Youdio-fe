@@ -41,7 +41,7 @@ function LiveSessions() {
     navigate("/");
   };
   const handleAddSession = () => {
-    navigate("/");
+    navigate("/dashboard/add-live-session");
   };
   const handleClose = () => {
     setOpen(!open)

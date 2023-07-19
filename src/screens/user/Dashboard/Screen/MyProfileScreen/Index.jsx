@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { profileScreenStaticContent as content } from "./Constant";
 import { useSelector } from "react-redux";
 import ProfileForm from "./ProfileForm";
 import useFetch from "src/features/hooks/useFetch";
@@ -17,7 +16,7 @@ const MyProfile = () => {
 
   return (
     <div>
-      <ProfileForm user={user} content={content} />
+      <ProfileForm user={user}  />
     </div>
   );
 };

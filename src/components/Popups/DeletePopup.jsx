@@ -5,7 +5,7 @@ import Fade from "@mui/material/Fade";
 import styled from "styled-components";
 import { icons } from "src/helpers";
 import { layout } from "src/helpers";
-import { H3, IconButton, P1, P2, PrimaryButton } from "src/components";
+import { H3, IconButton, P2, PrimaryButton } from "src/components";
 const { desktop } = layout;
 
 const Box = styled.div`

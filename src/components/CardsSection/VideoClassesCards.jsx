@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { layout } from "src/helpers";
 import { Loader, NoFoundBox, H3 } from "src/components";

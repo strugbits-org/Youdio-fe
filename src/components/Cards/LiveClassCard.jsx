@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { H3, H4, ClockTime, P3 } from "src/components";
-import { icons, path } from "src/helpers";
+import { path } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
 import { InstructorLink } from "src/components";

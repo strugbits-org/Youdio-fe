@@ -16,6 +16,7 @@ function VideoListing() {
   const navigate = useNavigate();
   useEffect(() => {
     postData("video/filter", resetFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const videos = useMemo(() => {
     if (res && res.videos.length > 0) {

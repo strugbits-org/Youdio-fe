@@ -17,6 +17,7 @@ function LiveSessions() {
   const navigate = useNavigate();
   useEffect(() => {
     postData("liveSession/get", resetFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const liveSession = useMemo(() => {
     if (res && res.liveSessions.length > 0) {

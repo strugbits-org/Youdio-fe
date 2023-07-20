@@ -18,21 +18,23 @@ import {
   DropDownInput,
   TextArea,
 } from "src/components/AdminInput/AdminInput";
-import { liveSessionvalidate } from "src/helpers/forms/AdminValidateForm";
 import { setInstructors, setStyles } from "src/features/filterSlice";
+import { liveSessionValidateForm } from "src/helpers/forms/validateForms";
+import { timeZones } from "src/helpers/constant";
 
 const AddLiveSession = () => {
   const initialValues = {
     category: "",
     date: "",
     title: "",
-    instructor: "",
+    trainer: "",
     difficulty: "",
     intensity: "",
     filter: "",
     totalTime: "",
-    zoomLink: "",
-    time: "",
+    timeZone: "",
+    start: "",
+    end: "",
     description: "",
     thumbnail: "",
   };
@@ -49,10 +51,15 @@ const AddLiveSession = () => {
   };
 
   const handleSubmit = (data, action) => {
+    const copyData = { ...data };
+    copyData.time = `${copyData.start} - ${copyData.end}`;
+    delete copyData.start;
+    delete copyData.end;
+
     const formData = new FormData();
-    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    Object.keys(copyData).forEach((key) => formData.append(key, copyData[key]));
     postData(
-      "video/upload-video",
+      "liveSession/create",
       formData,
       undefined,
       undefined,
@@ -113,7 +120,7 @@ const AddLiveSession = () => {
     return styles?.length > 0
       ? styles.map((val) => {
           return {
-            value: val.category,
+            value: val._id,
             label: val.category,
           };
         })
@@ -121,7 +128,7 @@ const AddLiveSession = () => {
   }, [styles]);
 
   const subCategoriesOption = useMemo(() => {
-    const getId = styles.filter((val) => val.category === category && val);
+    const getId = styles.filter((val) => val._id === category && val);
     return getId.length === 1
       ? getId[0].name.map((val) => {
           return {
@@ -138,7 +145,7 @@ const AddLiveSession = () => {
         <H2>Live Session</H2>
         <Formik
           initialValues={initialValues}
-          validationSchema={liveSessionvalidate}
+          validationSchema={liveSessionValidateForm}
           onSubmit={handleSubmit}
           innerRef={formikRef}
         >
@@ -149,7 +156,6 @@ const AddLiveSession = () => {
                   <DropDownInput
                     label="Category"
                     id="category"
-                    autofill
                     name="category"
                     type="text"
                     placeholder="select"
@@ -166,7 +172,6 @@ const AddLiveSession = () => {
                   <DropDownInput
                     label="Filter"
                     id="filter"
-                    autofill
                     name="filter"
                     type="text"
                     placeholder="Core"
@@ -183,7 +188,6 @@ const AddLiveSession = () => {
                   <FieldInput
                     label="Title"
                     id="title"
-                    autofill
                     name="title"
                     type="text"
                     placeholder="Live Back Press"
@@ -195,17 +199,17 @@ const AddLiveSession = () => {
                     disabled={loading}
                   />
                   <DropDownInput
-                    label="Instructor"
-                    id="instructor"
+                    label="Trainer"
+                    id="trainer"
                     autofill
-                    name="instructor"
+                    name="trainer"
                     type="text"
                     placeholder="e.g. Elizabeth Lisa"
                     style={{ fontSize: "16px" }}
                     options={instructorsOption}
                     value={formik.values.trainer}
                     onChange={(e) => {
-                      formik.setFieldValue("instructor", e.target.value);
+                      formik.setFieldValue("trainer", e.target.value);
                     }}
                     disabled={loading}
                   />
@@ -214,7 +218,6 @@ const AddLiveSession = () => {
                   <DropDownInput
                     label="Difficulty"
                     id="difficulty"
-                    autofill
                     name="difficulty"
                     type="text"
                     placeholder="Medium"
@@ -229,7 +232,6 @@ const AddLiveSession = () => {
                   <DropDownInput
                     label="Intensity"
                     id="intensity"
-                    autofill
                     name="intensity"
                     type="text"
                     placeholder="Level 1"
@@ -246,9 +248,9 @@ const AddLiveSession = () => {
                   <FieldInput
                     label="Date"
                     id="date"
-                    autofill
                     name="date"
                     type="date"
+                    min={String(new Date().toISOString().split("T")[0])}
                     placeholder="dd/mm/yy"
                     style={{ fontSize: "16px" }}
                     value={formik.values.date}
@@ -271,91 +273,78 @@ const AddLiveSession = () => {
                   />
                 </FormRow>
                 <FormRow>
+                  <div className="forTime">
+                    <FieldInput
+                      label="Start Time"
+                      id="start"
+                      name="start"
+                      type="time"
+                      style={{ fontSize: "16px" }}
+                      onChange={(e) => {
+                        formik.setFieldValue("start", e.target.value);
+                      }}
+                      disabled={loading}
+                    />
+                    <FieldInput
+                      label="End Time"
+                      id="end"
+                      name="end"
+                      type="time"
+                      style={{ fontSize: "16px" }}
+                      onChange={(e) => {
+                        formik.setFieldValue("end", e.target.value);
+                      }}
+                      disabled={loading}
+                    />
+                  </div>
                   <DropDownInput
-                    label="You Want to Feature this Video?"
-                    id="isFeatured"
-                    autofill
-                    name="isFeatured"
-                    type="text"
+                    label="Time Zone"
+                    id="timeZone"
+                    name="timeZone"
+                    placeholder="Select Time Zone"
                     style={{ fontSize: "16px" }}
-                    options={[
-                      {
-                        label: "Yes",
-                        value: "yes",
-                      },
-                      {
-                        label: "No",
-                        value: "no",
-                      },
-                    ]}
-                    value={
-                      formik.values.isFeatured === true
-                        ? "yes"
-                        : formik.values.isFeatured === false
-                        ? "no"
-                        : ""
-                    }
+                    options={timeZones}
+                    value={formik.values.timeZone}
                     onChange={(e) => {
-                      let val = false;
-                      if (e.target.value === "yes") val = true;
-                      formik.setFieldValue("isFeatured", val);
+                      formik.setFieldValue("timeZone", e.target.value);
                     }}
                     disabled={loading}
                   />
-                  <FieldInput
-                    label="Upload video thumbnail"
-                    id="thumbnail"
-                    name="thumbnail"
-                    type="file"
-                    className="customUploadMedia"
-                    accept="image/*"
-                    style={{ fontSize: "16px" }}
-                    value={""}
-                    onChange={(e) => {
-                      setThumbnailImageValue(e.target.value);
-                      formik.setFieldValue("thumbnail", e.target.files[0]);
-                    }}
-                    disabled={loading}
-                    {...{
-                      "data-before": thumbnailImageValue,
-                    }}
-                  />
+                  {/* Upload Video for small screens */}
                 </FormRow>
-                {/* Upload Video for small screens */}
                 {width < 1468 && (
                   <FormRow>
                     <FieldInput
-                      label="Upload Video"
-                      id="video"
-                      name="video"
+                      label="Upload video thumbnail"
+                      id="thumbnail"
+                      name="thumbnail"
                       type="file"
                       className="customUploadMedia"
-                      accept="video/*"
+                      accept="image/*"
                       style={{ fontSize: "16px" }}
                       value={""}
                       onChange={(e) => {
-                        setVideoName(e.target.value);
-                        formik.setFieldValue("video", e.target.files[0]);
+                        setThumbnailImageValue(e.target.value);
+                        formik.setFieldValue("thumbnail", e.target.files[0]);
                       }}
                       disabled={loading}
                       {...{
-                        "data-before": videoName,
+                        "data-before": thumbnailImageValue,
                       }}
                     />
                   </FormRow>
                 )}
+
                 <FormRow {...{ "data-type": "textarea" }}>
                   <TextArea
                     label="Description"
                     id="description"
-                    autofill
                     name="description"
                     type="textarea"
                     placeholder="Description"
                     style={{ fontSize: "16px" }}
                     value={formik.values.description}
                     onChange={(e) => {
-                      console.log(e.target.value);
                       formik.setFieldValue("description", e.target.value);
                     }}
                     disabled={loading}
@@ -376,16 +365,16 @@ const AddLiveSession = () => {
                   </div>
                   <div className="uploadButton">
                     <input
-                      id="video"
-                      name="video"
+                      id="thumbnail"
+                      name="thumbnail"
                       type="file"
-                      accept="video/*"
+                      accept="image/*"
                       className="uploadInp"
                       value={""}
                       onChange={(e) => {
                         setVideoName(e.target.files[0].name);
                         formikRef.current.setFieldValue(
-                          "video",
+                          "thumbnail",
                           e.target.files[0]
                         );
                       }}

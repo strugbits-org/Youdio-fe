@@ -12,16 +12,7 @@ const Ipt = styled.div`
   flex-wrap: wrap;
   gap: 4px;
 `;
-// const CONTAINER = styled.div`
-//   position: relative;
 
-//   .icon {
-//     position: absolute;
-//     top: 50%;
-//     right: 10px;
-//     /* min-width: 10px; */
-//   }
-// `;
 const TEXTAREA = styled.textarea`
   width: 100%;
   height: 185px;

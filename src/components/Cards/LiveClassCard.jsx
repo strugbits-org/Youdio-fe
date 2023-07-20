@@ -24,7 +24,6 @@ export const CardMedia = styled.div`
     .hoverBox {
       display: flex;
       transition: var(--transition1s);
-      
     }
   }
 `;
@@ -95,9 +94,11 @@ function LiveClassCard({ data, hoverChildren }) {
           width="100%"
           height="auto"
         />
-        <Tag>
-          <H4>{data.category.name}</H4>
-        </Tag>
+        {data.category && (
+          <Tag>
+            <H4>{data.category?.name}</H4>
+          </Tag>
+        )}
         {/* <H4>{new Date(data.date).toDateString()}</H4> */}
         {hoverChildren && (
           <HoverBox className="hoverBox">{hoverChildren}</HoverBox>

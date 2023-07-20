@@ -58,6 +58,13 @@ export const FormRow = styled.div`
     }
   }
 
+  .forTime{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* align-items: center; */
+    gap: 16px;
+  }
+
   @media only screen and (min-width: ${layout.mobile}) {
     grid-template-columns: 1fr;
   }
@@ -98,7 +105,7 @@ export const BrowseFile = styled.div`
     height: 0px;
 
     &::after {
-      content: "UPLOAD VIDEO";
+      content: "BROWSE FILE";
       color: #fff;
       background-color: var(--backgroundGreen);
       position: absolute;

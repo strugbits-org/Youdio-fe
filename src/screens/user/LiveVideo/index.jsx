@@ -11,6 +11,7 @@ import {
   InstructorLink,
   // FilterComponent,
   Loader,
+  H3,
 } from "src/components";
 import {
   LiveBookingBox,
@@ -33,13 +34,13 @@ import moment from "moment";
 
 function LiveVideo() {
   const { fetchIdAndVideos, res, loading } = useFetch();
-  const { postData } = usePostAPI()
+  const { postData } = usePostAPI();
   // const [open, setOpen] = useState(false);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
   const { resetFilters } = useSelector((state) => state.filter);
   const { user, token } = useSelector((state) => state.user);
-  const navigate= useNavigate()
+  const navigate = useNavigate();
 
   const location = useLocation();
   useEffect(() => {
@@ -73,12 +74,12 @@ function LiveVideo() {
     const link = token
       ? `liveSession/get/${path}`
       : `liveSession/get-unauth/${path}`;
-    return {_id: path, link};
+    return { _id: path, link };
   }, [location, token]);
 
   const handleBookNow = () => {
     if (token) {
-      if (user.subscription.isActive) { 
+      if (user.subscription.isActive) {
         // Hit Book Session API
         const payload = {
           liveSession: liveSessionId._id,
@@ -91,19 +92,18 @@ function LiveVideo() {
           undefined,
           () => navigate("/user/live-booking")
         );
-      }
-      else {
+      } else {
         window.open("https://www.google.com", "_self");
       }
     } else {
       window.open("https://www.google.com", "_self");
     }
-    
-  }
+  };
 
   return (
     <React.Fragment>
       <Section backgroundColor="white" paddingBlock="5vw 0px">
+        {loading && <Loader />}
         {!loading && liveSession[1] ? (
           <LiveBookingBox>
             <MediaBox>
@@ -146,7 +146,8 @@ function LiveVideo() {
                       height=""
                     />
                     <P3>
-                      {liveSession[1].date && moment(liveSession[1].date).format("MM-DD-YYYY")}
+                      {liveSession[1].date &&
+                        moment(liveSession[1].date).format("MM-DD-YYYY")}
                     </P3>
                   </div>
                 </div>
@@ -172,7 +173,12 @@ function LiveVideo() {
             </ContentBox>
           </LiveBookingBox>
         ) : (
-          <Loader />
+          !liveSession[1] &&
+          !loading && (
+            <H3 style={{ textAlign: "center" }}>
+              Live Session not Found, Contact to Support!
+            </H3>
+          )
         )}
       </Section>
       <Section backgroundColor="white" paddingBlock="0px 30px">

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { fonts } from "src/helpers";
 const { poppinsRegular } = fonts;
 
@@ -32,6 +32,7 @@ export const DropInput = styled.select`
   /* display: flex;
 flex-wrap: wrap; */
   /* width: 350px; */
+  width: 100%;
   height: 45px;
   color: #797979;
   background: #f7f7f7;
@@ -57,15 +58,10 @@ flex-wrap: wrap; */
   option {
     background: rgb(247, 247, 247);
     color: rgb(121, 121, 121);
-    font-size: 0.8em;
-    /* 
-    ${(props) =>
-      props.highlightOption === "Yoga" &&
-      css`
-        font-weight: bold;
-        color: red;
-      `} */
+    font-size: 11px;
+   
   }
+
 `;
 export const BOX4 = styled.input`
   height: 50px;

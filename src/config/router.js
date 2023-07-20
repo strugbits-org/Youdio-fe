@@ -44,6 +44,7 @@ import PageNotFound from "src/screens/PageNotFound";
 import LiveSessions from "src/screens/admin/pages/LiveSessions";
 import VideoListing from "src/screens/admin/pages/VideoListing";
 import Profile from "src/screens/admin/pages/Profile";
+import PremiumInstructors from "src/screens/admin/pages/PremiumInstructos";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 const AllRoutes = () => {
@@ -156,6 +157,7 @@ const AllRoutes = () => {
         <Route path="add-instructor" element={<AddInstructor />} />
         <Route path="add-video" element={<AddVideo />} />
         <Route path="add-live-session" element={<AddLiveSession />} />
+        <Route path="premium-instructors" element={<PremiumInstructors />} />
         <Route
           path="*"
           element={<PageNotFound width="528px" height="60dvh" />}

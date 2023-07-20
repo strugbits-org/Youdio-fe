@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { instructorClassStaticContent } from "./constant";
-import { ContentBox, SearchBox, CardsBox } from "./instructorClassComponent";
-import { H1, P1, Section, InputIcon, H3 } from "src/components";
+import { ContentBox, SearchBox } from "./instructorClassComponent";
+import { H1, P1, Section, InputIcon } from "src/components";
 import { icons } from "src/helpers";
-import { InstructorCard } from "src/components/Cards/";
 import useFetch from "src/features/hooks/useFetch";
-import Loader, { NoFoundBox } from "src/components/Loader";
-import { CardsSection } from "src/components/Banners";
+import { InstructorCards } from "src/components/CardsSection";
 
 function Instructor() {
   const [Content] = useState(instructorClassStaticContent);
@@ -21,6 +19,13 @@ function Instructor() {
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
+
+  const instructors = useMemo(() => { 
+    if (res && res.instructors.length > 0 ) {
+      return res.instructors;
+    }
+    return []
+  }, [res])
 
   return (
     <>
@@ -46,23 +51,9 @@ function Instructor() {
       </Section>
 
       {/* Cards Section */}
-      <CardsSection backgroundColor="#fff" paddingBlock="0px">
-        {loading && <Loader width="35px" height="35px" />}
-
-        {!loading && res?.instructors && res.instructors?.length > 0 ? (
-          <CardsBox>
-            {res.instructors.map((instructor) => {
-              return <InstructorCard key={`instructor-card-${instructor._id}`} instructor={instructor} />;
-            })}
-          </CardsBox>
-        ) : (
-          !loading && (
-            <NoFoundBox>
-                <H3>No Instructor Found with the title of { search}</H3>
-            </NoFoundBox>
-          )
-        )}
-      </CardsSection>
+      <Section backgroundColor="#fff" paddingBlock="0px 30px">
+        <InstructorCards instructors={instructors} loading={loading} search={search } />
+      </Section>
     </>
   );
 }

@@ -61,6 +61,7 @@ function LiveSessions() {
       setOpen(false);
     }
   };
+  
   return (
     <React.Fragment>
       <Container>

@@ -4,27 +4,34 @@ import { H2, InputIcon, PrimaryButton } from "src/components";
 import { LiveClassesCards } from "src/components/CardsSection";
 import useFetch from "src/features/hooks/useFetch";
 import { icons } from "src/helpers";
-import { Container, HoverBox } from "./liveSessionsComponent";
+import { Container } from "./liveSessionsComponent";
 import { useNavigate } from "react-router-dom";
 import { DeletePopup } from "src/components/Popups";
+import usePostAPI from "src/features/hooks/usePostAPI";
 
 function LiveSessions() {
-  const { postData, res, loading } = useFetch();
+  const { deleteData, loading } = useFetch();
+  const { postData, postRes, postLoading } = usePostAPI()
   const { resetFilters } = useSelector((state) => state.filter);
   const [searchInstructor, setSearchInstructor] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
+  const [sessionId, setSessionId] = useState("");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    postData("liveSession/get", resetFilters);
+    getLiveSessions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getLiveSessions = () => {
+    postData("liveSession/get", resetFilters);
+  }
   const liveSession = useMemo(() => {
-    if (res && res.liveSessions.length > 0) {
-      return res.liveSessions;
+    if (postRes && postRes.liveSessions?.length > 0) {
+      return postRes.liveSessions;
     }
     return [];
-  }, [res]);
+  }, [postRes]);
 
   const handleSearchInstructor = (e) => {
     const value = e.target.value;
@@ -34,23 +41,26 @@ function LiveSessions() {
     const value = e.target.value;
     setSearchCategory(value);
   };
-  const handleDelete = () => {
-    setOpen(true)
+  const handleDelete = (sessionId) => {
+    setOpen(true);
+    setSessionId(sessionId);
   };
-  const handleEdit = () => {
-    navigate("/");
+  const handleEdit = (sessionId) => {
+    navigate("/dashboard/edit-live-session", { state: {sessionId} });
   };
   const handleAddSession = () => {
     navigate("/dashboard/add-live-session");
   };
   const handleClose = () => {
-    setOpen(!open)
+    setOpen(!open);
   };
   const handleAction = () => {
-      alert("Deleted")
-        setOpen(false)
+    if (sessionId) {
+      // alert(`Deleted ${sessionId}`);
+      deleteData(`liveSession/delete/${sessionId}`, getLiveSessions);
+      setOpen(false);
+    }
   };
-
   return (
     <React.Fragment>
       <Container>
@@ -77,27 +87,16 @@ function LiveSessions() {
       </Container>
       <LiveClassesCards
         classes={liveSession}
-        loading={loading}
-        hoverChildren={
-          <HoverBox>
-            <img
-              src={icons.bin}
-              alt="Bin_Delete"
-              onClick={handleDelete}
-              width=""
-              height=""
-            />
-            <img
-              src={icons.pen}
-              alt="Edit_Pen"
-              onClick={handleEdit}
-              width=""
-              height=""
-            />
-          </HoverBox>
-        }
+        loading={postLoading}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
       />
-      <DeletePopup open={open} handleClose={handleClose} handleAction={handleAction}/>
+      <DeletePopup
+        open={open}
+        handleClose={handleClose}
+        handleAction={handleAction}
+        loading={ loading}
+      />
     </React.Fragment>
   );
 }

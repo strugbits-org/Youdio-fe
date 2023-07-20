@@ -71,7 +71,7 @@ const CloseIcon = styled(IconButton)`
   height: 30px;
 `;
 
-export default function DeletePopup({ open, handleClose, data, handleAction }) {
+export default function DeletePopup({ open, handleClose, data, handleAction, loading }) {
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -108,7 +108,7 @@ export default function DeletePopup({ open, handleClose, data, handleAction }) {
               <img src={icons.binGreen} alt="Close" width="" height="" />
               <P2>Are Your Sure you want to Delete?</P2>
               <div className="buttons">
-                <PrimaryButton onClick={handleAction}>Yes</PrimaryButton>
+                <PrimaryButton disabled={loading} onClick={handleAction}>Yes</PrimaryButton>
                 <PrimaryButton className="btnNo" onClick={handleClose}>
                   No
                 </PrimaryButton>

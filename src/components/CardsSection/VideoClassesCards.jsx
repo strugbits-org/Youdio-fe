@@ -29,7 +29,7 @@ const Box = styled.div`
   }
 `;
 
-function VideoClassesCards({ videos, loading, hoverChildren }) {
+function VideoClassesCards({ videos, loading, handleDelete, handleEdit }) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
@@ -40,7 +40,8 @@ function VideoClassesCards({ videos, loading, hoverChildren }) {
             <VideoClassCard
               key={`card-${val._id}`}
               data={val}
-              hoverChildren={hoverChildren}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
             />
           ))}
         </Box>

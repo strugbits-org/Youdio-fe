@@ -134,24 +134,24 @@ const useFetch = () => {
   };
 
   // Post
-  const deleteData = async (
-    url,
-    setLocalState
-  ) => {
-     setLoading(true);
-     const headers = await getHeaders(token);
-     try {
-       const response = await apiClient.delete(url, { headers });
-       if (response?.data) {
-         setResponse(response.data);
-         setLoading(false);
-         setError("");
-         setLocalState && setLocalState();
-       }
-     } catch (e) {
-       setLoading(false);
-       setError(e.message);
-     }
+  const deleteData = async (url, setLocalState) => {
+    setLoading(true);
+    const headers = await getHeaders(token);
+    try {
+      const response = await apiClient.delete(url, { headers });
+      if (response?.data) {
+        setResponse(response.data);
+        setLoading(false);
+        setError("");
+        setLocalState && setLocalState();
+        if(response?.data.message) notify("success", response.data.message)
+      }
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Get Data For Dynamic page and videos

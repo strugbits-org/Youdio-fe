@@ -34,19 +34,21 @@ function LiveClassesCards({
   classes,
   loading,
   currentLiveSessionId,
-  hoverChildren,
+  handleDelete,
+  handleEdit
 }) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
-      {!loading && classes.length > 0 ? (
+      {!loading && classes?.length > 0 ? (
         <Box>
           {classes.map((val) =>
             val._id !== currentLiveSessionId ? (
               <LiveClassCard
                 key={`card-${val._id}`}
                 data={val}
-                hoverChildren={hoverChildren}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
               />
             ) : (
               ""

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { H3, H4, ClockTime, P3 } from "src/components";
-import { path } from "src/helpers";
+import { icons, path } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
 import { InstructorLink } from "src/components";
@@ -67,14 +67,21 @@ const HoverBox = styled.div`
   background: rgba(0, 0, 0, 0.4);
   position: absolute;
   width: 100%;
-  /* height: 100%; */
   aspect-ratio: 0.83/1;
   top: 0px;
   left: 0px;
   transition: var(--transition1s);
+  gap: 24px;
+
+  img {
+    width: clamp(36px, 4vw, 50px);
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    object-fit: contain;
+  }
 `;
 
-function LiveClassCard({ data, hoverChildren }) {
+function LiveClassCard({ data, handleDelete, handleEdit }) {
   const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
     return data.intensity.slice(-1);
@@ -86,9 +93,9 @@ function LiveClassCard({ data, hoverChildren }) {
 
   return (
     <Card>
-      <CardMedia isHoverBox={hoverChildren ? true : false}>
+      <CardMedia isHoverBox={handleDelete && handleEdit ? true : false}>
         <img
-          onClick={!hoverChildren ? handleNavigate : () => {}}
+          onClick={!handleDelete && !handleEdit ? handleNavigate : () => {}}
           src={data.thumbnail}
           alt={data.title}
           width="100%"
@@ -96,12 +103,27 @@ function LiveClassCard({ data, hoverChildren }) {
         />
         {data.category && (
           <Tag>
-            <H4>{data.category?.name}</H4>
+            <H4>{data.category?.category}</H4>
           </Tag>
         )}
         {/* <H4>{new Date(data.date).toDateString()}</H4> */}
-        {hoverChildren && (
-          <HoverBox className="hoverBox">{hoverChildren}</HoverBox>
+        {handleDelete && handleEdit && (
+          <HoverBox className="hoverBox">
+            <img
+              src={icons.bin}
+              alt="Bin_Delete"
+              onClick={() => handleDelete(data._id)}
+              width=""
+              height=""
+            />
+            <img
+              src={icons.pen}
+              alt="Edit_Pen"
+              onClick={() => handleEdit(data._id)}
+              width=""
+              height=""
+            />
+          </HoverBox>
         )}
       </CardMedia>
       <CardContent>

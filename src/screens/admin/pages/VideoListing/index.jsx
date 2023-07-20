@@ -4,36 +4,45 @@ import { H2, InputIcon, PrimaryButton } from "src/components";
 import { VideoClassesCards } from "src/components/CardsSection";
 import useFetch from "src/features/hooks/useFetch";
 import { icons } from "src/helpers";
-import { Container, HoverBox } from "./videoListingComponent";
+import { Container } from "./videoListingComponent";
 import { useNavigate } from "react-router-dom";
 import { DeletePopup } from "src/components/Popups";
+import usePostAPI from "src/features/hooks/usePostAPI";
 
 function VideoListing() {
-  const { postData, res, loading } = useFetch();
+  const { loading } = useFetch();
+  const { postData, postRes, postLoading } = usePostAPI()
   const { resetFilters } = useSelector((state) => state.filter);
   const [searchCategory, setSearchCategory] = useState("");
+  const [videoId, setVideoId] = useState("");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    postData("video/filter", resetFilters);
+    getVideos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getVideos = () => { 
+    postData("video/filter", resetFilters);
+
+  }
   const videos = useMemo(() => {
-    if (res && res.videos.length > 0) {
-      return res.videos;
+    if (postRes && postRes.videos.length > 0) {
+      return postRes.videos;
     }
     return [];
-  }, [res]);
+  }, [postRes]);
 
   const handleSearchCategory = (e) => {
     const value = e.target.value;
     setSearchCategory(value);
   };
-  const handleDelete = () => {
+  const handleDelete = (videoId) => {
     setOpen(true);
+    setVideoId(videoId)
   };
-  const handleEdit = () => {
-    navigate("/");
+  const handleEdit = (videoId) => {
+    navigate("/dashboard/edit-video", { state: {videoId} });
   };
   const handleAddSession = () => {
     navigate("/dashboard/add-video");
@@ -42,8 +51,11 @@ function VideoListing() {
     setOpen(!open);
   };
   const handleAction = () => {
-    alert("Deleted");
-    setOpen(false);
+    if (videoId) {
+      console.log(`Deleted ${videoId}`);
+      // deleteData(`video/${videoId}`, getVideos);
+      setOpen(false);
+    }
   };
 
   return (
@@ -72,30 +84,15 @@ function VideoListing() {
       </Container>
       <VideoClassesCards
         videos={videos}
-        loading={loading}
-        hoverChildren={
-          <HoverBox>
-            <img
-              src={icons.bin}
-              alt="Bin_Delete"
-              onClick={handleDelete}
-              width=""
-              height=""
-            />
-            <img
-              src={icons.pen}
-              alt="Edit_Pen"
-              onClick={handleEdit}
-              width=""
-              height=""
-            />
-          </HoverBox>
-        }
+        loading={postLoading}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
       />
       <DeletePopup
         open={open}
         handleClose={handleClose}
         handleAction={handleAction}
+        loading={loading}
       />
     </React.Fragment>
   );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { H3, H4, InstructorLink, ClockTime, P3 } from "src/components";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
-import { path } from "src/helpers";
+import { icons, path } from "src/helpers";
 
 const Card = styled.div``;
 
@@ -67,9 +67,17 @@ const HoverBox = styled.div`
   top: 0px;
   left: 0px;
   transition: var(--transition1s);
+  gap: 24px;
+
+  img {
+    width: clamp(36px, 4vw, 50px);
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    object-fit: contain;
+  }
 `;
 
-function VideoClassCard({ data, hoverChildren }) {
+function VideoClassCard({ data, handleDelete, handleEdit }) {
   const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
     return data.intensity.slice(-1);
@@ -81,11 +89,11 @@ function VideoClassCard({ data, hoverChildren }) {
 
   return (
     <Card>
-      <CardMedia isHoverBox={hoverChildren ? true : false}>
+      <CardMedia isHoverBox={handleDelete && handleEdit ? true : false}>
         <img
           src={data.thumbnail}
           alt={data.title}
-          onClick={!hoverChildren ? handleNavigate : () => {}}
+          onClick={!handleDelete && !handleEdit ? handleNavigate : () => {}}
           width="100%"
           height="auto"
         />
@@ -93,8 +101,23 @@ function VideoClassCard({ data, hoverChildren }) {
           <H4>{data.category}</H4>
         </Tag>
         {/* <H4>{new Date(data.date).toDateString()}</H4> */}
-        {hoverChildren && (
-          <HoverBox className="hoverBox">{hoverChildren}</HoverBox>
+        {handleDelete && handleEdit && (
+          <HoverBox className="hoverBox">
+            <img
+              src={icons.bin}
+              alt="Bin_Delete"
+              onClick={() => handleDelete(data._id)}
+              width=""
+              height=""
+            />
+            <img
+              src={icons.pen}
+              alt="Edit_Pen"
+              onClick={() => handleEdit(data._id)}
+              width=""
+              height=""
+            />
+          </HoverBox>
         )}
       </CardMedia>
       <CardContent>

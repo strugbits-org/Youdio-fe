@@ -41,16 +41,3 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr;
   }
 `;
-
-export const HoverBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  img {
-    width: clamp(36px, 4vw, 50px);
-    aspect-ratio: 1/1;
-    cursor: pointer;
-    object-fit: contain;
-  }
-`;

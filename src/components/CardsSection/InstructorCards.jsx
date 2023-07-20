@@ -7,6 +7,7 @@ import { layout } from "src/helpers";
 const { mobile, mobileMedium, tablet, laptop } = layout;
 
 const Container = styled.div`
+margin-top: 30px;
   min-height: 30vh;
 `;
 
@@ -31,7 +32,7 @@ const Box = styled.div`
   }
 `;
 
-function InstructorCards({ loading, instructors, search }) {
+function InstructorCards({ loading, instructors, search, handleDelete, handleEdit }) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
@@ -43,6 +44,8 @@ function InstructorCards({ loading, instructors, search }) {
               <InstructorCard
                 key={`instructor-card-${instructor._id}`}
                 instructor={instructor}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
               />
             );
           })}

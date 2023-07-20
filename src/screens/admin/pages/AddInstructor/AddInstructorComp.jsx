@@ -1,105 +1,131 @@
 import styled from "styled-components";
 import { PrimaryButton, PrimaryWhiteButton } from "src/components";
+import { layout } from "src/helpers";
 
+export const MainContainer = styled.div`
+  display: grid;
+  grid-template-columns: 380px 1fr;
+`;
 export const Container = styled.div`
-  display: flex;
-  /* align-items: center;
-  justify-content: center; */
-  /* height: 100vh; */
-  justify-content: space-around;
-  padding-block: 4rem;
-  form {
-    /* width: 90vw;
-    max-width: 474px; */
-    flex-basis: 50%;
+  h2 {
+    width: 100%;
+    margin-bottom: 2rem;
   }
 `;
 
-export const SIDEBAR = styled.div`
-   width: 200px;
-  /* background-color: #f1f1f1; */
-  padding: 20px;
+export const CenterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 48px;
+  max-width: 1375px;
 
+  .form {
+    width: 100%;
+    max-width: 730px;
+  }
 `;
 export const FormRow = styled.div`
-  margin-bottom: 2rem;
-  display: flex;
-  flex-wrap: wrap;
+  margin-bottom: 18px;
+  display: grid;
   gap: 18px;
-`;
-export const Heading = styled.div`
-  margin-bottom: 2rem;
-`;
+  grid-template-columns: 1fr 1fr;
 
-export const BrowseFile = styled.div`
-  flex-basis: 10%;
-  display: flex;
-  flex-direction: column;
-  padding-block: 10rem;
-  /* justify-content: center; */
-`;
-export const ImageBrowse = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px dotted #797979;
-  padding: 70px 70px;
-
-  img {
-    width: 100px;
+  &[data-type="textarea"] {
+    grid-template-columns: 1fr;
   }
-  
-`;
-export const BrowseBtn = styled(PrimaryButton)`
-  /* min-width: 100px; */
-  height: 50px;
-  border: none;
-  border-radius: 0px;
-  /* max-width: 341px; */
-  align-items: center;
-  display: flex;
-  justify-content: center;
-
-`
-export const BOX4 = styled.div`
-  /* align-items: center;
-  gap: 2rem;
-  display: flex;
-  flex-wrap: wrap; */
-  .upload-container {
+  .customUploadMedia {
     position: relative;
-  }
-.uploadInp {
-    border: none;
-    outline: none;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: .8rem;
-    font-weight: 600;
-    width: 250px;
-    height: 50px;
- 
+    padding-inline: 0px;
+    color: transparent;
+    font-size: 0px;
+    width: 100%;
     &::file-selector-button {
-      color: var(--textHeadingWhite);
-    background:var(--backgroundGreen);
-      padding: 140px;
-      /* font-size: 0px; */
+      font-size: 0px;
       border: none;
       border-radius: 0px;
       outline: none;
     }
-    &::after {
-      content: "upload";
+    &::before {
+      content: attr(data-before);
       position: absolute;
-      top: 1vw;
-      left: 5vw;
-       width: 50px;
-      height: 50px; 
+      width: 90%;
+      color: #797979;
+      top: 50%;
+      transform: translateY(-50%);
+      padding-inline: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* transform: translate(-50%, -50%); */
+    }
+  }
+
+  .forTime {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* align-items: center; */
+    gap: 16px;
+  }
+
+  @media only screen and (min-width: ${layout.mobile}) {
+    grid-template-columns: 1fr;
+  }
+  @media only screen and (min-width: ${layout.tablet}) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+export const ButtonGroup = styled.div`
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 18px;
+`;
+
+export const BrowseFile = styled.div`
+  width: clamp(200px, 16.5vw, 320px);
+  height: clamp(250px, 20vw, 400px);
+  position: relative;
+  text-align: center;
+  .imageBox {
+    border: 1px dashed #e6e6e6;
+    border-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    img {
+      width: 50%;
+      margin-bottom: 60px;
+    }
+  }
+
+  input {
+    border: none;
+    outline: none;
+    color: transparent;
+    width: 0px;
+    height: 0px;
+
+    &::after {
+      content: "Profile Picture";
+      color: #fff;
+      background-color: var(--backgroundGreen);
+      position: absolute;
+      width: 100%;
+      padding-block: 24px;
+      font-size: 12px;
+      left: 0px;
+      text-align: center;
+      bottom: 0px;
       cursor: pointer;
     }
-    /* .userImage */
   }
-`
+
+  span {
+    margin-block: 16px;
+    font-size: small;
+  }
+`;
+
 export const ButtonOne = styled(PrimaryWhiteButton)`
   max-width: 200px;
   min-width: 100px;
@@ -114,16 +140,3 @@ export const ButtonTwo = styled(PrimaryButton)`
   background-color: #ffe7da;
   border-radius: 0px;
 `;
-
-// export const Label = styled.label`
-//   margin-right: 0.5rem;
-// `;
-// export const Input = styled(Field)`
-//   padding: 0.5rem;
-//   border: 1px solid #ccc;
-// `;
-
-// export const Error = styled(ErrorMessage)`
-//   color: red;
-//   font-size: 0.8rem;
-// `;

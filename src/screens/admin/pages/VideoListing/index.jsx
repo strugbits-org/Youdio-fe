@@ -10,7 +10,7 @@ import { DeletePopup } from "src/components/Popups";
 import usePostAPI from "src/features/hooks/usePostAPI";
 
 function VideoListing() {
-  const { loading } = useFetch();
+  const { deleteData, loading } = useFetch();
   const { postData, postRes, postLoading } = usePostAPI()
   const { resetFilters } = useSelector((state) => state.filter);
   const [searchCategory, setSearchCategory] = useState("");
@@ -52,8 +52,7 @@ function VideoListing() {
   };
   const handleAction = () => {
     if (videoId) {
-      console.log(`Deleted ${videoId}`);
-      // deleteData(`video/${videoId}`, getVideos);
+      deleteData(`video/${videoId}`, getVideos);
       setOpen(false);
     }
   };

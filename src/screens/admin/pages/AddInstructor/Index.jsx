@@ -1,22 +1,23 @@
-// import { useRef } from "react";\
-import React from "react";
-import { Formik } from "formik";
+import React, { useRef, useState } from "react";
+import { Form, Formik } from "formik";
+import { H2 } from "src/components";
+import { icons } from "src/helpers";
+import useFetch from "src/features/hooks/useFetch";
+import useWindowSize from "src/features/hooks/useInnerWidth";
 import {
   Container,
-  FormRow,
-  Heading,
   BrowseFile,
-  ButtonOne,
-  ButtonTwo,
-  ImageBrowse,
-  BOX4,
-  SIDEBAR
+  FormRow,
+  CenterContainer,
+  ButtonGroup,
 } from "./AddInstructorComp";
-import { H2 } from "src/components";
-import { AddInstructorContent } from "./content";
-import { FieldInput, TextArea, } from "src/components/AdminInput/AdminInput";
-import { icons } from "src/helpers";
-import { instructorFormvalidate } from "src/helpers/forms/AdminValidateForm";
+import { ButtonOne, ButtonTwo } from "../AddInstructor/AddInstructorComp";
+import {
+  FieldInput,
+  DropDownInput,
+  TextArea,
+} from "src/components/AdminInput/AdminInput";
+import { addInstructorValidateForm } from "src/helpers/forms/validateForms";
 
 const AddInstructor = () => {
   const initialValues = {
@@ -24,145 +25,242 @@ const AddInstructor = () => {
     lastName: "",
     email: "",
     phone: "",
-    JobTitle: "",
+    jobTitle: "",
     isPremium: "",
-    decription: ""
+    image: "",
+    bannerImage: "",
+    description: "",
   };
-  const handleSubmit = () => { };
 
-  // const formikRef = useRef();
+  const [profileImageName, setProfileImageName] = useState("")
+  const [bannerImageName, setBannerImageName] = useState("")
+  const { loading, postData } = useFetch();
+  const { width } = useWindowSize();
 
+  const formikRef = useRef();
+  const handleCancel = (e) => {
+    e.preventDefault();
+    resetFormValues();
+  };
+  const handleSubmit = (data, action) => {
+    const copyData = { ...data }
+    const isPremium = copyData.isPremium
+    copyData.isPremium = isPremium === 'yes' && true
+    const formData = new FormData();
+    Object.keys(copyData).forEach((key) => formData.append(key, copyData[key]));
+    postData(
+      "instructor/add-instructor",
+      formData,
+      undefined,
+      undefined,
+      true,
+      resetFormValues
+    );
+  };
+  const resetFormValues = () => {
+    formikRef.current.resetForm();
+    setProfileImageName("Select");
+    setBannerImageName("Select");
+  };
   return (
     <React.Fragment>
-      {/* <MainContainer> */}
+      
       <Container>
-        <SIDEBAR>SideBar</SIDEBAR>
+        <H2>Add New Video</H2>
         <Formik
           initialValues={initialValues}
-          validationSchema={instructorFormvalidate}
+          validationSchema={addInstructorValidateForm}
           onSubmit={handleSubmit}
+          innerRef={formikRef}
         >
-          <form autoComplete="off">
-            <Heading>
-              <H2>{AddInstructorContent.heading}</H2>
-            </Heading>
-            <FormRow>
-              <FieldInput
-                label={AddInstructorContent.fullName}
-                id="firstName"
-                autofill
-                name="firstName"
-                type="text"
-                placeholder={AddInstructorContent.fullNamePlace}
-                style={{ fontSize: "16px" }}
-              />
+          {(formik) => (
+            <CenterContainer>
+              <Form className="form">
+                <FormRow>
+                  <FieldInput
+                    label="First Name"
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    placeholder="Live Back Press"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.firstName}
+                    onChange={(e) => {
+                      formik.setFieldValue("firstName", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                  <FieldInput
+                    label="Last Name"
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    placeholder="Live Back Press"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.lastName}
+                    onChange={(e) => {
+                      formik.setFieldValue("lastName", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                </FormRow>
+                <FormRow>
+                  <FieldInput
+                    label="Email"
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Live Back Press"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.email}
+                    onChange={(e) => {
+                      formik.setFieldValue("email", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                  <FieldInput
+                    label="Phone"
+                    id="phone"
+                    name="phone"
+                    type="text"
+                    placeholder="Live Back Press"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.phone}
+                    onChange={(e) => {
+                      formik.setFieldValue("phone", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                </FormRow>
 
-              <FieldInput
-                label={AddInstructorContent.lastName}
-                id="lastName"
-                autofill
-                name="lastName"
-                type="text"
-                placeholder={AddInstructorContent.lastNameplace}
-                style={{ fontSize: "16px" }}
-              />
-            </FormRow>
+                <FormRow>
+                  <FieldInput
+                    label="Job Title"
+                    id="jobTitle"
+                    name="jobTitle"
+                    type="text"
+                    placeholder="Live Back Press"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.jobTitle}
+                    onChange={(e) => {
+                      formik.setFieldValue("jobTitle", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                  <DropDownInput
+                    label="Is Premium"
+                    id="isPremium"
+                    name="isPremium"
+                    type="text"
+                    placeholder="Level 1"
+                    style={{ fontSize: "16px" }}
+                    options={[
+                      { label: "Yes", value: "yes" },
+                      { label: "No", value: "no" },
+                    ]}
+                    value={formik.values.isPremium}
+                    onChange={(e) => {
+                      formik.setFieldValue("isPremium", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                </FormRow>
 
-            <FormRow>
-              <FieldInput
-                label={AddInstructorContent.email}
-                id="email"
-                autofill
-                name="email"
-                type="email"
-                placeholder={AddInstructorContent.emailPlace}
-                style={{ fontSize: "16px" }}
-              />
+                <FormRow>
+                  <FieldInput
+                    label="Background Cover Image"
+                    id="bannerImage"
+                    name="bannerImage"
+                    type="file"
+                    className="customUploadMedia"
+                    accept="image/*"
+                    style={{ fontSize: "16px" }}
+                    value={""}
+                    onChange={(e) => {
+                      setBannerImageName(e.target.value);
+                      formik.setFieldValue("bannerImage", e.target.files[0]);
+                    }}
+                    disabled={loading}
+                    {...{
+                      "data-before": bannerImageName,
+                    }}
+                  />
+                  {width < 1468 && (
+                    <FieldInput
+                      label="Profile Picture"
+                      id="image"
+                      name="image"
+                      type="file"
+                      className="customUploadMedia"
+                      accept="image/*"
+                      style={{ fontSize: "16px" }}
+                      value={""}
+                      onChange={(e) => {
+                        setProfileImageName(e.target.value);
+                        formik.setFieldValue("image", e.target.files[0]);
+                      }}
+                      disabled={loading}
+                      {...{
+                        "data-before": profileImageName,
+                      }}
+                    />
+                  )}
+                </FormRow>
 
-              <FieldInput
-                label={AddInstructorContent.phoneNo}
-                id="phone"
-                autofill
-                name="phone"
-                type="number"
-                placeholder={AddInstructorContent.phoneNoPlace}
-                style={{ fontSize: "16px" }}
-              />
-            </FormRow>
-
-            <FormRow>
-              <FieldInput
-                label={AddInstructorContent.jobTitle}
-                id="JobTitle"
-                autofill
-                name="JobTitle"
-                type="text"
-                placeholder={AddInstructorContent.jobTitlePlace}
-                style={{ fontSize: "16px" }}
-              />
-
-              <FieldInput
-                label={AddInstructorContent.premiumInstr}
-                id="isPremium"
-                autofill
-                name="isPremium"
-                type="text"
-                placeholder={AddInstructorContent.premiumInstrPlace}
-                style={{ fontSize: "16px" }}
-              />
-            </FormRow>
-
-            <FormRow>
-              <TextArea
-                label="Decription"
-                id="decription"
-                autofill
-                name="decription"
-                type="textarea"
-                placeholder="l...."
-                style={{ fontSize: "16px" }}
-              />
-            </FormRow>
-
-            <FormRow>
-              <ButtonOne>{AddInstructorContent.btncancel}</ButtonOne>
-              <ButtonTwo>{AddInstructorContent.btnSave}</ButtonTwo>
-            </FormRow>
-
-
-
-          </form>
+                <FormRow {...{ "data-type": "textarea" }}>
+                  <TextArea
+                    label="Description"
+                    id="description"
+                    name="description"
+                    type="textarea"
+                    placeholder="Description"
+                    style={{ fontSize: "16px" }}
+                    value={formik.values.description}
+                    onChange={(e) => {
+                      formik.setFieldValue("description", e.target.value);
+                    }}
+                    disabled={loading}
+                  />
+                </FormRow>
+                <ButtonGroup>
+                  <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
+                  <ButtonTwo type="submit" disabled={loading}>
+                    SAVE
+                  </ButtonTwo>
+                </ButtonGroup>
+              </Form>
+              {/* Upload Video For Desktop Large */}
+              {width >= 1468 && (
+                <BrowseFile>
+                  <div className="imageBox">
+                    <img src={icons.upload} alt="upload" />
+                  </div>
+                  <div className="uploadButton">
+                    <input
+                      id="image"
+                      name="image"
+                      type="file"
+                      accept="image/*"
+                      className="uploadInp"
+                      value={""}
+                      onChange={(e) => {
+                        setProfileImageName(e.target.files[0].name);
+                        formikRef.current.setFieldValue(
+                          "image",
+                          e.target.files[0]
+                        );
+                      }}
+                    />
+                  </div>
+                  {profileImageName && profileImageName !== "Select" && (
+                    <span>{profileImageName}</span>
+                  )}
+                </BrowseFile>
+              )}
+            </CenterContainer>
+          )}
         </Formik>
-
-        <BrowseFile>
-          <ImageBrowse>
-            <img src={icons.upload} alt="upload" />
-          </ImageBrowse>
-          <BOX4>
-            <div className="upload-container">
-              <input
-                id="userImage"
-                name="userImage"
-                type="file"
-                className="uploadInp"
-              // onChange={(e) =>
-              //   formikRef.current.setFieldValue("userImage", e.target.files[0])
-              // }
-              />
-            </div>
-          </BOX4>
-
-          {/* <BrowseBtn>
-            <input
-              type="file"
-              id="myFile"
-              // value={AddInstructorContent.btnBrowse}
-              className="input"
-            />
-          </BrowseBtn> */}
-        </BrowseFile>
       </Container>
-      {/* </MainContainer> */}
     </React.Fragment>
   );
 };

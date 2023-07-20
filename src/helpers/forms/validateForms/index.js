@@ -3,6 +3,7 @@ import {
   confirmPassword,
   email,
   password,
+  phone,
   textField,
 } from "../fieldsValidattion";
 import * as Yup from "yup";
@@ -62,7 +63,6 @@ const paymentFormValidate = Yup.object({
 });
 
 // Admin Dashboard Live Session Form
-
 const liveSessionValidateForm = Yup.object({
   category: textField({ reqMesg: "Caregory is required" }),
   date: Yup.date()
@@ -92,6 +92,20 @@ const liveSessionValidateForm = Yup.object({
   thumbnail: Yup.mixed().required("Thumbnail Image is required"),
 });
 
+// Admin Dashboard Add Instructor Form
+const addInstructorValidateForm = Yup.object({
+  firstName: textField({ reqMesg: "First Name is required" }),
+  lastName: textField({ reqMesg: "Last Name is required" }),
+  email,
+  phone,
+  jobTitle: textField({ reqMesg: "Job Title is required" }),
+  isPremium: Yup.string().required("Is Instructor Premium"),
+  image: Yup.mixed().required("Thumbnail Image is required"),
+  bannerImage: Yup.mixed().required("Thumbnail Image is required"),
+  description: textField({ reqMesg: "Description is required" }),
+});
+
+
 const userProfileFormValidate = Yup.object().shape({
   //   userImage: Yup
   //       .mixed()
@@ -111,4 +125,5 @@ export {
   userProfileFormValidate,
   paymentFormValidate,
   liveSessionValidateForm,
+  addInstructorValidateForm,
 };

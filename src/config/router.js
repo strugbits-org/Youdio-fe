@@ -155,8 +155,11 @@ const AllRoutes = () => {
         <Route path="live-sessions" element={<LiveSessions />} />
         <Route path="video-listing" element={<VideoListing />} />
         <Route path="add-instructor" element={<AddInstructor />} />
+        <Route path="edit-instructor" element={<AddInstructor />} />
         <Route path="add-video" element={<AddVideo />} />
+        <Route path="edit-video" element={<AddVideo />} />
         <Route path="add-live-session" element={<AddLiveSession />} />
+        <Route path="edit-live-session" element={<AddLiveSession />} />
         <Route path="premium-instructors" element={<PremiumInstructors />} />
         <Route
           path="*"

@@ -1,14 +1,10 @@
-import React, {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Form, Formik } from "formik";
 import { H2 } from "src/components";
 import { icons } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import useWindowSize from "src/features/hooks/useInnerWidth";
 import {
   Container,
@@ -17,10 +13,7 @@ import {
   CenterContainer,
   ButtonGroup,
 } from "./AddVideoComp";
-import {
-  ButtonOne,
-  ButtonTwo,
-} from "../AddInstructor/AddInstructorComp";
+import { ButtonOne, ButtonTwo } from "../AddInstructor/AddInstructorComp";
 import {
   FieldInput,
   DropDownInput,
@@ -44,13 +37,14 @@ const AddVideo = () => {
     thumbnail: "",
     video: "",
   };
-  const { loading, postData, fetchMultipleData } = useFetch();
-  const { width } = useWindowSize()
+  const { loading, fetchData, postData, fetchMultipleData } = useFetch();
+  const { width } = useWindowSize();
+  const location = useLocation();
   const formikRef = useRef();
-  const [thumbnailImageValue, setThumbnailImageValue] = useState('Select');
+  const [thumbnailImageValue, setThumbnailImageValue] = useState("Select");
   const [videoName, setVideoName] = useState("Select");
   const [category, setCategory] = useState("");
-
+  const [videoId, setVideoId] = useState("");
   const handleCancel = (e) => {
     e.preventDefault();
     resetFormValues();
@@ -73,13 +67,18 @@ const AddVideo = () => {
     formikRef.current.resetForm();
     setThumbnailImageValue("Select");
     setVideoName("Select");
-  }; 
+  };
 
   useEffect(() => {
     fetchMultipleData(
       ["category/get-sub-category", "instructor/get-instructor"],
       [setStyles, setInstructors]
     );
+
+    if (location && location.state?.videoId) {
+      setVideoId(location.state.videoId);
+      fetchData(`video/get-single/${location.state?.videoId}`);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -140,10 +139,45 @@ const AddVideo = () => {
       : [];
   }, [category, styles]);
 
+  // const videoDetail = useMemo(() => {
+  //   if (res && res.video) {
+  //     const {
+  //       isFeatured,
+  //       category,
+  //       date,
+  //       title,
+  //       instructor: { _id },
+  //       difficulty,
+  //       intensity,
+  //       filter,
+  //       totalTime,
+  //       description,
+  //     } = res.video;
+  //     const values = {
+  //       category,
+  //       date,
+  //       title,
+  //       instructor: _id,
+  //       difficulty,
+  //       intensity,
+  //       filter,
+  //       totalTime,
+  //       isFeatured: isFeatured ? "yes" : "no",
+  //       description,
+  //       thumbnail: "",
+  //       video: "",
+  //     };
+  //     console.log(values);
+  //     return values;
+  //   }
+  //   return initialValues;
+  // }, [res])
+
   return (
     <React.Fragment>
       <Container>
-        <H2>Add New Video</H2>
+        <H2>{videoId ? "Edit Video" : "Add New Video"}</H2>
+
         <Formik
           initialValues={initialValues}
           validationSchema={addVideoValidate}
@@ -352,7 +386,7 @@ const AddVideo = () => {
                     />
                   </FormRow>
                 )}
-                <FormRow {...{'data-type': 'textarea'}}>
+                <FormRow {...{ "data-type": "textarea" }}>
                   <TextArea
                     label="Description"
                     id="description"
@@ -399,7 +433,9 @@ const AddVideo = () => {
                       }}
                     />
                   </div>
-                  {videoName && videoName !== 'Select' && <span>{videoName}</span>}
+                  {videoName && videoName !== "Select" && (
+                    <span>{videoName}</span>
+                  )}
                 </BrowseFile>
               )}
             </CenterContainer>

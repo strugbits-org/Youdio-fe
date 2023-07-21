@@ -19,6 +19,7 @@ import {
 } from "src/components/AdminInput/AdminInput";
 import { addInstructorValidateForm } from "src/helpers/forms/validateForms";
 import { useLocation } from "react-router-dom";
+import usePutAPI from "src/features/hooks/usePutAPI";
 
 const initialValues = {
   firstName: "",
@@ -38,38 +39,54 @@ const AddInstructor = () => {
   );
   const [bannerImageName, setBannerImageName] = useState("Upload Cover Image");
   const { loading, postData, fetchData, res } = useFetch();
+  const { putData, putLoading } = usePutAPI();
   const { width } = useWindowSize();
   const location = useLocation();
   const formikRef = useRef();
 
   useEffect(() => {
-    if (isEditable) {
-      fetchData(`instructor/get-instructor/${isEditable}`);
-    }
+    isEditable && fetchData(`instructor/get-instructor/${isEditable}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCancel = (e) => {
     e.preventDefault();
     resetFormValues();
   };
+
   const handleSubmit = (data, action) => {
     const copyData = { ...data };
     const isPremium = copyData.isPremium;
     copyData.isPremium = isPremium === "yes" && true;
     const formData = new FormData();
     if (isEditable) {
-      console.log(copyData);
+      !copyData.image && delete copyData.image;
+      !copyData.bannerImage && delete copyData.bannerImage;
+      Object.keys(copyData).forEach((key) =>
+        formData.append(key, copyData[key])
+      );
+      putData(
+        `instructor/update-instructor/${isEditable}`,
+        formData,
+        undefined,
+        undefined,
+        true
+      );
+    } else {
+      Object.keys(copyData).forEach((key) =>
+        formData.append(key, copyData[key])
+      );
+      postData(
+        "instructor/add-instructor",
+        formData,
+        undefined,
+        undefined,
+        true,
+        resetFormValues
+      );
     }
-    // Object.keys(copyData).forEach((key) => formData.append(key, copyData[key]));
-    // postData(
-    //   "instructor/add-instructor",
-    //   formData,
-    //   undefined,
-    //   undefined,
-    //   true,
-    //   resetFormValues
-    // );
   };
+
   const resetFormValues = () => {
     formikRef.current.resetForm();
     setProfileImageName("Upload Profile Picture");
@@ -105,16 +122,23 @@ const AddInstructor = () => {
         bannerImage: "",
         description,
       };
-
       return instructor;
     }
     return initialValues;
   }, [res]);
 
+  const dynamicLoading = useMemo(() => {
+    if (location && location.state?.instructorId) {
+      return putLoading;
+    }
+    return loading;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, putLoading])
+
   return (
     <React.Fragment>
       <Container>
-        <H2>Add Instructor</H2>
+        <H2>{isEditable ? "Edit Instructor" : "Add Instructor"}</H2>
         <Formik
           initialValues={intructorDetail}
           validationSchema={addInstructorValidateForm(isEditable)}
@@ -137,7 +161,7 @@ const AddInstructor = () => {
                     onChange={(e) => {
                       formik.setFieldValue("firstName", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <FieldInput
                     label="Last Name"
@@ -150,7 +174,7 @@ const AddInstructor = () => {
                     onChange={(e) => {
                       formik.setFieldValue("lastName", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -165,7 +189,7 @@ const AddInstructor = () => {
                     onChange={(e) => {
                       formik.setFieldValue("email", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <FieldInput
                     label="Phone"
@@ -178,7 +202,7 @@ const AddInstructor = () => {
                     onChange={(e) => {
                       formik.setFieldValue("phone", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
 
@@ -194,7 +218,7 @@ const AddInstructor = () => {
                     onChange={(e) => {
                       formik.setFieldValue("jobTitle", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <DropDownInput
                     label="Is Premium"
@@ -211,7 +235,7 @@ const AddInstructor = () => {
                     onChange={(e) => {
                       formik.setFieldValue("isPremium", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
 
@@ -229,7 +253,7 @@ const AddInstructor = () => {
                       setBannerImageName(e.target.value);
                       formik.setFieldValue("bannerImage", e.target.files[0]);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                     {...{
                       "data-before": bannerImageName,
                     }}
@@ -248,7 +272,7 @@ const AddInstructor = () => {
                         setProfileImageName(e.target.value);
                         formik.setFieldValue("image", e.target.files[0]);
                       }}
-                      disabled={loading}
+                      disabled={dynamicLoading}
                       {...{
                         "data-before": profileImageName,
                       }}
@@ -268,14 +292,14 @@ const AddInstructor = () => {
                     onChange={(e) => {
                       formik.setFieldValue("description", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <ButtonGroup>
                   {!isEditable && (
                     <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
                   )}
-                  <ButtonTwo type="submit" disabled={loading}>
+                  <ButtonTwo type="submit" disabled={dynamicLoading}>
                     SAVE
                   </ButtonTwo>
                 </ButtonGroup>

@@ -132,6 +132,33 @@ const useFetch = () => {
       setError(e.message);
     }
   };
+  
+  // Put
+  const putData = async (url, payload, cbFunction, setValues, formData) => {
+    setLoading(true);
+    const headers = formData
+      ? await getHeaders(token, formData)
+      : await getHeaders(token);
+    try {
+      const response = await apiClient.put(url, payload, { headers });
+      if (response?.data) {
+        setResponse(response.data);
+        setLoading(false);
+        setError("");
+        setSuccess(true);
+        cbFunction && dispatch(cbFunction(response.data));
+        setValues && setValues();
+        if (response?.data.message) notify("success", response.data.message);
+      }
+    } catch (e) {
+      setLoading(false);
+      setSuccess(false);
+      setError(e.message);
+    } finally {
+      setLoading(false);
+      setSuccess(false);
+    }
+  };
 
   // Post
   const deleteData = async (url, setLocalState) => {
@@ -144,7 +171,7 @@ const useFetch = () => {
         setLoading(false);
         setError("");
         setLocalState && setLocalState();
-        if(response?.data.message) notify("success", response.data.message)
+        if (response?.data.message) notify("success", response.data.message);
       }
     } catch (e) {
       setLoading(false);
@@ -214,6 +241,7 @@ const useFetch = () => {
     fetchMultipleData,
     postData,
     patchData,
+    putData,
     fetchIdAndVideos,
   };
 };

@@ -38,7 +38,7 @@ const LiveBooking = () => {
                 <LiveBookingCard
                   key={`booked-session-card-${session._id}`}
                   bookedSession={session.liveSession}
-                  disabled={ind === 0}
+                  disabled={ind === 8}
                   getBookedSession={getBookedSession}
                   _id={session._id}
                 />

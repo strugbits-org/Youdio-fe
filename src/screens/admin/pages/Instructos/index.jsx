@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Container } from "./instructorsComponent";
 import { H2, PrimaryButton, InputIcon } from "src/components";
 import { icons } from "src/helpers";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { InstructorCards } from "src/components/CardsSection";
 import { DeletePopup } from "src/components/Popups";
@@ -85,7 +85,7 @@ function Instructors() {
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleView={handleView}
-        search={search}
+        search={debounce}
       />
       <DeletePopup
         open={open}

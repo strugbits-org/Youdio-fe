@@ -12,7 +12,7 @@ import {
   CenterContainer,
   ButtonGroup,
 } from "./AddLiveSessComo";
-import { ButtonOne, ButtonTwo } from "../AddInstructor/AddInstructorComp";
+import { ButtonOne, ButtonTwo } from "../../Instructos/AddInstructor/AddInstructorComp";
 import {
   FieldInput,
   DropDownInput,

@@ -13,7 +13,7 @@ import {
   CenterContainer,
   ButtonGroup,
 } from "./AddVideoComp";
-import { ButtonOne, ButtonTwo } from "../AddInstructor/AddInstructorComp";
+import { ButtonOne, ButtonTwo } from "../../Instructos/AddInstructor/AddInstructorComp";
 import {
   FieldInput,
   DropDownInput,

@@ -30,11 +30,11 @@ import LiveVideo from "src/screens/user/LiveVideo";
 import ForgotPassword from "src/screens/Authenticate/ForgotPassword";
 import ResetPassword from "src/screens/Authenticate/ResetPassword";
 import VideoClasses from "src/screens/user/VideoClasses";
-import AddInstructor from "src/screens/admin/pages/AddInstructor/Index";
-import AddLiveSession from "src/screens/admin/pages/AddLiveSession/Index";
+import AddInstructor from "src/screens/admin/pages/Instructos/AddInstructor/Index";
+import AddLiveSession from "src/screens/admin/pages/LiveSessions/AddLiveSession/Index";
 
 import VideoClass from "src/screens/user/VideoClass";
-import AddVideo from "src/screens/admin/pages/AddVideo/Index";
+import AddVideo from "src/screens/admin/pages/VideoListing/AddVideo/Index";
 import AdminDashboard from "src/screens/admin/pages";
 import UserDashboard from "src/screens/user/Dashboard";
 import usePermission from "src/features/hooks/usePermission";
@@ -44,7 +44,7 @@ import PageNotFound from "src/screens/PageNotFound";
 import LiveSessions from "src/screens/admin/pages/LiveSessions";
 import VideoListing from "src/screens/admin/pages/VideoListing";
 import Profile from "src/screens/admin/pages/Profile";
-import PremiumInstructors from "src/screens/admin/pages/PremiumInstructos";
+import Instructors from "src/screens/admin/pages/Instructos";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 const AllRoutes = () => {
@@ -160,7 +160,7 @@ const AllRoutes = () => {
         <Route path="edit-video" element={<AddVideo />} />
         <Route path="add-live-session" element={<AddLiveSession />} />
         <Route path="edit-live-session" element={<AddLiveSession />} />
-        <Route path="premium-instructors" element={<PremiumInstructors />} />
+        <Route path="instructors" element={<Instructors />} />
         <Route
           path="*"
           element={<PageNotFound width="528px" height="60dvh" />}

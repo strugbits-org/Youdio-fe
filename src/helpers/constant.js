@@ -30,8 +30,8 @@ export const adminDashboardMenu = [
     path: "/dashboard/admin",
   },
   {
-    name: "Premium Instrutors",
-    path: "/dashboard/premium-instructors",
+    name: "Instrutors",
+    path: "/dashboard/instructors",
   },
   {
     name: "Live Sessions",

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Container } from "./premiumInstructorsComponent";
+import { Container } from "./instructorsComponent";
 import { H2, PrimaryButton, InputIcon } from "src/components";
 import { icons } from "src/helpers";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { InstructorCards } from "src/components/CardsSection";
 import { DeletePopup } from "src/components/Popups";
 import useFetch from "src/features/hooks/useFetch";
 
-function PremiumInstructors() {
+function Instructors() {
   const [search, setSearch] = useState("");
   const [instructorId, setInstructorId] = useState("");
   const [open, setOpen] = useState(false);
@@ -91,4 +91,4 @@ function PremiumInstructors() {
   );
 }
 
-export default PremiumInstructors;
+export default Instructors;

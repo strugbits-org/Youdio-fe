@@ -11,7 +11,7 @@ import {
   CenterContainer,
   ButtonGroup,
 } from "./AddInstructorComp";
-import { ButtonOne, ButtonTwo } from "../AddInstructor/AddInstructorComp";
+import { ButtonOne, ButtonTwo } from "./AddInstructorComp";
 import {
   FieldInput,
   DropDownInput,

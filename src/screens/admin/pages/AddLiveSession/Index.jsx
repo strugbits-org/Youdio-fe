@@ -77,7 +77,8 @@ const AddLiveSession = () => {
   useEffect(() => {
     fetchMultipleData(
       ["category/get-sub-category", "instructor/get-instructor"],
-      [setStyles, setInstructors]
+      [setStyles, setInstructors],
+      [{}, {}]
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -85,6 +86,7 @@ const AddLiveSession = () => {
   const { difficulties, intensities, instructors, styles } = useSelector(
     (state) => state.filter
   );
+
   const difficultiesOption = useMemo(() => {
     return difficulties?.map((val) => {
       return {

@@ -9,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { DeletePopup } from "src/components/Popups";
 import usePostAPI from "src/features/hooks/usePostAPI";
 
+
 function LiveSessions() {
   const { deleteData, loading } = useFetch();
-  const { postData, postRes, postLoading } = usePostAPI()
+  const { postData, postRes, postLoading } = usePostAPI();
   const { resetFilters } = useSelector((state) => state.filter);
   const [searchInstructor, setSearchInstructor] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
@@ -25,7 +26,7 @@ function LiveSessions() {
 
   const getLiveSessions = () => {
     postData("liveSession/get", resetFilters);
-  }
+  };
   const liveSession = useMemo(() => {
     if (postRes && postRes.liveSessions?.length > 0) {
       return postRes.liveSessions;
@@ -46,7 +47,7 @@ function LiveSessions() {
     setSessionId(sessionId);
   };
   const handleEdit = (sessionId) => {
-    navigate("/dashboard/edit-live-session", { state: {sessionId} });
+    navigate("/dashboard/edit-live-session", { state: { sessionId } });
   };
   const handleView = (sessionId) => {
     window.open(`/live-class/${sessionId}`, "_blank");
@@ -64,7 +65,7 @@ function LiveSessions() {
       setOpen(false);
     }
   };
-  
+
   return (
     <React.Fragment>
       <Container>

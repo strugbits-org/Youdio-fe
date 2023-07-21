@@ -48,6 +48,9 @@ function LiveSessions() {
   const handleEdit = (sessionId) => {
     navigate("/dashboard/edit-live-session", { state: {sessionId} });
   };
+  const handleView = (sessionId) => {
+    window.open(`/live-class/${sessionId}`, "_blank");
+  };
   const handleAddSession = () => {
     navigate("/dashboard/add-live-session");
   };
@@ -91,12 +94,13 @@ function LiveSessions() {
         loading={postLoading}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
+        handleView={handleView}
       />
       <DeletePopup
         open={open}
         handleClose={handleClose}
         handleAction={handleAction}
-        loading={ loading}
+        loading={loading}
       />
     </React.Fragment>
   );

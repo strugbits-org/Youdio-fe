@@ -35,7 +35,8 @@ function LiveClassesCards({
   loading,
   currentLiveSessionId,
   handleDelete,
-  handleEdit
+  handleEdit,
+  handleView,
 }) {
   return (
     <Container>
@@ -49,6 +50,7 @@ function LiveClassesCards({
                 data={val}
                 handleEdit={handleEdit}
                 handleDelete={handleDelete}
+                handleView={handleView}
               />
             ) : (
               ""

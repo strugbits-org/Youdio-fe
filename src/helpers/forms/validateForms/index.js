@@ -93,18 +93,23 @@ const liveSessionValidateForm = Yup.object({
 });
 
 // Admin Dashboard Add Instructor Form
-const addInstructorValidateForm = Yup.object({
-  firstName: textField({ reqMesg: "First Name is required" }),
-  lastName: textField({ reqMesg: "Last Name is required" }),
-  email,
-  phone,
-  jobTitle: textField({ reqMesg: "Job Title is required" }),
-  isPremium: Yup.string().required("Is Instructor Premium"),
-  image: Yup.mixed().required("Thumbnail Image is required"),
-  bannerImage: Yup.mixed().required("Thumbnail Image is required"),
-  description: textField({ reqMesg: "Description is required" }),
-});
-
+const addInstructorValidateForm = (isEdit) => {
+  return Yup.object({
+    firstName: textField({ reqMesg: "First Name is required" }),
+    lastName: textField({ reqMesg: "Last Name is required" }),
+    email,
+    phone,
+    jobTitle: textField({ reqMesg: "Job Title is required" }),
+    isPremium: Yup.string().required("Is Instructor Premium"),
+    image: isEdit
+      ? Yup.mixed()
+      : Yup.mixed().required("Thumbnail Image is required"),
+    bannerImage: isEdit
+      ? Yup.mixed()
+      : Yup.mixed().required("Thumbnail Image is required"),
+    description: textField({ reqMesg: "Description is required" }),
+  });
+};
 
 const userProfileFormValidate = Yup.object().shape({
   //   userImage: Yup

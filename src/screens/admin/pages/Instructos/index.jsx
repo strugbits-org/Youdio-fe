@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Container } from "./instructorsComponent";
 import { H2, PrimaryButton, InputIcon } from "src/components";
 import { icons } from "src/helpers";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { InstructorCards } from "src/components/CardsSection";
 import { DeletePopup } from "src/components/Popups";
@@ -13,7 +13,7 @@ function Instructors() {
   const [search, setSearch] = useState("");
   const [instructorId, setInstructorId] = useState("");
   const [open, setOpen] = useState(false);
-  const debounce = useDebounce(search)
+  const debounce = useDebounce(search);
   const navigate = useNavigate();
   const { postData, postRes, postLoading } = usePostAPI();
   const { deleteData, loading } = useFetch();
@@ -26,11 +26,9 @@ function Instructors() {
   const getInstructor = () => {
     postData("instructor/get-instructor", { search });
   };
-
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-
   const handleEdit = (instructorId) => {
     navigate("/dashboard/edit-instructor", { state: { instructorId } });
   };
@@ -61,6 +59,8 @@ function Instructors() {
     }
     return [];
   }, [postRes]);
+
+  
   return (
     <div>
       <Container>

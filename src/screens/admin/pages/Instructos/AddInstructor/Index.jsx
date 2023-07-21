@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Form, Formik } from "formik";
 import { H2 } from "src/components";
 import { icons } from "src/helpers";
@@ -18,57 +18,107 @@ import {
   TextArea,
 } from "src/components/AdminInput/AdminInput";
 import { addInstructorValidateForm } from "src/helpers/forms/validateForms";
+import { useLocation } from "react-router-dom";
+
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  jobTitle: "",
+  isPremium: "",
+  image: "",
+  bannerImage: "",
+  description: "",
+};
 
 const AddInstructor = () => {
-  const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    jobTitle: "",
-    isPremium: "",
-    image: "",
-    bannerImage: "",
-    description: "",
-  };
-
-  const [profileImageName, setProfileImageName] = useState("Upload Profile Picture")
-  const [bannerImageName, setBannerImageName] = useState("Upload Cover Image")
-  const { loading, postData } = useFetch();
+  const [profileImageName, setProfileImageName] = useState(
+    "Upload Profile Picture"
+  );
+  const [bannerImageName, setBannerImageName] = useState("Upload Cover Image");
+  const { loading, postData, fetchData, res } = useFetch();
   const { width } = useWindowSize();
-
+  const location = useLocation();
   const formikRef = useRef();
+
+  useEffect(() => {
+    if (isEditable) {
+      fetchData(`instructor/get-instructor/${isEditable}`);
+    }
+  }, []);
+
   const handleCancel = (e) => {
     e.preventDefault();
     resetFormValues();
   };
   const handleSubmit = (data, action) => {
-    const copyData = { ...data }
-    const isPremium = copyData.isPremium
-    copyData.isPremium = isPremium === 'yes' && true
+    const copyData = { ...data };
+    const isPremium = copyData.isPremium;
+    copyData.isPremium = isPremium === "yes" && true;
     const formData = new FormData();
-    Object.keys(copyData).forEach((key) => formData.append(key, copyData[key]));
-    postData(
-      "instructor/add-instructor",
-      formData,
-      undefined,
-      undefined,
-      true,
-      resetFormValues
-    );
+    if (isEditable) {
+      console.log(copyData);
+    }
+    // Object.keys(copyData).forEach((key) => formData.append(key, copyData[key]));
+    // postData(
+    //   "instructor/add-instructor",
+    //   formData,
+    //   undefined,
+    //   undefined,
+    //   true,
+    //   resetFormValues
+    // );
   };
   const resetFormValues = () => {
     formikRef.current.resetForm();
     setProfileImageName("Upload Profile Picture");
     setBannerImageName("Upload Cover Image");
   };
+
+  const isEditable = useMemo(() => {
+    if (location && location.state?.instructorId) {
+      return location.state.instructorId;
+    }
+    return false;
+  }, [location]);
+
+  const intructorDetail = useMemo(() => {
+    if (res && res.instructor?.instructor) {
+      const {
+        firstName,
+        lastName,
+        email,
+        phone,
+        jobTitle,
+        isPremium,
+        description,
+      } = { ...res.instructor.instructor };
+      const instructor = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        jobTitle,
+        isPremium: isPremium ? "yes" : "no",
+        image: "",
+        bannerImage: "",
+        description,
+      };
+
+      return instructor;
+    }
+    return initialValues;
+  }, [res]);
+
   return (
     <React.Fragment>
       <Container>
         <H2>Add Instructor</H2>
         <Formik
-          initialValues={initialValues}
-          validationSchema={addInstructorValidateForm}
+          initialValues={intructorDetail}
+          validationSchema={addInstructorValidateForm(isEditable)}
+          enableReinitialize={true}
           onSubmit={handleSubmit}
           innerRef={formikRef}
         >
@@ -222,7 +272,9 @@ const AddInstructor = () => {
                   />
                 </FormRow>
                 <ButtonGroup>
-                  <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
+                  {!isEditable && (
+                    <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
+                  )}
                   <ButtonTwo type="submit" disabled={loading}>
                     SAVE
                   </ButtonTwo>

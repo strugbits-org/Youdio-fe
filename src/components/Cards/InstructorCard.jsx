@@ -41,10 +41,10 @@ const HoverBox = styled.div`
   top: 0px;
   left: 0px;
   transition: var(--transition1s);
-  gap: 24px;
+  gap: 8px;
 
   img {
-    width: clamp(36px, 4vw, 50px);
+    width: clamp(16px, 2vw, 30px);
     aspect-ratio: 1/1;
     cursor: pointer;
     object-fit: contain;
@@ -55,6 +55,7 @@ function InstructorCard({
   instructor: { _id, firstName, lastName, image, jobTitle },
   handleDelete,
   handleEdit,
+  handleView,
 }) {
   const navigate = useNavigate();
   const handleNavgate = () => {
@@ -62,7 +63,9 @@ function InstructorCard({
   };
   return (
     <Card>
-      <CardMedia onClick={!handleDelete && !handleEdit ? handleNavgate : () => {}}>
+      <CardMedia
+        onClick={!handleDelete && !handleEdit ? handleNavgate : () => {}}
+      >
         <img src={image} alt={firstName} width="100%" height="auto" />
         {handleDelete && handleEdit && (
           <HoverBox className="hoverBox">
@@ -77,6 +80,13 @@ function InstructorCard({
               src={icons.pen}
               alt="Edit_Pen"
               onClick={() => handleEdit(_id)}
+              width=""
+              height=""
+            />
+            <img
+              src={icons.eye}
+              alt="View_Eye"
+              onClick={() => handleView(_id)}
               width=""
               height=""
             />

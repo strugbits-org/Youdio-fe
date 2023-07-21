@@ -51,7 +51,7 @@ export const FieldInput = ({ label, ...props }) => {
     </Ipt>
   );
 };
-export const DropDownInput = ({ label, options, ...props }) => {
+export const DropDownInput = ({ label, options, placeholderName, ...props }) => {
   const [field, meta] = useField(props);
   // const selectedOption = field.value;
 
@@ -62,8 +62,8 @@ export const DropDownInput = ({ label, options, ...props }) => {
 
         {/* <CONTAINER className="input-container"> */}
         <DropInput err={meta.touched && meta.error} {...field} {...props}>
-          <option key="disbaled" value="">
-            Select
+          <option key="disbaled" disabled value="">
+            {placeholderName ? placeholderName : "Select"}
           </option>
           {options.map((option) => (
             <option key={option.value} value={option.value}>

@@ -32,7 +32,14 @@ const Box = styled.div`
   }
 `;
 
-function InstructorCards({ loading, instructors, search, handleDelete, handleEdit }) {
+function InstructorCards({
+  loading,
+  instructors,
+  search,
+  handleDelete,
+  handleEdit,
+  handleView,
+}) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
@@ -46,6 +53,7 @@ function InstructorCards({ loading, instructors, search, handleDelete, handleEdi
                 instructor={instructor}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
+                handleView={handleView}
               />
             );
           })}

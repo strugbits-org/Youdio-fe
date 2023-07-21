@@ -7,37 +7,41 @@ import usePostAPI from "src/features/hooks/usePostAPI";
 import { InstructorCards } from "src/components/CardsSection";
 import { DeletePopup } from "src/components/Popups";
 import useFetch from "src/features/hooks/useFetch";
+import { useDebounce } from "src/features/hooks/useDebounce";
 
 function Instructors() {
   const [search, setSearch] = useState("");
   const [instructorId, setInstructorId] = useState("");
   const [open, setOpen] = useState(false);
+  const debounce = useDebounce(search)
   const navigate = useNavigate();
   const { postData, postRes, postLoading } = usePostAPI();
   const { deleteData, loading } = useFetch();
 
   useEffect(() => {
-    getInstructor()
+    getInstructor();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [debounce]);
 
   const getInstructor = () => {
     postData("instructor/get-instructor", { search });
-  }
+  };
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-  
+
   const handleEdit = (instructorId) => {
     navigate("/dashboard/edit-instructor", { state: { instructorId } });
-
+  };
+  const handleView = (instructorId) => {
+    window.open(`/singleinstructor/${instructorId}`, "_blank");
   };
   const handleDelete = (instructorId) => {
-    setOpen(true)
+    setOpen(true);
     setInstructorId(instructorId);
   };
-  const handleAddSession = () => {
+  const handleAddInstructor = () => {
     navigate("/dashboard/add-instructor");
   };
   const handleClose = () => {
@@ -62,7 +66,7 @@ function Instructors() {
       <Container>
         <div className="leftSide">
           <H2>Instructors</H2>
-          <PrimaryButton onClick={handleAddSession}>
+          <PrimaryButton onClick={handleAddInstructor}>
             Add Instructor
           </PrimaryButton>
         </div>
@@ -80,6 +84,8 @@ function Instructors() {
         loading={postLoading}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
+        handleView={handleView}
+        search={search}
       />
       <DeletePopup
         open={open}

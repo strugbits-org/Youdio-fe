@@ -32,8 +32,8 @@ const AddInstructor = () => {
     description: "",
   };
 
-  const [profileImageName, setProfileImageName] = useState("")
-  const [bannerImageName, setBannerImageName] = useState("")
+  const [profileImageName, setProfileImageName] = useState("Upload Profile Picture")
+  const [bannerImageName, setBannerImageName] = useState("Upload Cover Image")
   const { loading, postData } = useFetch();
   const { width } = useWindowSize();
 
@@ -59,14 +59,13 @@ const AddInstructor = () => {
   };
   const resetFormValues = () => {
     formikRef.current.resetForm();
-    setProfileImageName("Select");
-    setBannerImageName("Select");
+    setProfileImageName("Upload Profile Picture");
+    setBannerImageName("Upload Cover Image");
   };
   return (
     <React.Fragment>
-      
       <Container>
-        <H2>Add New Video</H2>
+        <H2>Add Instructor</H2>
         <Formik
           initialValues={initialValues}
           validationSchema={addInstructorValidateForm}
@@ -82,7 +81,7 @@ const AddInstructor = () => {
                     id="firstName"
                     name="firstName"
                     type="text"
-                    placeholder="Live Back Press"
+                    placeholder="Your First Name"
                     style={{ fontSize: "16px" }}
                     value={formik.values.firstName}
                     onChange={(e) => {
@@ -95,7 +94,7 @@ const AddInstructor = () => {
                     id="lastName"
                     name="lastName"
                     type="text"
-                    placeholder="Live Back Press"
+                    placeholder="Your Last Name"
                     style={{ fontSize: "16px" }}
                     value={formik.values.lastName}
                     onChange={(e) => {
@@ -110,7 +109,7 @@ const AddInstructor = () => {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="Live Back Press"
+                    placeholder="Your Email"
                     style={{ fontSize: "16px" }}
                     value={formik.values.email}
                     onChange={(e) => {
@@ -123,7 +122,7 @@ const AddInstructor = () => {
                     id="phone"
                     name="phone"
                     type="text"
-                    placeholder="Live Back Press"
+                    placeholder="Phone e.g. 923241234567"
                     style={{ fontSize: "16px" }}
                     value={formik.values.phone}
                     onChange={(e) => {
@@ -139,7 +138,7 @@ const AddInstructor = () => {
                     id="jobTitle"
                     name="jobTitle"
                     type="text"
-                    placeholder="Live Back Press"
+                    placeholder="Your Job Title"
                     style={{ fontSize: "16px" }}
                     value={formik.values.jobTitle}
                     onChange={(e) => {
@@ -152,7 +151,7 @@ const AddInstructor = () => {
                     id="isPremium"
                     name="isPremium"
                     type="text"
-                    placeholder="Level 1"
+                    placeholderName="Select Instructor Type"
                     style={{ fontSize: "16px" }}
                     options={[
                       { label: "Yes", value: "yes" },

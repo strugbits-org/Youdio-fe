@@ -63,34 +63,38 @@ const paymentFormValidate = Yup.object({
 });
 
 // Admin Dashboard Live Session Form
-const liveSessionValidateForm = Yup.object({
-  category: textField({ reqMesg: "Caregory is required" }),
-  date: Yup.date()
-    .min(new Date(), "Please select future date")
-    .required("Date is required"),
-  title: textField({ reqMesg: "Title is required" }),
-  trainer: textField({ reqMesg: "Trainer is required" }),
-  difficulty: textField({ reqMesg: "Difficulty is required" }),
-  intensity: textField({ reqMesg: "Intensity is required" }),
-  filter: textField({ reqMesg: "Filter is required" }),
-  totalTime: Yup.number().required("TotalTime is required"),
-  timeZone: textField({ reqMesg: "Time Zone is required" }),
-  start: Yup.string().required("Start time can't be empty"),
-  end: Yup.string()
-    .required("End time can't be empty")
-    .test("is-greater", "End time should be greater", function (value) {
-      const { start } = this.parent;
-      return moment(value, "HH:mm").isSameOrAfter(moment(start, "HH:mm"));
-    }),
-  // zoomLink: Yup.string()
-  //   .matches(
-  //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-  //     "Enter correct url!"
-  //   )
-  //   .required("Zoom link is required"),
-  description: textField({ reqMesg: "Description is required" }),
-  thumbnail: Yup.mixed().required("Thumbnail Image is required"),
-});
+const liveSessionValidateForm = (isEdit) => { 
+  return Yup.object({
+    category: textField({ reqMesg: "Caregory is required" }),
+    date: Yup.date()
+      .min(new Date(), "Please select future date")
+      .required("Date is required"),
+    title: textField({ reqMesg: "Title is required" }),
+    trainer: textField({ reqMesg: "Trainer is required" }),
+    difficulty: textField({ reqMesg: "Difficulty is required" }),
+    intensity: textField({ reqMesg: "Intensity is required" }),
+    filter: textField({ reqMesg: "Filter is required" }),
+    totalTime: Yup.number().required("TotalTime is required"),
+    timeZone: textField({ reqMesg: "Time Zone is required" }),
+    start: Yup.string().required("Start time can't be empty"),
+    end: Yup.string()
+      .required("End time can't be empty")
+      .test("is-greater", "End time should be greater", function (value) {
+        const { start } = this.parent;
+        return moment(value, "HH:mm").isSameOrAfter(moment(start, "HH:mm"));
+      }),
+    description: textField({ reqMesg: "Description is required" }),
+    thumbnail: isEdit
+      ? Yup.mixed()
+      : Yup.mixed().required("Thumbnail Image is required"),
+    // zoomLink: Yup.string()
+    //   .matches(
+    //     /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    //     "Enter correct url!"
+    //   )
+    //   .required("Zoom link is required"),
+  });
+}
 
 // Admin Dashboard Add Instructor Form
 const addInstructorValidateForm = (isEdit) => {

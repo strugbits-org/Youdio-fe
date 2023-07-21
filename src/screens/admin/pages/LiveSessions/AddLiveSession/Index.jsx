@@ -12,7 +12,10 @@ import {
   CenterContainer,
   ButtonGroup,
 } from "./AddLiveSessComo";
-import { ButtonOne, ButtonTwo } from "../../Instructos/AddInstructor/AddInstructorComp";
+import {
+  ButtonOne,
+  ButtonTwo,
+} from "../../Instructos/AddInstructor/AddInstructorComp";
 import {
   FieldInput,
   DropDownInput,
@@ -21,29 +24,48 @@ import {
 import { setInstructors, setStyles } from "src/features/filterSlice";
 import { liveSessionValidateForm } from "src/helpers/forms/validateForms";
 import { timeZones } from "src/helpers/constant";
+import { useLocation } from "react-router-dom";
+import usePutAPI from "src/features/hooks/usePutAPI";
+import useGetAPI from "src/features/hooks/useGetAPI";
+import moment from "moment";
 
+const initialValues = {
+  category: "",
+  date: "",
+  title: "",
+  trainer: "",
+  difficulty: "",
+  intensity: "",
+  filter: "",
+  totalTime: "",
+  timeZone: "",
+  start: "",
+  end: "",
+  description: "",
+  thumbnail: "",
+};
 const AddLiveSession = () => {
-  const initialValues = {
-    category: "",
-    date: "",
-    title: "",
-    trainer: "",
-    difficulty: "",
-    intensity: "",
-    filter: "",
-    totalTime: "",
-    timeZone: "",
-    start: "",
-    end: "",
-    description: "",
-    thumbnail: "",
-  };
+  const [thumbnailImageValue, setThumbnailImageValue] = useState("Select");
+  const [videoName, setVideoName] = useState("Upload Video Thumbnail");
+  const [category, setCategory] = useState("");
   const { loading, postData, fetchMultipleData } = useFetch();
+  const { getData, getRes } = useGetAPI();
+  const { putLoading, putData } = usePutAPI();
   const { width } = useWindowSize();
   const formikRef = useRef();
-  const [thumbnailImageValue, setThumbnailImageValue] = useState("Select");
-  const [videoName, setVideoName] = useState("Select");
-  const [category, setCategory] = useState("");
+  const location = useLocation();
+  const { difficulties, intensities, instructors, styles } = useSelector(
+    (state) => state.filter
+  );
+  useEffect(() => {
+    fetchMultipleData(
+      ["category/get-sub-category", "instructor/get-instructor"],
+      [setStyles, setInstructors],
+      [{}, {}]
+    );
+    isEditable && getData(`liveSession/get/${isEditable}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -55,17 +77,33 @@ const AddLiveSession = () => {
     copyData.time = `${copyData.start} - ${copyData.end}`;
     delete copyData.start;
     delete copyData.end;
-
     const formData = new FormData();
-    Object.keys(copyData).forEach((key) => formData.append(key, copyData[key]));
-    postData(
-      "liveSession/create",
-      formData,
-      undefined,
-      undefined,
-      true,
-      resetFormValues
-    );
+    if (isEditable) {
+      !copyData.thumbnail && delete copyData.thumbnail;
+      console.log(copyData);
+      Object.keys(copyData).forEach((key) =>
+        formData.append(key, copyData[key])
+      );
+      putData(
+        `liveSession/update/${isEditable}`,
+        formData,
+        undefined,
+        undefined,
+        true
+      );
+    } else {
+      Object.keys(copyData).forEach((key) =>
+        formData.append(key, copyData[key])
+      );
+      postData(
+        "liveSession/create",
+        formData,
+        undefined,
+        undefined,
+        true,
+        resetFormValues
+      );
+    }
   };
 
   const resetFormValues = () => {
@@ -74,18 +112,56 @@ const AddLiveSession = () => {
     setVideoName("Select");
   };
 
-  useEffect(() => {
-    fetchMultipleData(
-      ["category/get-sub-category", "instructor/get-instructor"],
-      [setStyles, setInstructors],
-      [{}, {}]
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const isEditable = useMemo(() => {
+    if (location && location.state?.sessionId) {
+      return location.state.sessionId;
+    }
+    return false;
+  }, [location]);
 
-  const { difficulties, intensities, instructors, styles } = useSelector(
-    (state) => state.filter
-  );
+  const sessionDetail = useMemo(() => {
+    if (getRes && getRes?.liveSession) {
+      const {
+        category,
+        date,
+        title,
+        trainer,
+        difficulty,
+        intensity,
+        filter,
+        totalTime,
+        timeZone,
+        time,
+        description,
+      } = { ...getRes.liveSession };
+      const liveSession = {
+        category: category._id,
+        date: moment(date).format("YYYY-MM-DD"),
+        title,
+        trainer: trainer._id,
+        difficulty,
+        intensity,
+        filter,
+        totalTime,
+        timeZone,
+        start: time.slice(0, time.indexOf("-")).trim(),
+        end: time.slice(time.indexOf("-") + 1).trim(),
+        description,
+        thumbnail: "",
+      };
+      setCategory(category._id);
+      return liveSession;
+    }
+    return initialValues;
+  }, [getRes]);
+
+  const dynamicLoading = useMemo(() => {
+    if (location && location.state?.instructorId) {
+      return putLoading;
+    }
+    return loading;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, putLoading]);
 
   const difficultiesOption = useMemo(() => {
     return difficulties?.map((val) => {
@@ -144,11 +220,12 @@ const AddLiveSession = () => {
   return (
     <React.Fragment>
       <Container>
-        <H2>Live Session</H2>
+        <H2>{isEditable ? "Edit Live Session" : "Add Live Session"}</H2>
         <Formik
-          initialValues={initialValues}
-          validationSchema={liveSessionValidateForm}
+          initialValues={sessionDetail}
+          validationSchema={liveSessionValidateForm(isEditable)}
           onSubmit={handleSubmit}
+          enableReinitialize={true}
           innerRef={formikRef}
         >
           {(formik) => (
@@ -168,7 +245,7 @@ const AddLiveSession = () => {
                       setCategory(e.target.value);
                       formik.setFieldValue("category", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
 
                   <DropDownInput
@@ -183,7 +260,7 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("filter", e.target.value);
                     }}
-                    disabled={!category || loading}
+                    disabled={!category || dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -198,7 +275,7 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("title", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <DropDownInput
                     label="Trainer"
@@ -213,7 +290,7 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("trainer", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -229,7 +306,7 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("difficulty", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <DropDownInput
                     label="Intensity"
@@ -243,7 +320,7 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("intensity", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -259,7 +336,7 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("date", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <FieldInput
                     label="Total Time (Min)"
@@ -271,7 +348,7 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("totalTime", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -285,7 +362,7 @@ const AddLiveSession = () => {
                       onChange={(e) => {
                         formik.setFieldValue("start", e.target.value);
                       }}
-                      disabled={loading}
+                      disabled={dynamicLoading}
                     />
                     <FieldInput
                       label="End Time"
@@ -296,7 +373,7 @@ const AddLiveSession = () => {
                       onChange={(e) => {
                         formik.setFieldValue("end", e.target.value);
                       }}
-                      disabled={loading}
+                      disabled={dynamicLoading}
                     />
                   </div>
                   <DropDownInput
@@ -310,7 +387,7 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("timeZone", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   {/* Upload Video for small screens */}
                 </FormRow>
@@ -329,7 +406,7 @@ const AddLiveSession = () => {
                         setThumbnailImageValue(e.target.value);
                         formik.setFieldValue("thumbnail", e.target.files[0]);
                       }}
-                      disabled={loading}
+                      disabled={dynamicLoading}
                       {...{
                         "data-before": thumbnailImageValue,
                       }}
@@ -349,12 +426,14 @@ const AddLiveSession = () => {
                     onChange={(e) => {
                       formik.setFieldValue("description", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <ButtonGroup>
-                  <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
-                  <ButtonTwo type="submit" disabled={loading}>
+                  {!isEditable && (
+                    <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
+                  )}
+                  <ButtonTwo type="submit" disabled={dynamicLoading}>
                     SAVE
                   </ButtonTwo>
                 </ButtonGroup>

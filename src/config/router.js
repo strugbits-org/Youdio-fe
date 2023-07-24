@@ -46,6 +46,7 @@ import VideoListing from "src/screens/admin/pages/VideoListing";
 import Profile from "src/screens/admin/pages/Profile";
 import Instructors from "src/screens/admin/pages/Instructos";
 import AddReview from "src/screens/admin/pages/Reviews/AddReview";
+import FeatureLesson from "src/screens/admin/pages/FeatureLesson";
 
 //f0d18eebe6a4a8805d27a3031a904dcb344de975
 const AllRoutes = () => {
@@ -159,6 +160,8 @@ const AllRoutes = () => {
         <Route path="instructors" element={<Instructors />} />
         <Route path="add-instructor" element={<AddInstructor />} />
         <Route path="edit-instructor" element={<AddInstructor />} />
+        
+        <Route path="feature-lesson" element={<FeatureLesson />} />
         
         <Route path="add-review" element={<AddReview />} />
         

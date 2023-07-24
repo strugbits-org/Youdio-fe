@@ -149,7 +149,9 @@ const addReviewValidateForm = (isEdit) => {
   return Yup.object({
     instructor: textField({ reqMesg: "Caregory is required" }),
     date: Yup.date().required("Date is required"),
-    rating: textField({ reqMesg: "Rating is required" }),
+    rating: Yup.number()
+      .min(1, "Rating is Required")
+      .required("Rating is Required"),
     customerName: textField({ reqMesg: "Instructor is required" }),
     review: textField({ reqMesg: "Description is required" }),
     customerImage: isEdit

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Form, Formik } from "formik";
-import { H2 } from "src/components";
+import { Error, H2, Label } from "src/components";
 import { icons } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
 import useWindowSize from "src/features/hooks/useInnerWidth";
@@ -10,6 +10,7 @@ import {
   FormRow,
   CenterContainer,
   ButtonGroup,
+  RatingBox,
 } from "./AddReviewComponent";
 import {
   ButtonOne,
@@ -22,14 +23,14 @@ import {
 } from "src/components/AdminInput/AdminInput";
 import { addReviewValidateForm } from "src/helpers/forms/validateForms";
 import { useLocation } from "react-router-dom";
-import usePutAPI from "src/features/hooks/usePutAPI";
 import { setInstructors } from "src/features/filterSlice";
 import { useSelector } from "react-redux";
+import { FormControlLabel, Rating } from "@mui/material";
 
 const initialValues = {
   instructor: "",
   date: "",
-  rating: "",
+  rating: 0,
   customerName: "",
   customerImage: "",
   review: "",
@@ -39,17 +40,15 @@ const AddReview = () => {
   const [profileImageName, setProfileImageName] = useState(
     "Upload Customer Picture"
   );
-  const { loading, postData, fetchData, res } = useFetch();
-  const { putData, putLoading } = usePutAPI();
+  const { loading, postData } = useFetch();
   const { width } = useWindowSize();
   const { instructors } = useSelector((state) => state.filter);
   const location = useLocation();
   const formikRef = useRef();
 
   useEffect(() => {
-      postData("instructor/get-instructor", {}, setInstructors);
-
-    isEditable && fetchData(`instructor/get-instructor/${isEditable}`);
+    postData("instructor/get-instructor", {}, setInstructors);
+    // isEditable && fetch single review;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -60,82 +59,45 @@ const AddReview = () => {
 
   const handleSubmit = (data, action) => {
     const copyData = { ...data };
-    console.log(copyData);
-      const formData = new FormData();
+    const formData = new FormData();
     if (isEditable) {
-      !copyData.image && delete copyData.image;
-      !copyData.bannerImage && delete copyData.bannerImage;
-      Object.keys(copyData).forEach((key) =>
-        formData.append(key, copyData[key])
-      );
-    //   putData(
-    //     `instructor/update-instructor/${isEditable}`,
-    //     formData,
-    //     undefined,
-    //     undefined,
-    //     true
-    //   );
+      //   If in future we will need to edit review functinality then this block working
     } else {
       Object.keys(copyData).forEach((key) =>
         formData.append(key, copyData[key])
       );
-    //   postData(
-    //     "instructor/add-instructor",
-    //     formData,
-    //     undefined,
-    //     undefined,
-    //     true,
-    //     resetFormValues
-    //   );
+      postData(
+        "review/add-review",
+        formData,
+        undefined,
+        undefined,
+        true,
+        resetFormValues
+      );
     }
   };
 
   const resetFormValues = () => {
     formikRef.current.resetForm();
+    formikRef.current.setFieldError("rating", "");
+    formikRef.current.setFieldTouched("rating", false);
     setProfileImageName("Upload Customer Picture");
   };
 
   const isEditable = useMemo(() => {
-    if (location && location.state?.instructorId) {
-      return location.state.instructorId;
+    if (location && location.state?.reviewId) {
+      return location.state.reviewId;
     }
     return false;
   }, [location]);
 
-  const intructorDetail = useMemo(() => {
-    if (res && res.instructor?.instructor) {
-      const {
-        firstName,
-        lastName,
-        email,
-        phone,
-        jobTitle,
-        isPremium,
-        description,
-      } = { ...res.instructor.instructor };
-      const instructor = {
-        firstName,
-        lastName,
-        email,
-        phone,
-        jobTitle,
-        isPremium: isPremium ? "yes" : "no",
-        image: "",
-        bannerImage: "",
-        description,
-      };
-      return instructor;
-    }
-    return initialValues;
-  }, [res]);
-
   const dynamicLoading = useMemo(() => {
-    if (location && location.state?.reviewId) {
-      return putLoading;
-    }
+    // if (location && location.state?.reviewId) {
+    //   return putLoading;
+    // }
     return loading;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, putLoading]);
+  }, [loading]);
 
   const instructorsOption = useMemo(() => {
     return instructors?.length > 0
@@ -150,12 +112,20 @@ const AddReview = () => {
       : [];
   }, [instructors]);
 
+  const validateRating = () => {
+    if (formikRef && formikRef.current) {
+      const validate = formikRef.current.getFieldMeta("rating");
+      return validate.touched && validate.error;
+    }
+    return false;
+  };
+
   return (
     <React.Fragment>
       <Container>
         <H2>{isEditable ? "Edit Review" : "Add Review"}</H2>
         <Formik
-          initialValues={intructorDetail}
+          initialValues={initialValues}
           validationSchema={addReviewValidateForm(isEditable)}
           enableReinitialize={true}
           onSubmit={handleSubmit}
@@ -206,7 +176,39 @@ const AddReview = () => {
                     }}
                     disabled={dynamicLoading}
                   />
-                  {/* Ratings */}
+                  <RatingBox isError={validateRating()}>
+                    <Label>Rating</Label>
+                    <div className="rating">
+                      <FormControlLabel
+                        control={
+                          <>
+                            <input
+                              name="rating"
+                              id="rating"
+                              value={formik.values.rating}
+                              hidden
+                              readOnly
+                              {...formik.getFieldProps("rating")}
+                            />
+                            <Rating
+                              name="size-small"
+                              defaultValue={0}
+                              size="small"
+                              value={formik.values.rating}
+                              onBlur={formik.handleBlur}
+                              onChange={(e) => {
+                                formik.setFieldValue(
+                                  "rating",
+                                  Number(e.target.value)
+                                );
+                              }}
+                            />
+                          </>
+                        }
+                      />
+                    </div>
+                    {validateRating() && <Error>{validateRating()}</Error>}
+                  </RatingBox>
                 </FormRow>
 
                 <FormRow>
@@ -282,9 +284,10 @@ const AddReview = () => {
                       }}
                     />
                   </div>
-                  {profileImageName && profileImageName !== "Select" && (
-                    <span>{profileImageName}</span>
-                  )}
+                  {profileImageName &&
+                    profileImageName !== "Upload Customer Picture" && (
+                      <span>{profileImageName}</span>
+                    )}
                 </BrowseFile>
               )}
             </CenterContainer>

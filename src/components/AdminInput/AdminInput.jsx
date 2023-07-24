@@ -42,7 +42,6 @@ const TEXTAREA = styled.textarea`
 `;
 export const FieldInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
-
   return (
     <Ipt>
       <Label htmlFor={props.id}>{label}</Label>
@@ -51,7 +50,13 @@ export const FieldInput = ({ label, ...props }) => {
     </Ipt>
   );
 };
-export const DropDownInput = ({ label, options, placeholderName, ...props }) => {
+
+export const DropDownInput = ({
+  label,
+  options,
+  placeholderName,
+  ...props
+}) => {
   const [field, meta] = useField(props);
   // const selectedOption = field.value;
 

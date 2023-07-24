@@ -106,7 +106,7 @@ export const BrowseFile = styled.div`
     height: 0px;
 
     &::after {
-      content: "Profile Picture";
+      content: "Upload Customer Image";
       color: #fff;
       background-color: var(--backgroundGreen);
       position: absolute;
@@ -139,4 +139,35 @@ export const ButtonTwo = styled(PrimaryButton)`
   border: 1px solid #ffe7da;
   background-color: #ffe7da;
   border-radius: 0px;
+`;
+
+export const RatingBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  & > label {
+    display: block;
+    color: #777f82;
+  }
+  .rating {
+    display: grid;
+    align-items: center;
+    padding-inline: 16px;
+    border: ${({ isError }) =>
+      isError ? "1px solid red" : "1px solid var(--textParaBlack25)"};
+    height: 45px;
+    background: #f7f7f7;
+    margin-inline: initial;
+    & > label {
+      /* width: max-content; */
+      label svg {
+        fill: var(--backgroundGreen);
+      }
+    }
+    &:hover {
+      border: ${({ isError }) =>
+        isError ? "1px solid red" : "1px solid var(--backgroundGreen)"};
+    }
+  }
 `;

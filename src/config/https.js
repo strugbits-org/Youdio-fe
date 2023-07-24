@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // const base_url = "https://jsonplaceholder.typicode.com/";
-const base_url = "https://youdio-app.herokuapp.com";
-// const base_url = "http://192.168.100.132:3000";
+// const base_url = "https://youdio-app.herokuapp.com";
+const base_url = "http://192.168.100.132:3000";
 const auth_url = "";
 
 const axiosBaseClient = (type) => {

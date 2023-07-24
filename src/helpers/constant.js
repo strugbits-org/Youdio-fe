@@ -45,6 +45,10 @@ export const adminDashboardMenu = [
     name: "Feature Lesson",
     path: "/dashboard/feature-lesson",
   },
+  {
+    name: "Add Reveiw",
+    path: "/dashboard/add-review",
+  },
 ];
 
 export const userDashboardMenu = [

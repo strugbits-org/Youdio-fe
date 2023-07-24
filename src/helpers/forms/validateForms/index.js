@@ -144,6 +144,20 @@ const addVideoValidateForm = (isEdit) => {
   });
 };
 
+// Admin Dashboard Add Review Form
+const addReviewValidateForm = (isEdit) => {
+  return Yup.object({
+    instructor: textField({ reqMesg: "Caregory is required" }),
+    date: Yup.date().required("Date is required"),
+    rating: textField({ reqMesg: "Rating is required" }),
+    customerName: textField({ reqMesg: "Instructor is required" }),
+    review: textField({ reqMesg: "Description is required" }),
+    customerImage: isEdit
+      ? Yup.mixed()
+      : Yup.mixed().required("Thumbnail Image is required"),
+  });
+};
+
 const userProfileFormValidate = Yup.object().shape({
   //   userImage: Yup
   //       .mixed()
@@ -165,4 +179,5 @@ export {
   addVideoValidateForm,
   liveSessionValidateForm,
   addInstructorValidateForm,
+  addReviewValidateForm,
 };

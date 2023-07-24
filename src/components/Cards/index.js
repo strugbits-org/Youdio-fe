@@ -2,6 +2,7 @@ import LiveClassCard from "./LiveClassCard";
 import LiveLessonCard from "./LiveLessonCard";
 import VideoClassCard from "./VideoClassCard";
 import InstructorCard from "./InstructorCard";
+import FeatureVideoCard from "./FeatureVideoCard";
 import {
   SingleInstructorCard,
   TwoCardInstructor,
@@ -16,6 +17,7 @@ export {
   InstructorCard,
   TwoCardInstructor,
   SingleInstructorCard,
+  FeatureVideoCard,
   ReviewCard,
   Card,
   CardMedia,

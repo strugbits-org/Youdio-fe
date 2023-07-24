@@ -4,6 +4,7 @@ import { filterKeys } from "src/helpers/constant";
 const initialState = {
   styles: null,
   instructors: null,
+  categories: null,
   difficulties: [
     {
       id: 0,
@@ -40,6 +41,7 @@ const initialState = {
       name: "Level 4",
     },
   ],
+  
   resetFilters: {
     duration: {},
     instructors: [],
@@ -80,6 +82,9 @@ const filterSlice = createSlice({
     },
     setInstructors: (state, action) => {
       state.instructors = action.payload.instructors;
+    },
+    setCategories: (state, action) => {
+      state.categories = action.payload.categories;
     },
 
     // Duration
@@ -175,6 +180,7 @@ const filterSlice = createSlice({
 export const {
   setStyles,
   setInstructors,
+  setCategories,
   filterDuration,
   removeDuration,
   pushToFilters,

@@ -29,7 +29,13 @@ const Box = styled.div`
   }
 `;
 
-function VideoClassesCards({ videos, loading, handleDelete, handleEdit }) {
+function VideoClassesCards({
+  videos,
+  loading,
+  handleDelete,
+  handleEdit,
+  handleView,
+}) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
@@ -42,6 +48,7 @@ function VideoClassesCards({ videos, loading, handleDelete, handleEdit }) {
               data={val}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
+              handleView={handleView}
             />
           ))}
         </Box>

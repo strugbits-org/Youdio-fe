@@ -28,20 +28,6 @@ const liveSessionvalidate = Yup.object({
   thumbnail: Yup.mixed().required("Thumbnail Image is required"),
 });
 
-const addVideoValidate = Yup.object({
-  category: dropDown({ reqMesg: "Caregory is required" }),
-  date: dropDown({ reqMesg: "Date is required" }),
-  title: dropDown({ reqMesg: "Title is required" }),
-  instructor: dropDown({ reqMesg: "Instructor is required" }),
-  difficulty: dropDown({ reqMesg: "Difficulty is required" }),
-  intensity: dropDown({ reqMesg: "Intensity is required" }),
-  filter: dropDown({ reqMesg: "Filter is required" }),
-  //   totalTime: dropDown({ reqMesg: "TotalTime is required" }),
-  isFeatured: Yup.boolean().required("Select Is video featured?"),
-  description: dropDown({ reqMesg: "Description is required" }),
-  thumbnail: Yup.mixed().required("Thumbnail Image is required"),
-  video: Yup.mixed().required("Upload Video"),
-  // image: dropDown({ reqMesg: "Image is required" }),
-});
 
-export { instructorFormvalidate, liveSessionvalidate, addVideoValidate };
+
+export { instructorFormvalidate, liveSessionvalidate };

@@ -8,6 +8,8 @@ import {
 } from "../fieldsValidattion";
 import * as Yup from "yup";
 
+const numberRejex = /^[0-9]*$/;
+
 // const validFileExtensions = { image: ['jpg', 'gif', 'png', 'jpeg', 'svg', 'webp'] };
 
 // function isValidFileType(fileName, fileType) {
@@ -63,7 +65,7 @@ const paymentFormValidate = Yup.object({
 });
 
 // Admin Dashboard Live Session Form
-const liveSessionValidateForm = (isEdit) => { 
+const liveSessionValidateForm = (isEdit) => {
   return Yup.object({
     category: textField({ reqMesg: "Caregory is required" }),
     date: Yup.date()
@@ -94,7 +96,7 @@ const liveSessionValidateForm = (isEdit) => {
     //   )
     //   .required("Zoom link is required"),
   });
-}
+};
 
 // Admin Dashboard Add Instructor Form
 const addInstructorValidateForm = (isEdit) => {
@@ -112,6 +114,33 @@ const addInstructorValidateForm = (isEdit) => {
       ? Yup.mixed()
       : Yup.mixed().required("Thumbnail Image is required"),
     description: textField({ reqMesg: "Description is required" }),
+  });
+};
+
+// Admin Dashboard Add Instructor Form
+const addVideoValidateForm = (isEdit) => {
+  return Yup.object({
+    category: textField({ reqMesg: "Caregory is required" }),
+    date: Yup.date()
+      .min(new Date(moment().subtract(1, 'day')), "Please select future date")
+      .required("Date is required"),
+    title: textField({ reqMesg: "Title is required" }),
+    instructor: textField({ reqMesg: "Instructor is required" }),
+    difficulty: textField({ reqMesg: "Difficulty is required" }),
+    intensity: textField({ reqMesg: "Intensity is required" }),
+    filter: textField({ reqMesg: "Filter is required" }),
+    totalTime: Yup.string()
+    .required("Total Time is required")
+      .matches(
+        numberRejex,
+        "Total time must be a number"
+      ),
+    isFeatured: Yup.string().required("Select Is video featured?"),
+    description: textField({ reqMesg: "Description is required" }),
+    thumbnail: isEdit
+      ? Yup.mixed()
+      : Yup.mixed().required("Thumbnail Image is required"),
+    video: isEdit ? Yup.mixed() : Yup.mixed().required("Upload Video"),
   });
 };
 
@@ -133,6 +162,7 @@ export {
   userFormValidate,
   userProfileFormValidate,
   paymentFormValidate,
+  addVideoValidateForm,
   liveSessionValidateForm,
   addInstructorValidateForm,
 };

@@ -13,54 +13,97 @@ import {
   CenterContainer,
   ButtonGroup,
 } from "./AddVideoComp";
-import { ButtonOne, ButtonTwo } from "../../Instructos/AddInstructor/AddInstructorComp";
+import {
+  ButtonOne,
+  ButtonTwo,
+} from "../../Instructos/AddInstructor/AddInstructorComp";
 import {
   FieldInput,
   DropDownInput,
   TextArea,
 } from "src/components/AdminInput/AdminInput";
-import { addVideoValidate } from "src/helpers/forms/AdminValidateForm";
 import { setInstructors, setStyles } from "src/features/filterSlice";
+import useGetAPI from "src/features/hooks/useGetAPI";
+import moment from "moment";
+import { addVideoValidateForm } from "src/helpers/forms/validateForms";
+import usePatchAPI from "src/features/hooks/usePatchAPI";
+
+const initialValues = {
+  category: "",
+  date: "",
+  title: "",
+  instructor: "",
+  difficulty: "",
+  intensity: "",
+  filter: "",
+  totalTime: "",
+  isFeatured: "",
+  description: "",
+  thumbnail: "",
+  video: "",
+};
 
 const AddVideo = () => {
-  const initialValues = {
-    category: "",
-    date: "",
-    title: "",
-    instructor: "",
-    difficulty: "",
-    intensity: "",
-    filter: "",
-    totalTime: "",
-    isFeatured: "",
-    description: "",
-    thumbnail: "",
-    video: "",
-  };
-  const { loading, fetchData, postData, fetchMultipleData } = useFetch();
+  const { loading, postData, fetchMultipleData } = useFetch();
+  const { getData, getRes } = useGetAPI();
+  const { patchLoading, patchData } = usePatchAPI()
   const { width } = useWindowSize();
   const location = useLocation();
   const formikRef = useRef();
   const [thumbnailImageValue, setThumbnailImageValue] = useState("Select");
   const [videoName, setVideoName] = useState("Select");
   const [category, setCategory] = useState("");
-  const [videoId, setVideoId] = useState("");
+  const { difficulties, intensities, instructors, styles } = useSelector(
+    (state) => state.filter
+  );
+
+  useEffect(() => {
+    fetchMultipleData(
+      ["category/get-sub-category", "instructor/get-instructor"],
+      [setStyles, setInstructors],
+      [{}, {}]
+    );
+
+    isEditable && getData(`video/get-single/${isEditable}`);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleCancel = (e) => {
     e.preventDefault();
     resetFormValues();
   };
 
   const handleSubmit = (data, action) => {
+    const copyData = { ...data };
+    const isFeatured = copyData.isFeatured;
+    copyData.isFeatured = isFeatured === "yes" && true;
     const formData = new FormData();
-    Object.keys(data).forEach((key) => formData.append(key, data[key]));
-    postData(
-      "video/upload-video",
-      formData,
-      undefined,
-      undefined,
-      true,
-      resetFormValues
-    );
+    if (isEditable) {
+      !copyData.thumbnail && delete copyData.thumbnail;
+      !copyData.video && delete copyData.video;
+      console.log(copyData);
+      Object.keys(copyData).forEach((key) => formData.append(key, copyData[key]));
+      patchData(
+        `video/update-video/${isEditable}`,
+        formData,
+        undefined,
+        undefined,
+        true
+      );
+    } else {
+      Object.keys(copyData).forEach((key) =>
+        formData.append(key, copyData[key])
+      );
+      postData(
+        "video/upload-video",
+        formData,
+        undefined,
+        undefined,
+        true,
+        resetFormValues
+      );
+    }
   };
 
   const resetFormValues = () => {
@@ -69,22 +112,55 @@ const AddVideo = () => {
     setVideoName("Select");
   };
 
-  useEffect(() => {
-    fetchMultipleData(
-      ["category/get-sub-category", "instructor/get-instructor"],
-      [setStyles, setInstructors]
-    );
-
+  const isEditable = useMemo(() => {
     if (location && location.state?.videoId) {
-      setVideoId(location.state.videoId);
-      fetchData(`video/get-single/${location.state?.videoId}`);
+      return location.state.videoId;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    return false;
+  }, [location]);
 
-  const { difficulties, intensities, instructors, styles } = useSelector(
-    (state) => state.filter
-  );
+  const videoDetail = useMemo(() => {
+    if (getRes && getRes?.video) {
+      const {
+        category,
+        date,
+        title,
+        instructor,
+        difficulty,
+        intensity,
+        filter,
+        totalTime,
+        description,
+        isFeatured,
+      } = { ...getRes.video };
+      const videoClass = {
+        category,
+        date: moment(date).format("YYYY-MM-DD"),
+        title,
+        instructor: instructor._id,
+        difficulty,
+        intensity,
+        filter,
+        totalTime,
+        isFeatured: isFeatured ? "yes" : "no",
+        description,
+        thumbnail: "",
+        video: "",
+      };
+      setCategory(category);
+      return videoClass;
+    }
+    return initialValues;
+  }, [getRes]);
+
+  const dynamicLoading = useMemo(() => {
+    if (location && location.state?.videoId) {
+      return patchLoading;
+    }
+    return loading;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, patchLoading]);
+
   const difficultiesOption = useMemo(() => {
     return difficulties?.map((val) => {
       return {
@@ -139,48 +215,15 @@ const AddVideo = () => {
       : [];
   }, [category, styles]);
 
-  // const videoDetail = useMemo(() => {
-  //   if (res && res.video) {
-  //     const {
-  //       isFeatured,
-  //       category,
-  //       date,
-  //       title,
-  //       instructor: { _id },
-  //       difficulty,
-  //       intensity,
-  //       filter,
-  //       totalTime,
-  //       description,
-  //     } = res.video;
-  //     const values = {
-  //       category,
-  //       date,
-  //       title,
-  //       instructor: _id,
-  //       difficulty,
-  //       intensity,
-  //       filter,
-  //       totalTime,
-  //       isFeatured: isFeatured ? "yes" : "no",
-  //       description,
-  //       thumbnail: "",
-  //       video: "",
-  //     };
-  //     console.log(values);
-  //     return values;
-  //   }
-  //   return initialValues;
-  // }, [res])
-
   return (
     <React.Fragment>
       <Container>
-        <H2>{videoId ? "Edit Video" : "Add New Video"}</H2>
+        <H2>{isEditable ? "Edit Video" : "Add New Video"}</H2>
 
         <Formik
-          initialValues={initialValues}
-          validationSchema={addVideoValidate}
+          initialValues={videoDetail}
+          validationSchema={addVideoValidateForm(isEditable)}
+          enableReinitialize={true}
           onSubmit={handleSubmit}
           innerRef={formikRef}
         >
@@ -202,7 +245,7 @@ const AddVideo = () => {
                       setCategory(e.target.value);
                       formik.setFieldValue("category", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
 
                   <DropDownInput
@@ -218,7 +261,7 @@ const AddVideo = () => {
                     onChange={(e) => {
                       formik.setFieldValue("filter", e.target.value);
                     }}
-                    disabled={!category || loading}
+                    disabled={!category || dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -234,7 +277,7 @@ const AddVideo = () => {
                     onChange={(e) => {
                       formik.setFieldValue("title", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <DropDownInput
                     label="Instructor"
@@ -249,7 +292,7 @@ const AddVideo = () => {
                     onChange={(e) => {
                       formik.setFieldValue("instructor", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -266,7 +309,7 @@ const AddVideo = () => {
                     onChange={(e) => {
                       formik.setFieldValue("difficulty", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <DropDownInput
                     label="Intensity"
@@ -281,7 +324,7 @@ const AddVideo = () => {
                     onChange={(e) => {
                       formik.setFieldValue("intensity", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -294,10 +337,11 @@ const AddVideo = () => {
                     placeholder="dd/mm/yy"
                     style={{ fontSize: "16px" }}
                     value={formik.values.date}
+                    min={String(new Date().toISOString().split("T")[0])}
                     onChange={(e) => {
                       formik.setFieldValue("date", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <FieldInput
                     label="Total Time (Min)"
@@ -309,7 +353,7 @@ const AddVideo = () => {
                     onChange={(e) => {
                       formik.setFieldValue("totalTime", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <FormRow>
@@ -330,19 +374,11 @@ const AddVideo = () => {
                         value: "no",
                       },
                     ]}
-                    value={
-                      formik.values.isFeatured === true
-                        ? "yes"
-                        : formik.values.isFeatured === false
-                        ? "no"
-                        : ""
-                    }
+                    value={formik.values.isFeatured}
                     onChange={(e) => {
-                      let val = false;
-                      if (e.target.value === "yes") val = true;
-                      formik.setFieldValue("isFeatured", val);
+                      formik.setFieldValue("isFeatured", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                   <FieldInput
                     label="Upload video thumbnail"
@@ -357,7 +393,7 @@ const AddVideo = () => {
                       setThumbnailImageValue(e.target.value);
                       formik.setFieldValue("thumbnail", e.target.files[0]);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                     {...{
                       "data-before": thumbnailImageValue,
                     }}
@@ -379,7 +415,7 @@ const AddVideo = () => {
                         setVideoName(e.target.value);
                         formik.setFieldValue("video", e.target.files[0]);
                       }}
-                      disabled={loading}
+                      disabled={dynamicLoading}
                       {...{
                         "data-before": videoName,
                       }}
@@ -397,15 +433,16 @@ const AddVideo = () => {
                     style={{ fontSize: "16px" }}
                     value={formik.values.description}
                     onChange={(e) => {
-                      console.log(e.target.value);
                       formik.setFieldValue("description", e.target.value);
                     }}
-                    disabled={loading}
+                    disabled={dynamicLoading}
                   />
                 </FormRow>
                 <ButtonGroup>
-                  <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
-                  <ButtonTwo type="submit" disabled={loading}>
+                  {!isEditable && (
+                    <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
+                  )}
+                  <ButtonTwo type="submit" disabled={dynamicLoading}>
                     SAVE
                   </ButtonTwo>
                 </ButtonGroup>

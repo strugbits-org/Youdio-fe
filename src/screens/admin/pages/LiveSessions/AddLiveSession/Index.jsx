@@ -80,7 +80,6 @@ const AddLiveSession = () => {
     const formData = new FormData();
     if (isEditable) {
       !copyData.thumbnail && delete copyData.thumbnail;
-      console.log(copyData);
       Object.keys(copyData).forEach((key) =>
         formData.append(key, copyData[key])
       );
@@ -156,7 +155,7 @@ const AddLiveSession = () => {
   }, [getRes]);
 
   const dynamicLoading = useMemo(() => {
-    if (location && location.state?.instructorId) {
+    if (location && location.state?.sessionId) {
       return putLoading;
     }
     return loading;

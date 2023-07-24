@@ -46,7 +46,6 @@ const CardContent = styled.div`
     max-width: 482px;
   }
 `;
-
 const Tag = styled.span`
   background: var(--backgroundGreen);
   color: var(--textHeadingWhite);
@@ -55,7 +54,6 @@ const Tag = styled.span`
   left: 0px;
   position: absolute;
 `;
-
 const HoverBox = styled.div`
   display: none;
   justify-content: center;
@@ -67,17 +65,17 @@ const HoverBox = styled.div`
   top: 0px;
   left: 0px;
   transition: var(--transition1s);
-  gap: 24px;
+  gap: 8px;
 
   img {
-    width: clamp(36px, 4vw, 50px);
+    width: clamp(16px, 2vw, 36px);
     aspect-ratio: 1/1;
     cursor: pointer;
     object-fit: contain;
   }
 `;
 
-function VideoClassCard({ data, handleDelete, handleEdit }) {
+function VideoClassCard({ data, handleDelete, handleEdit, handleView }) {
   const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
     return data.intensity.slice(-1);
@@ -117,6 +115,13 @@ function VideoClassCard({ data, handleDelete, handleEdit }) {
               width=""
               height=""
             />
+            <img
+              src={icons.eye}
+              alt="View_Eye"
+              onClick={() => handleView(data._id)}
+              width=""
+              height=""
+            />
           </HoverBox>
         )}
       </CardMedia>
@@ -132,11 +137,7 @@ function VideoClassCard({ data, handleDelete, handleEdit }) {
           />
           <IntensityLevel level={intensityLevel} />
         </div>
-        <P3 className="detail">
-          Lorem ipsum dolor sit amet consectetur. Eget vulputate sed posuere
-          sit. Integer in ac sem adipiscing nulla arcu Enim placerat nunc
-          tincidunt gravida vitae tincidunt.
-        </P3>
+        <P3 className="detail">{data?.description}</P3>
       </CardContent>
     </Card>
   );

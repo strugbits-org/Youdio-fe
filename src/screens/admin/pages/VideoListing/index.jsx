@@ -44,6 +44,9 @@ function VideoListing() {
   const handleEdit = (videoId) => {
     navigate("/dashboard/edit-video", { state: {videoId} });
   };
+  const handleView = (videoId) => {
+    window.open(`/video-class/${videoId}`, "_blank");
+  };
   const handleAddSession = () => {
     navigate("/dashboard/add-video");
   };
@@ -67,12 +70,6 @@ function VideoListing() {
           </PrimaryButton>
         </div>
         <div className="actionBox">
-          {/* <InputIcon
-            isIcon={icons.searchIcon}
-            placeholder="Search Instructor"
-            value={searchInstructor}
-            onChange={handleSearchInstructor}
-          /> */}
           <InputIcon
             isIcon={icons.searchIcon}
             placeholder="Search Category"
@@ -86,6 +83,7 @@ function VideoListing() {
         loading={postLoading}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
+        handleView={handleView}
       />
       <DeletePopup
         open={open}

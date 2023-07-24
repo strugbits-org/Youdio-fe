@@ -99,10 +99,11 @@ const AllRoutes = () => {
 
       {/* User */}
       <Route path="/" element={<LiveClasses />} />
-      <Route path="/instructor" element={<Instructor />} />
       <Route path="/live-class/:id" element={<LiveVideo />} />
-      <Route path="/videoclasses" element={<VideoClasses />} />
+      <Route path="/instructor" element={<Instructor />} />
       <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
+      <Route path="/videoclasses" element={<VideoClasses />} />
+      <Route path="/video-class/:id" element={<VideoClass />} />
       <Route
         path="/payment"
         element={
@@ -111,13 +112,6 @@ const AllRoutes = () => {
       />
 
       {/* SINGLE VIDEO */}
-      <Route
-        path="/video-class"
-        element={<VideoClass />}
-        // loader={async ({params}) => {
-        //   await fetchData(`liveSession/get/${params.id}`);
-        // }}
-      />
 
       {/* User Dashboard */}
       <Route

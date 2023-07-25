@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   SingleImage,
   CardsBox,
@@ -17,29 +17,45 @@ import {
   TwoCardInstructor,
 } from "src/components/Cards/SingleInstructorCard";
 import { ReviewCard } from "src/components/Cards";
+import { useNavigate, useParams } from "react-router-dom";
+import useGetAPI from "src/features/hooks/useGetAPI";
 
-function SingleInstructor() {
-  // single id data fetch function
-  // const [user, setUser] = useState([]);
+function Instructor() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { getData, getRes, getLoading } = useGetAPI();
 
-  // const { id } = useParams();
-  // console.log(id, "userid");
+  useEffect(() => {
+    id
+      ? getData(`instructor/get-instructor/${id}`)
+      : navigate("/page-not-found");
+  }, []);
 
-  // const getUser = async () => {
-  //   const response = await fetch(`---/${id}`).catch((err) => {
-  //     console.log("Err", err);
-  //   });
-  //   setUser(await response.json());
-  // };
-
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
+  const instrutorDetail = useMemo(() => { 
+    if (getRes && getRes?.instructor) {
+      return getRes.instructor.instructor;
+    }
+    return false
+  }, [getRes])
+  
+  const instrutorClasses = useMemo(() => { 
+    if (getRes && getRes?.instructor) {
+      return {
+        liveClasses: getRes.instructor.sessions,
+        videoClasses: getRes.instructor.videos,
+      };
+    }
+    return false
+  }, [getRes])
 
   return (
     <React.Fragment>
-      <Sec backgroundImage={icons.singBgInstructor} paddingBlock="15.2vw">
-        <H1>{SingleinstClassStaticContent.singleInstructorH1}</H1>
+      <Sec
+        backgroundImage={instrutorDetail?.bannerImage}
+        paddingBlock="15.2vw"
+        data-loading=""
+      >
+        <H1>{}</H1>
         <P1>{SingleinstClassStaticContent.singleInstructorP1}</P1>
       </Sec>
       <SingleImage>
@@ -113,4 +129,4 @@ function SingleInstructor() {
   );
 }
 
-export default SingleInstructor;
+export default Instructor;

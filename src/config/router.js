@@ -18,7 +18,7 @@ import Register from "src/screens/Authenticate/Register";
 // User
 import LiveClasses from "src/screens/user/LiveClasses";
 import Instructors from "src/screens/user/Instructors";
-import SingleInstructor from "src/screens/user/SingleInstructor";
+import Instructor from "src/screens/user/Instructor";
 import Payment from "src/screens/user/Payment";
 
 // User Dashboard
@@ -103,7 +103,7 @@ const AllRoutes = () => {
       <Route path="/" element={<LiveClasses />} />
       <Route path="/live-class/:id" element={<LiveVideo />} />
       <Route path="/instructors" element={<Instructors />} />
-      <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
+      <Route path="/singleinstructor/:id" element={<Instructor />} />
       <Route path="/videoclasses" element={<VideoClasses />} />
       <Route path="/video-class/:id" element={<VideoClass />} />
       <Route
@@ -148,23 +148,23 @@ const AllRoutes = () => {
       >
         {/* <Route path="/" index={true} element={<AddVideo />} /> */}
         <Route path="admin" element={<Profile />} />
-        
+
         <Route path="live-sessions" element={<LiveSessions />} />
         <Route path="add-live-session" element={<AddLiveSession />} />
         <Route path="edit-live-session" element={<AddLiveSession />} />
-        
+
         <Route path="video-listing" element={<VideoListing />} />
         <Route path="add-video" element={<AddVideo />} />
         <Route path="edit-video" element={<AddVideo />} />
-        
+
         <Route path="instructors" element={<AllInstructors />} />
         <Route path="add-instructor" element={<AddInstructor />} />
         <Route path="edit-instructor" element={<AddInstructor />} />
-        
+
         <Route path="feature-lesson" element={<FeatureLesson />} />
-        
+
         <Route path="add-review" element={<AddReview />} />
-        
+
         <Route
           path="*"
           element={<PageNotFound width="528px" height="60dvh" />}

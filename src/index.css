@@ -11,6 +11,8 @@
   --backgroundLightGrey: #FAFAFA;    
   --backgroundGrey: #5b5b5b;
   --backgroundButonGrey: #d9d9d9;
+  --backgroundButonDarkHover: #26211f;
+  --backgroundButonDark: #413735;
   --borderLightGrey: #e6e6e6;
   --transition03s: .3s all ease-in-out;    
   --transition1s: 1s all ease-in-out;    

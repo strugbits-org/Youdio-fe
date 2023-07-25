@@ -26,6 +26,10 @@ export const Container = styled.div`
       font-size: 14px;
       line-height: 16px;
       margin-inline: auto 0px;
+      background: var(--backgroundButonDark);
+      &:hover {
+        background: var(--backgroundButonDarkHover);
+      }
     }
   }
   .actionBox {

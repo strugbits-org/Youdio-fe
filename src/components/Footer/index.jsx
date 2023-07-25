@@ -22,7 +22,7 @@ function Header() {
                             <li><NavLink to={path.home}>Home</NavLink></li>
                             <li><NavLink to={path.liveClasses}>Live Classes</NavLink></li>
                             <li><NavLink to={path.videos}>Videos</NavLink></li>
-                            <li><NavLink to={path.instructor}>Instructor</NavLink></li>
+                            <li><NavLink to={path.instructor}>Instructors</NavLink></li>
                         </ul>
                     </div>
                     <div className='quickLinks'>

@@ -17,7 +17,7 @@ export const path = {
 
   membership: "/user/profile",
   admin: "/dashboard/admin",
-  instructor: "/instructor",
+  instructor: "/instructors",
 
   signIn: "/login",
   register: "/register",

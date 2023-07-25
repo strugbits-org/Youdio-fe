@@ -9,7 +9,7 @@ import { DeletePopup } from "src/components/Popups";
 import useFetch from "src/features/hooks/useFetch";
 import { useDebounce } from "src/features/hooks/useDebounce";
 
-function Instructors() {
+function AllInstructors() {
   const [search, setSearch] = useState("");
   const [instructorId, setInstructorId] = useState("");
   const [open, setOpen] = useState(false);
@@ -99,4 +99,4 @@ function Instructors() {
   );
 }
 
-export default Instructors;
+export default AllInstructors;

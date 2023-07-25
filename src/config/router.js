@@ -17,7 +17,7 @@ import Register from "src/screens/Authenticate/Register";
 
 // User
 import LiveClasses from "src/screens/user/LiveClasses";
-import Instructor from "src/screens/user/Instructor";
+import Instructors from "src/screens/user/Instructors";
 import SingleInstructor from "src/screens/user/SingleInstructor";
 import Payment from "src/screens/user/Payment";
 
@@ -44,7 +44,7 @@ import PageNotFound from "src/screens/PageNotFound";
 import LiveSessions from "src/screens/admin/pages/LiveSessions";
 import VideoListing from "src/screens/admin/pages/VideoListing";
 import Profile from "src/screens/admin/pages/Profile";
-import Instructors from "src/screens/admin/pages/Instructos";
+import AllInstructors from "src/screens/admin/pages/Instructos";
 import AddReview from "src/screens/admin/pages/Reviews/AddReview";
 import FeatureLesson from "src/screens/admin/pages/FeatureLesson";
 
@@ -102,7 +102,7 @@ const AllRoutes = () => {
       {/* User */}
       <Route path="/" element={<LiveClasses />} />
       <Route path="/live-class/:id" element={<LiveVideo />} />
-      <Route path="/instructor" element={<Instructor />} />
+      <Route path="/instructors" element={<Instructors />} />
       <Route path="/singleinstructor/:id" element={<SingleInstructor />} />
       <Route path="/videoclasses" element={<VideoClasses />} />
       <Route path="/video-class/:id" element={<VideoClass />} />
@@ -157,7 +157,7 @@ const AllRoutes = () => {
         <Route path="add-video" element={<AddVideo />} />
         <Route path="edit-video" element={<AddVideo />} />
         
-        <Route path="instructors" element={<Instructors />} />
+        <Route path="instructors" element={<AllInstructors />} />
         <Route path="add-instructor" element={<AddInstructor />} />
         <Route path="edit-instructor" element={<AddInstructor />} />
         

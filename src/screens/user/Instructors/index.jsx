@@ -6,7 +6,7 @@ import { icons } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
 import { InstructorCards } from "src/components/CardsSection";
 
-function Instructor() {
+function Instructors() {
   const [Content] = useState(instructorClassStaticContent);
   const { loading, postData, res } = useFetch();
   const [search, setSearch] = useState("");
@@ -58,4 +58,4 @@ function Instructor() {
   );
 }
 
-export default Instructor;
+export default Instructors;

@@ -106,9 +106,11 @@ export default function DeletePopup({ open, handleClose, data, handleAction, loa
             </div>
             <div className="content">
               <img src={icons.binGreen} alt="Close" width="" height="" />
-              <P2>Are Your Sure you want to Delete?</P2>
+              <P2>{data?.text ? data.text : "Are you sure you want to delete?"}</P2>
               <div className="buttons">
-                <PrimaryButton disabled={loading} onClick={handleAction}>Yes</PrimaryButton>
+                <PrimaryButton disabled={loading} onClick={handleAction}>
+                  Yes
+                </PrimaryButton>
                 <PrimaryButton className="btnNo" onClick={handleClose}>
                   No
                 </PrimaryButton>

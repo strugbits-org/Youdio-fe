@@ -10,7 +10,6 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     gap: 16px;
 
     input {
@@ -29,7 +28,20 @@ export const Container = styled.div`
     }
   }
   .actionBox {
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    label {
+      font-size: 14px;
+    }
+    select{
+      margin-bottom: 8px;
+      min-width: 200px ;
+    }
+    select,
+    select option {
+      font-size: 14px;
+    }
   }
 
   @media only screen and (min-width: ${layout.mobileMedium}) {
@@ -37,7 +49,12 @@ export const Container = styled.div`
       flex-wrap: nowrap;
     }
   }
-  @media only screen and (min-width: ${layout.desktop}) {
+  @media only screen and (min-width: ${layout.mobileLarge}) {
     grid-template-columns: 1fr 1fr;
+    align-items: end;
+    .actionBox {
+      max-width: max-content;
+      margin-inline: auto 0px;
+    }
   }
 `;

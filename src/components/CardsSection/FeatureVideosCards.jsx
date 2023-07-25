@@ -34,16 +34,19 @@ const Box = styled.div`
   }
 `;
 
-function FeatureVideosCards({ loading, featureVideos, search, handleDelete }) {
+function FeatureVideosCards({
+  loading,
+  featureVideos,
+  search,
+  handleDelete,
+}) {
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
 
       {!loading && featureVideos && featureVideos?.length > 0 ? (
         <Box>
-                  {featureVideos.map((featureVideo) => {
-  console.log(featureVideo);
-              
+          {featureVideos.map((featureVideo) => {
             return (
               <FeatureVideoCard
                 key={`feature-video-card-${featureVideo?._id}`}

@@ -48,8 +48,10 @@ function Instructors() {
   const handleAction = () => {
     if (instructorId) {
       // alert(`Deleted ${instructorId}`);
-      deleteData(`instructor/delete-instructor/${instructorId}`, getInstructor);
-      setOpen(false);
+      deleteData(`instructor/delete-instructor/${instructorId}`, () => {
+        getInstructor();
+        setOpen(false);
+      });
     }
   };
 

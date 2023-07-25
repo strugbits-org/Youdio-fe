@@ -1,5 +1,11 @@
 import React from "react";
-import { ClockTime, H3, InstructorLink, P3, PrimaryButton } from "src/components";
+import {
+  ClockTime,
+  H3,
+  InstructorLink,
+  P3,
+  PrimaryButton,
+} from "src/components";
 import { icons } from "src/helpers";
 import { layout } from "src/helpers";
 import styled from "styled-components";
@@ -151,7 +157,9 @@ export default function FeatureVideoCard({ featureVideo, handleDelete }) {
             <P3 className="detail">{featureVideo.description}</P3>
           </div>
           <div className="action">
-            <PrimaryButton>Delete</PrimaryButton>
+            <PrimaryButton onClick={() => handleDelete(featureVideo._id)}>
+              Delete
+            </PrimaryButton>
           </div>
         </CardContent>
       </Card>

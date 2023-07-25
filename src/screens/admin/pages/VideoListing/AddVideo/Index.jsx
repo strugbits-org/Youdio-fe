@@ -82,7 +82,6 @@ const AddVideo = () => {
     if (isEditable) {
       !copyData.thumbnail && delete copyData.thumbnail;
       !copyData.video && delete copyData.video;
-      console.log(copyData);
       Object.keys(copyData).forEach((key) => formData.append(key, copyData[key]));
       patchData(
         `video/update-video/${isEditable}`,
@@ -337,7 +336,7 @@ const AddVideo = () => {
                     placeholder="dd/mm/yy"
                     style={{ fontSize: "16px" }}
                     value={formik.values.date}
-                    min={String(new Date().toISOString().split("T")[0])}
+                    // min={String(new Date().toISOString().split("T")[0])}
                     onChange={(e) => {
                       formik.setFieldValue("date", e.target.value);
                     }}

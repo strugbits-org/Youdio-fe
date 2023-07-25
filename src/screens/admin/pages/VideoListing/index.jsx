@@ -24,7 +24,6 @@ function VideoListing() {
 
   const getVideos = () => { 
     postData("video/filter", resetFilters);
-
   }
   const videos = useMemo(() => {
     if (postRes && postRes.videos.length > 0) {

@@ -122,7 +122,7 @@ const addVideoValidateForm = (isEdit) => {
   return Yup.object({
     category: textField({ reqMesg: "Caregory is required" }),
     date: Yup.date()
-      .min(new Date(moment().subtract(1, 'day')), "Please select future date")
+      // .min(new Date(moment().subtract(1, 'day')), "Please select future date")
       .required("Date is required"),
     title: textField({ reqMesg: "Title is required" }),
     instructor: textField({ reqMesg: "Instructor is required" }),

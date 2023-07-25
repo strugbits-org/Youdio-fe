@@ -9,7 +9,6 @@ import {
   P2,
   InstructorLink,
 } from "src/components";
-import useFetch from "src/features/hooks/useFetch";
 import moment from "moment";
 const { mobileLarge, laptop, desktop } = layout;
 
@@ -174,14 +173,10 @@ const CustomH6 = styled(H6)`
 
 const LiveBookingCard = ({
   bookedSession,
-  _id,
   disabled,
-  getBookedSession,
+  handleCancel,
+  sessionId,
 }) => {
-  const { deleteData } = useFetch();
-  const handleCancelBooking = () => {
-    deleteData(`booking/cancel/${_id}`, getBookedSession);
-  };
   return (
     <Card disabled={disabled}>
       <MediaBox>
@@ -240,7 +235,10 @@ const LiveBookingCard = ({
           />
           <P2 className="cardP lastP">{bookedSession.description}</P2>
         </div>
-        <CustomPrimaryButton onClick={handleCancelBooking} disabled={disabled}>
+        <CustomPrimaryButton
+          onClick={() => handleCancel(sessionId)}
+          disabled={disabled}
+        >
           Cancel
         </CustomPrimaryButton>
       </ContentBox>

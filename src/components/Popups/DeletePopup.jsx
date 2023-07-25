@@ -92,7 +92,7 @@ export default function DeletePopup({ open, handleClose, data, handleAction, loa
           <ContentBox>
             <div className="top">
               <H3 fontSize={"clamp(14px, 1.4vw, 20px)"}>
-                Do you wish to Delete?
+                {data?.heading ? data.heading : "Do you wish to Delete?"}
               </H3>
               <CloseIcon onClick={handleClose}>
                 <img
@@ -105,8 +105,15 @@ export default function DeletePopup({ open, handleClose, data, handleAction, loa
               </CloseIcon>
             </div>
             <div className="content">
-              <img src={icons.binGreen} alt="Close" width="" height="" />
-              <P2>{data?.text ? data.text : "Are you sure you want to delete?"}</P2>
+              <img
+                src={data?.icon ? data.icon : icons.binGreen}
+                alt="Close"
+                width=""
+                height=""
+              />
+              <P2>
+                {data?.text ? data.text : "Are you sure you want to delete?"}
+              </P2>
               <div className="buttons">
                 <PrimaryButton disabled={loading} onClick={handleAction}>
                   Yes

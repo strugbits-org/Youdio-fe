@@ -56,6 +56,7 @@ import pen from "src/assets/icons/pen.svg"
 import crossDark from "src/assets/icons/crossDark.svg"
 import binGreen from "src/assets/icons/binGreen.svg";
 import eye from "src/assets/icons/eye.svg"
+import warningGreen from "src/assets/icons/warningGreen.svg";
 
 
 const icons = {
@@ -111,6 +112,7 @@ const icons = {
   pen,
   crossDark,
   eye,
+  warningGreen,
 };
 
 export default icons

@@ -176,6 +176,7 @@ const useFetch = () => {
     } catch (e) {
       setLoading(false);
       setError(e.message);
+      if(e.message) notify("error", e.message)
     } finally {
       setLoading(false);
     }

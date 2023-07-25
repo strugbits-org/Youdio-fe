@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
 import { H2, InputIcon, PrimaryButton } from "src/components";
 import { VideoClassesCards } from "src/components/CardsSection";
 import useFetch from "src/features/hooks/useFetch";
@@ -8,22 +7,23 @@ import { Container } from "./videoListingComponent";
 import { useNavigate } from "react-router-dom";
 import { DeletePopup } from "src/components/Popups";
 import usePostAPI from "src/features/hooks/usePostAPI";
+import { useDebounce } from "src/features/hooks/useDebounce";
 
 function VideoListing() {
   const { deleteData, loading } = useFetch();
   const { postData, postRes, postLoading } = usePostAPI()
-  const { resetFilters } = useSelector((state) => state.filter);
   const [searchCategory, setSearchCategory] = useState("");
+  const debounceCategory = useDebounce(searchCategory)
   const [videoId, setVideoId] = useState("");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    getVideos();
+    getVideos(debounceCategory);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [debounceCategory]);
 
-  const getVideos = () => { 
-    postData("video/filter", resetFilters);
+  const getVideos = (category) => { 
+    postData("video/admin", {category});
   }
   const videos = useMemo(() => {
     if (postRes && postRes.videos.length > 0) {
@@ -54,8 +54,11 @@ function VideoListing() {
   };
   const handleAction = () => {
     if (videoId) {
-      deleteData(`video/${videoId}`, getVideos);
-      setOpen(false);
+      deleteData(`video/${videoId}`, () => {
+        getVideos("");
+        setSearchCategory("")
+        setOpen(false);
+      });
     }
   };
 

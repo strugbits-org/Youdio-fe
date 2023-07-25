@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
+  margin-bottom: 6vw;
 
   div {
     display: flex;
@@ -34,9 +35,9 @@ export const Container = styled.div`
     label {
       font-size: 14px;
     }
-    select{
+    select {
       margin-bottom: 8px;
-      min-width: 200px ;
+      min-width: 200px;
     }
     select,
     select option {
@@ -51,10 +52,13 @@ export const Container = styled.div`
   }
   @media only screen and (min-width: ${layout.mobileLarge}) {
     grid-template-columns: 1fr 1fr;
-    align-items: end;
+    align-items: start;
     .actionBox {
       max-width: max-content;
       margin-inline: auto 0px;
     }
+  }
+  @media only screen and (min-width: ${layout.tablet}) {
+    margin-bottom: 50px;
   }
 `;

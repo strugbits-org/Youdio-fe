@@ -23,6 +23,9 @@ export const Description = styled.div`
   }
   .small-box {
     min-width: 180px;
+    h3{
+      text-transform: capitalize;
+    }
   }
   .lorem_text {
     min-width: 100px;

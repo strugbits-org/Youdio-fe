@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
 import { H2, InputIcon, PrimaryButton } from "src/components";
 import { LiveClassesCards } from "src/components/CardsSection";
 import useFetch from "src/features/hooks/useFetch";
@@ -8,25 +7,31 @@ import { Container } from "./liveSessionsComponent";
 import { useNavigate } from "react-router-dom";
 import { DeletePopup } from "src/components/Popups";
 import usePostAPI from "src/features/hooks/usePostAPI";
+import { useDebounce } from "src/features/hooks/useDebounce";
 
 
 function LiveSessions() {
   const { deleteData, loading } = useFetch();
   const { postData, postRes, postLoading } = usePostAPI();
-  const { resetFilters } = useSelector((state) => state.filter);
   const [searchInstructor, setSearchInstructor] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
   const [sessionId, setSessionId] = useState("");
   const [open, setOpen] = useState(false);
+  const debounceCategory = useDebounce(searchCategory)
+  const debounceInstructor = useDebounce(searchInstructor)
   const navigate = useNavigate();
   useEffect(() => {
-    getLiveSessions();
+    getLiveSessions(debounceInstructor, debounceCategory);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [debounceCategory, debounceInstructor]);
 
-  const getLiveSessions = () => {
-    postData("liveSession/get", resetFilters);
+  const getLiveSessions = (trainer, category) => {
+    postData("liveSession/get-admin", {
+      trainer,
+      category,
+    });
   };
+
   const liveSession = useMemo(() => {
     if (postRes && postRes.liveSessions?.length > 0) {
       return postRes.liveSessions;
@@ -60,9 +65,12 @@ function LiveSessions() {
   };
   const handleAction = () => {
     if (sessionId) {
-      // alert(`Deleted ${sessionId}`);
-      deleteData(`liveSession/delete/${sessionId}`, getLiveSessions);
-      setOpen(false);
+      deleteData(`liveSession/delete/${sessionId}`, () => { 
+        getLiveSessions("", "");
+        setSearchCategory("")
+        setSearchInstructor("")
+        setOpen(false);
+      });
     }
   };
 

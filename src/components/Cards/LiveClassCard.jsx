@@ -48,6 +48,10 @@ export const CardContent = styled.div`
   .detail {
     color: var(--backgroundGrey);
     max-width: 482px;
+    span {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 `;
 
@@ -97,6 +101,15 @@ function LiveClassCard({
     navigate(`${path.liveClass}/${data._id}`, { state: { _id: data._id } });
   };
 
+  const paraLimit = useMemo(() => {
+    if (data?.description) {
+      return {
+        text: data.description.slice(0, 100).concat("..."),
+        length: data.description.length
+      };
+    }
+    return "";
+  }, [data]);
   return (
     <Card>
       <CardMedia isHoverBox={handleDelete && handleEdit ? true : false}>
@@ -143,7 +156,7 @@ function LiveClassCard({
         <div className="timeRow">
           <H4>{data.date && moment(data.date).format("MM-DD-YYYY")}</H4>
           <H4>{data.time}</H4>
-          <ClockTime time={`${data.totalTime} min`} />
+          <ClockTime time={`${data.totalTime} min`} fontSize={"13px"} />
         </div>
         <H3>{data.title}</H3>
         <div className="profileRow">
@@ -163,7 +176,14 @@ function LiveClassCard({
             <IntensityLevel level={intensityLevel} />
           </div>
         </div>
-        <P3 className="detail">{data.description}</P3>
+        <P3 className="detail">
+          {paraLimit.text}{" "}
+          {paraLimit.length >= 100 ? (
+            <span onClick={handleNavigate}>See More</span>
+          ) : (
+            ""
+          )}
+        </P3>
       </CardContent>
     </Card>
   );

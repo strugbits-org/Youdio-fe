@@ -6,7 +6,6 @@ import {
   P3,
   PrimaryButton,
 } from "src/components";
-import { icons } from "src/helpers";
 import { layout } from "src/helpers";
 import styled from "styled-components";
 import IntensityLevel from "../IntensityLevel";

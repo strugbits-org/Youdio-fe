@@ -1,5 +1,5 @@
 import React from "react";
-import { FeatureVideoCard, InstructorCard } from "../Cards";
+import { FeatureVideoCard } from "../Cards";
 import { H3, Loader, NoFoundBox } from "..";
 import styled from "styled-components";
 import { layout } from "src/helpers";

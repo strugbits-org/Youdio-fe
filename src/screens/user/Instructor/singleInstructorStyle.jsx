@@ -68,6 +68,7 @@ export const SingleImage = styled.div`
     background: #fafafa;
     padding: 5px;
     aspect-ratio: 1/1;
+    object-fit: cover;
   }
 `;
 

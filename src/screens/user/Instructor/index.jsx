@@ -13,6 +13,7 @@ import {
   ReviewCards,
   VideoClassesCards,
 } from "src/components/CardsSection";
+import { icons } from "src/helpers";
 
 function Instructor() {
   const { id } = useParams();
@@ -66,8 +67,8 @@ function Instructor() {
       </Sec>
       <SingleImage>
         <img
-          src={instructorDetail?.image ? instructorDetail.image : ""}
-          alt=""
+          src={instructorDetail?.image ? instructorDetail.image : icons.profile}
+          alt={"User Profile"}
         />
       </SingleImage>
 

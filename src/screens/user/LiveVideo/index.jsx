@@ -182,16 +182,18 @@ function LiveVideo() {
         )}
       </Section>
       <Section backgroundColor="white" paddingBlock="0px 30px">
-        <LiveLessonBox>
-          <H2>Other Live Lesson</H2>
-          {/* <FilterComponent /> */}
+        {liveSession[0] && liveSession[0].length > 1 && (
+          <LiveLessonBox>
+            <H2>Other Live Lesson</H2>
+            {/* <FilterComponent /> */}
 
-          <LiveClassesCards
-            classes={liveSession[0]}
-            loading={loading}
-            currentLiveSessionId={liveSessionId._id}
-          />
-        </LiveLessonBox>
+            <LiveClassesCards
+              classes={liveSession[0]}
+              loading={loading}
+              currentLiveSessionId={liveSessionId._id}
+            />
+          </LiveLessonBox>
+        )}
       </Section>
       {/* <BookingModal
         open={open}

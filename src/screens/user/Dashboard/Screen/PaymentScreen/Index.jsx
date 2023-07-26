@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Formik } from "formik";
-import { H4, Label, P3, H2 } from "src/components";
+import { H4, P3, H2 } from "src/components";
 import { icons } from "src/helpers";
 import { FieldInput } from "src/components";
 import {
@@ -9,7 +9,6 @@ import {
   FormRow,
   Buttons,
   CardInfoRow,
-  RadioFormRow,
   SaveButton,
   DisbaleEmailBox,
 } from "./PaymentComponent";
@@ -96,20 +95,6 @@ const PaymentDetail = () => {
                   style={{ fontSize: "16px" }}
                 />
               </FormRow>
-              <RadioFormRow>
-                <input
-                  type="radio"
-                  id="paymentAcceptRadio"
-                  name="paymentAcceptRadio"
-                  value={""}
-                />
-                <Label htmlFor="paymentAcceptRadio">
-                  Lorem ipsum dolor sit amet consectetur. In tristique id eu.
-                  Porttitor egestas viverra ultricies tincidunt nulla in nisl
-                  eget. Magna dolor risus porttitor blandit rhoncus iaculis.
-                  Ultricies r id risuslacus accumsan arcu ultrices varius.
-                </Label>
-              </RadioFormRow>
 
               <Buttons>
                 <SaveButton type="submit">Start Trial</SaveButton>

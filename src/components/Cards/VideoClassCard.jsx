@@ -44,6 +44,10 @@ const CardContent = styled.div`
   .detail {
     color: var(--backgroundGrey);
     max-width: 482px;
+    span{
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 `;
 const Tag = styled.span`
@@ -91,6 +95,15 @@ function VideoClassCard({
     navigate(path.videoClass);
   };
 
+  const paraLimit = useMemo(() => {
+    if (data?.description) {
+      return {
+        text: data.description.slice(0, 100).concat("..."),
+        length: data.description.length,
+      };
+    }
+    return "";
+  }, [data]);
   return (
     <Card>
       <CardMedia isHoverBox={handleDelete && handleEdit ? true : false}>
@@ -145,7 +158,14 @@ function VideoClassCard({
           )}
           <IntensityLevel level={intensityLevel} />
         </div>
-        <P3 className="detail">{data?.description}</P3>
+        <P3 className="detail">
+          {paraLimit.text}{" "}
+          {paraLimit.length >= 100 ? (
+            <span onClick={handleNavigate}>See More</span>
+          ) : (
+            ""
+          )}
+        </P3>
       </CardContent>
     </Card>
   );

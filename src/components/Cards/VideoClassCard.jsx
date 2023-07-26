@@ -75,7 +75,13 @@ const HoverBox = styled.div`
   }
 `;
 
-function VideoClassCard({ data, handleDelete, handleEdit, handleView }) {
+function VideoClassCard({
+  data,
+  handleDelete,
+  handleEdit,
+  handleView,
+  isSameInstructor,
+}) {
   const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
     return data.intensity.slice(-1);
@@ -131,10 +137,12 @@ function VideoClassCard({ data, handleDelete, handleEdit, handleView }) {
           <ClockTime time={`${data.totalTime} min`} />
         </div>
         <div className="profileRow">
-          <InstructorLink
-            imageSrc={data.instructor.image}
-            title={`${data.instructor.firstName} ${data.instructor.lastName}`}
-          />
+          {!isSameInstructor && (
+            <InstructorLink
+              imageSrc={data.instructor.image}
+              title={`${data.instructor.firstName} ${data.instructor.lastName}`}
+            />
+          )}
           <IntensityLevel level={intensityLevel} />
         </div>
         <P3 className="detail">{data?.description}</P3>

@@ -2,7 +2,6 @@ import styled from "styled-components";
 // import { H2, P1 } from "src/components";
 import { layout } from "src/helpers";
 import { Section } from "src/components";
-import { PrimaryWhiteButton } from "src/components";
 
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 
@@ -15,6 +14,7 @@ export const Sec = styled(Section)`
   }
   background-size: cover;
   background-position: center;
+  background-repeat:no-repeat;
 `;
 
 export const TextSec = styled(Section)`
@@ -63,7 +63,11 @@ export const SingleImage = styled.div`
   justify-content: center;
   transform: translateY(-35%);
   img {
-    width: min(35%, 290px);
+    width: clamp(140px, 14vw, 280px);
+    border-radius: 100%;
+    background: #fafafa;
+    padding: 5px;
+    aspect-ratio: 1/1;
   }
 `;
 
@@ -114,42 +118,7 @@ export const TwoCardsBox = styled.div`
   }
 `;
 
-export const ReviewCards = styled.div`
-  padding-inline: 11.5vw;
-  display: grid;
-  gap: 7vw 5.8vw;
-  position: relative;
 
-  @media only screen and (min-width: ${mobile}) {
-    grid-template-columns: 1fr;
-    margin-block: 70px;
-  }
-  @media only screen and (max-width: ${mobileMedium}) {
-    gap: 11vw 5.8vw;
-    grid-template-columns: 1fr;
-  }
-  @media only screen and (min-width: ${tablet}) {
-    grid-template-columns: 1fr 1fr;
-    margin-block: 90px;
-  }
-  @media only screen and (min-width: ${laptop}) {
-    grid-template-columns: 1fr 1fr;
-    margin-block: 60px;
-  }
-  @media only screen and (min-width: ${desktop}) {
-  }
-`;
-
-export const CenterButton = styled(PrimaryWhiteButton)`
-  /* margin: 0 auto; */
-  /* margin-left: 43%; */
-  /* margin-bottom: 13.2vh;
-  min-width: 180px; */
-
-  max-width: 200px;
-  min-width: 100px;
-  background-color: #ffff;
-`;
 
 export const StyledDiv = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.07);

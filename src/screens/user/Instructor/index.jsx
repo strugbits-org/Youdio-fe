@@ -1,24 +1,18 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   SingleImage,
-  CardsBox,
   Sec,
   TextSec,
-  TwoCardsBox,
-  ReviewCards,
-  Box,
-  CenterButton,
 } from "./singleInstructorStyle";
-import { icons } from "src/helpers";
 import { H1, P1, H2, Section } from "src/components";
-import { SingleinstClassStaticContent, ArrReview } from "./constant";
-import {
-  SingleInstructorCard,
-  TwoCardInstructor,
-} from "src/components/Cards/SingleInstructorCard";
-import { ReviewCard } from "src/components/Cards";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetAPI from "src/features/hooks/useGetAPI";
+import { HorizontalLine } from "src/components/BreakLines";
+import {
+  LiveClassesCards,
+  ReviewCards,
+  VideoClassesCards,
+} from "src/components/CardsSection";
 
 function Instructor() {
   const { id } = useParams();
@@ -29,102 +23,96 @@ function Instructor() {
     id
       ? getData(`instructor/get-instructor/${id}`)
       : navigate("/page-not-found");
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
-  const instrutorDetail = useMemo(() => { 
-    if (getRes && getRes?.instructor) {
-      return getRes.instructor.instructor;
+  const instructorDetail = useMemo(() => {
+    if (getRes && getRes?.instructor && getRes.instructor.instructor) {
+      const detail = getRes.instructor.instructor;
+      Object.keys(detail).forEach((key) => {
+        if (detail[key] === null || detail[key] === undefined) {
+          detail[key] = "";
+        }
+      });
+      detail.fullName = `${detail?.firstName} ${detail?.lastName}`;
+      return detail;
     }
-    return false
-  }, [getRes])
-  
-  const instrutorClasses = useMemo(() => { 
+    return false;
+  }, [getRes]);
+
+  const instrutorClasses = useMemo(() => {
     if (getRes && getRes?.instructor) {
       return {
         liveClasses: getRes.instructor.sessions,
         videoClasses: getRes.instructor.videos,
+        reviews: getRes.instructor.reviews,
       };
     }
-    return false
-  }, [getRes])
+    return false;
+  }, [getRes]);
 
   return (
     <React.Fragment>
       <Sec
-        backgroundImage={instrutorDetail?.bannerImage}
+        backgroundColorImage={`linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url(${instructorDetail?.bannerImage})`}
         paddingBlock="15.2vw"
-        data-loading=""
       >
-        <H1>{}</H1>
-        <P1>{SingleinstClassStaticContent.singleInstructorP1}</P1>
+        {instructorDetail && (
+          <>
+            <H1>{instructorDetail?.fullName}</H1>
+            <P1>{instructorDetail?.jobTitle}</P1>
+          </>
+        )}
       </Sec>
       <SingleImage>
-        <img src={icons.singleInstructorImg} alt="" />
+        <img
+          src={instructorDetail?.image ? instructorDetail.image : ""}
+          alt=""
+        />
       </SingleImage>
 
       <TextSec backgroundColor="#fff">
-        <H2 className="h2">
-          {SingleinstClassStaticContent.singleInstructorH2}
-        </H2>
-        <P1 className="p1">
-          {SingleinstClassStaticContent.singleInstructorPara1}
-        </P1>
-        <P1 className="p2">
-          {SingleinstClassStaticContent.singleInstructorPara2}
-        </P1>
-        <div className="seperatorLine"></div>
+        {instructorDetail && (
+          <>
+            <H2 className="h2">{`${instructorDetail?.fullName} Bio`}</H2>
+            <P1 className="p1">{instructorDetail?.description}</P1>
+          </>
+        )}
+        <HorizontalLine />
       </TextSec>
 
       {/* <StyledDiv /> */}
 
-      {/* Single-Instructor Cards Section */}
+      {/* Instructor Classes */}
       <Section backgroundColor="#fff">
-        <H2 style={{ textAlign: "center" }}>
-          {SingleinstClassStaticContent.singleInstructorCardH2}
-        </H2>
-        <CardsBox>
-          {[...Array(6).keys()].map((val) => (
-            <SingleInstructorCard key={`card-${val}`} />
-          ))}
-        </CardsBox>
-        <div className="seperatorLine"></div>
+        <H2 style={{ textAlign: "center" }}>Video Classes</H2>
+        <VideoClassesCards
+          isSameInstructor={true}
+          videos={instrutorClasses?.videoClasses}
+          loading={getLoading}
+          limit={3}
+        />
+        <HorizontalLine />
       </Section>
 
-      {/* Horizontal Line */}
-      {/* <StyledDiv /> */}
-
-      {/* Two Card Section */}
+      {/* Live Classes */}
       <Section backgroundColor="#fff">
-        <H2 style={{ textAlign: "center" }}>
-          {SingleinstClassStaticContent.TwoInstructorCardH2}
-        </H2>
-        <TwoCardsBox>
-          {[...Array(2).keys()].map((val) => (
-            <TwoCardInstructor key={`card-${val}`} />
-          ))}
-        </TwoCardsBox>
-        <div className="seperatorLine"></div>
-      </Section>
+        <H2 style={{ textAlign: "center" }}>Live Sessions</H2>
+        <LiveClassesCards
+          classes={instrutorClasses?.liveClasses}
+          loading={getLoading}
+          instructorInfo={instructorDetail}
+          limit={4}
+        />
 
-      {/* Horizontal Line */}
-      {/* <StyledDiv /> */}
+        <HorizontalLine />
+      </Section>
 
       {/* Review-Card */}
       <Section backgroundColor="#fff">
-        <H2 style={{ textAlign: "center" }}>
-          {SingleinstClassStaticContent.ReviewH2}
-        </H2>
-        <ReviewCards>
-          {ArrReview.map((review) => {
-            const { id } = review;
-            return <ReviewCard key={id} {...review} />;
-          })}
-        </ReviewCards>
+        <H2 style={{ textAlign: "center" }}>Instructor Reviews</H2>
+        <ReviewCards reviews={instrutorClasses.reviews} loading={getLoading} limit={6} />
       </Section>
-
-      <Box>
-        <CenterButton>{SingleinstClassStaticContent.ButtonH4}</CenterButton>
-      </Box>
     </React.Fragment>
   );
 }

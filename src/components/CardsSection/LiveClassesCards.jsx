@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { layout } from "src/helpers";
 import { LiveClassCard, Loader, NoFoundBox, H3 } from "src/components";
@@ -37,30 +37,40 @@ function LiveClassesCards({
   handleDelete,
   handleEdit,
   handleView,
+  instructorInfo,
+  limit,
 }) {
+  const videoLimit = useMemo(() => {
+    if (limit && typeof limit === "number") return limit;
+    return classes.length;
+  }, [limit, classes]);
+ 
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
-      {!loading && classes?.length > 0 ? (
+      {!loading && classes?.length > 0 && videoLimit ? (
         <Box>
-          {classes.map((val) =>
-            val._id !== currentLiveSessionId ? (
-              <LiveClassCard
-                key={`card-${val._id}`}
-                data={val}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-                handleView={handleView}
-              />
-            ) : (
-              ""
-            )
-          )}
+          {classes
+            .slice(0, videoLimit)
+            .map((val) =>
+              val._id !== currentLiveSessionId ? (
+                <LiveClassCard
+                  key={`card-${val._id}`}
+                  data={val}
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                  handleView={handleView}
+                  instructorInfo={instructorInfo}
+                />
+              ) : (
+                ""
+              )
+            )}
         </Box>
       ) : (
         !loading && (
           <NoFoundBox>
-            <H3>No Data Found</H3>
+            <H3>Live Sessions are not exist</H3>
           </NoFoundBox>
         )
       )}

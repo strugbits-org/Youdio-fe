@@ -182,7 +182,7 @@ function LiveVideo() {
         )}
       </Section>
       <Section backgroundColor="white" paddingBlock="0px 30px">
-        {liveSession[0] && liveSession[0].length > 1 && (
+        { (
           <LiveLessonBox>
             <H2>Other Live Lesson</H2>
             {/* <FilterComponent /> */}

@@ -81,7 +81,13 @@ const HoverBox = styled.div`
   }
 `;
 
-function LiveClassCard({ data, handleDelete, handleEdit, handleView }) {
+function LiveClassCard({
+  data,
+  handleDelete,
+  handleEdit,
+  handleView,
+  instructorInfo,
+}) {
   const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
     return data.intensity.slice(-1);
@@ -101,7 +107,7 @@ function LiveClassCard({ data, handleDelete, handleEdit, handleView }) {
           width="100%"
           height="auto"
         />
-        {data.category && (
+        {data?.category.category && (
           <Tag>
             <H4>{data.category?.category}</H4>
           </Tag>
@@ -141,10 +147,17 @@ function LiveClassCard({ data, handleDelete, handleEdit, handleView }) {
         </div>
         <H3>{data.title}</H3>
         <div className="profileRow">
-          <InstructorLink
-            imageSrc={data.trainer.image}
-            title={`${data.trainer.firstName} ${data.trainer.lastName}`}
-          />
+          {instructorInfo ? (
+            <InstructorLink
+              imageSrc={instructorInfo.image}
+              title={instructorInfo.fullName}
+            />
+          ) : (
+            <InstructorLink
+              imageSrc={data.trainer.image}
+              title={`${data.trainer.firstName} ${data.trainer.lastName}`}
+            />
+          )}
 
           <div className="intensityBox">
             <IntensityLevel level={intensityLevel} />

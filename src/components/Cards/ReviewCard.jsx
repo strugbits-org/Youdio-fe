@@ -2,7 +2,7 @@ import React from "react";
 import Rating from "@mui/material/Rating";
 import { P2, H3, P3 } from "src/components/Typography";
 import styled from "styled-components";
-import { icons } from "src/helpers";
+import moment from "moment";
 
 const Card = styled.div`
   padding-inline: 30px;
@@ -52,7 +52,7 @@ const QuotationIcon = styled.div`
   padding: 14px;
   background: var(--backgroundGreen);
   transform: translateY(-50%);
-  svg{
+  svg {
     width: 100%;
     height: 100%;
   }
@@ -99,9 +99,9 @@ const CustomerBox = styled.div`
   }
 `;
 
-export const ReviewCard = () => {
+export const ReviewCard = ({ review }) => {
   return (
-    <Card >
+    <Card>
       <QuotationIcon className="quotation">
         <svg
           width="52"
@@ -119,18 +119,20 @@ export const ReviewCard = () => {
       </QuotationIcon>
       <Content>
         <div className="cardUpperRow">
-          <Rating value={3} readOnly />
-          <P3>22/12/2022</P3>
+          <Rating value={review?.rating} readOnly />
+          <P3>{moment(review?.date).format("DD/MM/YYYY")}</P3>
         </div>
-        <P2 className="reviewPara">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-          lectus iaculis netus sem fringilla adipiscing.
-        </P2>
+        <P2 className="reviewPara">{review?.review}</P2>
         <CustomerBox>
-          <img src={icons.profileImage} alt="" width="" height="" />
+          <img
+            src={review?.customerImage}
+            alt={"Customer"}
+            width=""
+            height=""
+          />
           <div className="detail">
-            <H3>Customer</H3>
-            <P3>CEO</P3>
+            <H3>{review?.customerName}</H3>
+            {/* <P3>Customer</P3> */}
           </div>
         </CustomerBox>
       </Content>

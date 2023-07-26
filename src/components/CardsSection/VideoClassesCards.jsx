@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { layout } from "src/helpers";
 import { Loader, NoFoundBox, H3 } from "src/components";
@@ -35,27 +35,34 @@ function VideoClassesCards({
   handleDelete,
   handleEdit,
   handleView,
+  isSameInstructor,
+  limit,
 }) {
+  const videoLimit = useMemo(() => {
+    if (limit && typeof limit === "number") return limit;
+    return videos.length;
+  }, [limit, videos]);
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
 
-      {!loading && videos?.length > 0 ? (
+      {!loading && videos?.length > 0 && videoLimit ? (
         <Box>
-          {videos.map((val) => (
+          {videos.slice(0, videoLimit).map((val) => (
             <VideoClassCard
               key={`card-${val._id}`}
               data={val}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
               handleView={handleView}
+              isSameInstructor={isSameInstructor}
             />
           ))}
         </Box>
       ) : (
         !loading && (
           <NoFoundBox>
-            <H3>No Data Found</H3>
+            <H3>Video Classes are not exist</H3>
           </NoFoundBox>
         )
       )}

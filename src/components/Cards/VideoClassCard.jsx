@@ -92,7 +92,12 @@ function VideoClassCard({
   }, [data]);
 
   const handleNavigate = () => {
-    navigate(`${path.videoClass}/${data?._id}/${data?.instructor?._id}`);
+    if (data?.instructor?._id && data?._id) {
+      navigate(`${path.videoClass}/${data._id}/${data.instructor._id}`);
+    }
+    else {
+      navigate(`${path.videoClass}/${data._id}/${data.instructor}`);
+    }
   };
 
   const paraLimit = useMemo(() => {

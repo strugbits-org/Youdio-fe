@@ -3,7 +3,7 @@ import { Section } from "src/components";
 import { fonts } from "src/helpers";
 import { layout } from "src/helpers";
 
-const { tablet, laptop, desktop, mobileLarge } = layout;
+const { tablet, desktop } = layout;
 export const CustomSection = styled(Section)`
   min-height: 50dvh;
 `;
@@ -28,6 +28,7 @@ export const VideoBox = styled.div`
       max-height: 664px;
       max-width: 1589px;
       aspect-ratio: 2.39/1;
+      object-fit: cover;
     }
     button {
       width: clamp(40px, 6vw, 120px);
@@ -46,6 +47,7 @@ export const VideoBox = styled.div`
     }
   }
   video {
+    display: ${({videoRender})=> videoRender ? "initial" : "none"};
     max-height: 664px;
     max-width: 1589px;
     background: black;
@@ -173,7 +175,7 @@ export const InstructorBio = styled.div`
   }
 `;
 
-export const InstructorClasses = styled.div`
+export const ClassesContainer = styled.div`
   margin-block: 4vw;
   max-width: 400px;
   margin-inline: auto;
@@ -186,35 +188,6 @@ export const InstructorClasses = styled.div`
   }
   @media only screen and (min-width: ${desktop}) {
     margin-block: 80px;
-  }
-`;
-
-export const InstructorVideos = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-
-  @media only screen and (min-width: ${tablet}) {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media only screen and (min-width: ${laptop}) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-`;
-
-export const InstructorSessions = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-
-  @media only screen and (min-width: ${mobileLarge}) {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media only screen and (min-width: ${tablet}) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  @media only screen and (min-width: ${laptop}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
 
@@ -233,19 +206,5 @@ export const Reviews = styled.div`
     max-width: 180px;
     margin-inline: auto;
     display: block;
-  }
-`;
-
-export const ReviewsList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 60px;
-  margin-bottom: 60px;
-  @media only screen and (min-width: ${mobileLarge}) {
-    grid-template-columns: 1fr 1fr;
-    gap: 6vw;
-  }
-  @media only screen and (min-width: ${desktop}) {
-    gap: 80px;
   }
 `;

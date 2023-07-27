@@ -36,33 +36,49 @@ function VideoClassesCards({
   handleEdit,
   handleView,
   isSameInstructor,
+  currentVideoClassId,
   limit,
+  minLimit,
+  
 }) {
   const videoLimit = useMemo(() => {
     if (limit && typeof limit === "number") return limit;
     return videos.length;
   }, [limit, videos]);
+
+  const isDynamic = useMemo(() => {
+    if (minLimit && typeof minLimit === "number") return minLimit;
+    return 0;
+  }, [minLimit]);
+
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
 
-      {!loading && videos?.length > 0 && videoLimit ? (
+      {!loading && videos?.length > isDynamic && videoLimit ? (
         <Box>
-          {videos.slice(0, videoLimit).map((val) => (
-            <VideoClassCard
-              key={`card-${val._id}`}
-              data={val}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
-              handleView={handleView}
-              isSameInstructor={isSameInstructor}
-            />
-          ))}
+          {videos
+            .slice(0, videoLimit)
+            .map((val) =>
+              val._id !== currentVideoClassId ? (
+                <VideoClassCard
+                  key={`card-${val._id}`}
+                  data={val}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                  handleView={handleView}
+                  isSameInstructor={isSameInstructor}
+           
+                />
+              ) : (
+                ""
+              )
+            )}
         </Box>
       ) : (
         !loading && (
           <NoFoundBox>
-            <H3>Video Classes are not exist</H3>
+            <H3>Video Classes are not found</H3>
           </NoFoundBox>
         )
       )}

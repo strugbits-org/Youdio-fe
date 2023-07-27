@@ -1,14 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   CustomSection,
   VideoContainer,
   VideoBox,
   VideoDetail,
-  InstructorClasses,
-  InstructorVideos,
-  InstructorSessions,
+  ClassesContainer,
   InstructorBio,
-  ReviewsList,
   Reviews,
 } from "./SingleVideoComp";
 import { icons } from "src/helpers";
@@ -18,23 +15,29 @@ import {
   H5,
   P1,
   IntensityLevel,
-  PrimaryWhiteButton,
   IconButton,
   Loader,
 } from "src/components";
 import { HorizontalLine } from "src/components/BreakLines";
-import { ReviewCard, SingleInstructorCard } from "src/components/Cards";
-import { LiveLessonCard } from "src/components/Cards";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import useFetch from "src/features/hooks/useFetch";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  LiveClassesCards,
+  ReviewCards,
+  VideoClassesCards,
+} from "src/components/CardsSection";
+import usePostAPI from "src/features/hooks/usePostAPI";
 
 const VideoClass = () => {
-  const [videosLength, setVideosLength] = useState(6);
+  const [isPlay, setIsPlay] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
-  const { fetchIdAndVideos, res } = useFetch();
-
+  const { token } = useSelector((state) => state.user);
+  const { fetchIdAndVideos, res, loading } = useFetch();
+  const { postData } = usePostAPI()
+  const videoPlay = useRef();
   useEffect(() => {
     if (params?.id && params?.instructor) {
       fetchIdAndVideos([
@@ -57,13 +60,23 @@ const VideoClass = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
 
-  const handleSeeMore = () => {
-    setVideosLength(8);
+  const handlePlayButton = () => {
+    if (token && token !== null && !isPlay) {
+      setIsPlay(true)
+      videoPlay.current.play();
+      params?.id && postData("/watchHistory/create", {video:params.id});
+    }
   };
 
   const video = useMemo(() => {
     if (res && res?.length > 0 && res[0]?.video) {
-      const getVideo = res[0];
+      const getVideo = res[0].video;
+      const {
+        instructor: { firstName, lastName },
+      } = getVideo;
+      if (firstName || lastName) {
+        getVideo.instructor.fullName = `${firstName} ${lastName}`;
+      }
       return getVideo;
     }
     return false;
@@ -71,7 +84,13 @@ const VideoClass = () => {
 
   const instructor = useMemo(() => {
     if (res && res?.length > 0 && res[1]?.instructor) {
-      const getInstructor = res[1];
+      const getInstructor = res[1].instructor;
+      const {
+        instructor: { firstName, lastName },
+      } = getInstructor;
+      if (firstName || lastName) {
+        getInstructor.instructor.fullName = `${firstName} ${lastName}`;
+      }
       return getInstructor;
     }
     return false;
@@ -82,48 +101,60 @@ const VideoClass = () => {
       {video && instructor ? (
         <React.Fragment>
           <VideoContainer>
-            <VideoBox>
-              {/* <video src={videoURL} width="100%" height="100%"></video> */}
-              <div className="thumbnailImage">
-                <img src={icons.videoThumbnail} alt="" height="" width="" />
-                <IconButton aria-label="play" size="large" color="green">
-                  <PlayArrowRoundedIcon fontSize="large" />
-                </IconButton>
-              </div>
-              <div className="unLockOverlay">
-                <img src={icons.videoLock} alt="Lock" width="" height="" />
-                <div className="content">
-                  <H2 fontSize="clamp(20px, 2.3vw, 46px)">UNLOCK THIS CLASS</H2>
-                  <H5 fontSize="clamp(14px, 1.2vw, 18px)">
-                    Start your trial today
-                  </H5>
+            <VideoBox videoRender={isPlay}>
+              <video
+                ref={videoPlay}
+                src={video?.videoURL ? video.videoURL : ""}
+                width="100%"
+                height="100%"
+                controls={isPlay}
+              ></video>
+              {/* Render isPaly state false or user didn't do any interaction with video box */}
+              {!isPlay && (
+                <div className="thumbnailImage">
+                  <img src={video.thumbnail} alt="" height="" width="" />
+                  <IconButton
+                    aria-label="play"
+                    size="large"
+                    color="green"
+                    onClick={handlePlayButton}
+                  >
+                    <PlayArrowRoundedIcon fontSize="large" />
+                  </IconButton>
                 </div>
-              </div>
+              )}
+              {!token && !isPlay && (
+                <div className="unLockOverlay">
+                  <img src={icons.videoLock} alt="Lock" width="" height="" />
+                  <div className="content">
+                    <H2 fontSize="clamp(20px, 2.3vw, 46px)">
+                      UNLOCK THIS CLASS
+                    </H2>
+                    <H5 fontSize="clamp(14px, 1.2vw, 18px)">
+                      Start your trial today
+                    </H5>
+                  </div>
+                </div>
+              )}
             </VideoBox>
             <VideoDetail>
               <div className="singleClass">
                 <H5>SINGLE CLASS</H5>
-                <H2>OCEAN BREATH</H2>
+                <H2>{video?.title}</H2>
                 <P1>
-                  From Ocean Breath by{" "}
-                  <span className="bold">Jackie Stewart</span>
+                  {video?.title}{" "}
+                  <span className="bold">{video.instructor?.fullName}</span>
                 </P1>
-                <P1 className="description">
-                  Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu
-                  tempus pellentesque varius volutpat enim eget. Velit sed sed
-                  commodo nec vestibulum tellus tincidunt mollis. Nascetur et
-                  tellus integer integer. Viverra integer imperdiet phasellus
-                  ridiculus neque.
-                </P1>
+                <P1 className="description">{video?.description}</P1>
               </div>
 
               <div className="totalRunTime">
                 <H5>TOTAL RUN TIME</H5>
-                <ClockTime time="5 min 47 sec" fontSize={"18px"} />
+                <ClockTime time={`${video?.totalTime} min`} fontSize={"18px"} />
                 <div className="intensity">
                   <IntensityLevel
                     text="Intensitiy"
-                    level={1}
+                    level={video?.intensity}
                     fontSize={"18px"}
                     fontColor={"var(--backgroundGrey)"}
                   />
@@ -132,57 +163,50 @@ const VideoClass = () => {
             </VideoDetail>
           </VideoContainer>
           <HorizontalLine />
+
           <InstructorBio>
             <img src={icons.profile} alt="Instructor" width="" height="" />
             <div className="instructorBio">
-              <H2>Jackie Stewart Bio</H2>
-              <P1 className="bio">
-                Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu
-                tempus pellentesque varius volutpat enim eget. Velit sed sed
-                commodo nec vestibulum tellus tincidunt mollis. Nascetur et
-                tellus integer integer. Viverra integer imperdiet phasellus
-                ridiculus neque.
-              </P1>
-              <P1>
-                Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu
-                tempus pellentesque varius volutpat enim eget. Velit sed sed
-                commodo nec vestibulum tellus tincidunt mollis. Nascetur et
-                tellus integer integer. Viverra integer imperdiet phasellus
-                ridiculus neque.
-              </P1>
+              <H2>{`${instructor?.instructor?.fullName} Bio`}</H2>
+              <P1 className="bio">{instructor?.instructor?.description}</P1>
             </div>
           </InstructorBio>
           <HorizontalLine />
-          <InstructorClasses>
-            <H2>Jackie Stewart Classes</H2>
-            <InstructorVideos>
-              {[...Array(3).keys()].map((_, ind) => {
-                return <SingleInstructorCard key={`instructor-card-${ind}`} />;
-              })}
-            </InstructorVideos>
-          </InstructorClasses>
+
+          <ClassesContainer>
+            <H2>{`${instructor?.instructor?.fullName} Classes`}</H2>
+            <VideoClassesCards
+              isSameInstructor={true}
+              videos={instructor?.videos?.length > 0 ? instructor?.videos : []}
+              limit={3}
+              loading={loading}
+              currentVideoClassId={params?.id}
+              minLimit={1}
+            />
+          </ClassesContainer>
           <HorizontalLine />
-          <InstructorClasses>
-            <H2>Jackie Stewart Live Lessons</H2>
-            <InstructorSessions>
-              {[...Array(4).keys()].map((_, ind) => {
-                return <LiveLessonCard key={`live-lesson-card-${ind}`} />;
-              })}
-            </InstructorSessions>
-          </InstructorClasses>
+
+          <ClassesContainer>
+            <H2>{`${instructor?.instructor?.fullName} Live Lessons`}</H2>
+            <LiveClassesCards
+              classes={
+                instructor?.sessions?.length > 0 ? instructor?.sessions : []
+              }
+              limit={4}
+              loading={loading}
+            />
+          </ClassesContainer>
           <HorizontalLine />
+
           <Reviews>
             <H2>Instructor Review</H2>
-            <ReviewsList>
-              {[...Array(videosLength).keys()].map((_, ind) => {
-                return <ReviewCard key={`review-card-${ind}`} />;
-              })}
-            </ReviewsList>
-            {videosLength < 8 && (
-              <PrimaryWhiteButton onClick={handleSeeMore}>
-                See More
-              </PrimaryWhiteButton>
-            )}
+            <ReviewCards
+              limit={0}
+              loading={loading}
+              reviews={
+                instructor?.reviews?.length > 0 ? instructor?.reviews : []
+              }
+            />
           </Reviews>
         </React.Fragment>
       ) : (

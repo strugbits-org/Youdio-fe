@@ -1,5 +1,5 @@
 import React from "react";
-import { H3, P3 } from "src/components";
+import { ClockTime, H3, P3 } from "src/components";
 import { icons } from "src/helpers";
 import { layout } from "src/helpers";
 import styled from "styled-components";
@@ -87,20 +87,25 @@ const CardContent = styled.div`
   }
 `;
 
-export function HistoryCard({ img }) {
+export function HistoryCard({ historyVideo, historyVideoId }) {
   return (
     <Card>
       <ImageBox>
-        <img src={img} alt="Thumbnail" width="" height="" />
-        <span className="label">Yoga</span>
+        <img
+          src={historyVideo?.thumbnail}
+          alt={"Thumbnail"}
+          width=""
+          height=""
+        />
+        <span className="label">{historyVideo?.category}</span>
       </ImageBox>
       <CardContent>
         <div className="timeRow">
-          <H3>UPPER BODY POWER</H3>
-          <div className="time">
-            <img src={icons.timeClock} alt="" width="15px" height="auto" />
-            <P3>5 min 47 sec</P3>
-          </div>
+          <H3>{historyVideo?.title}</H3>
+          <ClockTime
+            time={`${historyVideo?.totalTime} min`}
+            fontSize={"13px"}
+          />
         </div>
 
         <div className="intensityRow">
@@ -108,14 +113,10 @@ export function HistoryCard({ img }) {
             <img src={icons.shortpicWomen} alt="Instructor" />
             <P3>Elizebeth Lisa</P3>
           </div>
-          <IntensityLevel level={3} />
+          <IntensityLevel level={historyVideo?.intensity} />
         </div>
 
-        <P3 className="detail">
-          Lorem ipsum dolor sit amet consectetur. Eget vulputate sed posuere
-          sit. Integer in ac sem adipiscing nulla arcu Enim placerat nunc
-          tincidunt gravida vitae tincidunt
-        </P3>
+        <P3 className="detail">{historyVideo?.description}</P3>
       </CardContent>
     </Card>
   );

@@ -3,6 +3,7 @@ import VideoClassesCards from "./VideoClassesCards";
 import InstructorCards from "./InstructorCards";
 import FeatureVideosCards from "./FeatureVideosCards";
 import ReviewCards from "./ReviewCards";
+import WatchHistoryCards from "./WatchHistoryCards";
 
 export {
   LiveClassesCards,
@@ -10,4 +11,5 @@ export {
   InstructorCards,
   FeatureVideosCards,
   ReviewCards,
+  WatchHistoryCards,
 };

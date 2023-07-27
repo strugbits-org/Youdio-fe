@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { Heading2 } from "../../Components/Heading";
-import { historyScreenStaticContent as content, ArrHistory } from "./Constant";
-import { HistoryCard } from "src/components/Cards/HistoryCard";
-import { HistoryList } from "./HistoryComponent";
-import { HorizontalLine2 } from "../MyProfileScreen/ProfileComponent";
+import { WatchHistoryCards } from "src/components/CardsSection";
+import useGetAPI from "src/features/hooks/useGetAPI";
 
 const History = () => {
+  const { getData, getRes, getLoading } = useGetAPI();
+
+  useEffect(() => {
+    getData("watchHistory/get");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const history = useMemo(() => {
+    if (getRes && getRes?.watchHistory) {
+      return getRes.watchHistory;
+    }
+    return [];
+  }, [getRes]);
   return (
     <div>
-      <Heading2>{content.historyH2}</Heading2>
-      <HistoryList>
-        {ArrHistory.map((value, ind) => {
-          return (
-            <React.Fragment key={`history-${ind}`}>
-              <HistoryCard {...value} />
-              <HorizontalLine2 style={{ marginBlock: "40px" }} />
-            </React.Fragment>
-          );
-        })}
-      </HistoryList>
+      <Heading2>Watch History</Heading2>
+      <WatchHistoryCards historyVideos={history} loading={getLoading} />
     </div>
   );
 };

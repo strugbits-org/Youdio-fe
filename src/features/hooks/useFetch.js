@@ -191,7 +191,7 @@ const useFetch = () => {
       if (typeof url === "object" && url.length > 0) {
         const response = await axios.all(
           url.map((link, ind) => {
-            if (link.method === "post") {
+            if (link.method === "post" && payload) {
               return apiClient
                 .post(link.endpoint, payload[ind], { headers })
                 .then((res) => res)
@@ -207,7 +207,6 @@ const useFetch = () => {
           })
         );
         const isResponseValid = response.some((val) => val?.data && true);
-        console.log(response);
         if (isResponseValid) {
           const responseData = [];
           response.forEach((res) =>

@@ -4,7 +4,9 @@ import { fonts } from "src/helpers";
 import { layout } from "src/helpers";
 
 const { tablet, laptop, desktop, mobileLarge } = layout;
-export const CustomSection = styled(Section)``;
+export const CustomSection = styled(Section)`
+  min-height: 50dvh;
+`;
 
 export const VideoContainer = styled.div`
   max-width: 1589px;

@@ -57,7 +57,7 @@ function LiveVideo() {
         return {};
       });
     }
-    return [{}, {}];
+    return [undefined, undefined];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
 

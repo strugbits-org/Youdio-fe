@@ -43,7 +43,7 @@ function LiveClassesCards({
 }) {
   const videoLimit = useMemo(() => {
     if (limit && typeof limit === "number") return limit;
-    return classes.length;
+    return classes?.length;
   }, [limit, classes]);
   const isDynamic = useMemo(() => {
     if (minLimit && typeof minLimit === "number") return minLimit;

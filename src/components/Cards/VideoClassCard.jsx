@@ -92,7 +92,7 @@ function VideoClassCard({
   }, [data]);
 
   const handleNavigate = () => {
-    navigate(path.videoClass);
+    navigate(`${path.videoClass}/${data?._id}`);
   };
 
   const paraLimit = useMemo(() => {

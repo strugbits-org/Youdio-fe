@@ -39,16 +39,21 @@ function LiveClassesCards({
   handleView,
   instructorInfo,
   limit,
+  minLimit,
 }) {
   const videoLimit = useMemo(() => {
     if (limit && typeof limit === "number") return limit;
     return classes.length;
   }, [limit, classes]);
+  const isDynamic = useMemo(() => {
+    if (minLimit && typeof minLimit === "number") return minLimit;
+    return 0;
+  }, [minLimit]);
  
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
-      {!loading && classes?.length > 0 && videoLimit ? (
+      {!loading && classes?.length > isDynamic && videoLimit ? (
         <Box>
           {classes
             .slice(0, videoLimit)

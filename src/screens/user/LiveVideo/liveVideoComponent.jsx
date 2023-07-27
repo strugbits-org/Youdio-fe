@@ -157,9 +157,10 @@ export const CustomPrimaryButton = styled(SimplePrimaryButton)`
 `;
 
 export const LiveLessonBox = styled.div`
+  min-height: 35dvh;
   h2 {
     text-align: center;
-    margin-block: 6vw 4vw;
+    margin-block: 44px 28px;
   }
 `;
 

@@ -9,7 +9,6 @@ import {
   ClockTime,
   IntensityLevel,
   InstructorLink,
-  // FilterComponent,
   Loader,
   H3,
 } from "src/components";
@@ -25,19 +24,13 @@ import useFetch from "src/features/hooks/useFetch";
 import { LiveClassesCards } from "src/components/CardsSection";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import BookingModal from "./BookingModal";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { setUser } from "src/features/userSlice";
 import moment from "moment";
 
-// import Modal from "./Modal";
-
 function LiveVideo() {
   const { fetchIdAndVideos, res, loading } = useFetch();
   const { postData } = usePostAPI();
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
   const { resetFilters } = useSelector((state) => state.filter);
   const { user, token } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -182,7 +175,7 @@ function LiveVideo() {
         )}
       </Section>
       <Section backgroundColor="white" paddingBlock="0px 30px">
-        { (
+        {
           <LiveLessonBox>
             <H2>Other Live Lesson</H2>
             {/* <FilterComponent /> */}
@@ -191,9 +184,10 @@ function LiveVideo() {
               classes={liveSession[0]}
               loading={loading}
               currentLiveSessionId={liveSessionId._id}
+              minLimit={1}
             />
           </LiveLessonBox>
-        )}
+        }
       </Section>
       {/* <BookingModal
         open={open}

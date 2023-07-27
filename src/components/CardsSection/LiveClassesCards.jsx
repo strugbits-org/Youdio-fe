@@ -75,7 +75,7 @@ function LiveClassesCards({
       ) : (
         !loading && (
           <NoFoundBox>
-            <H3>Live Sessions are not exist</H3>
+            <H3>Live Sessions are not found</H3>
           </NoFoundBox>
         )
       )}

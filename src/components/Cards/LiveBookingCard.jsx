@@ -3,13 +3,9 @@ import styled from "styled-components";
 import { icons } from "src/helpers";
 import { H3 } from "src/components";
 import { layout } from "src/helpers";
-import {
-  ClockTime,
-  H6,
-  P2,
-  InstructorLink,
-} from "src/components";
+import { ClockTime, H6, P2, InstructorLink } from "src/components";
 import moment from "moment";
+import { Link } from "react-router-dom";
 const { mobileLarge, laptop, desktop } = layout;
 
 const Card = styled.div`
@@ -56,9 +52,9 @@ const MediaBox = styled.div`
   }
 
   .videoCamera {
-    width: clamp(18px, 1.6vw, 32px);
+    width: clamp(28px, 1.6vw, 32px);
     aspect-ratio: 1/1;
-    border: 3px solid #fff;
+    border: 2px solid #fff;
     border-radius: 100%;
     min-width: initial;
     background: #fff;
@@ -66,6 +62,7 @@ const MediaBox = styled.div`
     object-position: center;
     top: 16px;
     left: 16px;
+    cursor: pointer;
   }
 `;
 
@@ -180,15 +177,25 @@ const LiveBookingCard = ({
   return (
     <Card disabled={disabled}>
       <MediaBox>
-        <img src={bookedSession.thumbnail} alt="Trainer" width="" height="" />
-        <div className="overlay"></div>
         <img
-          className="videoCamera"
-          src={icons.videoCamera}
-          alt="Camera"
+          src={bookedSession.thumbnail}
+          alt="Trainer"
           width=""
           height=""
+          title="Join Zoom Link"
         />
+        <div className="overlay"></div>
+        {bookedSession?.zoomLink && (
+          <Link to={bookedSession.zoomLink} target="_blank">
+            <img
+              className="videoCamera"
+              src={icons.videoCamera}
+              alt="Camera"
+              width=""
+              height=""
+            />
+          </Link>
+        )}
       </MediaBox>
       <ContentBox>
         <div>

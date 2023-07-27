@@ -107,13 +107,13 @@ function LiveVideo() {
                 height=""
               />
               <div className="overlay"></div>
-              <img
+              {/* <img
                 className="videoCamera"
                 src={icons.videoCamera}
                 alt="Camera"
                 width=""
                 height=""
-              />
+              /> */}
             </MediaBox>
             <ContentBox>
               <H2>{liveSession[1].title}</H2>

@@ -34,7 +34,7 @@ const VideoClass = () => {
   const [isPlay, setIsPlay] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.user);
+  const { token, user } = useSelector((state) => state.user);
   const { fetchIdAndVideos, res, loading } = useFetch();
   const { postData } = usePostAPI()
   const videoPlay = useRef();
@@ -61,7 +61,7 @@ const VideoClass = () => {
   }, [res]);
 
   const handlePlayButton = () => {
-    if (token && token !== null && !isPlay) {
+    if (token && token !== null && isPlanActive && !isPlay ) {
       setIsPlay(true)
       videoPlay.current.play();
       params?.id && postData("/watchHistory/create", {video:params.id});
@@ -96,6 +96,13 @@ const VideoClass = () => {
     return false;
   }, [res]);
 
+  const isPlanActive = useMemo(() => {
+    if(user?.subscription?.isActive){
+      return true
+    }
+    return false
+  }, [user])
+
   return (
     <CustomSection backgroundColor="#fff">
       {video && instructor ? (
@@ -123,7 +130,7 @@ const VideoClass = () => {
                   </IconButton>
                 </div>
               )}
-              {!token && !isPlay && (
+              {(!token || !isPlanActive) && (
                 <div className="unLockOverlay">
                   <img src={icons.videoLock} alt="Lock" width="" height="" />
                   <div className="content">

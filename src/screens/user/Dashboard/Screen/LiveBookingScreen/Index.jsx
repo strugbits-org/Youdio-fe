@@ -54,9 +54,9 @@ const LiveBooking = () => {
   const bookedSessions = useMemo(() => {
     if (res && res?.data?.length > 0) {
       return res.data.map((bookedSession) => {
-        const date = new Date(moment(bookedSession.date).ge);
-        const nowDate = moment();
-        if (date <= nowDate) {
+        const date = new Date(moment(bookedSession?.liveSession?.date).format());
+        const nowDate = new Date();
+        if (date < nowDate) {
           bookedSession.isDateBefore = true;
         } else {
           bookedSession.isDateBefore = false;

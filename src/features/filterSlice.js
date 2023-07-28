@@ -41,7 +41,7 @@ const initialState = {
       name: "Level 4",
     },
   ],
-  
+
   resetFilters: {
     duration: {},
     instructors: [],
@@ -130,7 +130,7 @@ const filterSlice = createSlice({
         state.filters.duration = {};
       } else if (key === filterKeys.date) {
         state.filterTags = state.filterTags.filter(
-          tag => tag.key !== key && tag
+          (tag) => tag.key !== key && tag
         );
 
         state.filters.date = null;
@@ -151,13 +151,15 @@ const filterSlice = createSlice({
     // Duration
     filterDate: (state, action) => {
       const { key, data } = action.payload;
-      state.filters.date = data.format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+      state.filters.date = data.momentDate;
+      // state.filters.date = moment(data).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
 
       state.filterTags = state.filterTags.filter(
         (tag) => tag.key !== key && tag
       );
       const dateTag = {
-        data:data.format("DD/MM/YYYY"),
+        data: data.formatDate,
+        // data:moment(data).format("DD/MM/YYYY"),
         key,
       };
       state.filterTags.push(dateTag);

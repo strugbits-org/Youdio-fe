@@ -82,8 +82,9 @@ function LiveClasses() {
     const currentDate = getDate("select", month, days, { d, m });
     setDateSelected(e.currentTarget.innerText);
     setMonth(currentDate);
-    const formatDate = moment(currentDate.date);
-    dispatch(filterDate({ key: filterKeys.date, data: formatDate }));
+    const momentDate= moment(currentDate.date).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    const formatDate = moment(currentDate.date).format("DD/MM/YYYY");
+    dispatch(filterDate({ key: filterKeys.date, data: {momentDate, formatDate} }));
   };
 
   const setInitialDate = () => {

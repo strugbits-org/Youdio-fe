@@ -63,9 +63,12 @@ function RangeSlider({ addDuration }) {
     if (Object.keys(filters.duration).length > 0) {
       const duration = [filters.duration.startTime, filters.duration.endTime];
       setValue(duration);
+    }else{
+      const duration = [0, 90];
+      setValue(duration);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filters.duration]);
   return (
     <Box sx={{ width: 400 }}>
       <DurationSlider

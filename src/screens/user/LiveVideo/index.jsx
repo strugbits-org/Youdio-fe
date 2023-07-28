@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   H2,
   P1,
@@ -28,10 +28,12 @@ import usePostAPI from "src/features/hooks/usePostAPI";
 import { setUser } from "src/features/userSlice";
 import moment from "moment";
 import { externalLinks, path } from "src/helpers/constant";
+import BookingModal from "./BookingModal";
 
 function LiveVideo() {
+  const [open, setOpen] = useState(false)
   const { fetchIdAndVideos, res, loading } = useFetch();
-  const { postData } = usePostAPI();
+  const { postData, postLoading } = usePostAPI();
   const { resetFilters } = useSelector((state) => state.filter);
   const { user, token } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -72,8 +74,8 @@ function LiveVideo() {
   }, [location, token]);
 
   const handleBookNow = () => {
-    if (token && user ) {
-      if (user.subscription.isActive && isUserHaveSessionLimit) {
+    if (token && user && liveSessionId?._id ) {
+      if (user?.subscription?.isActive && isUserHaveSessionLimit) {
         // Hit Book Session API
         const payload = {
           liveSession: liveSessionId._id,
@@ -86,17 +88,27 @@ function LiveVideo() {
           undefined,
           () => navigate("/user/live-booking")
         );
+        return
       }
-      else if(!isUserHaveSessionLimit && user.subscription.isActive){
+      if(!isUserHaveSessionLimit && user?.subscription?.isActive){
         navigate(`/payment?session=${liveSessionId._id}`)
+        return;
       } 
-      else {
-        window.open(externalLinks.subscriptionPlan.url, "_self");
-      }
-    } else {
-      window.open(externalLinks.subscriptionPlan.url, "_self");
     }
   };
+
+  const handleRedirectToPlan = () => {
+    window.open(externalLinks.subscriptionPlan.url, "_self");
+  }
+
+  const handleBookNowModal = () => {
+    if((!token && !user) || (token && !user?.subscription?.isActive)) setOpen(true)
+    else handleBookNow()
+  }
+
+  const handleClose = () => {
+    setOpen(!open)
+  }
 
   const isUserHaveSessionLimit = useMemo(() => {
     if(user && user?.subscription?.isActive && user?.subscription?.plan){
@@ -175,8 +187,8 @@ function LiveVideo() {
               />
               <P2 className="cardP lastP">{liveSession[1].description}</P2>
               <CustomPrimaryButton
-                onClick={handleBookNow}
-                disabled={liveSession[1].bookedByMe}
+                onClick={handleBookNowModal}
+                disabled={liveSession[1].bookedByMe || postLoading}
               >
                 {liveSession[1]?.bookedByMe ? "Booked" : "Book Now"}
               </CustomPrimaryButton>
@@ -207,11 +219,12 @@ function LiveVideo() {
           </LiveLessonBox>
         }
       </Section>
-      {/* <BookingModal
+      <BookingModal
         open={open}
         handleClose={handleClose}
         data={liveSession[1]}
-      /> */}
+        handleBookNow={handleRedirectToPlan}
+      />
     </React.Fragment>
   );
 }

@@ -13,7 +13,6 @@ import {
   InstructorDetail,
   IntensityLevel,
   P1,
-  PrimaryButton,
   PrimaryWhiteButton,
 } from "src/components";
 const { desktop, tablet } = layout;
@@ -111,7 +110,7 @@ const CloseIcon = styled(IconButton)`
   background: var(--textHeadingBlack);
 `;
 
-export default function BookingModal({ open, handleClose, data }) {
+export default function BookingModal({ open, handleClose, data, handleBookNow }) {
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -128,38 +127,47 @@ export default function BookingModal({ open, handleClose, data }) {
     >
       <Fade in={open}>
         <Box>
-          <ImageBox>
-            <img src={data.thumbnail} alt={data.title} width="" height="" />
-            <PrimaryButton className="btnBookNow">Book Now</PrimaryButton>
-          </ImageBox>
+          {data && (
+            <React.Fragment>
+              <ImageBox>
+                <img
+                  src={data?.thumbnail}
+                  alt={data?.title}
+                  width=""
+                  height=""
+                />
+                {/* <PrimaryButton className="btnBookNow">Book Now</PrimaryButton> */}
+              </ImageBox>
 
-          <ContentBox>
-            <div className="titleBox">
-              <H3 fontSize={"clamp(14px, 1.4vw, 20px)"}>{data.date}</H3>
-              <ClockTime
-                time={data.time}
-                fontSize={"clamp(14px, 1.4vw, 20px)"}
-              />
-              <H2>{data.title}</H2>
-            </div>
-            <div className="intensity">
-              <IntensityLevel
-                level={data.intensity}
-                text={"Intensity"}
-                fontSize={"16px"}
-                align="left"
-              />
-            </div>
-            <PrimaryWhiteButton>START MY TRIAL</PrimaryWhiteButton>
-            <P1 className="bookingDetail">{data.description}</P1>
-            <InstructorDetail
-              imageSrc={data.trainer?.image}
-              title={`${data.trainer?.firstName} ${data.trainer?.lastName} Bio`}
-              description={
-                "Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu tempus pellentesque varius volutpat enim eget. Velit sed sed commodo nec vestibulum tellus tincidunt mollis. "
-              }
-            />
-          </ContentBox>
+              <ContentBox>
+                <div className="titleBox">
+                  <H3 fontSize={"clamp(14px, 1.4vw, 20px)"}>{data?.date}</H3>
+                  <ClockTime
+                    time={data?.time}
+                    fontSize={"clamp(14px, 1.4vw, 20px)"}
+                  />
+                  <H2>{data?.title}</H2>
+                </div>
+                <div className="intensity">
+                  <IntensityLevel
+                    level={data?.intensity}
+                    text={"Intensity"}
+                    fontSize={"16px"}
+                    align="left"
+                  />
+                </div>
+                <PrimaryWhiteButton onClick={handleBookNow}>START MY TRIAL</PrimaryWhiteButton>
+                <P1 className="bookingDetail">{data?.description}</P1>
+                <InstructorDetail
+                  imageSrc={data?.trainer?.image}
+                  title={`${data?.trainer?.firstName} ${data?.trainer?.lastName} Bio`}
+                  description={
+                    "Lorem ipsum dolor sit amet consectetur. Odio id cursus arcu tempus pellentesque varius volutpat enim eget. Velit sed sed commodo nec vestibulum tellus tincidunt mollis. "
+                  }
+                />
+              </ContentBox>
+            </React.Fragment>
+          )}
           <CloseIcon onClick={handleClose}>
             <img
               // className="close"

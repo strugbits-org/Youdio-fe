@@ -57,7 +57,7 @@ const Payment = () => {
       fetchData(`/subscriptionPlan/${getId.id}`);
       return;
     }
-    user && fetchData(`/subscriptionPlan/${user.subscription.plan}`);
+    user && fetchData(`/subscriptionPlan/${user.subscription.plan._id}`);
     setPaymentIntent({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);

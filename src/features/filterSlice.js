@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import moment from "moment";
 import { filterKeys } from "src/helpers/constant";
 
 const initialState = {

@@ -72,8 +72,8 @@ function LiveVideo() {
   }, [location, token]);
 
   const handleBookNow = () => {
-    if (token) {
-      if (user.subscription.isActive) {
+    if (token && user ) {
+      if (user.subscription.isActive && isUserHaveSessionLimit) {
         // Hit Book Session API
         const payload = {
           liveSession: liveSessionId._id,
@@ -86,13 +86,30 @@ function LiveVideo() {
           undefined,
           () => navigate("/user/live-booking")
         );
-      } else {
+      }
+      else if(!isUserHaveSessionLimit && user.subscription.isActive){
+        navigate(`/payment?session=${liveSessionId._id}`)
+      } 
+      else {
         window.open(externalLinks.subscriptionPlan.url, "_self");
       }
     } else {
       window.open(externalLinks.subscriptionPlan.url, "_self");
     }
   };
+
+  const isUserHaveSessionLimit = useMemo(() => {
+    const {subscription} = user
+    if(subscription?.isActive && subscription?.plan){
+      const bookedSession = subscription.sessionsTaken
+      const totalSessions = subscription.plan?.liveSessions
+      if(typeof(totalSessions) === 'number' && bookedSession < totalSessions){
+        return true
+      }
+      return false
+    }   
+    return false
+  }, [user])
 
   return (
     <React.Fragment>

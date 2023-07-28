@@ -5,27 +5,29 @@ import { H1, P1, Section, InputIcon } from "src/components";
 import { icons } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
 import { InstructorCards } from "src/components/CardsSection";
+import { useDebounce } from "src/features/hooks/useDebounce";
 
 function Instructors() {
   const [Content] = useState(instructorClassStaticContent);
   const { loading, postData, res } = useFetch();
   const [search, setSearch] = useState("");
+  const debounceSearch = useDebounce(search);
 
   useEffect(() => {
     postData("instructor/get-instructor", { search });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [debounceSearch]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
 
-  const instructors = useMemo(() => { 
-    if (res && res.instructors.length > 0 ) {
+  const instructors = useMemo(() => {
+    if (res && res.instructors.length > 0) {
       return res.instructors;
     }
-    return []
-  }, [res])
+    return [];
+  }, [res]);
 
   return (
     <>
@@ -52,7 +54,11 @@ function Instructors() {
 
       {/* Cards Section */}
       <Section backgroundColor="#fff" paddingBlock="0px 30px">
-        <InstructorCards instructors={instructors} loading={loading} search={search } />
+        <InstructorCards
+          instructors={instructors}
+          loading={loading}
+          search={search}
+        />
       </Section>
     </>
   );

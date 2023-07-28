@@ -13,7 +13,7 @@ import {
   ReviewCards,
   VideoClassesCards,
 } from "src/components/CardsSection";
-import { icons } from "src/helpers";
+import { icons, path } from "src/helpers";
 
 function Instructor() {
   const { id } = useParams();
@@ -79,7 +79,7 @@ function Instructor() {
             <P1 className="p1">{instructorDetail?.description}</P1>
           </>
         )}
-        <HorizontalLine />
+        <HorizontalLine marginBlock="30px"/>
       </TextSec>
 
       {/* <StyledDiv /> */}
@@ -92,8 +92,9 @@ function Instructor() {
           videos={instrutorClasses?.videoClasses}
           loading={getLoading}
           limit={3}
+          handleAll={() => navigate(path.videos)}
         />
-        <HorizontalLine />
+        <HorizontalLine marginBlock="30px"/>
       </Section>
 
       {/* Live Classes */}
@@ -104,9 +105,10 @@ function Instructor() {
           loading={getLoading}
           instructorInfo={instructorDetail}
           limit={4}
+          handleAll={() => navigate(path.liveClasses)}
         />
 
-        <HorizontalLine />
+        <HorizontalLine marginBlock="30px"/>
       </Section>
 
       {/* Review-Card */}

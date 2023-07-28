@@ -29,7 +29,7 @@ import {
   VideoClassesCards,
 } from "src/components/CardsSection";
 import usePostAPI from "src/features/hooks/usePostAPI";
-import { externalLinks } from "src/helpers/constant";
+import { externalLinks, path } from "src/helpers/constant";
 
 const VideoClass = () => {
   const [isPlay, setIsPlay] = useState(false);
@@ -202,6 +202,7 @@ const VideoClass = () => {
               }
               limit={4}
               loading={loading}
+              handleAll={() => navigate(path.videos)}
             />
           </ClassesContainer>
           <HorizontalLine />

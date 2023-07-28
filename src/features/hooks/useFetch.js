@@ -185,7 +185,6 @@ const useFetch = () => {
   // Get Data For Dynamic page and videos
   const fetchIdAndVideos = async (url, cbFunction, payload) => {
     setLoading(true);
-    console.log({ url, cbFunction, payload });
     const headers = await getHeaders(token);
     try {
       if (typeof url === "object" && url.length > 0) {

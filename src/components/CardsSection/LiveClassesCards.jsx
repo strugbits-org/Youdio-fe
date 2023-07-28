@@ -1,12 +1,21 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { layout } from "src/helpers";
-import { LiveClassCard, Loader, NoFoundBox, H3 } from "src/components";
+import {
+  LiveClassCard,
+  Loader,
+  NoFoundBox,
+  H3,
+  PrimaryWhiteButton,
+} from "src/components";
 
 const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 const Container = styled.div`
   min-height: 30vh;
   margin-top: 30px;
+  .btnShowAll{
+    max-width: 320px;
+  }
 `;
 const Box = styled.div`
   display: grid;
@@ -40,6 +49,7 @@ function LiveClassesCards({
   instructorInfo,
   limit,
   minLimit,
+  handleAll
 }) {
   const videoLimit = useMemo(() => {
     if (limit && typeof limit === "number") return limit;
@@ -49,29 +59,38 @@ function LiveClassesCards({
     if (minLimit && typeof minLimit === "number") return minLimit;
     return 0;
   }, [minLimit]);
- 
+
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
       {!loading && classes?.length > isDynamic && videoLimit ? (
-        <Box>
-          {classes
-            .slice(0, videoLimit)
-            .map((val) =>
-              val._id !== currentLiveSessionId ? (
-                <LiveClassCard
-                  key={`card-${val._id}`}
-                  data={val}
-                  handleEdit={handleEdit}
-                  handleDelete={handleDelete}
-                  handleView={handleView}
-                  instructorInfo={instructorInfo}
-                />
-              ) : (
-                ""
-              )
-            )}
-        </Box>
+        <React.Fragment>
+          <Box>
+            {classes
+              .slice(0, videoLimit)
+              .map((val) =>
+                val._id !== currentLiveSessionId ? (
+                  <LiveClassCard
+                    key={`card-${val._id}`}
+                    data={val}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                    handleView={handleView}
+                    instructorInfo={instructorInfo}
+                  />
+                ) : (
+                  ""
+                )
+              )}
+          </Box>
+          {handleAll && (
+            <NoFoundBox>
+              <PrimaryWhiteButton className="btnShowAll" onClick={handleAll}>
+                All Live Sessions
+              </PrimaryWhiteButton>
+            </NoFoundBox>
+          )}
+        </React.Fragment>
       ) : (
         !loading && (
           <NoFoundBox>

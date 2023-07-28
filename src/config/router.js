@@ -70,12 +70,18 @@ const AllRoutes = () => {
     const base = useSelector((state) => state.user);
     let location = useLocation();
 
-
     if (base.token) {
-      return <Navigate to={location.state?.url ? location.state.url : "/"} state={{ from: location }} replace />;
+      return (
+        <Navigate
+          to={location.state?.url ? location.state.url : "/"}
+          state={{ from: location }}
+          replace
+        />
+      );
     }
     return children;
   };
+
   return (
     <Routes>
       {/* Authenticate */}

@@ -1,13 +1,16 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { layout } from "src/helpers";
-import { Loader, NoFoundBox, H3 } from "src/components";
+import { Loader, NoFoundBox, H3, PrimaryWhiteButton } from "src/components";
 import { VideoClassCard } from "../Cards";
 
 const { mobile, mobileMedium, tablet, laptop } = layout;
 const Container = styled.div`
   min-height: 30vh;
   margin-top: 30px;
+  .btnShowAll{
+    max-width: 320px;
+  }
 `;
 const Box = styled.div`
   display: grid;
@@ -39,7 +42,7 @@ function VideoClassesCards({
   currentVideoClassId,
   limit,
   minLimit,
-  
+  handleAll
 }) {
   const videoLimit = useMemo(() => {
     if (limit && typeof limit === "number") return limit;
@@ -56,25 +59,33 @@ function VideoClassesCards({
       {loading && <Loader width="35px" height="35px" />}
 
       {!loading && videos?.length > isDynamic && videoLimit ? (
-        <Box>
-          {videos
-            .slice(0, videoLimit)
-            .map((val) =>
-              val._id !== currentVideoClassId ? (
-                <VideoClassCard
-                  key={`card-${val._id}`}
-                  data={val}
-                  handleDelete={handleDelete}
-                  handleEdit={handleEdit}
-                  handleView={handleView}
-                  isSameInstructor={isSameInstructor}
-           
-                />
-              ) : (
-                ""
-              )
-            )}
-        </Box>
+        <React.Fragment>
+          <Box>
+            {videos
+              .slice(0, videoLimit)
+              .map((val) =>
+                val._id !== currentVideoClassId ? (
+                  <VideoClassCard
+                    key={`card-${val._id}`}
+                    data={val}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                    handleView={handleView}
+                    isSameInstructor={isSameInstructor}
+                  />
+                ) : (
+                  ""
+                )
+              )}
+          </Box>
+          {handleAll && (
+            <NoFoundBox>
+              <PrimaryWhiteButton className="btnShowAll" onClick={handleAll}>
+                All Video Classes
+              </PrimaryWhiteButton>
+            </NoFoundBox>
+          )}
+        </React.Fragment>
       ) : (
         !loading && (
           <NoFoundBox>

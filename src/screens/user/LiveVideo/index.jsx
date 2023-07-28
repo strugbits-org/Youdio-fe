@@ -27,7 +27,7 @@ import { useSelector } from "react-redux";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { setUser } from "src/features/userSlice";
 import moment from "moment";
-import { externalLinks } from "src/helpers/constant";
+import { externalLinks, path } from "src/helpers/constant";
 
 function LiveVideo() {
   const { fetchIdAndVideos, res, loading } = useFetch();
@@ -202,6 +202,7 @@ function LiveVideo() {
               loading={loading}
               currentLiveSessionId={liveSessionId._id}
               minLimit={1}
+              handleAll={() => navigate(path.liveClasses)}
             />
           </LiveLessonBox>
         }

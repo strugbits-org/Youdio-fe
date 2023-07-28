@@ -14,7 +14,9 @@ const Box = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: clamp(270px, 85.5vw, 643px);
-  height: clamp(100px, 20dvh, 100dvh);
+  /* height: clamp(100px, 10%, 100dvh); */
+  min-height: 200px;
+  max-height: 100dvh;
   overflow-y: auto;
   background: #fff;
   overflow-y: auto;

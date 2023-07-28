@@ -70,8 +70,9 @@ const AllRoutes = () => {
     const base = useSelector((state) => state.user);
     let location = useLocation();
 
+
     if (base.token) {
-      return <Navigate to="/" state={{ from: location }} replace />;
+      return <Navigate to={location.state?.url ? location.state.url : "/"} state={{ from: location }} replace />;
     }
     return children;
   };
@@ -109,7 +110,8 @@ const AllRoutes = () => {
       <Route
         path="/payment"
         element={
-          <ProtectedRoute children={<Payment />} permission="user.checkout" />
+          <Payment />
+          // <ProtectedRoute children={} permission="user.checkout" />
         }
       />
 

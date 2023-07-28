@@ -99,10 +99,9 @@ function LiveVideo() {
   };
 
   const isUserHaveSessionLimit = useMemo(() => {
-    const {subscription} = user
-    if(subscription?.isActive && subscription?.plan){
-      const bookedSession = subscription.sessionsTaken
-      const totalSessions = subscription.plan?.liveSessions
+    if(user && user?.subscription?.isActive && user?.subscription?.plan){
+      const bookedSession = user.subscription.sessionsTaken
+      const totalSessions = user.subscription.plan?.liveSessions
       if(typeof(totalSessions) === 'number' && bookedSession < totalSessions){
         return true
       }

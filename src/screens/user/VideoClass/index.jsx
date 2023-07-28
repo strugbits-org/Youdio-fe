@@ -21,7 +21,7 @@ import {
 import { HorizontalLine } from "src/components/BreakLines";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import useFetch from "src/features/hooks/useFetch";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   LiveClassesCards,
@@ -29,6 +29,7 @@ import {
   VideoClassesCards,
 } from "src/components/CardsSection";
 import usePostAPI from "src/features/hooks/usePostAPI";
+import { externalLinks } from "src/helpers/constant";
 
 const VideoClass = () => {
   const [isPlay, setIsPlay] = useState(false);
@@ -138,7 +139,7 @@ const VideoClass = () => {
                       UNLOCK THIS CLASS
                     </H2>
                     <H5 fontSize="clamp(14px, 1.2vw, 18px)">
-                      Start your trial today
+                      <Link to={externalLinks.subscriptionPlan.url}>Start your trial today</Link>
                     </H5>
                   </div>
                 </div>

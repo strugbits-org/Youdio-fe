@@ -27,6 +27,7 @@ import { useSelector } from "react-redux";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { setUser } from "src/features/userSlice";
 import moment from "moment";
+import { externalLinks } from "src/helpers/constant";
 
 function LiveVideo() {
   const { fetchIdAndVideos, res, loading } = useFetch();
@@ -86,10 +87,10 @@ function LiveVideo() {
           () => navigate("/user/live-booking")
         );
       } else {
-        window.open("https://www.google.com", "_self");
+        window.open(externalLinks.subscriptionPlan.url, "_self");
       }
     } else {
-      window.open("https://www.google.com", "_self");
+      window.open(externalLinks.subscriptionPlan.url, "_self");
     }
   };
 

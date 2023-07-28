@@ -98,6 +98,12 @@ export const filterKeys = {
   date: "date",
 };
 
+export const externalLinks = {
+  subscriptionPlan: {
+    url: "https://youdio.strugbits.com/membership/",
+  },
+};
+
 export const timeZones = [
   { value: "-12:00", label: "(GMT -12:00) Eniwetok, Kwajalein" },
   { value: "-11:00", label: "(GMT -11:00) Midway Island, Samoa" },
@@ -145,7 +151,10 @@ export const timeZones = [
   { value: "+06:00", label: "(GMT +6:00) Almaty, Dhaka, Colombo" },
   { value: "+06:30", label: "(GMT +6:30) Yangon, Mandalay" },
   { value: "+07:00", label: "(GMT +7:00) Bangkok, Hanoi, Jakarta" },
-  { value: "+08:00", label: "(GMT +8:00) Beijing, Perth, Singapore, Hong Kong" },
+  {
+    value: "+08:00",
+    label: "(GMT +8:00) Beijing, Perth, Singapore, Hong Kong",
+  },
   { value: "+08:45", label: "(GMT +8:45) Eucla" },
   {
     value: "+09:00",

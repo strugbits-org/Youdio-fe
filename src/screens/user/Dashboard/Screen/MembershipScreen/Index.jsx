@@ -9,6 +9,7 @@ import { Description } from "./MembershipScreenComponent";
 import { useSelector } from "react-redux";
 import useGetAPI from "src/features/hooks/useGetAPI";
 import { Link } from "react-router-dom";
+import { externalLinks } from "src/helpers/constant";
 const Membership = () => {
   const { user } = useSelector((state) => state.user);
   const { getData, getRes, getLoading } = useGetAPI();
@@ -63,15 +64,15 @@ const Membership = () => {
           <React.Fragment>
             <Heading2>No Plan</Heading2>
             <P2 style={{ color: "#999999", paddingBottom: "50px" }}>
-              Currently you have not purchase any plan, click here for more
-              details.{" "}
+              Currently you have not purchase any plan, click here{" "}
               <Link
-                style={{ textDecoration: "underline" }}
-                to={"https://www.google.com"}
+                style={{ textDecoration: "underline", fontWeight: "bold" }}
+                to={externalLinks.subscriptionPlan.url}
                 target="_blank"
               >
                 Subsciption Plans
-              </Link>
+              </Link>{" "}
+              for more details.
             </P2>
           </React.Fragment>
         )

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import moment from "moment";
 import { filterKeys } from "src/helpers/constant";
 
 const initialState = {
@@ -151,13 +152,13 @@ const filterSlice = createSlice({
     // Duration
     filterDate: (state, action) => {
       const { key, data } = action.payload;
-      state.filters.date = data
+      state.filters.date = data.format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
 
       state.filterTags = state.filterTags.filter(
         (tag) => tag.key !== key && tag
       );
       const dateTag = {
-        data,
+        data:data.format("DD/MM/YYYY"),
         key,
       };
       state.filterTags.push(dateTag);

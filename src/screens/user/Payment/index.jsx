@@ -10,9 +10,7 @@ import { Loader } from "src/components";
 import styled from "styled-components";
 import useFetch from "src/features/hooks/useFetch";
 import InfoPupup from "src/components/InfoPopup";
-const stripePromise = loadStripe(
-  "pk_test_51NSIlJCz6A0J32KfawEKMFsfzwVOcuGJSQkJTGcwtbXtYE0jTQFQk628ZlUNP6kApZy8JUlnDYrQPEj1Ksmak1m600VisDRfA7"
-);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY);
 
 const CustomSection = styled(Section)`
   min-height: 50dvh;

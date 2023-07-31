@@ -52,7 +52,6 @@ const VideoClass = () => {
     } else {
       navigate("/page-not-found");
     }
-    console.log(params);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 

@@ -156,7 +156,7 @@ function Header({ isLoggedin }) {
                   {content.logout}
                 </span>
               </li>
-              <li>
+              <li onClick={reset}>
                 <NavLink to={handleDashboard()}>
                   <ProfileImageCircle
                     src={auth?.user?.userImage ? auth.user.userImage : userIcon}

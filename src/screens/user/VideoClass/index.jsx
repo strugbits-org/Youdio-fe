@@ -41,6 +41,7 @@ const VideoClass = () => {
   const videoPlay = useRef();
   useEffect(() => {
     if (params?.id && params?.instructor) {
+      setIsPlay(false)
       fetchIdAndVideos([
         { endpoint: `/video/get-single/${params.id}`, method: "get" },
         {
@@ -51,6 +52,7 @@ const VideoClass = () => {
     } else {
       navigate("/page-not-found");
     }
+    console.log(params);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 

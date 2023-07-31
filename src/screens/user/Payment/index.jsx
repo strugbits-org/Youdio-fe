@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { H4, P3, Section } from "src/components";
+import { H2, P2, Section } from "src/components";
 import { useSelector } from "react-redux";
 import PaymentForm from "./PaymentForm";
 import { loadStripe } from "@stripe/stripe-js";
@@ -15,15 +15,17 @@ const stripePromise = loadStripe(
 );
 
 const CustomSection = styled(Section)`
-  max-width: 540px;
-  margin-inline: auto;
-  min-height: 740px;
-  .plan-details {
-    .plan-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
+  min-height: 50dvh;
+  .container {
+    width: clamp(260px, 100%, 500px);
+    margin-inline: auto;
+    .plan-details {
+      .plan-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
     }
   }
 `;
@@ -45,7 +47,9 @@ const Payment = () => {
     }
 
     if (!token && !user) {
-      navigate("/login", { state: { url: location.pathname.concat(location.search) } });
+      navigate("/login", {
+        state: { url: location.pathname.concat(location.search) },
+      });
       return;
     }
     if (getId?.type === "session" && token && !planDetails) {
@@ -119,41 +123,42 @@ const Payment = () => {
 
   return (
     <CustomSection backgroundColor="#fff">
-      {planDetails && (
-        <div className="plan-details">
-          <div className="plan-info">
-            <div>
-              <H4>{planDetails?.name}</H4>
-              <H4>
-                {`$${planDetails?.price}/`}
-                <span style={{ fontSize: "12px" }}>{planDetails?.type}</span>
-              </H4>
+      <div className="container">
+        {planDetails && (
+          <div className="plan-details">
+            <div className="plan-info">
+              <div>
+                <H2>{planDetails?.name}</H2>
+                <H2>
+                  {`$${planDetails?.price}/`}
+                  <span style={{ fontSize: "18px" }}>{planDetails?.type}</span>
+                </H2>
+              </div>
             </div>
+            {planDetails?.description?.length > 0 && (
+              <P2>{planDetails.description.join(" ")}</P2>
+            )}
           </div>
-          {planDetails?.description?.length > 0 &&
-            planDetails.description.map((desc) => {
-              return <P3>{desc}</P3>;
-            })}
-        </div>
-      )}
-      {paymentIntent && getId && planDetails && (
-        <Elements
-          stripe={stripePromise}
-          options={
-            paymentIntent ? { clientSecret: paymentIntent.clientSecret } : {}
-          }
-        >
-          <PaymentForm user={user} intent={paymentIntent} plan={getId} />
-        </Elements>
-      )}
-      {(paymentIntent || getId) && postLoading && <Loader />}
-      {errorMessage?.status && (
-        <InfoPupup
-          open={errorMessage.status}
-          data={errorMessage.text}
-          handleLink={handleLink}
-        />
-      )}
+        )}
+        {paymentIntent && getId && planDetails && (
+          <Elements
+            stripe={stripePromise}
+            options={
+              paymentIntent ? { clientSecret: paymentIntent.clientSecret } : {}
+            }
+          >
+            <PaymentForm user={user} intent={paymentIntent} plan={getId} />
+          </Elements>
+        )}
+        {(paymentIntent || getId) && postLoading && <Loader />}
+        {errorMessage?.status && (
+          <InfoPupup
+            open={errorMessage.status}
+            data={errorMessage.text}
+            handleLink={handleLink}
+          />
+        )}
+      </div>
     </CustomSection>
   );
 };

@@ -29,6 +29,11 @@ import usePutAPI from "src/features/hooks/usePutAPI";
 import useGetAPI from "src/features/hooks/useGetAPI";
 import moment from "moment";
 
+const getTime = (time) => {
+  const splitTime = time.split(":");
+  return splitTime.map((val) => Number(val));
+};
+
 const initialValues = {
   category: "",
   date: "",
@@ -75,6 +80,10 @@ const AddLiveSession = () => {
   const handleSubmit = (data, action) => {
     const copyData = { ...data };
     copyData.time = `${copyData.start} - ${copyData.end}`;
+    const splitTime = getTime(copyData.start);
+    copyData.date = moment(
+      new Date(copyData.date).setHours(splitTime[0], splitTime[1])
+    ).format();
     delete copyData.start;
     delete copyData.end;
     const formData = new FormData();

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { P3, H2, Error } from "src/components";
+import { P3, Error, H3 } from "src/components";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import {
   Buttons,
@@ -13,7 +13,8 @@ import { useNavigate } from "react-router-dom";
 
 
 const Form = styled.form`
-  h2{
+margin-top: 24px;
+  h3{
     margin-block: 16px;
     text-align: center;
   }
@@ -68,7 +69,7 @@ function PaymentForm({ user, intent, plan }) {
 
   return (
     <Form>
-      <H2>Enter Payment Details</H2>
+      <H3>Enter Payment Details</H3>
       <FormRow>
         <DisbaleEmailBox>
           <P3>Email</P3>

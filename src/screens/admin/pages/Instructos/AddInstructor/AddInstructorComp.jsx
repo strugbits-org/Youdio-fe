@@ -28,7 +28,6 @@ export const FormRow = styled.div`
   margin-bottom: 18px;
   display: grid;
   gap: 18px;
-  grid-template-columns: 1fr 1fr;
 
   &[data-type="textarea"] {
     grid-template-columns: 1fr;
@@ -70,7 +69,7 @@ export const FormRow = styled.div`
     grid-template-columns: 1fr;
   }
   @media only screen and (min-width: ${layout.tablet}) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: ${({extend}) => extend ? "1fr" : "1fr 1fr"};
   }
 `;
 
@@ -85,6 +84,7 @@ export const BrowseFile = styled.div`
   height: clamp(250px, 20vw, 400px);
   position: relative;
   text-align: center;
+  aspect-ratio: 0.83/1;
   .imageBox {
     border: 1px dashed #e6e6e6;
     border-bottom: 0px;

@@ -84,6 +84,7 @@ export const BrowseFile = styled.div`
   height: clamp(250px, 20vw, 400px);
   position: relative;
   text-align: center;
+  aspect-ratio: 0.83/1;
   .imageBox {
     border: 1px dashed #e6e6e6;
     border-bottom: 0px;

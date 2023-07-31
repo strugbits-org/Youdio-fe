@@ -239,7 +239,7 @@ const AddInstructor = () => {
                   />
                 </FormRow>
 
-                <FormRow>
+                <FormRow extend={ width >= 1468 && true}>
                   <FieldInput
                     label="Background Cover Image"
                     id="bannerImage"

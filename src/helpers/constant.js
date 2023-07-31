@@ -60,10 +60,10 @@ export const userDashboardMenu = [
     name: "Membership",
     path: "/user/membership",
   },
-  {
-    name: "Payment",
-    path: "/user/payment",
-  },
+  // {
+  //   name: "Payment",
+  //   path: "/user/payment",
+  // },
   {
     name: "History",
     path: "/user/history",

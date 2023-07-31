@@ -1,9 +1,11 @@
+import React from "react";
 import styled from "styled-components";
 import { H6, P3 } from "src/components";
 import { useSelector } from "react-redux";
 import { filterKeys } from "src/helpers/constant";
 import { MobileFilterButton, MobileFilterHeader } from "./filtersComponents";
 import { useMemo, useState } from "react";
+import { HorizontalLine } from "../BreakLines";
 
 const StylesBox = styled.div`
   padding-inline: 8px;
@@ -83,31 +85,36 @@ export default function Styles({ addTag, removeTag }) {
       {isVisible && (
         <ul className="styles">
           {styles?.length > 0 &&
-            styles.map(({ _id, category, name }) => {
+            styles.map(({ _id, category, name }, index) => {
               return (
-                <li key={_id}>
-                  <H6 className={""} style={{ cursor: "default" }}>
-                    {category}
-                  </H6>
-                  <ul>
-                    {name.length > 0 &&
-                      name.map((val, ind) => {
-                        return (
-                          <li
-                            key={`sub-design-${ind}`}
-                            className={
-                              filters.styles[camelCase(category)].includes(val)
-                                ? "active"
-                                : ""
-                            }
-                            onClick={() => setSpecific(val, category)}
-                          >
-                            <P3>{val}</P3>
-                          </li>
-                        );
-                      })}
-                  </ul>
-                </li>
+                <React.Fragment>
+                  <li key={_id}>
+                    <H6 className={""} style={{ cursor: "default" }}>
+                      {category}
+                    </H6>
+                    <ul>
+                      {name.length > 0 &&
+                        name.map((val, ind) => {
+                          return (
+                            <li
+                              key={`sub-design-${ind}`}
+                              className={
+                                filters.styles[camelCase(category)].includes(
+                                  val
+                                )
+                                  ? "active"
+                                  : ""
+                              }
+                              onClick={() => setSpecific(val, category)}
+                            >
+                              <P3>{val}</P3>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  </li>
+                  {index !== styles.length-1 && <HorizontalLine />}
+                </React.Fragment>
               );
             })}
         </ul>

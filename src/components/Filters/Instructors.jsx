@@ -26,6 +26,10 @@ const InstructorsBox = styled.div`
       gap: 10px 6vw;
     }
   }
+
+  h4 {
+    text-transform: uppercase;
+  }
 `;
 export default function Instructors({ removeTag, addTag }) {
   const { instructors, filters } = useSelector((state) => state.filter);

@@ -8,7 +8,9 @@ const { mobile, tablet } = layout;
 
 export const Instructor = styled.li`
   h4 {
-    font-weight: ${({ selected }) => (selected ? 700 : 400)};
+    font-weight: ${({ selected }) => (selected ? 500 : 400)};
+    color: ${({ selected }) =>
+      selected ? "initial" : "var(--backgroundBrown)"};
   }
   cursor: pointer;
 `;

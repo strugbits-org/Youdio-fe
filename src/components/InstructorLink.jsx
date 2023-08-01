@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { H4} from "src/components/Typography"
+import React from "react";
+import styled from "styled-components";
+import { H4 } from "src/components/Typography";
 
 const Container = styled.div`
   display: flex;
@@ -9,13 +9,24 @@ const Container = styled.div`
   /* img{
         border-radius: 100%;
     } */
+  cursor: ${({ isClickable }) => (isClickable ? "pointer" : "initial")};
   h4 {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : "initial")};
   }
 `;
-const InstructorLink = ({ imageSrc, title, link, imgWidth, fontSize }) => {
+const InstructorLink = ({
+  imageSrc,
+  title,
+  handleNavigate,
+  imgWidth,
+  fontSize,
+}) => {
   return (
-    <Container fontSize={fontSize}>
+    <Container
+      fontSize={fontSize}
+      isClickable={handleNavigate && true}
+      onClick={handleNavigate && handleNavigate}
+    >
       <img
         src={imageSrc}
         alt={title}
@@ -27,4 +38,4 @@ const InstructorLink = ({ imageSrc, title, link, imgWidth, fontSize }) => {
   );
 };
 
-export default InstructorLink
+export default InstructorLink;

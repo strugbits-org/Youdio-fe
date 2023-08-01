@@ -7,6 +7,9 @@ const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 
 export const ContentBox = styled.div`
   max-width: 632px;
+  & > p{
+    text-transform: capitalize;
+  }
 `;
 
 export const MonthBox = styled.div`

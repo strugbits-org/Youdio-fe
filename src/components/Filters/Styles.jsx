@@ -16,6 +16,12 @@ const StylesBox = styled.div`
     h6 {
       margin-bottom: 24px;
       cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.15ch;
+    }
+    p{
+      text-transform: uppercase;
+      letter-spacing: 0.15ch;
     }
     li {
       cursor: pointer;

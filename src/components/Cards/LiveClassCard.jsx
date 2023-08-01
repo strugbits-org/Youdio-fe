@@ -38,6 +38,7 @@ export const CardContent = styled.div`
   h3 {
     text-align: left;
     margin-block: 6px 12px;
+    cursor: pointer;
   }
   .profileRow {
     display: flex;
@@ -158,7 +159,7 @@ function LiveClassCard({
           <H4>{data.time}</H4>
           <ClockTime time={`${data.totalTime} min`} fontSize={"13px"} />
         </div>
-        <H3>{data.title}</H3>
+        <H3 onClick={handleNavigate}>{data.title}</H3>
         <div className="profileRow">
           {instructorInfo ? (
             <InstructorLink
@@ -169,11 +170,14 @@ function LiveClassCard({
             <InstructorLink
               imageSrc={data.trainer.image}
               title={`${data.trainer.firstName} ${data.trainer.lastName}`}
+              handleNavigate={() =>
+                navigate(`/singleinstructor/${data.trainer._id}`)
+              }
             />
           )}
 
           <div className="intensityBox">
-            <IntensityLevel level={intensityLevel} />
+            <IntensityLevel level={intensityLevel} text={"Intensity"} />
           </div>
         </div>
         <P3 className="detail">

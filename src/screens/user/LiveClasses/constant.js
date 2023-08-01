@@ -41,7 +41,10 @@ const getFormated = (date) => {
   const m = date.getMonth();
   const wd = weekDays[date.getDay()].slice(0, 3);
   const dateObject = {
-    dateString: `${m + 1}/${d} (${wd})`,
+    dateString: {
+      date: `${m + 1}/${d}`,
+      weekDay: `(${wd})`,
+    },
     d,
     m,
   };

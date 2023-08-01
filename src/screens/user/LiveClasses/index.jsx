@@ -170,7 +170,7 @@ function LiveClasses() {
                       key={`weekday-${ind}`}
                       onClick={(e) => selectDate(e, val, ind)}
                     >
-                      {val.dateString}
+                      {val.dateString.date} <small>{val.dateString.weekDay}</small>
                     </PrimaryWhiteButton>
                   </li>
                 );

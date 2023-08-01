@@ -21,7 +21,7 @@ import Intensity from "./Intensity";
 import Styles from "./Styles";
 import { useDispatch, useSelector } from "react-redux";
 
-const CustomDrawe = styled(Drawer)({
+const CustomDrawer = styled(Drawer)({
   marginTop: "16px",
   color: "var(--textHeadingWhite)",
   "& .MuiDrawer-paper": {
@@ -89,13 +89,13 @@ export default function MobileFilters({ open, setOpen, onClose }) {
 
   return (
     <React.Fragment>
-      <CustomDrawe
+      <CustomDrawer
         anchor="top"
         open={open}
         onClose={() => console.log("closed")}
       >
         {list()}
-      </CustomDrawe>
+      </CustomDrawer>
     </React.Fragment>
   );
 }

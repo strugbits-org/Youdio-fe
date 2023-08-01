@@ -37,11 +37,11 @@ const VideoClass = () => {
   const navigate = useNavigate();
   const { token, user } = useSelector((state) => state.user);
   const { fetchIdAndVideos, res, loading } = useFetch();
-  const { postData } = usePostAPI()
+  const { postData } = usePostAPI();
   const videoPlay = useRef();
   useEffect(() => {
     if (params?.id && params?.instructor) {
-      setIsPlay(false)
+      setIsPlay(false);
       fetchIdAndVideos([
         { endpoint: `/video/get-single/${params.id}`, method: "get" },
         {
@@ -63,10 +63,10 @@ const VideoClass = () => {
   }, [res]);
 
   const handlePlayButton = () => {
-    if (token && token !== null && isPlanActive && !isPlay ) {
-      setIsPlay(true)
+    if (token && token !== null && isPlanActive && !isPlay) {
+      setIsPlay(true);
       videoPlay.current.play();
-      params?.id && postData("/watchHistory/create", {video:params.id});
+      params?.id && postData("/watchHistory/create", { video: params.id });
     }
   };
 
@@ -99,11 +99,11 @@ const VideoClass = () => {
   }, [res]);
 
   const isPlanActive = useMemo(() => {
-    if(user?.subscription?.isActive){
-      return true
+    if (user?.subscription?.isActive) {
+      return true;
     }
-    return false
-  }, [user])
+    return false;
+  }, [user]);
 
   return (
     <CustomSection backgroundColor="#fff">
@@ -140,7 +140,9 @@ const VideoClass = () => {
                       UNLOCK THIS CLASS
                     </H2>
                     <H5 fontSize="clamp(14px, 1.2vw, 18px)">
-                      <Link to={externalLinks.subscriptionPlan.url}>Start your trial today</Link>
+                      <Link to={externalLinks.subscriptionPlan.url}>
+                        Start your trial today
+                      </Link>
                     </H5>
                   </div>
                 </div>
@@ -159,7 +161,11 @@ const VideoClass = () => {
 
               <div className="totalRunTime">
                 <H5>TOTAL RUN TIME</H5>
-                <ClockTime time={`${video?.totalTime} min`} fontSize={"18px"} />
+                <ClockTime
+                  time={`${video?.totalTime} min`}
+                  fontSize={"18px"}
+                  fontColor={"var(--backgroundGrey)"}
+                />
                 <div className="intensity">
                   <IntensityLevel
                     text="Intensitiy"
@@ -196,7 +202,7 @@ const VideoClass = () => {
           <HorizontalLine />
 
           <ClassesContainer>
-            <H2>{`${instructor?.instructor?.fullName} Live Lessons`}</H2>
+            <H2>{`Live Lessons`}</H2>
             <LiveClassesCards
               classes={
                 instructor?.sessions?.length > 0 ? instructor?.sessions : []
@@ -209,7 +215,7 @@ const VideoClass = () => {
           <HorizontalLine />
 
           <Reviews>
-            <H2>Instructor Review</H2>
+            <H2>Instructor Reviews</H2>
             <ReviewCards
               limit={0}
               loading={loading}

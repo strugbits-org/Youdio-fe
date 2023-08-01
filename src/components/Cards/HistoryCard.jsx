@@ -66,6 +66,9 @@ const CardContent = styled.div`
       align-items: center;
       gap: 8px;
     }
+    h3{
+      text-transform: uppercase;
+    }
   }
 
   .intensityRow {

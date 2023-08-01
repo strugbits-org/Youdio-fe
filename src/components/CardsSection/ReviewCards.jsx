@@ -11,6 +11,9 @@ const Container = styled.div`
   margin-top: 30px;
   .btnBox {
     text-align: center;
+    button {
+      text-transform: uppercase;
+    }
   }
 `;
 const Box = styled.div`

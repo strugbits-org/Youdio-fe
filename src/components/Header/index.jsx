@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { staticContent } from "./constant";
 import {
@@ -27,6 +27,7 @@ function Header({ isLoggedin }) {
   const [menu, setMenu] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const auth = useSelector((state) => state.user);
   const language = useSelector((state) => state.language.lang);
 
@@ -47,6 +48,7 @@ function Header({ isLoggedin }) {
 
   const btnLogout = () => {
     dispatch(logout());
+    navigate("/login", { replace: true });
   };
 
   const handleDashboard = () => {

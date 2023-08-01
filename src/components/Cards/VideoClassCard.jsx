@@ -152,7 +152,11 @@ function VideoClassCard({
       <CardContent>
         <div className="timeRow">
           <H3>{data.title}</H3>
-          <ClockTime time={`${data.totalTime} min`} />
+          <ClockTime
+            time={`${data.totalTime} min`}
+            fontSize={"14px"}
+            fontColor={"var(--backgroundGrey)"}
+          />
         </div>
         <div className="profileRow">
           {!isSameInstructor && (

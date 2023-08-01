@@ -58,7 +58,7 @@ export const adminDashboardMenu = [
 
 export const userDashboardMenu = [
   {
-    name: "My Profile",
+    name: "Profile",
     path: "/user/profile",
   },
   {

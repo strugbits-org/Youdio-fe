@@ -96,7 +96,7 @@ function Dashboard({ menu }) {
             <DashboardCustomizeIcon />
           </IconButton>
         )}
-        <H1>{user && user.role === "admin" ? "Admin" : "My Profile"}</H1>
+        <H1>{user && user.role === "admin" ? "Admin" : "Profile"}</H1>
       </DashboardHeader>
       <HorizontalLine />
       <Container>

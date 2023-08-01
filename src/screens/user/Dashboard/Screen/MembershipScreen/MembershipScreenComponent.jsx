@@ -25,11 +25,15 @@ export const Description = styled.div`
     min-width: 180px;
     h3{
       text-transform: capitalize;
+      span{
+        font-weight: 500;
+      }
     }
   }
   .lorem_text {
     min-width: 100px;
     max-width: 650px;
+    color: var(--textParaBlackLight);
   }
 `;
 

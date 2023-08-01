@@ -110,7 +110,7 @@ const PaymentDetail = () => {
             <H4>Monthly</H4>
             <H4>
               20$/
-              <span style={{ fontSize: "12px" }}>month</span>
+              <span style={{ fontSize: "12px", fontWeight: "500" }}>month</span>
             </H4>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import {
   FieldPassword,
@@ -58,6 +58,7 @@ function Login() {
   const { loading, postData } = useFetch()
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(loginContent);
+  const {state} = useLocation()
   // const navigate = useNavigate()
 
   useEffect(() => {
@@ -129,7 +130,7 @@ function Login() {
                 <FormRow>
                   <P1>
                     {content.dontHave}{" "}
-                    <NavLink className="txtSignUp" to={path.register}>
+                    <NavLink className="txtSignUp" to={path.register} state={state}>
                       {content.signUp}
                     </NavLink>
                   </P1>

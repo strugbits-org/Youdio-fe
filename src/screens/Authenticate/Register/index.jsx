@@ -47,7 +47,7 @@ const CustomP2 = styled(P2)`
 `;
 
 function Register() {
-  const { loading, postData } = useFetch()
+  const { loading, postData } = useFetch();
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(regsiterContent);
 
@@ -128,7 +128,9 @@ function Register() {
                 <FormRow>
                   <P1>
                     {content.ifYouHave}{" "}
-                    <NavLink className="txtSignIn" to={path.signIn}>{content.signIn}</NavLink>
+                    <NavLink className="txtSignIn" to={path.signIn}>
+                      {content.signIn}
+                    </NavLink>
                   </P1>
                 </FormRow>
               </Form>

@@ -77,7 +77,7 @@ const Payment = () => {
 
     setPaymentIntent({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [searchParams, user, token]);
 
   const getId = useMemo(() => {
     const planId = searchParams.get("plan");

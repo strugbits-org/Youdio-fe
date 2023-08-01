@@ -23,7 +23,8 @@ import useFetch from "src/features/hooks/useFetch";
 
 const Container = styled.div`
   background: #fff;
-  height: 100vh;
+  margin-block: 24px;
+  min-height: 60dvh;
   display: grid;
   place-content: center;
   padding-inline: 5vw;
@@ -88,7 +89,7 @@ function Login() {
               <Form autoComplete="off">
                 {" "}
                 {/*Formik Form Import from Formik*/}
-                <H1>{content.signIn}</H1>
+                <H1>Sign In</H1>
                 <CustomP2>{content.signInLine}</CustomP2>
                 <FormRow>
                   <FieldInput
@@ -121,7 +122,7 @@ function Login() {
                 <FormRow>{/* <P2>Message</P2> */}</FormRow>
                 <FormRow>
                   <PrimaryButton type="submit" disabled={loading}>
-                    {content.btnLogin}
+                    Log in
                   </PrimaryButton>
                   <P2 className="txtForgotPassword">
                     <NavLink to={path.forgotPassword}>{content.forgot}</NavLink>

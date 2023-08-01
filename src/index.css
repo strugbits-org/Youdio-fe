@@ -92,6 +92,26 @@ a:link, a:visited, a:hover, a:active {
   font-family: InterBold;
   src: url(./assets/fonts/Inter-Bold.ttf);
 }
+@font-face {
+  font-family: HindiLight;
+  src: url(./assets/fonts/HindMadurai-Light.ttf);
+}
+@font-face {
+  font-family: HindiRegular;
+  src: url(./assets/fonts/HindMadurai-Regular.ttf);
+}
+@font-face {
+  font-family: HindiMedium;
+  src: url(./assets/fonts/HindMadurai-Medium.ttf);
+}
+@font-face {
+  font-family: HindiSemiBold;
+  src: url(./assets/fonts/HindMadurai-SemiBold.ttf);
+}
+@font-face {
+  font-family: HindiBold;
+  src: url(./assets/fonts/HindMadurai-Bold.ttf);
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -6,6 +6,11 @@ export const fonts = {
   comfortaaRegular: "ComfortaaRegular",
   comfortaaBold: "ComfortaaBold",
   interBold: "InterBold",
+  hindiLight: "HindiLight",
+  hindiRegular: "HindiRegular",
+  hindiMedium: "HindiMedium",
+  hindiSemiBold: "HindiSemiBold",
+  hindiBold: "HindiBold",
 };
 
 export const path = {

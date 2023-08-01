@@ -85,13 +85,13 @@ function ForgotPassword() {
             <div>
               <Form autoComplete="off">
                 {/*Formik Form Import from Formik*/}
-                <H1>Forgot Password</H1>
+                <H1>Reset Password</H1>
                 <CustomP2>
                   Lorem ipsum dolor sit amet tortor ut nulla amet dui.
                 </CustomP2>
                 <FormRow>
                   <FieldInput
-                    label="Email"
+                    label="E-mail"
                     id="forgotEmail"
                     autofill
                     name="email"

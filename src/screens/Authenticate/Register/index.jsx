@@ -21,7 +21,7 @@ import useFetch from "src/features/hooks/useFetch";
 
 const Container = styled.div`
   background: #fff;
-  height: 100vh;
+  margin-block: 24px;
   display: grid;
   place-content: center;
   padding-inline: 5vw;
@@ -80,7 +80,7 @@ function Register() {
               <Form autoComplete="off">
                 {" "}
                 {/*Formik Form Import from Formik*/}
-                <H1>{content.signUp}</H1>
+                <H1>Sign Up</H1>
                 <CustomP2>{content.signUpLine}</CustomP2>
                 <FormRow>
                   <FieldInput

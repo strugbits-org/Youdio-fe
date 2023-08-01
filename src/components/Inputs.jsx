@@ -1,29 +1,30 @@
 import styled from "styled-components";
 import { fonts } from "src/helpers";
 
-const { poppinsRegular } = fonts;
+const { hindiRegular, poppinsRegular } = fonts;
 
 export const Input = styled.input`
   width: 100%;
-  height: 45px;
+  min-height: 45px;
   color: var(--backgroundGrey);
   border-radius: 7px;
   outline: none;
   font-size: 0.8em;
   padding-inline: 16px;
-  font-family: ${poppinsRegular};
+  padding-block: 16px;
+  font-family: ${hindiRegular};
   border: ${(props) =>
     props.err ? "1px solid red" : "1px solid var(--textParaBlack25)"};
- 
- &:hover {
+
+  &:hover {
     border-color: ${(props) => (props.err ? "red" : "var(--backgroundGreen)")};
   }
- 
+
   &:focus {
     border-color: ${(props) => (props.err ? "red" : "var(--backgroundGreen)")};
     border-width: 2px;
   }
- 
+
   &::placeholder {
     color: var(--textParaBlack25);
   }
@@ -42,7 +43,7 @@ export const InputIcon = styled.input`
   font-size: 16px;
   padding-left: 16px;
   padding-right: 48px;
-  font-family: ${poppinsRegular};
+  font-family: ${hindiRegular};
   border: 1px solid var(--backgroundGrey);
   &:hover,
   &:focus {
@@ -60,5 +61,6 @@ export const Error = styled.div`
 `;
 
 export const Label = styled.label`
+  font-size: clamp(17px, 1vw, 19px) ;
   font-family: ${poppinsRegular};
 `;

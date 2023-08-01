@@ -17,7 +17,7 @@ const FooterContent = styled.div`
 const UpperBox = styled.div`
     padding-block: 5vw;
     display: grid;
-    min-height: 400px;
+    min-height: 320px;
     gap: 2.5vw;
 
 
@@ -120,7 +120,7 @@ const BottomBox= styled.div`
     align-items: center;
     gap: 10px;
     color: white;
-    padding-block: 20px;
+    padding-block: 20px 0px;
     .regular{
         font-family: ${fonts.poppinsRegular};
     }

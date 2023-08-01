@@ -13,14 +13,16 @@ function Header() {
         <FooterContent>
           <UpperBox>
             <div className="logoBox">
-              <img src={icons.footerLogo} alt="" width={""} height={""} />
+              <NavLink to={"/"}>
+                <img src={icons.footerLogo} alt="" width={""} height={""} />
+              </NavLink>
               <P2>
                 Imagining professional yoga lessons without the hassle of
                 travelling has now become easier.
               </P2>
             </div>
             <div className="quickLinks">
-              <H4>QUICK LINKS</H4>
+              <H4>Quick Links</H4>
               <ul>
                 <li>
                   <NavLink to={path.home}>Home</NavLink>
@@ -37,7 +39,7 @@ function Header() {
               </ul>
             </div>
             <div className="quickLinks">
-              <H4>QUICK LINKS</H4>
+              <H4>Quick Links</H4>
               <ul>
                 <li>
                   <NavLink to={"https://youdio.strugbits.com/blogs/"}>

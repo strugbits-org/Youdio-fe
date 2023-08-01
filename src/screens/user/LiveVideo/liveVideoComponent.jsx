@@ -105,6 +105,9 @@ export const ContentBox = styled.div`
         display: flex;
         align-items: center;
         gap: 12px;
+        p{
+          color: var(--backgroundGrey);
+        }
       }
     }
   }
@@ -151,6 +154,7 @@ export const ContentBox = styled.div`
 export const CustomPrimaryButton = styled(SimplePrimaryButton)`
   border-radius: 0px;
   max-width: 196px;
+  text-transform: uppercase;
   @media only screen and (min-width: ${tablet}) {
     max-width: 296px;
   }

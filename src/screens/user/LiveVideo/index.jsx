@@ -156,6 +156,8 @@ function LiveVideo() {
                   <ClockTime
                     time={`${liveSession[1].totalTime} min`}
                     align={"left"}
+                    fontSize={"clamp(12px, .7vw, 14px)"}
+                    fontColor={"var(--backgroundGrey)"}
                   />
                 </div>
                 <div className="date detail">
@@ -178,12 +180,16 @@ function LiveVideo() {
                   <IntensityLevel
                     level={liveSession[1].intensity}
                     align={"left"}
+                    text={"Intensity"}
+                    fontSize={"clamp(12px, .7vw, 14px)"}
+                    fontColor={"var(--backgroundGrey)"}
                   />
                 </div>
               </div>
               <InstructorLink
                 imageSrc={liveSession[1].trainer?.image}
                 title={`${liveSession[1].trainer?.firstName} ${liveSession[1].trainer?.lastName}`}
+                fontColor="var(--backgroundGrey)"
               />
               <P2 className="cardP lastP">{liveSession[1].description}</P2>
               <CustomPrimaryButton

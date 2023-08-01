@@ -15,6 +15,7 @@ import {
   P1,
   PrimaryWhiteButton,
 } from "src/components";
+import moment from "moment";
 const { desktop, tablet } = layout;
 
 const Box = styled.div`
@@ -141,7 +142,9 @@ export default function BookingModal({ open, handleClose, data, handleBookNow })
 
               <ContentBox>
                 <div className="titleBox">
-                  <H3 fontSize={"clamp(14px, 1.4vw, 20px)"}>{data?.date}</H3>
+                  <H3 fontSize={"clamp(14px, 1.4vw, 20px)"}>
+                    {moment(data?.date).format("YYYY/MM/DD")}
+                  </H3>
                   <ClockTime
                     time={data?.time}
                     fontSize={"clamp(14px, 1.4vw, 20px)"}
@@ -156,7 +159,9 @@ export default function BookingModal({ open, handleClose, data, handleBookNow })
                     align="left"
                   />
                 </div>
-                <PrimaryWhiteButton onClick={handleBookNow}>START MY TRIAL</PrimaryWhiteButton>
+                <PrimaryWhiteButton onClick={handleBookNow}>
+                  START MY TRIAL
+                </PrimaryWhiteButton>
                 <P1 className="bookingDetail">{data?.description}</P1>
                 <InstructorDetail
                   imageSrc={data?.trainer?.image}

@@ -12,6 +12,7 @@ const Container = styled.div`
   cursor: ${({ isClickable }) => (isClickable ? "pointer" : "initial")};
   h4 {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : "initial")};
+    color: ${({ fontColor }) => (fontColor ? fontColor : "initial")};
   }
 `;
 const InstructorLink = ({
@@ -20,10 +21,12 @@ const InstructorLink = ({
   handleNavigate,
   imgWidth,
   fontSize,
+  fontColor,
 }) => {
   return (
     <Container
       fontSize={fontSize}
+      fontColor={fontColor}
       isClickable={handleNavigate && true}
       onClick={handleNavigate && handleNavigate}
     >

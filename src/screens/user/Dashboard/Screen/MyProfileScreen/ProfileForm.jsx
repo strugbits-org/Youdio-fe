@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Formik, Form } from "formik";
 
 import { FieldInput, FieldPassword, Label } from "src/components";
@@ -18,9 +18,12 @@ import { toast, ToastContainer } from "react-toastify";
 import { Heading2 } from "src/screens/user/Dashboard/Components/Heading";
 import { H5 } from "src/components";
 import userIcon from "src/assets/icons/user.png";
+import { useImagePreview } from "src/features/hooks/useImagePreview";
 
 function ProfileForm({ user }) {
   const { loading, error, success, patchData } = useFetch();
+  const [isUploading, setIsUploading] = useState("")
+  const imagePreview = useImagePreview(isUploading)
   const formikRef = useRef();
   useEffect(() => {
     error &&
@@ -47,25 +50,31 @@ function ProfileForm({ user }) {
     formik.setFieldValue("newPassword", "");
   };
 
+  const profileSrc = useMemo(() => {
+    if (imagePreview) {
+      return imagePreview;
+    }
+    if (user?.userImage) {
+      return user.userImage;
+    }
+    return userIcon;
+  }, [user, imagePreview]);
 
   return (
     <React.Fragment>
       <ProfileFormHeader>
         <div className="image-container">
-          <img
-            className="profile-img"
-            src={user?.userImage ? user.userImage : userIcon}
-            alt="profile-pic"
-          />
+          <img className="profile-img" src={profileSrc} alt="profile-pic" />
           <input
             id="userImage"
             name="userImage"
             type="file"
             className="userImage"
             accept="image/*"
-            onChange={(e) =>
-              formikRef.current.setFieldValue("userImage", e.target.files[0])
-            }
+            onChange={(e) => {
+              setIsUploading(e.target.files[0]);
+              formikRef.current.setFieldValue("userImage", e.target.files[0]);
+            }}
           />
         </div>
         <div>
@@ -83,6 +92,7 @@ function ProfileForm({ user }) {
           oldPassword: "",
           newPassword: "",
         }}
+        enableReinitialize={true}
         validationSchema={userFormValidate}
         onSubmit={handleSubmit}
         innerRef={formikRef}

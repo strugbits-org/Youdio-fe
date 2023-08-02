@@ -21,8 +21,8 @@ const TEXTAREA = styled.textarea`
   outline: none;
   resize: none;
   font-size: 0.8em;
-  padding-inline: 5px;
-  padding-block: 5px;
+  padding-inline: 16px;
+  padding-block: 16px;
   font-family: ${poppinsRegular};
   border: ${(props) =>
     props.err ? "1px solid red" : "1px solid var(--textParaBlack25)"};

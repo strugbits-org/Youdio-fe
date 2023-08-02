@@ -439,7 +439,7 @@ const AddLiveSession = () => {
                 </FormRow>
                 <ButtonGroup>
                   {!isEditable && (
-                    <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
+                    <ButtonOne onClick={handleCancel}>RESET</ButtonOne>
                   )}
                   <ButtonTwo type="submit" disabled={dynamicLoading}>
                     SAVE

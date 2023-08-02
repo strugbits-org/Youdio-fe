@@ -214,7 +214,7 @@ const AddReview = () => {
                 <FormRow>
                   {width < 1468 && (
                     <FieldInput
-                      label="Profile Picture"
+                      label="Customer Image"
                       id="customerImage"
                       name="customerImage"
                       type="file"

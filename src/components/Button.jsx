@@ -93,6 +93,7 @@ export const PrimaryWhiteButton = styled.button`
   background: var(--backgroundLightGrey);
   cursor: pointer;
   transition: var(--transition03s);
+  font-size: 16px;
 
   &:hover {
     transition: var(--transition03s);

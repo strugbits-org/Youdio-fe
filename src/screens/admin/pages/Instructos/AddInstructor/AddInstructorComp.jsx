@@ -130,7 +130,8 @@ export const ButtonOne = styled(PrimaryWhiteButton)`
   max-width: 200px;
   min-width: 100px;
   border: 1px solid #e6e7e9;
-`;
+  font-size: 16px;
+  `;
 
 export const ButtonTwo = styled(PrimaryButton)`
   color: black;
@@ -139,4 +140,8 @@ export const ButtonTwo = styled(PrimaryButton)`
   border: 1px solid #ffe7da;
   background-color: #ffe7da;
   border-radius: 0px;
+  font-size: 16px;
+  &:hover{
+    background-color: #ffdcc9;
+  }
 `;

@@ -138,7 +138,7 @@ const AddInstructor = () => {
   return (
     <React.Fragment>
       <Container>
-        <H2>{isEditable ? "Edit Instructor" : "Add Instructor"}</H2>
+        <H2>{isEditable ? "Edit Instructor" : "Add New Instructor"}</H2>
         <Formik
           initialValues={intructorDetail}
           validationSchema={addInstructorValidateForm(isEditable)}
@@ -297,7 +297,7 @@ const AddInstructor = () => {
                 </FormRow>
                 <ButtonGroup>
                   {!isEditable && (
-                    <ButtonOne onClick={handleCancel}>CANCEL</ButtonOne>
+                    <ButtonOne onClick={handleCancel}>RESET</ButtonOne>
                   )}
                   <ButtonTwo type="submit" disabled={dynamicLoading}>
                     SAVE

@@ -9,6 +9,8 @@ const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
 const Container = styled.div`
   min-height: 30vh;
   margin-top: 30px;
+  max-width: 1000px;
+  margin-inline: auto;
   .btnBox {
     text-align: center;
     button {
@@ -17,7 +19,7 @@ const Container = styled.div`
   }
 `;
 const Box = styled.div`
-  padding-inline: 11.5vw;
+  /* padding-inline: 11.5vw; */
   display: grid;
   gap: 7vw 5.8vw;
   position: relative;

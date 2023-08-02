@@ -9,7 +9,7 @@ import {
   PrimaryWhiteButton,
 } from "src/components";
 
-const { mobile, mobileMedium, tablet, laptop, desktop } = layout;
+const { mobile, mobileLarge, tablet, laptop, desktop } = layout;
 const Container = styled.div`
   min-height: 30vh;
   margin-top: 30px;
@@ -26,7 +26,7 @@ const Box = styled.div`
     grid-template-columns: 1fr;
     margin-block: 6vw;
   }
-  @media only screen and (min-width: ${mobileMedium}) {
+  @media only screen and (min-width: ${mobileLarge}) {
     grid-template-columns: 1fr 1fr;
   }
   @media only screen and (min-width: ${tablet}) {

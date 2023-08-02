@@ -13,6 +13,7 @@ const Container = styled.div`
   h4 {
     font-size: ${({ fontSize }) => (fontSize ? fontSize : "initial")};
     color: ${({ fontColor }) => (fontColor ? fontColor : "initial")};
+    text-wrap: nowrap;
   }
 `;
 const InstructorLink = ({

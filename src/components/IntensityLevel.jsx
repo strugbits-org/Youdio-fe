@@ -14,6 +14,7 @@ const IntensityBox = styled.div`
   }
   p {
     color: ${({ fontColor }) => (fontColor ? fontColor : "initial")};
+    text-wrap: nowrap;
   }
 `;
 

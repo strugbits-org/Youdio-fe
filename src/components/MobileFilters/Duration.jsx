@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Slider, Box } from "@mui/material";
@@ -7,6 +7,7 @@ import { H3, P3 } from "src/components";
 import { fonts } from "src/helpers";
 import { MobileFilterButton, MobileFilterHeader } from "./filtersComponents";
 import { filterKeys } from "src/helpers/constant";
+import { useSelector } from "react-redux";
 
 function valuetext(value) {
   return `${value}min`;
@@ -107,8 +108,25 @@ const SliderBox = styled.div`
 `;
 
 export default function Duration({ addDuration }) {
+  const { filters } = useSelector((state) => state.filter);
   const [isVisible, setIsVisible] = useState(false);
   const [selection, setSelection] = useState({ label: "", value: [0, 90] });
+  useEffect(() => {
+    if (Object.keys(filters.duration).length > 0) {
+      const duration = [filters.duration.startTime, filters.duration.endTime];
+      setSelection({
+        label: duration.join("-").concat("+ Mins"),
+        value: duration,
+      });
+    } else {
+      const duration = [0, 90];
+      setSelection({
+        label: "",
+        value: duration,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.duration]);
 
   return (
     <SliderBox>

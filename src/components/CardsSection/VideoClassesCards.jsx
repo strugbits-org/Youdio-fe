@@ -4,7 +4,7 @@ import { layout } from "src/helpers";
 import { Loader, NoFoundBox, H3, PrimaryWhiteButton } from "src/components";
 import { VideoClassCard } from "../Cards";
 
-const { mobile, mobileMedium, tablet, laptop } = layout;
+const { mobile, mobileLarge, tablet, laptop } = layout;
 const Container = styled.div`
   min-height: 30vh;
   margin-top: 30px;
@@ -21,7 +21,7 @@ const Box = styled.div`
     grid-template-columns: 1fr;
     margin-block: 6vw;
   }
-  @media only screen and (min-width: ${mobileMedium}) {
+  @media only screen and (min-width: ${mobileLarge}) {
     grid-template-columns: 1fr 1fr;
   }
   @media only screen and (min-width: ${tablet}) {

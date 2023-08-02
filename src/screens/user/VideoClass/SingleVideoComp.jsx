@@ -99,6 +99,7 @@ export const VideoDetail = styled.div`
 
     .description {
       max-width: 1087px;
+      font-size: clamp(16px, 1.6vw, 22px);
     }
     .bold{
       font-weight: 700;
@@ -111,6 +112,7 @@ export const VideoDetail = styled.div`
     align-items: center;
     justify-content: left;
     flex-wrap: wrap;
+    gap:8px 16px;
     h5 {
       flex-basis: 100%;
     }

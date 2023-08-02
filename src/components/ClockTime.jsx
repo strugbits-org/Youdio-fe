@@ -5,19 +5,18 @@ import { P3 } from ".";
 
 const Time = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
   justify-content: ${({ align }) => (align ? align : "right")};
   min-height: 2px;
-  img{
+  img {
     width: ${({ fontSize }) => (fontSize ? fontSize : "auto")};
-
   }
   p {
     color: ${({ fontColor }) => (fontColor ? fontColor : "initial")};
     font-size: ${({ fontSize }) => (fontSize ? fontSize : "initial")};
-  }
-  
+    text-wrap: nowrap;
+}
 `;
 
 export const ClockTime = ({ time, fontColor, fontSize, align, icon }) => {

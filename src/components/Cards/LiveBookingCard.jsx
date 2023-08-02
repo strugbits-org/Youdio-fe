@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import { icons } from "src/helpers";
 import { H3 } from "src/components";
@@ -22,7 +22,7 @@ const Card = styled.div`
     margin-inline: initial;
     /* max-width: 1517px; */
     flex-direction: row;
-    align-items: center;
+    align-items: ${({alignment}) => alignment ? "center" : "flex-start" };
   }
 
   @media only screen and (min-width: ${desktop}) {
@@ -90,6 +90,13 @@ const ContentBox = styled.div`
   .lastP {
     max-width: 324px;
     font-size: 12px;
+    span{
+      text-decoration: underline;
+      cursor: pointer;
+      &:hover{
+        color:var(--textParaBlackLight)
+      }
+    }
   }
 
   .sessionDetail {
@@ -174,8 +181,24 @@ const LiveBookingCard = ({
   handleCancel,
   sessionId,
 }) => {
+  const [isLessContent, setIsLessContent] = useState(true);
+  const description = useMemo(() => {
+    if (bookedSession?.description) {
+      const desc = bookedSession.description;
+      if (desc.length > 200 && isLessContent) {
+        return desc.slice(0, 200).concat("...");
+      }
+      isLessContent && setIsLessContent(false);
+      return desc;
+    }
+    return "";
+  }, [bookedSession, isLessContent]);
+  const handleDescription = () => {
+    setIsLessContent(!isLessContent);
+  };
+
   return (
-    <Card disabled={disabled}>
+    <Card disabled={disabled} alignment={isLessContent}>
       <MediaBox>
         <img
           src={bookedSession.thumbnail}
@@ -240,7 +263,14 @@ const LiveBookingCard = ({
             imgWidth={"26px"}
             fontSize={"14px"}
           />
-          <P2 className="cardP lastP">{bookedSession.description}</P2>
+          <P2 className="cardP lastP">
+            {description}{" "}
+            {description.length > 200 && (
+              <span onClick={handleDescription}>
+                {isLessContent ? "See More" : "See Less"}
+              </span>
+            )}
+          </P2>
         </div>
         <CustomPrimaryButton
           onClick={() => handleCancel(sessionId)}

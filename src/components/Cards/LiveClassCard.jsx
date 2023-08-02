@@ -1,13 +1,19 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { H3, H4, ClockTime, P3 } from "src/components";
-import { icons, path } from "src/helpers";
+import { icons, layout, path } from "src/helpers";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
 import { InstructorLink } from "src/components";
 import moment from "moment";
 
-export const Card = styled.div``;
+export const Card = styled.div`
+  margin-inline: auto;
+  max-width: 300px;
+  @media only screen and (min-width: ${layout.mobileLarge}) {
+    max-width: initial;
+  }
+`;
 
 export const CardMedia = styled.div`
   margin-bottom: 18px;

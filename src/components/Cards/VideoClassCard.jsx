@@ -3,14 +3,20 @@ import styled from "styled-components";
 import { H3, H4, InstructorLink, ClockTime, P3 } from "src/components";
 import IntensityLevel from "../IntensityLevel";
 import { useNavigate } from "react-router-dom";
-import { icons, path } from "src/helpers";
+import { icons, layout, path } from "src/helpers";
 
-const Card = styled.div``;
+const Card = styled.div`
+  margin-inline: auto;
+  max-width: 350px;
+  @media only screen and (min-width: ${layout.mobileLarge}) {
+    max-width: initial;
+  }
+`;
 
 const CardMedia = styled.div`
   margin-bottom: 18px;
   position: relative;
-  & > img{
+  & > img {
     cursor: pointer;
   }
   img {
@@ -48,7 +54,7 @@ const CardContent = styled.div`
   .detail {
     color: var(--backgroundGrey);
     max-width: 482px;
-    span{
+    span {
       cursor: pointer;
       text-decoration: underline;
     }
@@ -98,8 +104,7 @@ function VideoClassCard({
   const handleNavigate = () => {
     if (data?.instructor?._id && data?._id) {
       navigate(`${path.videoClass}/${data._id}/${data.instructor._id}`);
-    }
-    else {
+    } else {
       navigate(`${path.videoClass}/${data._id}/${data.instructor}`);
     }
   };

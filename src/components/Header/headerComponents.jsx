@@ -157,7 +157,8 @@ const SideMenu = styled.div`
   top: 0px;
   right: 0;
   background-color: white;
-  transition: 0.5s all ease-in-out;
+  /* transition: 0.2s all ease-in-out; */
+  transition: width 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   padding-top: 80px;
   text-align: center;
   display: flex;
@@ -180,6 +181,7 @@ const SideMenu = styled.div`
   ul {
     opacity: 0;
     transition: 0.3s all ease-in-out;
+    transition: opacity 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   }
 `;
 

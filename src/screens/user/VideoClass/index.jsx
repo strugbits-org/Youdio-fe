@@ -106,7 +106,7 @@ const VideoClass = () => {
   }, [user]);
 
   return (
-    <CustomSection backgroundColor="#fff">
+    <CustomSection backgroundColor="#fff" paddingBlock="0px 20px">
       {video && instructor ? (
         <React.Fragment>
           <VideoContainer>
@@ -151,7 +151,7 @@ const VideoClass = () => {
             <VideoDetail>
               <div className="singleClass">
                 <H5>SINGLE CLASS</H5>
-                <H2>{video?.title}</H2>
+                <H2 fontSize="clamp(28px, 2.6vw, 44px)">{video?.title}</H2>
                 <P1>
                   {video?.title}{" "}
                   <span className="bold">{video.instructor?.fullName}</span>
@@ -160,17 +160,17 @@ const VideoClass = () => {
               </div>
 
               <div className="totalRunTime">
-                <H5>TOTAL RUN TIME</H5>
+                <H5 fontSize="clamp(16px, 1.6vw, 24px)">TOTAL RUN TIME</H5>
                 <ClockTime
                   time={`${video?.totalTime} min`}
-                  fontSize={"18px"}
+                  fontSize={"clamp(14px, 1.2vw, 18px)"}
                   fontColor={"var(--backgroundGrey)"}
                 />
                 <div className="intensity">
                   <IntensityLevel
                     text="Intensitiy"
                     level={video?.intensity}
-                    fontSize={"18px"}
+                    fontSize={"clamp(14px, 1.2vw, 18px)"}
                     fontColor={"var(--backgroundGrey)"}
                   />
                 </div>

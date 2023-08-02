@@ -3,7 +3,7 @@ import { icons } from "src/helpers"
 export const instructorClassStaticContent = {
 
     instructorSectionh1: "Our Instructors",
-    instructorSectionp1: "Start your Yoga, Meditation and Fitness routines by availing our live or recorded VIDEOS",
+    instructorSectionp1: "Start your Yoga, Meditation and Fitness routines by availing our live or recorded Videos ",
     searchPlaceholder: "Find Instructor",
 
 }

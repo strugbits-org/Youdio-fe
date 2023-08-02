@@ -31,6 +31,7 @@ export const TextSec = styled(Section)`
     text-align: center;
     /* font-size: min(90%,30px); */
     font-size: clamp(13px, 1.1vw, 22px);
+    color: var(--backgroundGrey);
   }
   @media only screen and (max-width: ${laptop}) {
     p {

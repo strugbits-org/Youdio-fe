@@ -4,6 +4,9 @@ const { mobile, tablet } = layout;
 
 export const ContentBox = styled.div`
   max-width: 632px;
+  & > p{
+    text-transform: capitalize;
+  }
 `;
 
 export const SearchBox = styled.div`

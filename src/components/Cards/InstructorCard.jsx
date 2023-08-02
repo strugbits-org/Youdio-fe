@@ -9,6 +9,9 @@ const Card = styled.div``;
 const CardMedia = styled.div`
   margin-bottom: 18px;
   position: relative;
+  & > img{
+    cursor: pointer;
+  }
   img {
     width: 100%;
     aspect-ratio: 1/1;
@@ -27,6 +30,7 @@ const CardMedia = styled.div`
 const CardContent = styled.div`
   h3 {
     margin-bottom: 2px;
+    cursor: pointer;
   }
 `;
 
@@ -96,7 +100,7 @@ function InstructorCard({
 
       <CardContent>
         <div className="timeRow">
-          <H3>{`${firstName} ${lastName}`}</H3>
+          <H3 onClick={handleNavgate}>{`${firstName} ${lastName}`}</H3>
         </div>
         <P2>{jobTitle}</P2>
       </CardContent>

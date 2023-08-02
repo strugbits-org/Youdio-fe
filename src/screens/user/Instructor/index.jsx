@@ -79,14 +79,16 @@ function Instructor() {
             <P1 className="p1">{instructorDetail?.description}</P1>
           </>
         )}
-        <HorizontalLine marginBlock="30px"/>
+        <HorizontalLine marginBlock="30px" />
       </TextSec>
 
       {/* <StyledDiv /> */}
 
       {/* Instructor Classes */}
       <Section backgroundColor="#fff">
-        <H2 style={{ textAlign: "center" }}>Video Classes</H2>
+        <H2
+          style={{ textAlign: "center" }}
+        >{`${instructorDetail?.fullName} Classes`}</H2>
         <VideoClassesCards
           isSameInstructor={true}
           videos={instrutorClasses?.videoClasses}
@@ -94,12 +96,14 @@ function Instructor() {
           limit={3}
           handleAll={() => navigate(path.videos)}
         />
-        <HorizontalLine marginBlock="30px"/>
+        <HorizontalLine marginBlock="30px" />
       </Section>
 
       {/* Live Classes */}
       <Section backgroundColor="#fff">
-        <H2 style={{ textAlign: "center" }}>Live Sessions</H2>
+        <H2 style={{ textAlign: "center" }}>
+          {`${instructorDetail?.fullName} Series`}
+        </H2>
         <LiveClassesCards
           classes={instrutorClasses?.liveClasses}
           loading={getLoading}
@@ -108,13 +112,17 @@ function Instructor() {
           handleAll={() => navigate(path.liveClasses)}
         />
 
-        <HorizontalLine marginBlock="30px"/>
+        <HorizontalLine marginBlock="30px" />
       </Section>
 
       {/* Review-Card */}
       <Section backgroundColor="#fff">
         <H2 style={{ textAlign: "center" }}>Instructor Reviews</H2>
-        <ReviewCards reviews={instrutorClasses.reviews} loading={getLoading} limit={6} />
+        <ReviewCards
+          reviews={instrutorClasses.reviews}
+          loading={getLoading}
+          limit={6}
+        />
       </Section>
     </React.Fragment>
   );

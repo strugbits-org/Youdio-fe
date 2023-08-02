@@ -39,15 +39,21 @@ export const VideoBox = styled.div`
       transform: translate(-50%, -50%);
       background: #fff;
       border-radius: 100%;
+      box-shadow: 0px 0px 0px 10px rgba(255, 255, 255, 0.4);
+      transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1) 0ms;
       svg {
         width: 100%;
         height: 100%;
         fill: var(--backgroundGreen);
       }
+      &:hover {
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1) 0ms;
+        box-shadow: 0px 0px 0px 10px rgba(255, 255, 255, 0.6);
+      }
     }
   }
   video {
-    display: ${({videoRender})=> videoRender ? "initial" : "none"};
+    display: ${({ videoRender }) => (videoRender ? "initial" : "none")};
     max-height: 664px;
     max-width: 1589px;
     background: black;

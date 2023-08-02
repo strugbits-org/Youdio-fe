@@ -1,9 +1,10 @@
-import React from "react";
-import { ClockTime, H3, P3 } from "src/components";
+import React, { useState } from "react";
+import { ClockTime, H3, InstructorLink, P3 } from "src/components";
 import { icons } from "src/helpers";
 import { layout } from "src/helpers";
 import styled from "styled-components";
 import IntensityLevel from "../IntensityLevel";
+import { Link, useNavigate } from "react-router-dom";
 
 const { mobile, desktop, mobileLarge } = layout;
 
@@ -66,7 +67,7 @@ const CardContent = styled.div`
       align-items: center;
       gap: 8px;
     }
-    h3{
+    h3 {
       text-transform: uppercase;
     }
   }
@@ -91,20 +92,31 @@ const CardContent = styled.div`
 `;
 
 export function HistoryCard({ historyVideo, historyVideoId }) {
+  const [videoUrl] = useState(
+    `/video-class/${historyVideo._id}/${historyVideo?.instructor}`
+  );
+  const [instructorUrl] = useState(
+    `/singleinstructor/${historyVideo?.instructor}`
+  );
+  const navigate = useNavigate();
   return (
     <Card>
       <ImageBox>
-        <img
-          src={historyVideo?.thumbnail}
-          alt={"Thumbnail"}
-          width=""
-          height=""
-        />
-        <span className="label">{historyVideo?.category}</span>
+        <Link to={videoUrl}>
+          <img
+            src={historyVideo?.thumbnail}
+            alt={"Thumbnail"}
+            width=""
+            height=""
+          />
+          <span className="label">{historyVideo?.category}</span>
+        </Link>
       </ImageBox>
       <CardContent>
         <div className="timeRow">
-          <H3>{historyVideo?.title}</H3>
+          <H3>
+            <Link to={videoUrl}>{historyVideo?.title}</Link>
+          </H3>
           <ClockTime
             time={`${historyVideo?.totalTime} min`}
             fontSize={"13px"}
@@ -112,10 +124,11 @@ export function HistoryCard({ historyVideo, historyVideoId }) {
         </div>
 
         <div className="intensityRow">
-          <div className="instrutor">
-            <img src={icons.shortpicWomen} alt="Instructor" />
-            <P3>Elizebeth Lisa</P3>
-          </div>
+          <InstructorLink
+            title={"Elizebeth Lisa"}
+            imageSrc={icons.shortpicWomen}
+            handleNavigate={() => navigate(instructorUrl)}
+          />
           <IntensityLevel level={historyVideo?.intensity} />
         </div>
 

@@ -10,6 +10,9 @@ const Card = styled.div``;
 const CardMedia = styled.div`
   margin-bottom: 18px;
   position: relative;
+  & > img{
+    cursor: pointer;
+  }
   img {
     width: 100%;
     aspect-ratio: 1.64/1;
@@ -34,6 +37,7 @@ const CardContent = styled.div`
   }
   h3 {
     text-align: initial;
+    cursor: pointer;
   }
   .profileRow {
     display: flex;
@@ -109,6 +113,7 @@ function VideoClassCard({
     }
     return "";
   }, [data]);
+
   return (
     <Card>
       <CardMedia isHoverBox={handleDelete && handleEdit ? true : false}>
@@ -151,7 +156,7 @@ function VideoClassCard({
       </CardMedia>
       <CardContent>
         <div className="timeRow">
-          <H3>{data.title}</H3>
+          <H3 onClick={handleNavigate}>{data.title}</H3>
           <ClockTime
             time={`${data.totalTime} min`}
             fontSize={"14px"}
@@ -161,8 +166,11 @@ function VideoClassCard({
         <div className="profileRow">
           {!isSameInstructor && (
             <InstructorLink
-              imageSrc={data.instructor.image}
-              title={`${data.instructor.firstName} ${data.instructor.lastName}`}
+              imageSrc={data.instructor?.image}
+              title={`${data?.instructor?.firstName} ${data.instructor?.lastName}`}
+              handleNavigate={() =>
+                navigate(`/singleinstructor/${data?.instructor?._id}`)
+              }
             />
           )}
           <IntensityLevel level={intensityLevel} />

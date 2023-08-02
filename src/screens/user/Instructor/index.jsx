@@ -1,9 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import {
-  SingleImage,
-  Sec,
-  TextSec,
-} from "./singleInstructorStyle";
+import { SingleImage, Sec, TextSec } from "./singleInstructorStyle";
 import { H1, P1, H2, Section } from "src/components";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetAPI from "src/features/hooks/useGetAPI";
@@ -86,9 +82,11 @@ function Instructor() {
 
       {/* Instructor Classes */}
       <Section backgroundColor="#fff">
-        <H2
-          style={{ textAlign: "center" }}
-        >{`${instructorDetail?.fullName} Classes`}</H2>
+        {instructorDetail && (
+          <H2 style={{ textAlign: "center" }}>
+            {`${instructorDetail?.fullName} Classes`}
+          </H2>
+        )}
         <VideoClassesCards
           isSameInstructor={true}
           videos={instrutorClasses?.videoClasses}
@@ -101,9 +99,11 @@ function Instructor() {
 
       {/* Live Classes */}
       <Section backgroundColor="#fff">
-        <H2 style={{ textAlign: "center" }}>
-          {`${instructorDetail?.fullName} Series`}
-        </H2>
+        {instructorDetail && (
+          <H2 style={{ textAlign: "center" }}>
+            {`${instructorDetail?.fullName} Series`}
+          </H2>
+        )}
         <LiveClassesCards
           classes={instrutorClasses?.liveClasses}
           loading={getLoading}

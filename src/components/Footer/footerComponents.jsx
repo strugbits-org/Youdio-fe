@@ -59,7 +59,6 @@ const UpperBox = styled.div`
         input{
             border-radius:0px;
             padding:12px 1.5vw;
-            margin-bottom:16px;
         }
         button{
             width:100%;
@@ -67,6 +66,7 @@ const UpperBox = styled.div`
             justify-content:space-between;
             background:var(--backgroundBrown);
             padding:12px 1.5vw;
+            margin-top: 16px;
         }
     }
 

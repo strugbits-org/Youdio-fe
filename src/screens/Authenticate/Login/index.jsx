@@ -95,7 +95,6 @@ function Login() {
                   <FieldInput
                     label={content.email}
                     id="loginEmail"
-                    autofill
                     name="email"
                     type="email"
                     placeholder={content.emailPlaceHolder}

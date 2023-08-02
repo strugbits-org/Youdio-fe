@@ -69,7 +69,10 @@ const liveSessionValidateForm = (isEdit) => {
   return Yup.object({
     category: textField({ reqMesg: "Caregory is required" }),
     date: Yup.date()
-      .min(new Date(moment().subtract(1, 'day')), "Please select today or future date")
+      .min(
+        new Date(moment().subtract(1, "day")),
+        "Please select today or future date"
+      )
       // .min(new Date(), "Please select future date")
       .required("Date is required"),
     title: textField({ reqMesg: "Title is required" }),
@@ -131,11 +134,8 @@ const addVideoValidateForm = (isEdit) => {
     intensity: textField({ reqMesg: "Intensity is required" }),
     filter: textField({ reqMesg: "Filter is required" }),
     totalTime: Yup.string()
-    .required("Total Time is required")
-      .matches(
-        numberRejex,
-        "Total time must be a number"
-      ),
+      .required("Total Time is required")
+      .matches(numberRejex, "Total time must be a number"),
     isFeatured: Yup.string().required("Select Is video featured?"),
     description: textField({ reqMesg: "Description is required" }),
     thumbnail: isEdit
@@ -161,6 +161,11 @@ const addReviewValidateForm = (isEdit) => {
   });
 };
 
+// Admin Dashboard Add Review Form
+const subscriberValidateForm = Yup.object({
+  email,
+});
+
 const userProfileFormValidate = Yup.object().shape({
   //   userImage: Yup
   //       .mixed()
@@ -179,6 +184,7 @@ export {
   userFormValidate,
   userProfileFormValidate,
   paymentFormValidate,
+  subscriberValidateForm,
   addVideoValidateForm,
   liveSessionValidateForm,
   addInstructorValidateForm,

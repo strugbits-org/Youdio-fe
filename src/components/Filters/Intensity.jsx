@@ -17,6 +17,9 @@ const IntensityBox = styled.div`
       display: flex;
       gap: 10px;
       cursor: pointer;
+      p {
+        text-transform: uppercase;
+      }
       .active {
         color: var(--textHeadingBlack);
       }

@@ -98,6 +98,7 @@ function LiveClassCard({
   handleEdit,
   handleView,
   instructorInfo,
+  isSameInstructor,
 }) {
   const navigate = useNavigate();
   const intensityLevel = useMemo(() => {
@@ -112,7 +113,7 @@ function LiveClassCard({
     if (data?.description) {
       return {
         text: data.description.slice(0, 100).concat("..."),
-        length: data.description.length
+        length: data.description.length,
       };
     }
     return "";
@@ -163,11 +164,14 @@ function LiveClassCard({
         <div className="timeRow">
           <H4>{data.date && moment(data.date).format("MM-DD-YYYY")}</H4>
           <H4>{data.time}</H4>
-          <ClockTime time={`${data.totalTime} min`} fontSize={"13px"} />
+          {!isSameInstructor && (
+            <ClockTime time={`${data.totalTime} min`} fontSize={"13px"} />
+          )}
         </div>
         <H3 onClick={handleNavigate}>{data.title}</H3>
-        <div className="profileRow">
-          {instructorInfo ? (
+        {!isSameInstructor && (
+          <div className="profileRow">
+            {/* {instructorInfo ? (
             <InstructorLink
               imageSrc={instructorInfo.image}
               title={instructorInfo.fullName}
@@ -180,12 +184,21 @@ function LiveClassCard({
                 navigate(`/singleinstructor/${data.trainer._id}`)
               }
             />
-          )}
+          )} */}
 
-          <div className="intensityBox">
-            <IntensityLevel level={intensityLevel} text={"Intensity"} />
+            <InstructorLink
+              imageSrc={data.trainer.image}
+              title={`${data.trainer.firstName} ${data.trainer.lastName}`}
+              handleNavigate={() =>
+                navigate(`/singleinstructor/${data.trainer._id}`)
+              }
+            />
+
+            <div className="intensityBox">
+              <IntensityLevel level={intensityLevel} text={"Intensity"} />
+            </div>
           </div>
-        </div>
+        )}
         <P3 className="detail">
           {paraLimit.text}{" "}
           {paraLimit.length >= 100 ? (

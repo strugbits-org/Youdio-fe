@@ -110,6 +110,7 @@ function Instructor() {
           instructorInfo={instructorDetail}
           limit={4}
           handleAll={() => navigate(path.liveClasses)}
+          isSameInstructor={true}
         />
 
         <HorizontalLine marginBlock="30px" />

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { H4 } from "src/components";
+import { P2 } from "src/components";
 // import { fonts } from "src/helpers";
 import { Instructor } from "./filtersComponents";
 import { useSelector } from "react-redux";
@@ -79,12 +79,18 @@ export default function Instructors({ removeTag, addTag }) {
               return (
                 <Instructor
                   selected={
-                    isAll ? isAll : filters.instructors.includes(val.firstName)
+                    isAll
+                      ? isAll
+                      : filters.instructors.includes(
+                          `${val.firstName} ${val.lastName}`
+                        )
                   }
                   key={val._id}
-                  onClick={() => setSelected(val.firstName)}
+                  onClick={() =>
+                    setSelected(`${val.firstName} ${val.lastName}`)
+                  }
                 >
-                  <H4>{val.firstName}</H4>
+                  <P2>{`${val.firstName} ${val.lastName}`}</P2>
                 </Instructor>
               );
             })}

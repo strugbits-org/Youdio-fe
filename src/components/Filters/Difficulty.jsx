@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { P1 } from "src/components";
+import { P2 } from "src/components";
 import { filterKeys } from "src/helpers/constant";
 import { useSelector } from "react-redux";
 
@@ -14,6 +14,7 @@ const DifficultyBox = styled.div`
     color: var(--backgroundBrown);
     li {
       cursor: pointer;
+      
       .active {
         color: var(--textHeadingBlack);
       }
@@ -44,11 +45,11 @@ export default function Difficulty({ addTag, removeTag, options }) {
           options.map(({ id, name }) => {
             return (
               <li key={id} onClick={() => setSelected(name)}>
-                <P1
+                <P2
                   className={filters.difficulty.includes(name) ? "active" : ""}
                 >
                   {name}
-                </P1>
+                </P2>
               </li>
             );
           })}

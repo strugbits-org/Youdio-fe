@@ -49,7 +49,8 @@ function LiveClassesCards({
   instructorInfo,
   limit,
   minLimit,
-  handleAll
+  handleAll,
+  isSameInstructor,
 }) {
   const videoLimit = useMemo(() => {
     if (limit && typeof limit === "number") return limit;
@@ -77,6 +78,7 @@ function LiveClassesCards({
                     handleDelete={handleDelete}
                     handleView={handleView}
                     instructorInfo={instructorInfo}
+                    isSameInstructor={isSameInstructor}
                   />
                 ) : (
                   ""

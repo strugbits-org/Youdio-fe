@@ -93,15 +93,16 @@ export const VideoDetail = styled.div`
     display: grid;
     gap: 7px;
 
-    h5, p {
-      color: var(--textParaGrey);
+    h5,
+    p {
+      color: var(--backgroundGrey);
     }
 
     .description {
       max-width: 1087px;
       font-size: clamp(16px, 1.6vw, 22px);
     }
-    .bold{
+    .bold {
       font-weight: 700;
     }
   }
@@ -112,7 +113,7 @@ export const VideoDetail = styled.div`
     align-items: center;
     justify-content: left;
     flex-wrap: wrap;
-    gap:8px 16px;
+    gap: 8px 16px;
     h5 {
       flex-basis: 100%;
     }
@@ -128,7 +129,7 @@ export const VideoDetail = styled.div`
         margin-block: 32px 12px;
       }
       .intensity {
-        margin-block: auto 16px;
+        margin-block: auto 0px;
       }
     }
   }

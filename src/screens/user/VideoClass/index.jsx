@@ -153,7 +153,7 @@ const VideoClass = () => {
                 <H5>SINGLE CLASS</H5>
                 <H2 fontSize="clamp(28px, 2.6vw, 44px)">{video?.title}</H2>
                 <P1>
-                  {video?.title}{" "}
+                  {"From "} {video?.title}{" by "}
                   <span className="bold">{video.instructor?.fullName}</span>
                 </P1>
                 <P1 className="description">{video?.description}</P1>
@@ -207,6 +207,7 @@ const VideoClass = () => {
               classes={
                 instructor?.sessions?.length > 0 ? instructor?.sessions : []
               }
+              isSameInstructor={true}
               limit={4}
               loading={loading}
               handleAll={() => navigate(path.videos)}

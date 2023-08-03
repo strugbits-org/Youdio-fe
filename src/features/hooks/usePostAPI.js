@@ -57,8 +57,9 @@ const usePostAPI = () => {
       setSuccess(false);
       e.message && setError(e.message);
       e.errors && e.errors.length > 0 && setError(e.errors[0].msg);
-      // e.message && notify("error", e.message);
-      // e.errors && e.errors.length > 0 && notify("error", e.errors[0].msg);
+      e.message && notify("error", e.message);
+      e.errors && e.errors.length > 0 && notify("error", e.errors[0].msg);
+     
     }
   };
 

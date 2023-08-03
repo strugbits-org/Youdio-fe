@@ -29,8 +29,7 @@ function Header() {
   };
 
   useEffect(() => {
-    formikRef.current.setFieldError("email", postError);
-    formikRef.current.setFieldValue("email", "");
+    formikRef.current.resetForm()
   }, [postError]);
 
   return (

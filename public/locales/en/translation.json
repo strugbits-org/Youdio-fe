@@ -1,0 +1,18 @@
+{
+  "common":{
+    "emailFieldTitle": "E-mail",
+    "emailFieldPlaceholder": "Enter E-mail address",
+    "passwordFieldTitle": "Password",
+    "loginText": "Log in"
+
+  },
+  "login":{
+    "title":"Sign In",
+    "subTitle": "Log in to access all of your content",
+    "forgotPassword": "Fogot Password ?",
+    "question":{
+      "text":"Don’t have account ? ",
+      "linkText": "Sign up"
+    }
+  }
+}

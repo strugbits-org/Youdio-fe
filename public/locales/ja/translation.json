@@ -1,0 +1,18 @@
+{
+  "common":{
+    "emailFieldTitle": "Eメール",
+    "emailFieldPlaceholder": "メールアドレスを入力してください",
+    "passwordFieldTitle": "パスワード",
+    "loginText": "ログイン"
+
+  },
+  "login":{
+    "title":"ログイン",
+    "subTitle": "ログインしてすべてのコンテンツにアクセスします",
+    "forgotPassword": "パスワードを忘れましたか?",
+    "question":{
+      "text":"アカウントをお持ちではありませんか? ",
+      "linkText": "サインアップ"
+    }
+  }
+}

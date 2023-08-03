@@ -19,7 +19,7 @@ import { path } from "src/helpers";
 
 import { setUserAuth } from "src/features/userSlice";
 import useFetch from "src/features/hooks/useFetch";
-
+import { useTranslation } from "react-i18next";
 
 const Container = styled.div`
   background: #fff;
@@ -53,13 +53,14 @@ const FormRow = styled.div`
 
 const CustomP2 = styled(P2)`
   margin-bottom: 60px;
-`
+`;
 
 function Login() {
-  const { loading, postData } = useFetch()
+  const { loading, postData } = useFetch();
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(loginContent);
-  const {state} = useLocation()
+  const { state } = useLocation();
+  const { t } = useTranslation();
   // const navigate = useNavigate()
 
   useEffect(() => {
@@ -89,21 +90,21 @@ function Login() {
               <Form autoComplete="off">
                 {" "}
                 {/*Formik Form Import from Formik*/}
-                <H1>Sign In</H1>
-                <CustomP2>{content.signInLine}</CustomP2>
+                <H1>{t("login.title")}</H1>
+                <CustomP2>{t("login.subTitle")}</CustomP2>
                 <FormRow>
                   <FieldInput
-                    label={content.email}
+                    label={t("common.emailFieldTitle")}
                     id="loginEmail"
                     name="email"
                     type="email"
-                    placeholder={content.emailPlaceHolder}
+                    placeholder={t("common.emailFieldPlaceholder")}
                     style={{ fontSize: "16px" }}
                   />
                 </FormRow>
                 <FormRow>
                   <FieldPassword
-                    label={content.password}
+                    label={t("common.passwordFieldTitle")}
                     id="loginPassword"
                     name="password"
                     placeholder="******"
@@ -121,17 +122,23 @@ function Login() {
                 <FormRow>{/* <P2>Message</P2> */}</FormRow>
                 <FormRow>
                   <PrimaryButton type="submit" disabled={loading}>
-                    Log in
+                    {t("common.loginText")}
                   </PrimaryButton>
                   <P2 className="txtForgotPassword">
-                    <NavLink to={path.forgotPassword}>{content.forgot}</NavLink>
+                    <NavLink to={path.forgotPassword}>
+                      {t("login.forgotPassword")}
+                    </NavLink>
                   </P2>
                 </FormRow>
                 <FormRow>
                   <P1>
-                    {content.dontHave}{" "}
-                    <NavLink className="txtSignUp" to={path.register} state={state}>
-                      {content.signUp}
+                    {t("login.question.text")}{" "}
+                    <NavLink
+                      className="txtSignUp"
+                      to={path.register}
+                      state={state}
+                    >
+                      {t("login.question.linkText")}
                     </NavLink>
                   </P1>
                 </FormRow>

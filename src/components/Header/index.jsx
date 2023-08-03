@@ -11,7 +11,7 @@ import {
   ProfileImageCircle,
 } from "./headerComponents";
 import { useDispatch, useSelector } from "react-redux";
-import { setLang } from "src/features/language";
+// import { setLang } from "src/features/language";
 import { path } from "src/helpers";
 import { contentTranslator } from "src/helpers/translator";
 import { icons } from "src/helpers";
@@ -19,12 +19,25 @@ import { IconButton } from "src/components";
 import userIcon from "src/assets/icons/user.png";
 
 import { logout } from "src/features/userSlice";
+import { useTranslation } from "react-i18next";
 
 // import { init } from "src/store/baseStore";
 
 function Header({ isLoggedin }) {
   const [content, setContent] = useState(staticContent);
   const [menu, setMenu] = useState(false);
+  const { i18n } = useTranslation();
+  const [lang, setLang] = useState("en");
+  const [langOptions] = useState([
+    {
+      label: "English",
+      value: "en",
+    },
+    {
+      label: "Japanese",
+      value: "ja",
+    },
+  ]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,7 +51,10 @@ function Header({ isLoggedin }) {
 
   // Language Listener
   const handleLanguage = (e) => {
-    dispatch(setLang(e.target.value));
+    const lng = e.target.value;
+    i18n.changeLanguage(lng);
+    setLang(lng);
+    // dispatch(setLang(e.target.value));
     setMenu(false);
   };
 
@@ -66,11 +82,13 @@ function Header({ isLoggedin }) {
           <li>
             <NavLink to={path.videos}>{content.videos}</NavLink>
           </li>
-          {/* <li>
-            <NavLink to={path.membership}>{content.membership}</NavLink>
-          </li> */}
           <li>
             <NavLink to={path.instructor}>{content.instructor}</NavLink>
+          </li>
+          <li>
+            <NavLink to="https://youdio.strugbits.com/membership/">
+              {content.membership}
+            </NavLink>
           </li>
         </UL>
 
@@ -85,18 +103,24 @@ function Header({ isLoggedin }) {
         </IconButton>
 
         <UL align="right">
-          <li className="langChange">
-            <select onChange={handleLanguage} value={language}>
-              <option id="EN">EN</option>
-              <option id="JA">JA</option>
-            </select>
-            <img
-              src={icons.worldMap}
-              alt="world_map"
-              width="15"
-              height="auto"
-            />
-          </li>
+          {langOptions?.length && (
+            <li className="langChange">
+              <select onChange={handleLanguage} value={lang}>
+                {langOptions.map(({ label, value }) => (
+                  <option id="en" value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+              <img
+                src={icons.worldMap}
+                alt="world_map"
+                width="15"
+                height="auto"
+              />
+            </li>
+          )}
+
           {!auth.token ? (
             <React.Fragment>
               <li>
@@ -130,18 +154,23 @@ function Header({ isLoggedin }) {
 
       <SideMenu className={menu ? "mobileMenu open" : "mobileMenu"}>
         <MobileUL>
-          <li className="langChange">
-            <select onChange={handleLanguage} value={language}>
-              <option id="EN">EN</option>
-              <option id="JA">JA</option>
-            </select>
-            <img
-              src={icons.worldMap}
-              alt="world_map"
-              width="15"
-              height="auto"
-            />
-          </li>
+          {langOptions?.length && (
+            <li className="langChange">
+              <select onChange={handleLanguage} value={lang}>
+                {langOptions.map(({ label, value }) => (
+                  <option id="en" value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+              <img
+                src={icons.worldMap}
+                alt="world_map"
+                width="15"
+                height="auto"
+              />
+            </li>
+          )}
           {!auth.token ? (
             <React.Fragment>
               <li onClick={reset}>

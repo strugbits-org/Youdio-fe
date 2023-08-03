@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 
 import { FieldInput, H4, P2, P3 } from "src/components";
@@ -15,7 +15,8 @@ import usePostAPI from "src/features/hooks/usePostAPI";
 import { subscriberValidateForm } from "src/helpers/forms/validateForms";
 
 function Header() {
-  const { postData, postLoading } = usePostAPI();
+  const { postData, postLoading, postError } = usePostAPI();
+  const formikRef = useRef();
   const handleSubmit = (data, action) => {
     postData(
       "newsletter/subscribe",
@@ -26,6 +27,11 @@ function Header() {
       () => action.resetForm()
     );
   };
+
+  useEffect(() => {
+    formikRef.current.setFieldError("email", postError);
+    formikRef.current.setFieldValue("email", "");
+  }, [postError]);
 
   return (
     <Section backgroundColor="var(--textHeadingBlack)">
@@ -80,6 +86,7 @@ function Header() {
               }}
               validationSchema={subscriberValidateForm}
               onSubmit={handleSubmit}
+              innerRef={formikRef}
             >
               {(formik) => (
                 <Form autoComplete="off">

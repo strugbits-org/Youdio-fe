@@ -37,6 +37,7 @@ const usePostAPI = () => {
     setLocalState
   ) => {
     setLoading(true);
+    postError && setError("")
     const headers = resetToken
       ? await getHeaders(resetToken)
       : await getHeaders(token, formData);

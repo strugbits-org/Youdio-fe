@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -13,8 +12,6 @@ import {
   P1,
 } from "src/components";
 import { loginFormValidate } from "src/helpers/forms/validateForms";
-import { loginContent } from "./content";
-import { contentTranslator } from "src/helpers/translator";
 import { path } from "src/helpers";
 
 import { setUserAuth } from "src/features/userSlice";
@@ -57,20 +54,8 @@ const CustomP2 = styled(P2)`
 
 function Login() {
   const { loading, postData } = useFetch();
-  const language = useSelector((state) => state.language.lang);
-  const [content, setContent] = useState(loginContent);
   const { state } = useLocation();
   const { t } = useTranslation();
-  // const navigate = useNavigate()
-
-  useEffect(() => {
-    contentTranslator({
-      staticContent: loginContent,
-      contentToTranslate: content,
-      setContent,
-      language,
-    });
-  }, [language, content]);
 
   return (
     <Container>

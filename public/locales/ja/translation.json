@@ -2,7 +2,10 @@
   "common":{
     "emailFieldTitle": "Eメール",
     "emailFieldPlaceholder": "メールアドレスを入力してください",
+    "emailFieldInvalid": "メールが無効です",
+    "emailFieldError": "電子メールは必須です",
     "passwordFieldTitle": "パスワード",
+    "passwordFieldError": "パスワードが必要",
     "loginText": "ログイン"
 
   },

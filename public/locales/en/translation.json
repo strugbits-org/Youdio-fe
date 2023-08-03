@@ -2,7 +2,10 @@
   "common":{
     "emailFieldTitle": "E-mail",
     "emailFieldPlaceholder": "Enter E-mail address",
+    "emailFieldInvalid": "E-mail is invalid",
+    "emailFieldError": "E-mail is required",
     "passwordFieldTitle": "Password",
+    "passwordFieldError": "Password is required",
     "loginText": "Log in"
 
   },

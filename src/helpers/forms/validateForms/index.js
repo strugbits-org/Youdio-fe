@@ -19,7 +19,7 @@ const numberRejex = /^[0-9]*$/;
 // Login form Validation
 const loginFormValidate = Yup.object({
   email,
-  password: password({ reqMesg: "Password is Required" }),
+  password: password({ reqMesg: "common.passwordFieldError" }),
 });
 
 // Register form Validation

@@ -1,11 +1,12 @@
 import * as Yup from "yup";
+
 let phoneRejex =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 // Email
 export const email = Yup.string()
-  .email("Email is invalid")
-  .required("Email is required");
+  .email("common.emailFieldInvalid")
+  .required("common.emailFieldError");
 
 // Password
 export const password = ({ min, reqMesg, isRequired, minMesg }) => {

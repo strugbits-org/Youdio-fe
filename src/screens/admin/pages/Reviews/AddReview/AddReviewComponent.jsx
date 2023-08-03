@@ -48,7 +48,7 @@ export const FormRow = styled.div`
     &::before {
       content: attr(data-before);
       position: absolute;
-      width: 90%;
+      width: 85%;
       color: #797979;
       top: 50%;
       transform: translateY(-50%);

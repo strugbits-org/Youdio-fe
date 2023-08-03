@@ -20,6 +20,7 @@ import {
   FieldInput,
   DropDownInput,
   TextArea,
+  FieldInputIcon,
 } from "src/components/AdminInput/AdminInput";
 import { addReviewValidateForm } from "src/helpers/forms/validateForms";
 import { useLocation } from "react-router-dom";
@@ -213,7 +214,7 @@ const AddReview = () => {
 
                 <FormRow>
                   {width < 1468 && (
-                    <FieldInput
+                    <FieldInputIcon
                       label="Customer Image"
                       id="customerImage"
                       name="customerImage"
@@ -229,6 +230,7 @@ const AddReview = () => {
                           e.target.files[0]
                         );
                       }}
+                      isIcon={ icons.cameraDark}
                       disabled={dynamicLoading}
                       {...{
                         "data-before": profileImageName,

@@ -1,6 +1,6 @@
 import { ErrorMessage, useField } from "formik";
 import styled from "styled-components";
-import { Error, Label } from "src/components/AdminInput/AdminInpComp";
+import { Error, Label, StyleInputIcon } from "src/components/AdminInput/AdminInpComp";
 import { StyleInput, DropInput } from "./AdminInpComp";
 import { fonts } from "src/helpers";
 const { poppinsRegular } = fonts;
@@ -40,6 +40,16 @@ const TEXTAREA = styled.textarea`
     color: #797979;
   }
 `;
+export const FieldInputIcon = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
+  return (
+    <Ipt>
+      <Label htmlFor={props.id}>{label}</Label>
+      <StyleInputIcon err={meta.touched && meta.error} {...field} {...props} />
+      <ErrorMessage component={Error} name={field.name} className="error" />
+    </Ipt>
+  );
+};
 export const FieldInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (

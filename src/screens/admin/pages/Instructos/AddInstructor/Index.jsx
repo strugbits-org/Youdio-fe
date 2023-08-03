@@ -16,6 +16,7 @@ import {
   FieldInput,
   DropDownInput,
   TextArea,
+  FieldInputIcon,
 } from "src/components/AdminInput/AdminInput";
 import { addInstructorValidateForm } from "src/helpers/forms/validateForms";
 import { useLocation } from "react-router-dom";
@@ -239,8 +240,8 @@ const AddInstructor = () => {
                   />
                 </FormRow>
 
-                <FormRow extend={ width >= 1468 && true}>
-                  <FieldInput
+                <FormRow extend={width >= 1468 && true}>
+                  <FieldInputIcon
                     label="Background Cover Image"
                     id="bannerImage"
                     name="bannerImage"
@@ -253,13 +254,14 @@ const AddInstructor = () => {
                       setBannerImageName(e.target.value);
                       formik.setFieldValue("bannerImage", e.target.files[0]);
                     }}
+                    isIcon={icons.cameraDark}
                     disabled={dynamicLoading}
                     {...{
                       "data-before": bannerImageName,
                     }}
                   />
                   {width < 1468 && (
-                    <FieldInput
+                    <FieldInputIcon
                       label="Profile Picture"
                       id="image"
                       name="image"
@@ -272,6 +274,7 @@ const AddInstructor = () => {
                         setProfileImageName(e.target.value);
                         formik.setFieldValue("image", e.target.files[0]);
                       }}
+                      isIcon={icons.cameraDark}
                       disabled={dynamicLoading}
                       {...{
                         "data-before": profileImageName,

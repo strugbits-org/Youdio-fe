@@ -20,6 +20,7 @@ import {
   FieldInput,
   DropDownInput,
   TextArea,
+  FieldInputIcon,
 } from "src/components/AdminInput/AdminInput";
 import { setInstructors, setStyles } from "src/features/filterSlice";
 import { liveSessionValidateForm } from "src/helpers/forms/validateForms";
@@ -401,7 +402,7 @@ const AddLiveSession = () => {
                 </FormRow>
                 {width < 1468 && (
                   <FormRow>
-                    <FieldInput
+                    <FieldInputIcon
                       label="Upload video thumbnail"
                       id="thumbnail"
                       name="thumbnail"
@@ -414,6 +415,7 @@ const AddLiveSession = () => {
                         setThumbnailImageValue(e.target.value);
                         formik.setFieldValue("thumbnail", e.target.files[0]);
                       }}
+                      isIcon={icons.cameraDark}
                       disabled={dynamicLoading}
                       {...{
                         "data-before": thumbnailImageValue,

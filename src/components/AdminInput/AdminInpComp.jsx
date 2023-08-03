@@ -3,7 +3,6 @@ import { fonts } from "src/helpers";
 const { poppinsRegular } = fonts;
 
 export const StyleInput = styled.input`
-  /* width: 350px; */
   height: 45px;
   color: #797979;
   background: #f7f7f7;
@@ -26,6 +25,19 @@ export const StyleInput = styled.input`
   &::placeholder {
     color: #797979;
   }
+`;
+
+export const StyleInputIcon = styled(StyleInput)`
+  background: url(${({ isIcon }) => (isIcon ? isIcon : "")});
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position-x: calc(100% - 16px);
+  background-position-y: center;
+  border-radius: 0px;
+  padding-inline:initial ;
+  font-size: 16px;
+  padding-left: 16px;
+  padding-right: ${({ isIcon }) => (isIcon ? "48px" : "16px")};
 `;
 
 export const DropInput = styled.select`
@@ -59,9 +71,7 @@ flex-wrap: wrap; */
     background: rgb(247, 247, 247);
     color: rgb(121, 121, 121);
     font-size: 11px;
-   
   }
-
 `;
 export const BOX4 = styled.input`
   height: 50px;

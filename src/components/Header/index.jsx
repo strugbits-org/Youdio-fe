@@ -35,11 +35,13 @@ function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.user);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Language Listener
   const handleLanguage = (e) => {
     dispatch(setLang(e.target.value));
+    i18n.changeLanguage(e.target.value);
+    window.localStorage.setItem("i18nextLng", e.target.value);
     setMenu(false);
   };
 

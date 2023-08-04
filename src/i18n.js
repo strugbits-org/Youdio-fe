@@ -3,15 +3,16 @@ import { initReactI18next } from "react-i18next";
 
 import Backend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { store } from "src/store";
 
+const lang = window.localStorage.getItem("i18nextLng")
 i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: store.getState().language.lang,
-    fallbackLng: "en",
+    // lng: store.getState().language.lang,
+    lng: lang ? lang : "en",
+    // fallbackLng: "en",
     debug: false,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

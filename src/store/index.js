@@ -20,6 +20,7 @@ export const rootReducer = combineReducers({
   filter: filterReducer,
   language: languageReducer,
 });
+
 const persistConfig = {
   key: "root",
   storage,

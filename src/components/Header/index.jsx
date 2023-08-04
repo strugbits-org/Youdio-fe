@@ -10,7 +10,6 @@ import {
   ProfileImageCircle,
 } from "./headerComponents";
 import { useDispatch, useSelector } from "react-redux";
-// import { setLang } from "src/features/language";
 import { path } from "src/helpers";
 import { icons } from "src/helpers";
 import { IconButton } from "src/components";
@@ -18,13 +17,10 @@ import userIcon from "src/assets/icons/user.png";
 
 import { logout } from "src/features/userSlice";
 import { useTranslation } from "react-i18next";
+import { setLang } from "src/features/language";
 
-// import { init } from "src/store/baseStore";
-
-function Header({ isLoggedin }) {
+function Header() {
   const [menu, setMenu] = useState(false);
-  const { i18n } = useTranslation();
-  const [lang, setLang] = useState("en");
   const [langOptions] = useState([
     {
       label: "English",
@@ -35,18 +31,15 @@ function Header({ isLoggedin }) {
       value: "ja",
     },
   ]);
-
+  const { lang } = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.user);
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   // Language Listener
   const handleLanguage = (e) => {
-    const lng = e.target.value;
-    i18n.changeLanguage(lng);
-    setLang(lng);
-    // dispatch(setLang(e.target.value));
+    dispatch(setLang(e.target.value));
     setMenu(false);
   };
 

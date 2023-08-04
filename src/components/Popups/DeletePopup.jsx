@@ -39,7 +39,7 @@ const ContentBox = styled.div`
     margin-inline: auto;
     gap: 30px;
     img {
-      width: clamp(48px, 4.8vw, 95px);
+      width: clamp(48px, 5vw, 95px);
     }
     p {
       color: var(--textParaGrey);

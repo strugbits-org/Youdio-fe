@@ -1,6 +1,25 @@
+import { fonts } from "src/helpers";
 import styled from "styled-components";
+
+export const Container = styled.div`
+  .buttonBox {
+    text-align: right;
+    margin-bottom: 16px;
+    button {
+      max-width: 220px;
+      border-radius: 2px;
+      font-size: 16px;
+      font-family: ${fonts.poppinsRegular};
+      background: var(--backgroundButonDark);
+      &:hover {
+        background: var(--backgroundButonDarkHover);
+      }
+    }
+  }
+`;
+
 export const Description = styled.div`
-  padding-block: 50px;
+  padding-block: 36px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,7 +31,6 @@ export const Description = styled.div`
     height: 20px;
   }
   .sub-heading {
-    width: 300px;
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -23,9 +41,9 @@ export const Description = styled.div`
   }
   .small-box {
     min-width: 180px;
-    h3{
+    h3 {
       text-transform: capitalize;
-      span{
+      span {
         font-weight: 500;
       }
     }
@@ -43,7 +61,7 @@ export const Box = styled.div`
   align-items: flex-start;
   gap: 1rem;
 
-  input[type=radio]{
+  input[type="radio"] {
     margin-top: 4px;
   }
 `;

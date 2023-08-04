@@ -10,9 +10,8 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    // lng: store.getState().language.lang,
     lng: lang ? lang : "en",
-    // fallbackLng: "en",
+    fallbackLng: "en",
     debug: false,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

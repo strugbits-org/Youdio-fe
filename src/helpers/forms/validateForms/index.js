@@ -166,23 +166,12 @@ const subscriberValidateForm = Yup.object({
   email,
 });
 
-const userProfileFormValidate = Yup.object().shape({
-  //   userImage: Yup
-  //       .mixed()
-  //       .required("Required")
-  //       .test("is-valid-type", "Not a valid image type",
-  //         value => isValidFileType(value && value.name.toLowerCase(), "image"))
-  //       .test("is-valid-size", "Max allowed size is 100KB",
-  //         value => value && value.size <= MAX_FILE_SIZE)
-});
-
 export {
   loginFormValidate,
   regsiterFormValidate,
   forgotFormValidate,
   resetPasswordFormValidate,
   userFormValidate,
-  userProfileFormValidate,
   paymentFormValidate,
   subscriberValidateForm,
   addVideoValidateForm,

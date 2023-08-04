@@ -7,16 +7,26 @@
     "loginText": "ログイン",
     "signupText": "サインアップ",
     "passwordFieldTitle": "パスワード",
-    "passwordFieldMinimum": "パスワードは6文字以上にしてください",
-    "confirmPasswordFieldTitle": "パスワード確認",
+    "confirmPasswordFieldTitle": "パスワードの確認",
     "passwordFieldError": "パスワードが必要です",
+    "passwordFieldMinimum": "パスワードは6文字以上である必要があります",
     "passwordFieldNotMatched": "パスワードが一致しません",
     "phoneNumberFieldRequired": "電話番号が必要です",
     "phoneNumberFieldInvalid": "電話番号が無効です",
     "requireText": "必須"
-    
-
-  },      
+  },
+  "menu": {
+    "home": "ホーム",
+    "liveClasses": "ライブクラス",
+    "videos": "動画",
+    "instructors": "インストラクター",
+    "membership": "メンバーシップ",
+    "signIn": "サインイン",
+    "register": "登録",
+    "blog": "ブログ",
+    "contactUs": "お問い合わせ",
+    "logout": "ログアウト"
+  },
   "login": {
     "title": "サインイン",
     "subTitle": "すべてのコンテンツにアクセスするにはログインしてください",
@@ -37,5 +47,15 @@
       "text": "すでにアカウントをお持ちですか？",
       "linkText": "サインイン"
     }
+  },
+  "footer": {
+    "youdioDescription": "旅行の手間なしでプロのヨガレッスンを想像することがより簡単になりました。",
+    "form": {
+      "heading": "ニュースレターに登録する",
+      "buttonTitle": "購読"
+    },
+    "menuHeading": "クイックリンク",
+    "copyRight": "著作権 © 2023",
+    "allRight": "Youdio、全著作権所有"
   }
 }

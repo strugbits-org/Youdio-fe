@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import { NavLink } from "react-router-dom";
 import { setUserAuth } from "src/features/userSlice";
@@ -14,8 +13,6 @@ import {
   P1,
 } from "src/components";
 import { regsiterFormValidate } from "src/helpers/forms/validateForms";
-import { regsiterContent } from "./content";
-import { contentTranslator } from "src/helpers/translator";
 import { path } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
 import { useTranslation } from "react-i18next";
@@ -49,18 +46,7 @@ const CustomP2 = styled(P2)`
 
 function Register() {
   const { loading, postData } = useFetch();
-  const language = useSelector((state) => state.language.lang);
-  const [content, setContent] = useState(regsiterContent);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    contentTranslator({
-      staticContent: regsiterContent,
-      contentToTranslate: content,
-      setContent,
-      language,
-    });
-  }, [language, content]);
 
   return (
     <Container>

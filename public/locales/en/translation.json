@@ -15,6 +15,18 @@
     "phoneNumberFieldInvalid": "Phone Number is invalid",
     "requireText": "Required"
   },
+  "menu":{
+    "home": "Home",
+    "liveClasses": "Live Classes",
+    "videos": "Videos",
+    "instructors": "Instructors",
+    "membership": "Membership",
+    "signIn": "Sign In",
+    "register": "Register",
+    "blog": "Blog",
+    "contactUs": "Contact Us",
+    "logout": "Logout"
+  },
   "login": {
     "title": "Sign In",
     "subTitle": "Log in to access all of your content",
@@ -35,5 +47,15 @@
       "text": "Already have an account ? ",
       "linkText": "Sign in"
     }
+  },
+  "footer":{
+    "youdioDescription": "Imagining professional yoga lessons without the hassle of travelling has now become easier.",
+    "form":{
+      "heading":"Subscribe to our newsletter",
+      "buttonTitle": "Subscribe"
+    },
+    "menuHeading": "Quick Links",
+    "copyRight":"Copyright © 2023",
+    "allRight": "Youdio, All Right Reserved"
   }
 }

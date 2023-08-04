@@ -20,7 +20,7 @@ export const path = {
   videos: "/videoclasses",
   videoClass: "/video-class",
 
-  membership: "/user/profile",
+  membership: "https://youdio.strugbits.com/membership/",
   admin: "/dashboard/admin",
   instructor: "/instructors",
 

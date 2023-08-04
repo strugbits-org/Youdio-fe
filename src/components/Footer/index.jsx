@@ -13,10 +13,12 @@ import { Section, IconButton } from "src/components";
 import { Form, Formik } from "formik";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { subscriberValidateForm } from "src/helpers/forms/validateForms";
+import { useTranslation } from "react-i18next";
 
 function Header() {
   const { postData, postLoading, postError } = usePostAPI();
   const formikRef = useRef();
+  const { t } = useTranslation();
   const handleSubmit = (data, action) => {
     postData(
       "newsletter/subscribe",
@@ -29,7 +31,7 @@ function Header() {
   };
 
   useEffect(() => {
-    formikRef.current.resetForm()
+    formikRef.current.resetForm();
   }, [postError]);
 
   return (
@@ -40,45 +42,42 @@ function Header() {
             <NavLink to={"/"}>
               <img src={icons.footerLogo} alt="" width={""} height={""} />
             </NavLink>
-            <P2>
-              Imagining professional yoga lessons without the hassle of
-              travelling has now become easier.
-            </P2>
+            <P2>{t("footer.youdioDescription")}</P2>
           </div>
           <div className="quickLinks">
-            <H4>Quick Links</H4>
+            <H4>{t("footer.menuHeading")}</H4>
             <ul>
               <li>
-                <NavLink to={path.home}>Home</NavLink>
+                <NavLink to={path.home}>{t("menu.home")}</NavLink>
               </li>
               <li>
-                <NavLink to={path.liveClasses}>Live Classes</NavLink>
+                <NavLink to={path.liveClasses}>{t("menu.liveClasses")}</NavLink>
               </li>
               <li>
-                <NavLink to={path.videos}>Videos</NavLink>
+                <NavLink to={path.videos}>{t("menu.videos")}</NavLink>
               </li>
               <li>
-                <NavLink to={path.instructor}>Instructors</NavLink>
+                <NavLink to={path.instructor}>{t("menu.instructors")}</NavLink>
               </li>
             </ul>
           </div>
           <div className="quickLinks">
-            <H4>Quick Links</H4>
+            <H4>{t("footer.menuHeading")}</H4>
             <ul>
               <li>
                 <NavLink to={"https://youdio.strugbits.com/blogs/"}>
-                  Blog
+                  {t("menu.blog")}
                 </NavLink>
               </li>
               <li>
                 <NavLink to={"https://youdio.strugbits.com/contact/"}>
-                  Contact Us
+                  {t("menu.contactUs")}
                 </NavLink>
               </li>
             </ul>
           </div>
           <div className="subscribeBox">
-            <H4>Subscribe to our newsletter</H4>
+            <H4>{t("footer.form.heading")}</H4>
             <Formik
               initialValues={{
                 email: "",
@@ -93,10 +92,10 @@ function Header() {
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Email Address"
+                    placeholder={t("common.emailFieldPlaceholder")}
                   />
                   <IconButton type="submit" disabled={postLoading}>
-                    <span>Subscribe</span>
+                    <span>{t("footer.form.buttonTitle")}</span>
                     <img src={icons.rightArrowShort} alt="" />
                   </IconButton>
                 </Form>
@@ -107,8 +106,8 @@ function Header() {
         <BottomBox>
           <HorizontalLine />
           <div className="copyright">
-            <P3 className="regular">Copyright © 2023</P3>
-            <P3 className="medium">Youdio, All Right Reserved</P3>
+            <P3 className="regular">{t("footer.copyRight")}</P3>
+            <P3 className="medium">{t("footer.allRight")}</P3>
           </div>
         </BottomBox>
       </FooterContent>

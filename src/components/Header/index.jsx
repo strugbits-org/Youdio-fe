@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { staticContent } from "./constant";
 import {
   Nav,
   Section,
@@ -13,7 +12,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 // import { setLang } from "src/features/language";
 import { path } from "src/helpers";
-import { contentTranslator } from "src/helpers/translator";
 import { icons } from "src/helpers";
 import { IconButton } from "src/components";
 import userIcon from "src/assets/icons/user.png";
@@ -24,7 +22,6 @@ import { useTranslation } from "react-i18next";
 // import { init } from "src/store/baseStore";
 
 function Header({ isLoggedin }) {
-  const [content, setContent] = useState(staticContent);
   const [menu, setMenu] = useState(false);
   const { i18n } = useTranslation();
   const [lang, setLang] = useState("en");
@@ -42,12 +39,7 @@ function Header({ isLoggedin }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.user);
-  const language = useSelector((state) => state.language.lang);
-
-  useEffect(() => {
-    // dispatch(init({ cbAction: setId }));
-    contentTranslator({ staticContent, setContent, language });
-  }, [language, isLoggedin]);
+  const {t} = useTranslation()
 
   // Language Listener
   const handleLanguage = (e) => {
@@ -77,18 +69,16 @@ function Header({ isLoggedin }) {
       <Nav>
         <UL align="left">
           <li>
-            <NavLink to={path.liveClasses}>{content.liveClasses}</NavLink>
+            <NavLink to={path.liveClasses}>{t("menu.liveClasses")}</NavLink>
           </li>
           <li>
-            <NavLink to={path.videos}>{content.videos}</NavLink>
+            <NavLink to={path.videos}>{t("menu.videos")}</NavLink>
           </li>
           <li>
-            <NavLink to={path.instructor}>{content.instructor}</NavLink>
+            <NavLink to={path.instructor}>{t("menu.instructors")}</NavLink>
           </li>
           <li>
-            <NavLink to="https://youdio.strugbits.com/membership/">
-              {content.membership}
-            </NavLink>
+            <NavLink to={path.membership}>{t("menu.membership")}</NavLink>
           </li>
         </UL>
 
@@ -106,8 +96,8 @@ function Header({ isLoggedin }) {
           {langOptions?.length && (
             <li className="langChange">
               <select onChange={handleLanguage} value={lang}>
-                {langOptions.map(({ label, value }) => (
-                  <option id="en" value={value}>
+                {langOptions.map(({ label, value }, ind) => (
+                  <option key={`value-${ind}`} id="en" value={value}>
                     {label}
                   </option>
                 ))}
@@ -124,17 +114,17 @@ function Header({ isLoggedin }) {
           {!auth.token ? (
             <React.Fragment>
               <li>
-                <NavLink to={path.signIn}>{content.signIn}</NavLink>
+                <NavLink to={path.signIn}>{t("menu.signIn")}</NavLink>
               </li>
               <li>
-                <NavLink to={path.register}>{content.register}</NavLink>
+                <NavLink to={path.register}>{t("menu.register")}</NavLink>
               </li>
             </React.Fragment>
           ) : (
             <React.Fragment>
               <li>
                 <span className="txtLogout" onClick={() => btnLogout()}>
-                  {content.logout}
+                  {t("menu.logout")}
                 </span>
               </li>
               <li>
@@ -157,8 +147,8 @@ function Header({ isLoggedin }) {
           {langOptions?.length && (
             <li className="langChange">
               <select onChange={handleLanguage} value={lang}>
-                {langOptions.map(({ label, value }) => (
-                  <option id="en" value={value}>
+                {langOptions.map(({ label, value }, ind) => (
+                  <option key={`value-${ind}`} id="en" value={value}>
                     {label}
                   </option>
                 ))}
@@ -174,17 +164,17 @@ function Header({ isLoggedin }) {
           {!auth.token ? (
             <React.Fragment>
               <li onClick={reset}>
-                <NavLink to={path.signIn}>{content.signIn}</NavLink>
+                <NavLink to={path.signIn}>{t("menu.signIn")}</NavLink>
               </li>
               <li onClick={reset}>
-                <NavLink to={path.register}>{content.register}</NavLink>
+                <NavLink to={path.register}>{t("menu.register")}</NavLink>
               </li>
             </React.Fragment>
           ) : (
             <React.Fragment>
               <li>
                 <span className="txtLogout" onClick={() => btnLogout()}>
-                  {content.logout}
+                  {t("menu.logout")}
                 </span>
               </li>
               <li onClick={reset}>
@@ -203,13 +193,16 @@ function Header({ isLoggedin }) {
 
         <ul className="links">
           <li onClick={reset}>
-            <NavLink to={path.liveClasses}>{content.liveClasses}</NavLink>
+            <NavLink to={path.liveClasses}>{t("menu.liveClasses")}</NavLink>
           </li>
           <li onClick={reset}>
-            <NavLink to={path.videos}>{content.videos}</NavLink>
+            <NavLink to={path.videos}>{t("menu.videos")}</NavLink>
           </li>
           <li onClick={reset}>
-            <NavLink to={path.instructor}>{content.instructor}</NavLink>
+            <NavLink to={path.instructor}>{t("menu.instructors")}</NavLink>
+          </li>
+          <li onClick={reset}>
+            <NavLink to={path.membership}>{t("menu.membership")}</NavLink>
           </li>
         </ul>
       </SideMenu>

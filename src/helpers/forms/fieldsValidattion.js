@@ -1,19 +1,28 @@
 import * as Yup from "yup";
+import { errorsKey } from "../constant";
 
 let phoneRejex =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
+const {
+  emailFieldInvalid,
+  emailFieldError,
+  passwordRequired,
+  passwordFieldNotMatched,
+  phoneNumberFieldInvalid,
+  phoneNumberFieldRequired,
+  passwordFieldMinimum,
+  nameFieldLimit,
+} = errorsKey;
 // Email
 export const email = Yup.string()
-  .email("common.emailFieldInvalid")
-  .required("common.emailFieldError");
+  .email(emailFieldInvalid)
+  .required(emailFieldError);
 
 // Password
 export const password = ({ min, reqMesg, isRequired, minMesg }) => {
-  reqMesg = reqMesg ? reqMesg : (reqMesg = "Password is Required");
-  minMesg = minMesg
-    ? minMesg
-    : (minMesg = `Password should be ${min} or more characters`);
+  reqMesg = reqMesg ? reqMesg : (reqMesg = passwordRequired);
+  minMesg = minMesg ? minMesg : (minMesg = passwordFieldMinimum);
 
   if (typeof min === "number") {
     return Yup.string().required(reqMesg).min(min, minMesg);
@@ -23,39 +32,26 @@ export const password = ({ min, reqMesg, isRequired, minMesg }) => {
 };
 
 export const confirmPassword = ({ reqMesg, isRequired, pass }) => {
-  reqMesg = reqMesg ? reqMesg : (reqMesg = "Password is Required");
+  reqMesg = reqMesg ? reqMesg : (reqMesg = passwordRequired);
 
-  return Yup.string().required(reqMesg).oneOf([Yup.ref(pass), null], "Password not matched");
+  return Yup.string()
+    .required(reqMesg)
+    .oneOf([Yup.ref(pass), null], passwordFieldNotMatched);
 };
 
 // Simple Text Field
-export const textField = ({ min, reqMesg, isRequired, minMesg }) => {
+export const textField = ({ min, reqMesg, minMesg }) => {
   min = typeof min === "number" ? min : (min = 3);
   reqMesg = reqMesg ? reqMesg : (reqMesg = "Required");
-  minMesg = minMesg
-    ? minMesg
-    : (minMesg = `Should be ${min} or more characters`);
+  minMesg = minMesg ? minMesg : (minMesg = nameFieldLimit);
 
-  return Yup.string().required(reqMesg).min(min, minMesg);
+  if (typeof min === "number") {
+    return Yup.string().required(reqMesg).min(min, minMesg);
+  }
+  return Yup.string().required(reqMesg)
 };
 
 // Phone
 export const phone = Yup.string()
-  .required("Phone Number is required")
-  .matches(phoneRejex, "Phone Number is not valid");
-
-// Country
-export const country = Yup.string().required("Select your Country");
-
-export const tradeInvite = Yup.string().required("Select a trade");
-
-// Array
-export const array = Yup.array()
-  .required("Required")
-  .min(1, "Select at least 1 skill");
-
-// Boolean
-export const bool = Yup.boolean();
-
-// Boolean
-export const boolReq = Yup.boolean().required("Must be checked").isTrue();
+  .required(phoneNumberFieldRequired)
+  .matches(phoneRejex, phoneNumberFieldInvalid);

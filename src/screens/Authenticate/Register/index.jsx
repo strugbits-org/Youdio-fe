@@ -18,6 +18,7 @@ import { regsiterContent } from "./content";
 import { contentTranslator } from "src/helpers/translator";
 import { path } from "src/helpers";
 import useFetch from "src/features/hooks/useFetch";
+import { useTranslation } from "react-i18next";
 
 const Container = styled.div`
   background: #fff;
@@ -50,6 +51,7 @@ function Register() {
   const { loading, postData } = useFetch();
   const language = useSelector((state) => state.language.lang);
   const [content, setContent] = useState(regsiterContent);
+  const { t } = useTranslation();
 
   useEffect(() => {
     contentTranslator({
@@ -80,31 +82,31 @@ function Register() {
               <Form autoComplete="off">
                 {" "}
                 {/*Formik Form Import from Formik*/}
-                <H1>Sign Up</H1>
-                <CustomP2>{content.signUpLine}</CustomP2>
+                <H1>{t("register.title")}</H1>
+                <CustomP2>{t("register.subTitle")}</CustomP2>
                 <FormRow>
                   <FieldInput
-                    label={content.name}
+                    label={t("register.nameFieldTitle")}
                     id="name"
                     name="name"
                     type="text"
-                    placeholder={content.namePlaceholder}
+                    placeholder={t("register.nameFieldPlaceholder")}
                     style={{ fontSize: "16px" }}
                   />
                 </FormRow>
                 <FormRow>
                   <FieldInput
-                    label={content.email}
+                    label={t("common.emailFieldTitle")}
                     id="registerEmail"
                     name="email"
                     type="email"
-                    placeholder={content.emailPlaceHolder}
+                    placeholder={t("common.emailFieldPlaceholder")}
                     style={{ fontSize: "16px" }}
                   />
                 </FormRow>
                 <FormRow>
                   <FieldPassword
-                    label={content.password}
+                    label={t("common.passwordFieldTitle")}
                     id="regsiterPassword"
                     name="password"
                     placeholder="******"
@@ -113,7 +115,7 @@ function Register() {
                 </FormRow>
                 <FormRow>
                   <FieldPassword
-                    label={content.confirmPassword}
+                    label={t("common.confirmPasswordFieldTitle")}
                     id="regsiterConfirmPassword"
                     name="confirmPassword"
                     placeholder="******"
@@ -122,14 +124,14 @@ function Register() {
                 </FormRow>
                 <FormRow>
                   <PrimaryButton type="submit" disabled={loading}>
-                    {content.btnSignup}
+                    {t("common.signupText")}
                   </PrimaryButton>
                 </FormRow>
                 <FormRow>
                   <P1>
-                    {content.ifYouHave}{" "}
+                    {t("register.question.text")}{" "}
                     <NavLink className="txtSignIn" to={path.signIn}>
-                      {content.signIn}
+                      {t("register.question.linkText")}
                     </NavLink>
                   </P1>
                 </FormRow>

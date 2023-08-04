@@ -1,21 +1,41 @@
 {
-  "common":{
+  "common": {
     "emailFieldTitle": "Eメール",
-    "emailFieldPlaceholder": "メールアドレスを入力してください",
-    "emailFieldInvalid": "メールが無効です",
-    "emailFieldError": "電子メールは必須です",
+    "emailFieldPlaceholder": "Eメールアドレスを入力してください",
+    "emailFieldInvalid": "Eメールが無効です",
+    "emailFieldError": "Eメールが必要です",
+    "loginText": "ログイン",
+    "signupText": "サインアップ",
     "passwordFieldTitle": "パスワード",
-    "passwordFieldError": "パスワードが必要",
-    "loginText": "ログイン"
+    "passwordFieldMinimum": "パスワードは6文字以上にしてください",
+    "confirmPasswordFieldTitle": "パスワード確認",
+    "passwordFieldError": "パスワードが必要です",
+    "passwordFieldNotMatched": "パスワードが一致しません",
+    "phoneNumberFieldRequired": "電話番号が必要です",
+    "phoneNumberFieldInvalid": "電話番号が無効です",
+    "requireText": "必須"
+    
 
-  },
-  "login":{
-    "title":"ログイン",
-    "subTitle": "ログインしてすべてのコンテンツにアクセスします",
-    "forgotPassword": "パスワードを忘れましたか?",
-    "question":{
-      "text":"アカウントをお持ちではありませんか? ",
+  },      
+  "login": {
+    "title": "サインイン",
+    "subTitle": "すべてのコンテンツにアクセスするにはログインしてください",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "question": {
+      "text": "アカウントをお持ちでないですか？",
       "linkText": "サインアップ"
+    }
+  },
+  "register": {
+    "title": "サインアップ",
+    "subTitle": "すべてのコンテンツにアクセスするにはサインアップしてください",
+    "nameFieldTitle": "名前",
+    "nameFieldError": "名前が必要です",
+    "nameFieldLimit": "3文字以上である必要があります",
+    "nameFieldPlaceholder": "名前を入力してください",
+    "question": {
+      "text": "すでにアカウントをお持ちですか？",
+      "linkText": "サインイン"
     }
   }
 }

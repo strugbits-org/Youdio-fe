@@ -1,21 +1,39 @@
 {
-  "common":{
+  "common": {
     "emailFieldTitle": "E-mail",
     "emailFieldPlaceholder": "Enter E-mail address",
     "emailFieldInvalid": "E-mail is invalid",
     "emailFieldError": "E-mail is required",
+    "loginText": "Log in",
+    "signupText": "Sign up",
     "passwordFieldTitle": "Password",
+    "confirmPasswordFieldTitle": "Confirm Password",
     "passwordFieldError": "Password is required",
-    "loginText": "Log in"
-
+    "passwordFieldMinimum": "Password should be 6 or more characters",
+    "passwordFieldNotMatched": "Password not matched",
+    "phoneNumberFieldRequired": "Phone Number is required",
+    "phoneNumberFieldInvalid": "Phone Number is invalid",
+    "requireText": "Required"
   },
-  "login":{
-    "title":"Sign In",
+  "login": {
+    "title": "Sign In",
     "subTitle": "Log in to access all of your content",
     "forgotPassword": "Fogot Password ?",
-    "question":{
-      "text":"Don’t have account ? ",
+    "question": {
+      "text": "Don’t have account ? ",
       "linkText": "Sign up"
+    }
+  },
+  "register": {
+    "title": "Sign Up",
+    "subTitle": "Sign up to access all of your content",
+    "nameFieldTitle": "Name",
+    "nameFieldError": "Name is Required",
+    "nameFieldLimit": "Should be 3 or more characters",
+    "nameFieldPlaceholder": "Enter name",
+    "question": {
+      "text": "Already have an account ? ",
+      "linkText": "Sign in"
     }
   }
 }

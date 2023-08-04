@@ -7,28 +7,24 @@ import {
   textField,
 } from "../fieldsValidattion";
 import * as Yup from "yup";
+import { errorsKey } from "src/helpers/constant";
 
 const numberRejex = /^[0-9]*$/;
-
-// const validFileExtensions = { image: ['jpg', 'gif', 'png', 'jpeg', 'svg', 'webp'] };
-
-// function isValidFileType(fileName, fileType) {
-//   return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
-// }
+const { passwordFieldError, nameFieldError } = errorsKey;
 
 // Login form Validation
 const loginFormValidate = Yup.object({
   email,
-  password: password({ reqMesg: "common.passwordFieldError" }),
+  password: password({ reqMesg: passwordFieldError }),
 });
 
 // Register form Validation
 const regsiterFormValidate = Yup.object({
-  name: textField({ reqMesg: "Name is Required" }),
+  name: textField({ reqMesg: nameFieldError }),
   email,
-  password: password({ reqMesg: "Password is Required" }),
+  password: password({ reqMesg: passwordFieldError, min: 6 }),
   confirmPassword: confirmPassword({
-    reqMesg: "Password is Required",
+    reqMesg: passwordFieldError,
     pass: "password",
   }),
 });

@@ -14,9 +14,11 @@ import { Form, Formik } from "formik";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { subscriberValidateForm } from "src/helpers/forms/validateForms";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 function Header() {
   const { postData, postLoading, postError } = usePostAPI();
+  const auth = useSelector((state) => state.user);
   const formikRef = useRef();
   const { t } = useTranslation();
   const handleSubmit = (data, action) => {
@@ -74,6 +76,14 @@ function Header() {
                   {t("menu.contactUs")}
                 </NavLink>
               </li>
+
+              {!auth?.token && !auth.user && (
+                <li>
+                  <NavLink to="https://youdio.strugbits.com/membership/">
+                    {t("menu.membership")}
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
           <div className="subscribeBox">

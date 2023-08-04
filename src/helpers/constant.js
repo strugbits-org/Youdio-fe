@@ -14,13 +14,13 @@ export const fonts = {
 };
 
 export const path = {
-  home: "/",
+  home: "https://youdio.strugbits.com/",
   liveClasses: "/live-classes",
   liveClass: "/live-class",
   videos: "/videoclasses",
   videoClass: "/video-class",
 
-  membership: "https://youdio.strugbits.com/membership/",
+  membership: "/user/profile",
   admin: "/dashboard/admin",
   instructor: "/instructors",
 

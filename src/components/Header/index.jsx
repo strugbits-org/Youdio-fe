@@ -70,9 +70,13 @@ function Header() {
           <li>
             <NavLink to={path.instructor}>{t("menu.instructors")}</NavLink>
           </li>
-          <li>
-            <NavLink to={path.membership}>{t("menu.membership")}</NavLink>
-          </li>
+          {!auth?.token && !auth?.user && (
+            <li>
+              <NavLink to="https://youdio.strugbits.com/membership/">
+                {t("menu.membership")}
+              </NavLink>
+            </li>
+          )}
         </UL>
 
         <div className="logo" onClick={menu ? reset : undefined}>
@@ -194,9 +198,13 @@ function Header() {
           <li onClick={reset}>
             <NavLink to={path.instructor}>{t("menu.instructors")}</NavLink>
           </li>
-          <li onClick={reset}>
-            <NavLink to={path.membership}>{t("menu.membership")}</NavLink>
-          </li>
+          {!auth?.token && !auth?.user && (
+            <li onClick={reset}>
+              <NavLink to="https://youdio.strugbits.com/membership/">
+                {t("menu.membership")}
+              </NavLink>
+            </li>
+          )}
         </ul>
       </SideMenu>
     </Section>

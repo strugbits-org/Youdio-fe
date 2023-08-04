@@ -11,6 +11,7 @@ function App() {
   const { i18n } = useTranslation();
   useEffect(() => {
     i18n && i18n.changeLanguage(lang);
+    // console.log(lang);
   }, [lang, i18n]);
   return (
     <div className="App">

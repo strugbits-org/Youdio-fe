@@ -107,7 +107,9 @@ const AllRoutes = () => {
       />
 
       {/* User */}
+    
       <Route path="/" element={<LiveClasses />} />
+      <Route path="/live-classes" element={<LiveClasses />} />
       <Route path="/live-class/:id" element={<LiveVideo />} />
       <Route path="/instructors" element={<Instructors />} />
       <Route path="/singleinstructor/:id" element={<Instructor />} />

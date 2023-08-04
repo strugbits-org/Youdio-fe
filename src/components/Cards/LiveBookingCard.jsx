@@ -90,6 +90,7 @@ const ContentBox = styled.div`
   .lastP {
     max-width: 324px;
     font-size: 12px;
+    margin-top: 8px;
     span{
       text-decoration: underline;
       cursor: pointer;

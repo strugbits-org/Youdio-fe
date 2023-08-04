@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ClockTime, H3, InstructorLink, P3 } from "src/components";
-import { icons } from "src/helpers";
 import { layout } from "src/helpers";
 import styled from "styled-components";
 import IntensityLevel from "../IntensityLevel";
@@ -93,12 +92,24 @@ const CardContent = styled.div`
 
 export function HistoryCard({ historyVideo, historyVideoId }) {
   const [videoUrl] = useState(
-    `/video-class/${historyVideo._id}/${historyVideo?.instructor}`
+    `/video-class/${historyVideo._id}/${historyVideo?.instructor?._id}`
   );
   const [instructorUrl] = useState(
-    `/singleinstructor/${historyVideo?.instructor}`
+    `/singleinstructor/${historyVideo?.instructor?._id}`
   );
   const navigate = useNavigate();
+
+  const fullName = useMemo(() => {
+    if (
+      historyVideo?.instructor?.firstName &&
+      historyVideo?.instructor?.lastName
+    ) {
+      return historyVideo.instructor.firstName.concat(
+        historyVideo.instructor.lastName
+      );
+    }
+    return "";
+  }, [historyVideo]);
   return (
     <Card>
       <ImageBox>
@@ -125,8 +136,8 @@ export function HistoryCard({ historyVideo, historyVideoId }) {
 
         <div className="intensityRow">
           <InstructorLink
-            title={"Elizebeth Lisa"}
-            imageSrc={icons.shortpicWomen}
+            title={fullName}
+            imageSrc={historyVideo?.instructor?.image}
             handleNavigate={() => navigate(instructorUrl)}
           />
           <IntensityLevel level={historyVideo?.intensity} />

@@ -1,49 +1,44 @@
-export const liveClassStaticContent = {
-  heroSectionh1: "Find Perfect Live Class",
-  heroSectionp1:
-    "Start your Yoga, Meditation and Fitness routines by availing our live or recorded VIDEOS",
-  monthSectionMonth: "December",
-  weekSectionPrev: "previous",
-  weekSectionNext: "next",
-  searchPlaceholder: "Search",
-  instructorSectionh1: "Our Instructor",
-  instructorSectionp1:
-    "Start your Yoga, Meditation and Fitness routines by availing our live or recorded VIDEOS",
-};
+import i18next from "i18next";
+import { t } from "i18next";
+
+i18next.on("languageChanged", () => {
+  // console.log(i18next.language, "changed");
+})
 
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "date.months.jan",
+  "date.months.feb",
+  "date.months.mar",
+  "date.months.apr",
+  "date.months.may",
+  "date.months.jun",
+  "date.months.july",
+  "date.months.aug",
+  "date.months.sep",
+  "date.months.oct",
+  "date.months.nov",
+  "date.months.dec",
 ];
 
 const weekDays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  "date.days.mon",
+  "date.days.tue",
+  "date.days.wed",
+  "date.days.thu",
+  "date.days.fri",
+  "date.days.sat",
+  "date.days.sun",
 ];
 
 const getFormated = (date) => {
   const d = date.getDate();
   const m = date.getMonth();
-  const wd = weekDays[date.getDay()].slice(0, 3);
+  const wd = t(weekDays[date.getDay()]);
   const dateObject = {
     dateString: {
       date: `${m + 1}/${d}`,
       weekDay: `(${wd})`,
+      concatDate: `${m + 1}/${d} (${wd})`,
     },
     d,
     m,
@@ -72,7 +67,7 @@ const getDaysInWeek = (date, { prevDays, nextDays }) => {
 const getDateValues = (date, prevNextDays) => {
   return {
     monthIndex: date.getMonth(),
-    monthName: months[date.getMonth()],
+    monthName: t(months[date.getMonth()]),
     year: date.getFullYear(),
     selectedDate: date.getDate(),
     day: weekDays[date.getDay()],

@@ -37,7 +37,7 @@ const IntensityBox = styled.div`
   }
 `;
 
-export default function Intensity({addTag, removeTag}) {
+export default function Intensity({ addTag, removeTag, title }) {
   const [isVisible, setIsVisible] = useState(false);
   const { filters, intensities } = useSelector((state) => state.filter);
 
@@ -59,7 +59,7 @@ export default function Intensity({addTag, removeTag}) {
     <IntensityBox>
       <MobileFilterHeader>
         <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-          Intensity
+          {title}
         </MobileFilterButton>
         <P3>{filters.intensity.join(", ")}</P3>
       </MobileFilterHeader>

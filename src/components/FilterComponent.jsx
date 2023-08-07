@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import useInnerWidth from "src/features/hooks/useInnerWidth";
 import { PrimaryWhiteButton, Filters, MobileFilters } from "src/components";
 import styled from "styled-components";
+import { t } from "i18next";
 
 const Box = styled.div`
   margin-block: 22px;
@@ -17,13 +18,13 @@ function FilterComponent({ sort, setSort, videoCount, videoType }) {
       {windowSize.width < 768 ? (
         <React.Fragment>
           <PrimaryWhiteButton onClick={() => setOpen(true)}>
-            Filters
+            {t("filters.filtersText")}
           </PrimaryWhiteButton>
           <MobileFilters open={open} setOpen={setOpen} />
         </React.Fragment>
       ) : (
         <React.Fragment>
-            {/* <div className="seperatorLine"></div> */}
+          {/* <div className="seperatorLine"></div> */}
           <Filters
             videoCount={videoCount}
             videoSort={sort}

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFetch from "src/features/hooks/useFetch";
 
-import { getDate, liveClassStaticContent } from "./constant";
+import { getDate } from "./constant";
 import { ContentBox, MonthBox, WeekBox, DayBox } from "./liveClassesComponents";
 import {
   // fonts,
@@ -22,22 +22,28 @@ import { clearFilters, filterDate } from "src/features/filterSlice";
 import { filterKeys } from "src/helpers/constant";
 import moment from "moment";
 import { LiveClassesCards } from "src/components/CardsSection";
+import { useTranslation } from "react-i18next";
 
 function LiveClasses() {
   const { postData, res, loading } = useFetch();
   const dispatch = useDispatch();
   const { filterTags, filters } = useSelector((state) => state.filter);
-  const [content] = useState(liveClassStaticContent);
+  const { lang } = useSelector((state) => state.language);
   const [month, setMonth] = useState({});
   const [isDateSelected, setDateSelected] = useState();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [sort, setSort] = useState("newest");
   const [isFilters, setIsFilters] = useState(true);
   const [nextPrevDays, setNextPrevDays] = useState();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // !isDateSelected && weekDays && setDateSelected(weekDays[3]);
   }, [month, selectedIndex]);
+  useEffect(() => {
+    setInitialDate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   useEffect(() => {
     if (filterTags.length > 0) {
@@ -82,9 +88,13 @@ function LiveClasses() {
     const currentDate = getDate("select", month, days, { d, m });
     setDateSelected(e.currentTarget.innerText);
     setMonth(currentDate);
-    const momentDate= moment(currentDate.date).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    const momentDate = moment(currentDate.date).format(
+      "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+    );
     const formatDate = moment(currentDate.date).format("DD/MM/YYYY");
-    dispatch(filterDate({ key: filterKeys.date, data: {momentDate, formatDate} }));
+    dispatch(
+      filterDate({ key: filterKeys.date, data: { momentDate, formatDate } })
+    );
   };
 
   const setInitialDate = () => {
@@ -112,8 +122,8 @@ function LiveClasses() {
       {/* Hero Section */}
       <Section paddingBlock="7.5vw">
         <ContentBox>
-          <H1>{content.heroSectionh1}</H1>
-          <P1>{content.heroSectionp1}</P1>
+          <H1>{t("liveClasses.title")}</H1>
+          <P1>{t("liveClasses.subTitle")}</P1>
         </ContentBox>
       </Section>
 
@@ -163,14 +173,15 @@ function LiveClasses() {
                   <li key={ind}>
                     <PrimaryWhiteButton
                       className={
-                        isDateSelected === val.dateString && filters.date
+                        isDateSelected === val.dateString.concatDate && filters.date
                           ? "selectedDate"
                           : ""
                       }
                       key={`weekday-${ind}`}
                       onClick={(e) => selectDate(e, val, ind)}
                     >
-                      {val.dateString.date} <small>{val.dateString.weekDay}</small>
+                      {val.dateString.date}{" "}
+                      <small>{val.dateString.weekDay}</small>
                     </PrimaryWhiteButton>
                   </li>
                 );
@@ -184,10 +195,10 @@ function LiveClasses() {
                 width={""}
                 height={""}
               />
-              <span>{content.weekSectionPrev}</span>
+              <span>{t("liveClasses.previous")}</span>
             </IconButton>
             <IconButton onClick={() => changeDate("next")}>
-              <span>{content.weekSectionNext}</span>
+              <span>{t("liveClasses.next")}</span>
               <img
                 src={icons.rightArrow}
                 alt="Right Arrow"
@@ -210,7 +221,7 @@ function LiveClasses() {
             <div className="searchBox">
               <InputIcon
                 isIcon={icons.searchIcon}
-                placeholder={content.searchPlaceholder}
+                placeholder={"Search"}
                 style={{ visibility: "hidden" }}
               />
             </div>

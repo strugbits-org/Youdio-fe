@@ -35,29 +35,29 @@ const DifficultyBox = styled.div`
   }
 `;
 
-export default function Difficulty({ addTag,removeTag}) {
+export default function Difficulty({ addTag, removeTag, title }) {
   const [isVisible, setIsVisible] = useState(false);
   const { filters, difficulties } = useSelector((state) => state.filter);
 
   const setSelected = (name) => {
-     if (!filters.difficulty.includes(name)) {
-       addTag({
-         data: name,
-         key: filterKeys.difficulty,
-       });
-     } else {
-       removeTag({
-         data: name,
-         key: filterKeys.difficulty,
-       });
-     }
+    if (!filters.difficulty.includes(name)) {
+      addTag({
+        data: name,
+        key: filterKeys.difficulty,
+      });
+    } else {
+      removeTag({
+        data: name,
+        key: filterKeys.difficulty,
+      });
+    }
   };
 
   return (
     <DifficultyBox>
       <MobileFilterHeader>
         <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-          Difficulties
+          {title}
         </MobileFilterButton>
         <P3>{filters.difficulty.join(", ")}</P3>
       </MobileFilterHeader>

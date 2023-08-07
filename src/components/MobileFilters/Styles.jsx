@@ -42,7 +42,7 @@ const StylesBox = styled.div`
   }
 `;
 
-export default function Styles({ addTag, removeTag }) {
+export default function Styles({ addTag, removeTag, title }) {
   const { styles, filters } = useSelector((state) => state.filter);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -78,7 +78,7 @@ export default function Styles({ addTag, removeTag }) {
     <StylesBox>
       <MobileFilterHeader>
         <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-          Styles
+          {title}
         </MobileFilterButton>
         <P3>{allStyles}</P3>
       </MobileFilterHeader>

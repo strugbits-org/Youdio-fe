@@ -15,6 +15,50 @@
     "phoneNumberFieldInvalid": "電話番号が無効です",
     "requireText": "必須"
   },
+  "date": {
+    "months": {
+      "jan": "1月",
+      "feb": "2月",
+      "mar": "3月",
+      "apr": "4月",
+      "may": "5月",
+      "jun": "6月",
+      "jul": "7月",
+      "aug": "8月",
+      "sep": "9月",
+      "oct": "10月",
+      "nov": "11月",
+      "dec": "12月"
+    },
+    "days": {
+      "mon": "月曜日",
+      "tue": "火曜日",
+      "wed": "水曜日",
+      "thu": "木曜日",
+      "fri": "金曜日",
+      "sat": "土曜日",
+      "sun": "日曜日"
+    }
+  },
+  "filters": {
+    "filtersText": "フィルター",
+    "resetFilterText": "フィルターをリセットする",
+    "showingText": "見せている",
+    "sortBy": "並び替え:",
+    "sortOptions": {
+      "newest": "新着順",
+      "oldest": "古い順"
+    },
+    "duration": {
+      "title": "所要時間",
+      "allDuration": "すべての所要時間",
+      "mins": "分"
+    },
+    "instructors": "インストラクター",
+    "styles": "スタイル",
+    "difficulty": "難易度",
+    "intensity": "強度"
+  },
   "menu": {
     "home": "ホーム",
     "liveClasses": "ライブクラス",
@@ -47,6 +91,13 @@
       "text": "すでにアカウントをお持ちですか？",
       "linkText": "サインイン"
     }
+  },
+  "liveClasses": {
+    "title": "理想のライブクラスを見つける",
+    "subTitle": "ライブまたは録画されたビデオをご利用いただいて、ヨガ、瞑想、フィットネスのルーチンを始めましょう",
+    "next": "次へ",
+    "previous": "前へ",
+    "notFound": "ライブセッションが見つかりませんでした"
   },
   "footer": {
     "youdioDescription": "旅行の手間なしでプロのヨガレッスンを想像することがより簡単になりました。",

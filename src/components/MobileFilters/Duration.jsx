@@ -43,12 +43,13 @@ const DurationSlider = styled(Slider)({
   },
 });
 
-function RangeSlider({ setSelection, selection, addDuration }) {
+function RangeSlider({ setSelection, selection, addDuration, mins, allDuration }) {
   const [value, setValue] = useState(selection.value);
   const timeDuration = useMemo(() => {
     return value[0] !== 0 || value[1] !== 90
-      ? `${value[0]} - ${value[1]}+ Mins`
+      ? `${value[0]} - ${value[1]}+ ${mins}`
       : "";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   const handleChange = (event, newValue) => {
     const startTime = newValue[0] % 10 === 0;
@@ -77,13 +78,13 @@ function RangeSlider({ setSelection, selection, addDuration }) {
       />
       <div className="sliderContent">
         <P3 className="points" fontFamily={fonts.poppinsMedium}>
-          0 MINS
+          {`0+ ${mins}`}
         </P3>
         <H3 fontFamily={fonts.poppinsSemiBold}>
-          {timeDuration ? timeDuration : "All Duration"}
+          {timeDuration ? timeDuration : allDuration}
         </H3>
         <P3 className="points" fontFamily={fonts.poppinsMedium}>
-          90+ MINS
+          {`90+ ${mins}`}
         </P3>
       </div>
     </Box>
@@ -107,7 +108,7 @@ const SliderBox = styled.div`
   }
 `;
 
-export default function Duration({ addDuration }) {
+export default function Duration({ addDuration, title, mins, allDuration }) {
   const { filters } = useSelector((state) => state.filter);
   const [isVisible, setIsVisible] = useState(false);
   const [selection, setSelection] = useState({ label: "", value: [0, 90] });
@@ -115,7 +116,7 @@ export default function Duration({ addDuration }) {
     if (Object.keys(filters.duration).length > 0) {
       const duration = [filters.duration.startTime, filters.duration.endTime];
       setSelection({
-        label: duration.join("-").concat("+ Mins"),
+        label: duration.join("-").concat(`+ ${mins}`),
         value: duration,
       });
     } else {
@@ -132,7 +133,7 @@ export default function Duration({ addDuration }) {
     <SliderBox>
       <MobileFilterHeader>
         <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-          Duration
+          {title}
         </MobileFilterButton>
         <P3>{selection.label}</P3>
       </MobileFilterHeader>
@@ -141,6 +142,8 @@ export default function Duration({ addDuration }) {
           setSelection={setSelection}
           selection={selection}
           addDuration={addDuration}
+          mins={mins}
+          allDuration={allDuration}
         />
       )}
     </SliderBox>

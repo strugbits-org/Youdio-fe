@@ -23,25 +23,26 @@ import {
 } from "src/features/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { HorizontalLine } from "../BreakLines";
+import { useTranslation } from "react-i18next";
 const filter = [
   {
-    label: "DURATION",
+    label: "filters.duration.title",
     value: "duration",
   },
   {
-    label: "INSTRUCTORS",
+    label: "filters.instructors",
     value: "instructors",
   },
   {
-    label: "STYLES",
+    label: "filters.styles",
     value: "styles",
   },
   {
-    label: "DIFFICULTY",
+    label: "filters.difficulty",
     value: "difficulty",
   },
   {
-    label: "INTENSITY",
+    label: "filters.intensity",
     value: "intensity",
   },
 ];
@@ -53,6 +54,7 @@ export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
   );
   const { fetchMultipleData } = useFetch();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {}, [filterTab, filterTags]);
 
@@ -97,7 +99,7 @@ export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
           return (
             <div key={`filter-button-${ind}`}>
               <FilterButton
-                name={label}
+                name={t(label)}
                 selected={filterTab}
                 clickEvent={() => filterHandler(value)}
               />
@@ -107,18 +109,20 @@ export function Filters({ videoCount, videoSort, setVideoSort, videoType }) {
       </FilterBox>
       <SortingOption>
         <P3 className="videoCount">
-          {videoCount ? `SHOWING ${videoCount} ${videoType}` : ""}
+          {videoCount
+            ? `${t("filters.sortOptions.newest")} ${videoCount} ${videoType}`
+            : ""}
         </P3>
 
         {videoSort && (
           <div className="sortOption">
-            <P3>SORT BY:</P3>
+            <P3>{t("filters.sortBy")}</P3>
             <select
               value={videoSort}
               onChange={(e) => setVideoSort(e.target.value)}
             >
-              <option value="newest">NEWEST</option>
-              <option value="oldest">OLDEST</option>
+              <option value="newest">{t("filters.sortOptions.newest")}</option>
+              <option value="oldest">{t("filters.sortOptions.oldest")}</option>
             </select>
           </div>
         )}

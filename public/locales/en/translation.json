@@ -15,6 +15,52 @@
     "phoneNumberFieldInvalid": "Phone Number is invalid",
     "requireText": "Required"
   },
+  "date":{
+    "months":{
+      "jan":"January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    },
+    "days":{
+      "mon":"Mon",
+      "tue":"Tue",
+      "wed":"Wed",
+      "thu":"Thu",
+      "fri":"Fri",
+      "sat":"Sat",
+      "sun":"Sun"
+    }
+  },
+  "filters":{
+    "filtersText": "Filters",
+    "resetFilterText": "Reset Filter",
+    "showingText": "SHOWING",
+    "videosText": "Videos",
+    "classesText": "Classes",
+    "sortBy": "SORT BY:",
+    "sortOptions": {
+      "newest": "NEWEST",
+      "oldest": "OLDEST"
+    },
+    "duration": {
+      "title": "Duration",
+      "allDuration": "All Duration",
+      "mins": "MINS"
+    },
+    "instructors": "Instructors",
+    "styles": "Styles",
+    "difficulty": "Difficulty",
+    "intensity": "Intensity"
+  },
   "menu":{
     "home": "Home",
     "liveClasses": "Live Classes",
@@ -47,6 +93,13 @@
       "text": "Already have an account ? ",
       "linkText": "Sign in"
     }
+  },
+  "liveClasses":{
+    "title":"Find Perfect Live Class",
+    "subTitle": "Start Your Yoga, Meditation And Fitness Routines By Availing Our Live Or Recorded Videos",
+    "next": "next",
+    "previous": "previous",
+    "notFound": "Live Sessions are not found"
   },
   "footer":{
     "youdioDescription": "Imagining professional yoga lessons without the hassle of travelling has now become easier.",

@@ -20,6 +20,7 @@ import Difficulty from "./Difficulty";
 import Intensity from "./Intensity";
 import Styles from "./Styles";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const CustomDrawer = styled(Drawer)({
   marginTop: "16px",
@@ -31,8 +32,9 @@ const CustomDrawer = styled(Drawer)({
 
 export default function MobileFilters({ open, setOpen, onClose }) {
   const { fetchMultipleData } = useFetch();
-  const { filterTags } = useSelector(state => state.filter)
+  const { filterTags } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchMultipleData(
@@ -69,20 +71,41 @@ export default function MobileFilters({ open, setOpen, onClose }) {
         <img src={icons.cross} alt="" width="16" />
       </IconButton>
       <HorizontalLine />
-      <Instructors removeTag={removeTag} addTag={addTag} />
+      <Instructors
+        removeTag={removeTag}
+        addTag={addTag}
+        title={t("filters.instructors")}
+      />
       <HorizontalLine />
-      <Duration addDuration={addDuration} />
+      <Duration
+        addDuration={addDuration}
+        title={t("filters.duration.title")}
+        mins={t("filters.duration.mins")}
+        allDuration={t("filters.duration.allDuration")}
+      />
       <HorizontalLine />
-      <Difficulty removeTag={removeTag} addTag={addTag} />
+      <Difficulty
+        removeTag={removeTag}
+        addTag={addTag}
+        title={t("filters.difficulty")}
+      />
       <HorizontalLine />
-      <Intensity removeTag={removeTag} addTag={addTag} />
+      <Intensity
+        removeTag={removeTag}
+        addTag={addTag}
+        title={t("filters.intensity")}
+      />
       <HorizontalLine />
-      <Styles removeTag={removeTag} addTag={addTag} />
+      <Styles
+        removeTag={removeTag}
+        addTag={addTag}
+        title={t("filters.styles")}
+      />
       <HorizontalLine />
       <ResetButton
         onClick={() => filterTags.length > 0 && dispatch(clearFilters())}
       >
-        Reset Filters
+        {t("filters.resetFilterText")}
       </ResetButton>
     </FilterBox>
   );

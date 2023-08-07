@@ -96,7 +96,7 @@ const Membership = () => {
         }}
         handleAction={handleAction}
         loading={getLoading}
-      />
+    />
     </Container>
   );
 };

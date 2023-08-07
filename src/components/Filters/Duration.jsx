@@ -6,6 +6,7 @@ import { P3 } from "src/components";
 import { fonts } from "src/helpers";
 import { useSelector } from "react-redux";
 import { filterKeys } from "src/helpers/constant";
+import { useTranslation } from "react-i18next";
 
 function valuetext(value) {
   return `${value}min`;
@@ -44,6 +45,7 @@ const DurationSlider = styled(Slider)({
 function RangeSlider({ addDuration }) {
   const [value, setValue] = useState([0, 90]);
   const { filters } = useSelector((state) => state.filter);
+  const { t } = useTranslation();
   const handleChange = (event, newValue) => {
     const startTime = newValue[0] % 10 === 0;
     const endTime = newValue[1] % 10 === 0;
@@ -55,7 +57,7 @@ function RangeSlider({ addDuration }) {
           endTime: newValue[1],
         },
         key: filterKeys.duration,
-      }); 
+      });
     }
   };
 
@@ -63,7 +65,7 @@ function RangeSlider({ addDuration }) {
     if (Object.keys(filters.duration).length > 0) {
       const duration = [filters.duration.startTime, filters.duration.endTime];
       setValue(duration);
-    }else{
+    } else {
       const duration = [0, 90];
       setValue(duration);
     }
@@ -81,11 +83,14 @@ function RangeSlider({ addDuration }) {
       />
       <div className="sliderContent">
         <P3 className="points" fontFamily={fonts.poppinsMedium}>
-          {value[0]} MINS
+          {`${value[0]} ${t("filters.duration.mins")}`}
         </P3>
-        <P3 fontFamily={fonts.poppinsSemiBold}>All Duration</P3>
+        <P3 fontFamily={fonts.poppinsSemiBold}>
+          {t("filters.duration.allDuration")}
+        </P3>
         <P3 className="points" fontFamily={fonts.poppinsMedium}>
-          {value[1] === 90 ? `${value[1]}+` : value[1]} MINS
+          {value[1] === 90 ? `${value[1]}+` : value[1]}{" "}
+          {t("filters.duration.mins")}
         </P3>
       </div>
     </Box>
@@ -106,7 +111,7 @@ const SliderBox = styled.div`
   }
 `;
 
-export default function Duration({addDuration}) {
+export default function Duration({ addDuration }) {
   return (
     <SliderBox>
       <RangeSlider addDuration={addDuration} />

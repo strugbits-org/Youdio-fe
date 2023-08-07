@@ -40,7 +40,7 @@ const Instructor = styled.li`
     white-space: nowrap;
   }
 `;
-export default function Instructors({ removeTag, addTag }) {
+export default function Instructors({ removeTag, addTag, title }) {
   const { instructors, filters } = useSelector((state) => state.filter);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -64,7 +64,7 @@ export default function Instructors({ removeTag, addTag }) {
     <InstructorsBox>
       <MobileFilterHeader>
         <MobileFilterButton onClick={() => setIsVisible(!isVisible)}>
-          Instructor
+          {title}
         </MobileFilterButton>
         <P3>{filters.instructors.join(", ")}</P3>
       </MobileFilterHeader>

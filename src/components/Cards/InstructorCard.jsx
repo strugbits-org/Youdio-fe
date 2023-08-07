@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { H3, P2 } from "src/components";
-import { icons } from "src/helpers";
+import { icons, path } from "src/helpers";
 import styled from "styled-components";
 
 const Card = styled.div``;
@@ -63,7 +63,7 @@ function InstructorCard({
 }) {
   const navigate = useNavigate();
   const handleNavgate = () => {
-    navigate(`/singleinstructor/${_id}`);
+    navigate(`/${path.singleInstructor}/${_id}`);
   };
   return (
     <Card>

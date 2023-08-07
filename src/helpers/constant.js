@@ -17,12 +17,13 @@ export const path = {
   home: "https://youdio.strugbits.com/",
   liveClasses: "/live-classes",
   liveClass: "/live-class",
-  videos: "/videoclasses",
+  videos: "/video-classes",
   videoClass: "/video-class",
+  instructor: "/instructors",
+  singleInstructor: "instructor",
 
   membership: "/user/profile",
   admin: "/dashboard/admin",
-  instructor: "/instructors",
 
   signIn: "/login",
   register: "/register",

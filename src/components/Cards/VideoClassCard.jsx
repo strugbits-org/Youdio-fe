@@ -179,7 +179,7 @@ function VideoClassCard({
               imageSrc={data.instructor?.image}
               title={`${data?.instructor?.firstName} ${data.instructor?.lastName}`}
               handleNavigate={() =>
-                navigate(`/singleinstructor/${data?.instructor?._id}`)
+                navigate(`/${path.singleInstructor}/${data?.instructor?._id}`)
               }
             />
           )}

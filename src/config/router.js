@@ -112,8 +112,8 @@ const AllRoutes = () => {
       <Route path="/live-classes" element={<LiveClasses />} />
       <Route path="/live-class/:id" element={<LiveVideo />} />
       <Route path="/instructors" element={<Instructors />} />
-      <Route path="/singleinstructor/:id" element={<Instructor />} />
-      <Route path="/videoclasses" element={<VideoClasses />} />
+      <Route path="/instructor/:id" element={<Instructor />} />
+      <Route path="/video-classes" element={<VideoClasses />} />
       <Route path="/video-class/:id/:instructor" element={<VideoClass />} />
       <Route
         path="/payment"

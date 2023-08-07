@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Container } from "./instructorsComponent";
 import { H2, PrimaryButton, InputIcon } from "src/components";
-import { icons } from "src/helpers";
+import { icons, path } from "src/helpers";
 import { useNavigate } from "react-router-dom";
 import usePostAPI from "src/features/hooks/usePostAPI";
 import { InstructorCards } from "src/components/CardsSection";
@@ -33,7 +33,7 @@ function AllInstructors() {
     navigate("/dashboard/edit-instructor", { state: { instructorId } });
   };
   const handleView = (instructorId) => {
-    window.open(`/singleinstructor/${instructorId}`, "_blank");
+    window.open(`/${path.singleInstructor}/${instructorId}`, "_blank");
   };
   const handleDelete = (instructorId) => {
     setOpen(true);

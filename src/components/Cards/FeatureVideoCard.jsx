@@ -6,7 +6,7 @@ import {
   P3,
   PrimaryButton,
 } from "src/components";
-import { layout } from "src/helpers";
+import { layout, path } from "src/helpers";
 import styled from "styled-components";
 import IntensityLevel from "../IntensityLevel";
 import { HorizontalLine } from "../BreakLines";
@@ -164,7 +164,9 @@ export default function FeatureVideoCard({ featureVideo, handleDelete }) {
                 title={`${featureVideo?.instructor?.firstName} ${featureVideo?.instructor?.lastName}`}
                 imageSrc={featureVideo?.instructor?.image}
                 handleNavigate={() =>
-                  navigate(`/singleinstructor/${featureVideo?.instructor?._id}`)
+                  navigate(
+                    `/${path.singleInstructor}/${featureVideo?.instructor?._id}`
+                  )
                 }
               />
               <IntensityLevel level={3} />

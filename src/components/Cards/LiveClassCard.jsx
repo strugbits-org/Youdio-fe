@@ -175,26 +175,11 @@ function LiveClassCard({
         <H3 onClick={handleNavigate}>{data.title}</H3>
         {!isSameInstructor && (
           <div className="profileRow">
-            {/* {instructorInfo ? (
-            <InstructorLink
-              imageSrc={instructorInfo.image}
-              title={instructorInfo.fullName}
-            />
-          ) : (
             <InstructorLink
               imageSrc={data.trainer.image}
               title={`${data.trainer.firstName} ${data.trainer.lastName}`}
               handleNavigate={() =>
-                navigate(`/singleinstructor/${data.trainer._id}`)
-              }
-            />
-          )} */}
-
-            <InstructorLink
-              imageSrc={data.trainer.image}
-              title={`${data.trainer.firstName} ${data.trainer.lastName}`}
-              handleNavigate={() =>
-                navigate(`/singleinstructor/${data.trainer._id}`)
+                navigate(`/${path.singleInstructor}/${data.trainer._id}`)
               }
             />
 

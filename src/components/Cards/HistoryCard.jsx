@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { ClockTime, H3, InstructorLink, P3 } from "src/components";
-import { layout } from "src/helpers";
+import { layout, path } from "src/helpers";
 import styled from "styled-components";
 import IntensityLevel from "../IntensityLevel";
 import { Link, useNavigate } from "react-router-dom";
@@ -96,7 +96,7 @@ export function HistoryCard({ historyVideo, historyVideoId }) {
     `/video-class/${historyVideo._id}/${historyVideo?.instructor?._id}`
   );
   const [instructorUrl] = useState(
-    `/singleinstructor/${historyVideo?.instructor?._id}`
+    `/${path.singleInstructor}/${historyVideo?.instructor?._id}`
   );
   const navigate = useNavigate();
 

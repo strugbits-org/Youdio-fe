@@ -209,7 +209,7 @@ function LiveVideo() {
                 title={`${liveSession[1].trainer?.firstName} ${liveSession[1].trainer?.lastName}`}
                 fontColor="var(--backgroundGrey)"
                 handleNavigate={() =>
-                  navigate(`/singleinstructor/${liveSession[1].trainer?._id}`)
+                  navigate(`/${path.singleInstructor}/${liveSession[1].trainer?._id}`)
                 }
               />
               <P2 className="cardP lastP">

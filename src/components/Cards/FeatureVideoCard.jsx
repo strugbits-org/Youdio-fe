@@ -10,6 +10,7 @@ import { layout } from "src/helpers";
 import styled from "styled-components";
 import IntensityLevel from "../IntensityLevel";
 import { HorizontalLine } from "../BreakLines";
+import { Link, useNavigate } from "react-router-dom";
 
 const { mobile, desktop, tablet, mobileLarge } = layout;
 
@@ -123,22 +124,33 @@ const CardContent = styled.div`
 `;
 
 export default function FeatureVideoCard({ featureVideo, handleDelete }) {
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <Card>
         <ImageBox>
-          <img
-            src={featureVideo?.thumbnail}
-            alt="Thumbnail"
-            width=""
-            height=""
-          />
+          <Link
+            to={`/video-class/${featureVideo?._id}/${featureVideo?.instructor?._id}`}
+          >
+            <img
+              src={featureVideo?.thumbnail}
+              alt="Thumbnail"
+              width=""
+              height=""
+            />
+          </Link>
           <span className="label">{featureVideo.category}</span>
         </ImageBox>
         <CardContent>
           <div className="left">
             <div className="timeRow">
-              <H3>{featureVideo.title}</H3>
+              <H3>
+                <Link
+                  to={`/video-class/${featureVideo?._id}/${featureVideo?.instructor?._id}`}
+                >
+                  {featureVideo.title}
+                </Link>
+              </H3>
               <ClockTime
                 time={`${featureVideo.totalTime} min`}
                 fontSize={"12px"}
@@ -149,6 +161,9 @@ export default function FeatureVideoCard({ featureVideo, handleDelete }) {
               <InstructorLink
                 title={`${featureVideo?.instructor?.firstName} ${featureVideo?.instructor?.lastName}`}
                 imageSrc={featureVideo?.instructor?.image}
+                handleNavigate={() =>
+                  navigate(`/singleinstructor/${featureVideo?.instructor?._id}`)
+                }
               />
               <IntensityLevel level={3} />
             </div>

@@ -190,6 +190,9 @@ function LiveVideo() {
                 imageSrc={liveSession[1].trainer?.image}
                 title={`${liveSession[1].trainer?.firstName} ${liveSession[1].trainer?.lastName}`}
                 fontColor="var(--backgroundGrey)"
+                handleNavigate={() =>
+                  navigate(`/singleinstructor/${liveSession[1].trainer?._id}`)
+                }
               />
               <P2 className="cardP lastP">{liveSession[1].description}</P2>
               <CustomPrimaryButton

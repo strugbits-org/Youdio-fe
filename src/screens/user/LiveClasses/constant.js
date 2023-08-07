@@ -12,7 +12,7 @@ const months = [
   "date.months.apr",
   "date.months.may",
   "date.months.jun",
-  "date.months.july",
+  "date.months.jul",
   "date.months.aug",
   "date.months.sep",
   "date.months.oct",

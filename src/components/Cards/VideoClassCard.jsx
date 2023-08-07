@@ -110,9 +110,14 @@ function VideoClassCard({
   };
 
   const paraLimit = useMemo(() => {
+     const descLength = data.description.length;
+    
     if (data?.description) {
       return {
-        text: data.description.slice(0, 100).concat("..."),
+        text:
+          descLength >= 100
+            ? data.description.slice(0, 100).concat("...")
+            : data.description,
         length: data.description.length,
       };
     }
@@ -152,7 +157,7 @@ function VideoClassCard({
             <img
               src={icons.eye}
               alt="View_Eye"
-              onClick={() => handleView(data._id)}
+              onClick={() => handleView(data._id, data?.instructor?._id)}
               width=""
               height=""
             />
@@ -178,7 +183,7 @@ function VideoClassCard({
               }
             />
           )}
-          <IntensityLevel level={intensityLevel} />
+          <IntensityLevel level={intensityLevel} text={"Intensity"} />
         </div>
         <P3 className="detail">
           {paraLimit.text}{" "}

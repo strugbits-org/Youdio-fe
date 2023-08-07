@@ -31,12 +31,13 @@ import { externalLinks, path } from "src/helpers/constant";
 import BookingModal from "./BookingModal";
 
 function LiveVideo() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const { fetchIdAndVideos, res, loading } = useFetch();
   const { postData, postLoading } = usePostAPI();
   const { resetFilters } = useSelector((state) => state.filter);
   const { user, token } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const [isLessContent, setIsLessContent] = useState(true);
 
   const location = useLocation();
   useEffect(() => {
@@ -74,7 +75,7 @@ function LiveVideo() {
   }, [location, token]);
 
   const handleBookNow = () => {
-    if (token && user && liveSessionId?._id ) {
+    if (token && user && liveSessionId?._id) {
       if (user?.subscription?.isActive && isUserHaveSessionLimit) {
         // Hit Book Session API
         const payload = {
@@ -88,46 +89,63 @@ function LiveVideo() {
           undefined,
           () => navigate("/user/live-booking")
         );
-        return
-      }
-      if(!isUserHaveSessionLimit && user?.subscription?.isActive){
-        navigate(`/payment?session=${liveSessionId._id}`)
         return;
-      } 
+      }
+      if (!isUserHaveSessionLimit && user?.subscription?.isActive) {
+        navigate(`/payment?session=${liveSessionId._id}`);
+        return;
+      }
     }
   };
 
   const handleRedirectToPlan = () => {
     window.open(externalLinks.subscriptionPlan.url, "_self");
-  }
+  };
 
   const handleBookNowModal = () => {
-    if((!token && !user) || (token && !user?.subscription?.isActive)) setOpen(true)
-    else handleBookNow()
-  }
+    if ((!token && !user) || (token && !user?.subscription?.isActive))
+      setOpen(true);
+    else handleBookNow();
+  };
 
   const handleClose = () => {
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
 
   const isUserHaveSessionLimit = useMemo(() => {
-    if(user && user?.subscription?.isActive && user?.subscription?.plan){
-      const bookedSession = user.subscription.sessionsTaken
-      const totalSessions = user.subscription.plan?.liveSessions
-      if(typeof(totalSessions) === 'number' && bookedSession < totalSessions){
-        return true
+    if (user && user?.subscription?.isActive && user?.subscription?.plan) {
+      const bookedSession = user.subscription.sessionsTaken;
+      const totalSessions = user.subscription.plan?.liveSessions;
+      if (typeof totalSessions === "number" && bookedSession < totalSessions) {
+        return true;
       }
-      return false
-    }   
-    return false
-  }, [user])
+      return false;
+    }
+    return false;
+  }, [user]);
+
+  const description = useMemo(() => {
+    if (liveSession[1]?.description) {
+      const desc = liveSession[1].description;
+      if (desc.length > 250 && isLessContent) {
+        return desc.slice(0, 250).concat("...");
+      }
+      return desc;
+    }
+    return "";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [liveSession[1], isLessContent]);
+
+  const handleDescription = () => {
+    setIsLessContent(!isLessContent);
+  };
 
   return (
     <React.Fragment>
       <Section backgroundColor="white" paddingBlock="5vw 0px">
         {loading && <Loader />}
         {!loading && liveSession[1] ? (
-          <LiveBookingBox>
+          <LiveBookingBox alignment={isLessContent}>
             <MediaBox>
               <img
                 src={liveSession[1].thumbnail}
@@ -194,7 +212,15 @@ function LiveVideo() {
                   navigate(`/singleinstructor/${liveSession[1].trainer?._id}`)
                 }
               />
-              <P2 className="cardP lastP">{liveSession[1].description}</P2>
+              <P2 className="cardP lastP">
+                {description}{" "}
+                {description.length > 250 && (
+                  <span onClick={handleDescription}>
+                    {isLessContent ? "See More" : "See Less"}
+                  </span>
+                )}
+                {/* {liveSession[1].description} */}
+              </P2>
               <CustomPrimaryButton
                 onClick={handleBookNowModal}
                 disabled={liveSession[1].bookedByMe || postLoading}

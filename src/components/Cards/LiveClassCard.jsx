@@ -111,8 +111,12 @@ function LiveClassCard({
 
   const paraLimit = useMemo(() => {
     if (data?.description) {
+      const descLength = data.description.length;
       return {
-        text: data.description.slice(0, 100).concat("..."),
+        text:
+          descLength >= 100
+            ? data.description.slice(0, 100).concat("...")
+            : data.description,
         length: data.description.length,
       };
     }

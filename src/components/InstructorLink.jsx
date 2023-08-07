@@ -36,7 +36,7 @@ const InstructorLink = ({
         alt={title}
         width={imgWidth ? imgWidth : "30px"}
         height={imgWidth ? imgWidth : "30px"}
-      />
+      /> 
       <H4>{title}</H4>
     </Container>
   );

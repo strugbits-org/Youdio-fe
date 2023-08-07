@@ -87,6 +87,7 @@ const CardContent = styled.div`
 
   .detail {
     max-width: 482px;
+    color: #4e4e4e;
   }
 `;
 
@@ -104,9 +105,7 @@ export function HistoryCard({ historyVideo, historyVideoId }) {
       historyVideo?.instructor?.firstName &&
       historyVideo?.instructor?.lastName
     ) {
-      return historyVideo.instructor.firstName.concat(
-        historyVideo.instructor.lastName
-      );
+      return `${historyVideo.instructor.firstName} ${historyVideo.instructor.lastName}`;
     }
     return "";
   }, [historyVideo]);
@@ -139,6 +138,7 @@ export function HistoryCard({ historyVideo, historyVideoId }) {
             title={fullName}
             imageSrc={historyVideo?.instructor?.image}
             handleNavigate={() => navigate(instructorUrl)}
+            fontColor={"var(--backgroundButonDark)"}
           />
           <IntensityLevel level={historyVideo?.intensity} />
         </div>

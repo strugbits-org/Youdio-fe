@@ -43,8 +43,8 @@ function VideoListing() {
   const handleEdit = (videoId) => {
     navigate("/dashboard/edit-video", { state: {videoId} });
   };
-  const handleView = (videoId) => {
-    window.open(`/video-class/${videoId}`, "_blank");
+  const handleView = (videoId, instructorId) => {
+    window.open(`/video-class/${videoId}/${instructorId}`, "_blank");
   };
   const handleAddSession = () => {
     navigate("/dashboard/add-video");

@@ -106,7 +106,7 @@ const VideoClass = () => {
   }, [user]);
 
   return (
-    <CustomSection backgroundColor="#fff" paddingBlock="0px 20px">
+    <CustomSection backgroundColor="#fff" paddingBlock="10px 20px">
       {video && instructor ? (
         <React.Fragment>
           <VideoContainer>
@@ -180,7 +180,7 @@ const VideoClass = () => {
           <HorizontalLine />
 
           <InstructorBio>
-            <img src={icons.profile} alt="Instructor" width="" height="" />
+            <img src={instructor?.instructor?.image} alt="Instructor" width="" height="" />
             <div className="instructorBio">
               <H2>{`${instructor?.instructor?.fullName} Bio`}</H2>
               <P1 className="bio">{instructor?.instructor?.description}</P1>

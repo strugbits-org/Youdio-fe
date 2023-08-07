@@ -94,6 +94,7 @@ export const VideoDetail = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 36px;
+  text-transform: capitalize;
 
   .singleClass {
     display: grid;
@@ -107,6 +108,10 @@ export const VideoDetail = styled.div`
     .description {
       max-width: 1087px;
       font-size: clamp(16px, 1.6vw, 22px);
+      text-transform: initial;
+      ::first-letter{
+        text-transform: capitalize;
+      }
     }
     .bold {
       font-weight: 700;
@@ -154,11 +159,13 @@ export const InstructorBio = styled.div`
   img {
     width: clamp(220px, 18.6vw, 359px);
     aspect-ratio: 1/1;
-    object-fit: contain;
+    object-fit: cover;
+    
     border-radius: 100%;
   }
   .instructorBio {
     flex: 1;
+    text-transform: capitalize;
     p {
       color: var(--backgroundGrey);
     }
@@ -190,6 +197,7 @@ export const ClassesContainer = styled.div`
   margin-inline: auto;
   h2 {
     text-align: center;
+    text-transform: capitalize;
     margin-bottom: 30px;
   }
   @media only screen and (min-width: ${tablet}) {

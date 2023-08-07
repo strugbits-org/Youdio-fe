@@ -194,6 +194,7 @@ const LiveBookingCard = ({
     }
     return "";
   }, [bookedSession, isLessContent]);
+  
   const handleDescription = () => {
     setIsLessContent(!isLessContent);
   };

@@ -68,6 +68,8 @@ const CardContent = styled.div`
 
   gap: 16px;
   .left {
+    flex: 1;
+
     .timeRow {
       width: 100%;
       display: flex;

@@ -14,7 +14,7 @@ export const LiveBookingBox = styled.div`
     margin-inline: initial;
     max-width: 1517px;
     flex-direction: row;
-    align-items: center;
+    align-items: ${({alignment}) => alignment ? "center" : "flex-start" };
   }
 
   @media only screen and (min-width: ${desktop}) {
@@ -84,6 +84,13 @@ export const ContentBox = styled.div`
   .lastP {
     margin-top: 12px;
     max-width: 824px;
+    span{
+      text-decoration: underline;
+      cursor: pointer;
+      &:hover{
+        color:var(--textParaBlackLight)
+      }
+    }
   }
 
   .sessionDetail {
@@ -105,7 +112,7 @@ export const ContentBox = styled.div`
         display: flex;
         align-items: center;
         gap: 12px;
-        p{
+        p {
           color: var(--backgroundGrey);
         }
       }

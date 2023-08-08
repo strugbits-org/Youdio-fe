@@ -149,6 +149,7 @@ export const RatingBox = styled.div`
   & > label {
     display: block;
     color: #777f82;
+    font-size: 16px;
   }
   .rating {
     display: grid;

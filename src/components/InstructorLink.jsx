@@ -6,14 +6,17 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  /* img{
-        border-radius: 100%;
-    } */
+
   cursor: ${({ isClickable }) => (isClickable ? "pointer" : "initial")};
-  h4 {
-    font-size: ${({ fontSize }) => (fontSize ? fontSize : "initial")};
-    color: ${({ fontColor }) => (fontColor ? fontColor : "initial")};
-    text-wrap: nowrap;
+  .titleBox {
+    display: grid;
+    h4 {
+      font-size: ${({ fontSize }) => (fontSize ? fontSize : "initial")};
+      color: ${({ fontColor }) => (fontColor ? fontColor : "initial")};
+      text-wrap: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 `;
 const InstructorLink = ({
@@ -38,7 +41,9 @@ const InstructorLink = ({
         width={imgWidth ? imgWidth : "30px"}
         height={imgWidth ? imgWidth : "30px"}
       />
-      <H4 title={title}>{title}</H4>
+      <div className="titleBox">
+        <H4 title={title}>{title}</H4>
+      </div>
     </Container>
   );
 };

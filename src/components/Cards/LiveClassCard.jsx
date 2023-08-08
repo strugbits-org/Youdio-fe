@@ -41,10 +41,16 @@ export const CardContent = styled.div`
     flex-wrap: wrap;
     gap: 8px;
   }
-  h3 {
-    text-align: left;
-    margin-block: 6px 12px;
-    cursor: pointer;
+  .titleBox {
+    display: grid;
+    h3 {
+      text-align: left;
+      margin-block: 6px 12px;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-wrap: nowrap;
+    }
   }
   .profileRow {
     display: flex;
@@ -173,7 +179,11 @@ function LiveClassCard({
             <ClockTime time={`${data.totalTime} min`} fontSize={"13px"} />
           )}
         </div>
-        <H3 onClick={handleNavigate}>{data.title}</H3>
+        <div className="titleBox">
+          <H3 onClick={handleNavigate} title={data.title}>
+            {data.title}
+          </H3>
+        </div>
         {!isSameInstructor && (
           <div className="profileRow">
             <InstructorLink

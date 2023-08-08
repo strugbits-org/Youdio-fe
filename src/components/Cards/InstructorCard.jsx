@@ -9,7 +9,7 @@ const Card = styled.div``;
 const CardMedia = styled.div`
   margin-bottom: 18px;
   position: relative;
-  & > img{
+  & > img {
     cursor: pointer;
   }
   img {
@@ -28,9 +28,19 @@ const CardMedia = styled.div`
   }
 `;
 const CardContent = styled.div`
-  h3 {
-    margin-bottom: 2px;
-    cursor: pointer;
+  .timeRow {
+    display: grid;
+    h3 {
+      margin-bottom: 2px;
+      cursor: pointer;
+    }
+    h3,
+    p {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-wrap: nowrap;
+      text-transform: capitalize;
+    }
   }
 `;
 
@@ -100,9 +110,12 @@ function InstructorCard({
 
       <CardContent>
         <div className="timeRow">
-          <H3 onClick={handleNavgate}>{`${firstName} ${lastName}`}</H3>
+          <H3
+            onClick={handleNavgate}
+            title={`${firstName} ${lastName}`}
+          >{`${firstName} ${lastName}`}</H3>
+          <P2 title={jobTitle}>{jobTitle}</P2>
         </div>
-        <P2>{jobTitle}</P2>
       </CardContent>
     </Card>
   );

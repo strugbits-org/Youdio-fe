@@ -6,8 +6,8 @@ const IntensityBox = styled.div`
   align-items: center;
   justify-content: ${({ align }) => (align ? align : "right")};
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  /* flex-wrap: wrap; */
+  gap: 6px;
   min-height: 2px;
   svg {
     width: ${({ fontSize }) => (fontSize ? fontSize : "initial")};

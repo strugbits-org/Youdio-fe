@@ -40,16 +40,23 @@ const CardContent = styled.div`
     align-items: center;
     gap: 8px;
     margin-bottom: 12px;
-  }
-  h3 {
-    text-align: initial;
-    cursor: pointer;
+    .titleBox {
+      display: grid;
+      h3 {
+        text-align: initial;
+        cursor: pointer;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-wrap:nowrap;
+      }
+    }
   }
   .profileRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    gap: 8px;
   }
   .detail {
     color: var(--backgroundGrey);
@@ -110,8 +117,8 @@ function VideoClassCard({
   };
 
   const paraLimit = useMemo(() => {
-     const descLength = data.description.length;
-    
+    const descLength = data.description.length;
+
     if (data?.description) {
       return {
         text:
@@ -166,7 +173,12 @@ function VideoClassCard({
       </CardMedia>
       <CardContent>
         <div className="timeRow">
-          <H3 onClick={handleNavigate}>{data.title}</H3>
+          <div className="titleBox">
+            <H3 onClick={handleNavigate} title={data.title}>
+              {data.title}
+            </H3>
+          </div>
+          {/* <H3 onClick={handleNavigate}>{data.title}</H3> */}
           <ClockTime
             time={`${data.totalTime} min`}
             fontSize={"14px"}

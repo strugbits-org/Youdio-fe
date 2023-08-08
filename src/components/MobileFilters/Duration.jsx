@@ -44,18 +44,16 @@ const DurationSlider = styled(Slider)({
 });
 
 function RangeSlider({ setSelection, selection, addDuration, mins, allDuration }) {
-  const [value, setValue] = useState(selection.value);
   const timeDuration = useMemo(() => {
-    return value[0] !== 0 || value[1] !== 90
-      ? `${value[0]} - ${value[1]}+ ${mins}`
+    return selection[0] !== 0 || selection[1] !== 90
+      ? `${selection[0]} - ${selection[1]}+ ${mins}`
       : "";
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+  }, [selection]);
   const handleChange = (event, newValue) => {
     const startTime = newValue[0] % 10 === 0;
     const endTime = newValue[1] % 10 === 0;
     if (startTime && endTime) {
-      setValue(newValue);
       setSelection({ label: timeDuration, value: newValue });
       addDuration({
         duration: {
@@ -71,7 +69,7 @@ function RangeSlider({ setSelection, selection, addDuration, mins, allDuration }
     <Box sx={{ width: "98%", marginInline: "auto" }}>
       <DurationSlider
         max={90}
-        value={value}
+        value={selection}
         onChange={handleChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
@@ -121,13 +119,14 @@ export default function Duration({ addDuration, title, mins, allDuration }) {
       });
     } else {
       const duration = [0, 90];
+      console.log('reset');
       setSelection({
         label: "",
         value: duration,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters.duration]);
+  }, [filters]);
 
   return (
     <SliderBox>
@@ -140,7 +139,7 @@ export default function Duration({ addDuration, title, mins, allDuration }) {
       {isVisible && (
         <RangeSlider
           setSelection={setSelection}
-          selection={selection}
+          selection={selection.value}
           addDuration={addDuration}
           mins={mins}
           allDuration={allDuration}

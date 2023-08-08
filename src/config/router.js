@@ -48,7 +48,6 @@ import AllInstructors from "src/screens/admin/pages/Instructos";
 import AddReview from "src/screens/admin/pages/Reviews/AddReview";
 import FeatureLesson from "src/screens/admin/pages/FeatureLesson";
 
-//f0d18eebe6a4a8805d27a3031a904dcb344de975
 const AllRoutes = () => {
   useScrollToTop();
 
@@ -107,7 +106,7 @@ const AllRoutes = () => {
       />
 
       {/* User */}
-    
+
       <Route path="/" element={<LiveClasses />} />
       <Route path="/live-classes" element={<LiveClasses />} />
       <Route path="/live-class/:id" element={<LiveVideo />} />
@@ -115,15 +114,7 @@ const AllRoutes = () => {
       <Route path="/instructor/:id" element={<Instructor />} />
       <Route path="/video-classes" element={<VideoClasses />} />
       <Route path="/video-class/:id/:instructor" element={<VideoClass />} />
-      <Route
-        path="/payment"
-        element={
-          <Payment />
-          // <ProtectedRoute children={} permission="user.checkout" />
-        }
-      />
-
-      {/* SINGLE VIDEO */}
+      <Route path="/payment" element={<Payment />} />
 
       {/* User Dashboard */}
       <Route
@@ -187,10 +178,6 @@ const AllRoutes = () => {
 };
 
 export default function Router() {
-  // useEffect(() => {
-  //     // Calling a auth function if user logged in setUser with id or something. Else setUser to null.
-  // }, [])
-
   return (
     <BrowserRouter>
       <Header />

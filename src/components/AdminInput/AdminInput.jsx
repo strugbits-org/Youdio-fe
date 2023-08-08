@@ -1,8 +1,13 @@
 import { ErrorMessage, useField } from "formik";
 import styled from "styled-components";
-import { Error, Label, StyleInputIcon } from "src/components/AdminInput/AdminInpComp";
+import {
+  Error,
+  Label,
+  StyleInputIcon,
+} from "src/components/AdminInput/AdminInpComp";
 import { StyleInput, DropInput } from "./AdminInpComp";
 import { fonts } from "src/helpers";
+import { useTranslation } from "react-i18next";
 const { poppinsRegular } = fonts;
 
 const Ipt = styled.div`
@@ -52,11 +57,13 @@ export const FieldInputIcon = ({ label, ...props }) => {
 };
 export const FieldInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
+  const { t } = useTranslation();
   return (
     <Ipt>
       <Label htmlFor={props.id}>{label}</Label>
       <StyleInput err={meta.touched && meta.error} {...field} {...props} />
-      <ErrorMessage component={Error} name={field.name} className="error" />
+      {/* <ErrorMessage component={Error} name={field.name} className="error" /> */}
+      {meta.touched && meta.error && <Error>{t(meta.error)}</Error>}
     </Ipt>
   );
 };

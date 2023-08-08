@@ -30,14 +30,15 @@ const InstructorLink = ({
       fontColor={fontColor}
       isClickable={handleNavigate && true}
       onClick={handleNavigate && handleNavigate}
+      className="instructorLink"
     >
       <img
         src={imageSrc}
         alt={title}
         width={imgWidth ? imgWidth : "30px"}
         height={imgWidth ? imgWidth : "30px"}
-      /> 
-      <H4>{title}</H4>
+      />
+      <H4 title={title}>{title}</H4>
     </Container>
   );
 };

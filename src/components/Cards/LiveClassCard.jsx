@@ -50,6 +50,7 @@ export const CardContent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
     margin-bottom: 12px;
   }
   .detail {
@@ -183,9 +184,7 @@ function LiveClassCard({
               }
             />
 
-            <div className="intensityBox">
-              <IntensityLevel level={intensityLevel} text={"Intensity"} />
-            </div>
+            <IntensityLevel level={intensityLevel} text={"Intensity"} />
           </div>
         )}
         <P3 className="detail">

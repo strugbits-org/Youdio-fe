@@ -151,9 +151,10 @@ const VideoClass = () => {
             <VideoDetail>
               <div className="singleClass">
                 <H5>SINGLE CLASS</H5>
-                <H2 fontSize="clamp(28px, 2.6vw, 44px)">{video?.title}</H2>
-                <P1>
-                  {"From "} {video?.title}{" by "}
+                <H2 fontSize="clamp(26px, 2.6vw, 44px)">{video?.title}</H2>
+                <P1 fontSize="clamp(16px, 1.8vw, 24px)">
+                  {"From "} {video?.title}
+                  {" by "}
                   <span className="bold">{video.instructor?.fullName}</span>
                 </P1>
                 <P1 className="description">{video?.description}</P1>
@@ -180,16 +181,23 @@ const VideoClass = () => {
           <HorizontalLine />
 
           <InstructorBio>
-            <img src={instructor?.instructor?.image} alt="Instructor" width="" height="" />
+            <img
+              src={instructor?.instructor?.image}
+              alt="Instructor"
+              width=""
+              height=""
+            />
             <div className="instructorBio">
-              <H2>{`${instructor?.instructor?.fullName} Bio`}</H2>
-              <P1 className="bio">{instructor?.instructor?.description}</P1>
+              <H2 fontSize="clamp(26px, 2.6vw, 44px)">{`${instructor?.instructor?.fullName} Bio`}</H2>
+              <P1 className="bio" fontSize="clamp(14px, 1.8vw, 22px)">
+                {instructor?.instructor?.description}
+              </P1>
             </div>
           </InstructorBio>
           <HorizontalLine />
 
           <ClassesContainer>
-            <H2>{`${instructor?.instructor?.fullName} Classes`}</H2>
+            <H2 fontSize="clamp(28px, 2.6vw, 44px)">{`${instructor?.instructor?.fullName} Classes`}</H2>
             <VideoClassesCards
               isSameInstructor={true}
               videos={instructor?.videos?.length > 0 ? instructor?.videos : []}
@@ -202,7 +210,7 @@ const VideoClass = () => {
           <HorizontalLine />
 
           <ClassesContainer>
-            <H2>{`Live Lessons`}</H2>
+            <H2 fontSize="clamp(28px, 2.6vw, 44px)">{`Live Lessons`}</H2>
             <LiveClassesCards
               classes={
                 instructor?.sessions?.length > 0 ? instructor?.sessions : []
@@ -216,7 +224,7 @@ const VideoClass = () => {
           <HorizontalLine />
 
           <Reviews>
-            <H2>Instructor Reviews</H2>
+            <H2 fontSize="clamp(28px, 2.6vw, 44px)">Instructor Reviews</H2>
             <ReviewCards
               limit={0}
               loading={loading}

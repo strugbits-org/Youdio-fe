@@ -107,7 +107,7 @@ export const VideoDetail = styled.div`
 
     .description {
       max-width: 1087px;
-      font-size: clamp(16px, 1.6vw, 22px);
+      font-size: clamp(14px, 1.6vw, 22px);
       text-transform: initial;
       ::first-letter{
         text-transform: capitalize;

@@ -27,16 +27,16 @@ const Box = styled.div`
     margin-block: 6vw;
   }
   @media only screen and (min-width: ${mobileLarge}) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   @media only screen and (min-width: ${tablet}) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
   @media only screen and (min-width: ${laptop}) {
     margin-block: 40px;
   }
   @media only screen and (min-width: ${desktop}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 function LiveClassesCards({

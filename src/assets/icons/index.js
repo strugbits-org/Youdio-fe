@@ -58,6 +58,7 @@ import binGreen from "src/assets/icons/binGreen.svg";
 import eye from "src/assets/icons/eye.svg"
 import warningGreen from "src/assets/icons/warningGreen.svg";
 import cameraDark from "src/assets/icons/camera.svg";
+import binRed from "src/assets/icons/binRed.svg";
 
 
 const icons = {
@@ -115,6 +116,7 @@ const icons = {
   eye,
   warningGreen,
   cameraDark,
+  binRed,
 };
 
 export default icons

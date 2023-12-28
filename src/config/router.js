@@ -47,6 +47,7 @@ import Profile from "src/screens/admin/pages/Profile";
 import AllInstructors from "src/screens/admin/pages/Instructos";
 import AddReview from "src/screens/admin/pages/Reviews/AddReview";
 import FeatureLesson from "src/screens/admin/pages/FeatureLesson";
+import Reviews from "src/screens/admin/pages/Reviews";
 
 const AllRoutes = () => {
   useScrollToTop();
@@ -165,6 +166,7 @@ const AllRoutes = () => {
         <Route path="feature-lesson" element={<FeatureLesson />} />
 
         <Route path="add-review" element={<AddReview />} />
+        <Route path="reviews" element={<Reviews />} />
 
         <Route
           path="*"

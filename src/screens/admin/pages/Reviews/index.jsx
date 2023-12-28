@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { H2, PrimaryButton } from "src/components";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { H2, PrimaryButton, InputIcon } from "src/components";
 import useFetch from "src/features/hooks/useFetch";
 import { Container } from "./reviewsComponent";
 import { useNavigate } from "react-router-dom";
@@ -7,14 +7,17 @@ import { DeletePopup, ViewPopup } from "src/components/Popups";
 import ReviewsList from "./ReviewsList";
 import useGetAPI from "src/features/hooks/useGetAPI";
 import moment from "moment/moment";
+import { icons } from "src/helpers";
 
 function Reviews() {
   const { deleteData, loading } = useFetch();
   const { getData, getRes, getLoading } = useGetAPI();
   const [reviewId, setReviewId] = useState("");
   const [reviewText, setReviewText] = useState("");
+  const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
+  const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,16 +33,22 @@ function Reviews() {
     return { instructorName, customerName, date, rating, review, _id };
   }
 
-  const reviews = useMemo(() => {
+  const reviewsMemo = useMemo(() => {
     if (getRes && getRes?.reviews?.length) {
-      const rows = getRes.reviews.map((row) => {
+      let rows = getRes.reviews.map((row) => {
         const { _id, instructor: { firstName, lastName}, customerName, date, rating, review } = row;
         return createData(_id, `${firstName} ${lastName}`, customerName, moment(date).format("ll"), rating, review);
       });
+      // if (search.trim().length) { 
+      //   rows = rows.filter(({ instructorName }) => {
+      //     console.log(instructorName, search, "result");
+      //     instructorName.toLowerCase().includes(search.toLowerCase());
+      //   });
+      // }
       return rows;
     }
     return [];
-  }, [getRes]);
+  }, [getRes, search]);
 
   const handleDelete = (id) => {
     setOpen(true);
@@ -66,6 +75,10 @@ function Reviews() {
     }
   };
 
+  // const handleSearch = (e) => { 
+  //   setSearch(e.target.value)
+  // }
+
   return (
     <React.Fragment>
       <Container>
@@ -73,9 +86,17 @@ function Reviews() {
           <H2>Reviews</H2>
           <PrimaryButton onClick={handleAddReview}>Add Reviews</PrimaryButton>
         </div>
+        <div className="actionBox">
+          {/* <InputIcon
+            isIcon={icons.searchIcon}
+            placeholder="Search Instructor"
+            value={search}
+            onChange={handleSearch}
+          /> */}
+        </div>
       </Container>
       <ReviewsList
-        rows={reviews}
+        rows={reviewsMemo}
         handleDelete={handleDelete}
         handleView={handleView}
         loading={getLoading}

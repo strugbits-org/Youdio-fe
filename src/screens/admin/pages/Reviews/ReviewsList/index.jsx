@@ -8,7 +8,7 @@ import { Container } from "./ReviewsTableComponent";
 const StyledTable = styled(TableContainer)(({ theme }) => ({
   borderRadius: "17px 17px 0px 0px",
   background: "#fff",
-  boxShadow: "0px 4px 15px 0px rgba(0, 0, 0, 0.1)",
+  boxShadow: "0px 4px 15px 0px rgba(0, 0, 0, 0.06)",
 }));
 
 export default function ReviewsList({
@@ -20,21 +20,22 @@ export default function ReviewsList({
   return (
     <Container>
       {loading && <Loader width="35px" height="35px" />}
-      <StyledTable component={Paper}>
-        {!loading && rows?.length ? (
+
+      {!loading && rows?.length ? (
+        <StyledTable component={Paper}>
           <ReviewTable
             rows={rows}
             handleView={handleView}
             handleDelete={handleDelete}
           />
-        ) : (
-          !loading && (
-            <NoFoundBox>
-              <H3>No Reviews Found</H3>
-            </NoFoundBox>
-          )
-        )}
-      </StyledTable>
+        </StyledTable>
+      ) : (
+        !loading && (
+          <NoFoundBox>
+            <H3>No Reviews Found</H3>
+          </NoFoundBox>
+        )
+      )}
     </Container>
   );
 }

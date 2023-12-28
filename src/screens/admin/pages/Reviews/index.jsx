@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { H2, PrimaryButton, InputIcon } from "src/components";
+import React, { useEffect, useMemo, useState } from "react";
+import { H2, PrimaryButton } from "src/components";
 import useFetch from "src/features/hooks/useFetch";
 import { Container } from "./reviewsComponent";
 import { useNavigate } from "react-router-dom";
@@ -7,17 +7,16 @@ import { DeletePopup, ViewPopup } from "src/components/Popups";
 import ReviewsList from "./ReviewsList";
 import useGetAPI from "src/features/hooks/useGetAPI";
 import moment from "moment/moment";
-import { icons } from "src/helpers";
 
 function Reviews() {
   const { deleteData, loading } = useFetch();
   const { getData, getRes, getLoading } = useGetAPI();
   const [reviewId, setReviewId] = useState("");
   const [reviewText, setReviewText] = useState("");
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,7 +47,7 @@ function Reviews() {
       return rows;
     }
     return [];
-  }, [getRes, search]);
+  }, [getRes]);
 
   const handleDelete = (id) => {
     setOpen(true);

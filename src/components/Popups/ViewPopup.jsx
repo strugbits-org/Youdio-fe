@@ -25,6 +25,7 @@ const ContentBox = styled.div`
     margin-bottom: 40px;
     padding: 40px 16px;
     position: relative;
+    border-radius: 5px 5px 0px 0px;
     h3 {
       color: var(--backgroundGreen);
     }

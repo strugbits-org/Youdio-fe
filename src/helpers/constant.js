@@ -56,7 +56,7 @@ export const adminDashboardMenu = [
   //   path: "/dashboard/add-review",
   // },
   {
-    name: "Reveiws",
+    name: "Reviews",
     path: "/dashboard/reviews",
   },
 ];

@@ -40,6 +40,6 @@ export const Container = styled.div`
     }
   }
   @media only screen and (min-width: ${layout.desktop}) {
-    grid-template-columns: 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
   }
 `;
